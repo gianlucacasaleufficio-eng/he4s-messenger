@@ -1,7 +1,7 @@
 {
-  "name": "session-desktop",
-  "productName": "Session",
-  "description": "Private messaging from your desktop",
+"name": "he4s-messenger",
+"productName": "HE4S Messenger",
+"description": "Private messaging powered by HE4S token",
   "version": "1.14.3",
   "license": "GPL-3.0",
   "author": {
