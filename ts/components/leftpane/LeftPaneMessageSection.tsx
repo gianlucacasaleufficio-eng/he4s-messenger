@@ -11,7 +11,7 @@ import { getLeftPaneConversationIds } from '../../state/selectors/conversations'
 import { getSearchTerm } from '../../state/selectors/search';
 import { getLeftOverlayMode } from '../../state/selectors/section';
 import { assertUnreachable } from '../../types/sqlSharedTypes';
-import { SessionSearchInput } from '../SessionSearchInput';
+import { HE4SSearchInput } from '../HE4SSearchInput';
 import { StyledLeftPaneList } from './LeftPaneList';
 import { ConversationListItem } from './conversation-list-item/ConversationListItem';
 import { OverlayClosedGroup } from './overlay/OverlayClosedGroup';
@@ -126,7 +126,7 @@ export const LeftPaneMessageSection = () => {
         <ClosableOverlay />
       ) : (
         <StyledConversationListContent>
-          <SessionSearchInput />
+          <HE4SSearchInput />
           <MessageRequestsBanner
             handleOnClick={() => {
               window.inboxStore?.dispatch(setLeftOverlayMode('message-requests'));

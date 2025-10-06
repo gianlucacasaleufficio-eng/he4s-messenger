@@ -4,17 +4,17 @@ import autoBind from 'auto-bind';
 import filesize from 'filesize';
 import { cloneDeep, debounce, isEmpty, size as lodashSize, partition, pick, uniq } from 'lodash';
 import { SignalService } from '../protobuf';
-import { getMessageQueue } from '../session';
-import { getConversationController } from '../session/conversations';
-import { ContentMessage } from '../session/messages/outgoing';
-import { ClosedGroupVisibleMessage } from '../session/messages/outgoing/visibleMessage/ClosedGroupVisibleMessage';
-import { PubKey } from '../session/types';
+import { getMessageQueue } from '../he4s';
+import { getConversationController } from '../he4s/conversations';
+import { ContentMessage } from '../he4s/messages/outgoing';
+import { ClosedGroupVisibleMessage } from '../he4s/messages/outgoing/visibleMessage/ClosedGroupVisibleMessage';
+import { PubKey } from '../he4s/types';
 import {
   UserUtils,
   uploadAttachmentsToFileServer,
   uploadLinkPreviewToFileServer,
   uploadQuoteThumbnailsToFileServer,
-} from '../session/utils';
+} from '../he4s/utils';
 import {
   DataExtractionNotificationMsg,
   MessageAttributes,
@@ -29,28 +29,28 @@ import {
 import { Data } from '../data/data';
 import { OpenGroupData } from '../data/opengroups';
 import { SettingsKey } from '../data/settings-key';
-import { isUsAnySogsFromCache } from '../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { GetNetworkTime } from '../session/apis/snode_api/getNetworkTime';
-import { SnodeNamespaces } from '../session/apis/snode_api/namespaces';
-import { DURATION } from '../session/constants';
-import { DisappearingMessages } from '../session/disappearing_messages';
-import { TimerOptions } from '../session/disappearing_messages/timerOptions';
+import { isUsAnySogsFromCache } from '../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { GetNetworkTime } from '../he4s/apis/snode_api/getNetworkTime';
+import { SnodeNamespaces } from '../he4s/apis/snode_api/namespaces';
+import { DURATION } from '../he4s/constants';
+import { DisappearingMessages } from '../he4s/disappearing_messages';
+import { TimerOptions } from '../he4s/disappearing_messages/timerOptions';
 import {
   OpenGroupVisibleMessage,
   OpenGroupVisibleMessageParams,
-} from '../session/messages/outgoing/visibleMessage/OpenGroupVisibleMessage';
+} from '../he4s/messages/outgoing/visibleMessage/OpenGroupVisibleMessage';
 import {
   VisibleMessage,
   VisibleMessageParams,
-} from '../session/messages/outgoing/visibleMessage/VisibleMessage';
+} from '../he4s/messages/outgoing/visibleMessage/VisibleMessage';
 import {
   uploadAttachmentsV3,
   uploadLinkPreviewsV3,
   uploadQuoteThumbnailsV3,
-} from '../session/utils/AttachmentsV2';
-import { perfEnd, perfStart } from '../session/utils/Performance';
-import { isUsFromCache } from '../session/utils/User';
-import { buildSyncMessage } from '../session/utils/sync/syncUtils';
+} from '../he4s/utils/AttachmentsV2';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
+import { isUsFromCache } from '../he4s/utils/User';
+import { buildSyncMessage } from '../he4s/utils/sync/syncUtils';
 import {
   FindAndFormatContactType,
   MessageModelPropsWithoutConvoProps,
@@ -1469,7 +1469,7 @@ export function findAndFormatContact(pubkey: string): FindAndFormatContactType {
   return {
     pubkey,
     avatarPath: contactModel ? contactModel.getAvatarPath() : null,
-    name: contactModel?.getRealSessionUsername() || null,
+    name: contactModel?.getRealHE4SUsername() || null,
     profileName,
     isMe,
   };

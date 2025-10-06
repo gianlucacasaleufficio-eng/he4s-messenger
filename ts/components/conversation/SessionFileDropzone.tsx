@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Flex } from '../basic/Flex';
-import { SessionIcon } from '../icon';
+import { HE4SIcon } from '../icon';
 
 const DropZoneContainer = styled.div`
   display: inline-block;
@@ -23,12 +23,12 @@ const DropZoneWithBorder = styled.div`
   pointer-events: none;
 `;
 
-export const SessionFileDropzone = () => {
+export const HE4SFileDropzone = () => {
   return (
     <DropZoneContainer>
       <DropZoneWithBorder>
         <Flex container={true} justifyContent="space-around" height="100%" alignItems="center">
-          <SessionIcon
+          <HE4SIcon
             iconColor="var(--file-dropzone-border-color)"
             iconSize={'max'}
             iconType="circlePlus"

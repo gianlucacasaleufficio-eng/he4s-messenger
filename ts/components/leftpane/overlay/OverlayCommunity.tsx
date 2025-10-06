@@ -3,16 +3,16 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useKey from 'react-use/lib/useKey';
 
-import { SessionJoinableRooms } from './SessionJoinableDefaultRooms';
+import { HE4SJoinableRooms } from './HE4SJoinableDefaultRooms';
 
 import {
   joinOpenGroupV2WithUIEvents,
   JoinSogsRoomUICallbackArgs,
-} from '../../../session/apis/open_group_api/opengroupV2/JoinOpenGroupV2';
-import { openGroupV2CompleteURLRegex } from '../../../session/apis/open_group_api/utils/OpenGroupUtils';
+} from '../../../he4s/apis/open_group_api/opengroupV2/JoinOpenGroupV2';
+import { openGroupV2CompleteURLRegex } from '../../../he4s/apis/open_group_api/utils/OpenGroupUtils';
 import { resetLeftOverlayMode } from '../../../state/ducks/section';
-import { SessionButton } from '../../basic/SessionButton';
-import { SessionSpinner } from '../../loading';
+import { HE4SButton } from '../../basic/HE4SButton';
+import { HE4SSpinner } from '../../loading';
 
 import {
   markConversationInitialLoadingInProgress,
@@ -20,9 +20,9 @@ import {
 } from '../../../state/ducks/conversations';
 import { getLeftOverlayMode } from '../../../state/selectors/section';
 import { Spacer2XL } from '../../basic/Text';
-import { SessionInput } from '../../inputs';
+import { HE4SInput } from '../../inputs';
 import { StyledLeftPaneOverlay } from './OverlayMessage';
-import LIBSESSION_CONSTANTS from '../../../session/utils/libsession/libsession_constants';
+import LIBSESSION_CONSTANTS from '../../../he4s/utils/libhe4s/libhe4s_constants';
 
 async function joinOpenGroup(
   serverUrl: string,
@@ -84,7 +84,7 @@ export const OverlayCommunity = () => {
     }
     if (args.loadingState === 'finished' && overlayModeIsCommunity && args.conversationKey) {
       closeOverlay();
-      void openConversationWithMessages({ conversationKey: args.conversationKey, messageId: null }); // open to last unread for a session run sogs
+      void openConversationWithMessages({ conversationKey: args.conversationKey, messageId: null }); // open to last unread for a he4s run sogs
     }
   }
 
@@ -98,7 +98,7 @@ export const OverlayCommunity = () => {
       alignItems={'center'}
       padding={'var(--margins-md)'}
     >
-      <SessionInput
+      <HE4SInput
         autoFocus={true}
         type="text"
         placeholder={window.i18n('communityEnterUrl')}
@@ -115,10 +115,10 @@ export const OverlayCommunity = () => {
         isTextArea={true}
       />
       <Spacer2XL />
-      <SessionButton text={window.i18n('join')} disabled={!groupUrl} onClick={onTryJoinRoom} />
+      <HE4SButton text={window.i18n('join')} disabled={!groupUrl} onClick={onTryJoinRoom} />
       {!loading ? <Spacer2XL /> : null}
-      <SessionSpinner loading={loading} />
-      <SessionJoinableRooms onJoinClick={onTryJoinRoom} alreadyJoining={loading} />
+      <HE4SSpinner loading={loading} />
+      <HE4SJoinableRooms onJoinClick={onTryJoinRoom} alreadyJoining={loading} />
     </StyledLeftPaneOverlay>
   );
 };

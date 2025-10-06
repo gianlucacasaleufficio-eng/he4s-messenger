@@ -4,20 +4,20 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { Dispatch } from '@reduxjs/toolkit';
-import { UserUtils } from '../../../session/utils';
-import { YourSessionIDPill, YourSessionIDSelectable } from '../../basic/YourSessionIDPill';
+import { UserUtils } from '../../../he4s/utils';
+import { YourHE4SIDPill, YourHE4SIDSelectable } from '../../basic/YourHE4SIDPill';
 
 import { useHotkey } from '../../../hooks/useHotkey';
 import { useOurAvatarPath, useOurConversationUsername } from '../../../hooks/useParamSelector';
-import { ProfileManager } from '../../../session/profile_manager/ProfileManager';
+import { ProfileManager } from '../../../he4s/profile_manager/ProfileManager';
 import { editProfileModal, updateEditProfilePictureModal } from '../../../state/ducks/modalDialog';
-import { SessionWrapperModal } from '../../SessionWrapperModal';
+import { HE4SWrapperModal } from '../../HE4SWrapperModal';
 import { Flex } from '../../basic/Flex';
-import { SessionButton } from '../../basic/SessionButton';
+import { HE4SButton } from '../../basic/HE4SButton';
 import { Spacer2XL, Spacer3XL, SpacerLG, SpacerSM, SpacerXL } from '../../basic/Text';
 import { CopyToClipboardButton } from '../../buttons/CopyToClipboardButton';
-import { SessionInput } from '../../inputs';
-import { SessionSpinner } from '../../loading';
+import { HE4SInput } from '../../inputs';
+import { HE4SSpinner } from '../../loading';
 import { sanitizeDisplayNameOrToast } from '../../registration/utils';
 import { ProfileHeader, ProfileName, QRView } from './components';
 
@@ -117,9 +117,9 @@ const handleKeyEscape = (
 // #endregion
 
 const StyledEditProfileDialog = styled.div`
-  .session-modal {
+  .he4s-modal {
     width: 468px;
-    .session-modal__body {
+    .he4s-modal__body {
       width: calc(100% - 80px);
       margin: 0 auto;
       overflow: initial;
@@ -147,7 +147,7 @@ const StyledEditProfileDialog = styled.div`
         filter: brightness(90%);
       }
 
-      .session-icon-button {
+      .he4s-icon-button {
         opacity: 1;
       }
     }
@@ -158,8 +158,8 @@ const StyledEditProfileDialog = styled.div`
   }
 `;
 
-const StyledSessionIdSection = styled(Flex)`
-  .session-button {
+const StyledHE4SIdSection = styled(Flex)`
+  .he4s-button {
     width: 160px;
   }
 `;
@@ -274,7 +274,7 @@ export const EditProfileDialog = () => {
 
   return (
     <StyledEditProfileDialog className="edit-profile-dialog" data-testid="edit-profile-dialog">
-      <SessionWrapperModal
+      <HE4SWrapperModal
         title={window.i18n('profile')}
         headerIconButtons={backButton}
         headerReverse={true}
@@ -283,7 +283,7 @@ export const EditProfileDialog = () => {
         additionalClassName={mode === 'default' ? 'edit-profile-default' : undefined}
       >
         {mode === 'qr' ? (
-          <QRView sessionID={ourId} setMode={setMode} />
+          <QRView he4sID={ourId} setMode={setMode} />
         ) : (
           <>
             <SpacerXL />
@@ -317,7 +317,7 @@ export const EditProfileDialog = () => {
         )}
 
         {mode === 'edit' && (
-          <SessionInput
+          <HE4SInput
             autoFocus={true}
             disableOnBlurEvent={true}
             type="text"
@@ -340,17 +340,17 @@ export const EditProfileDialog = () => {
 
         {mode !== 'qr' ? <Spacer3XL /> : <SpacerSM />}
 
-        <StyledSessionIdSection
+        <StyledHE4SIdSection
           container={true}
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
           width={'100%'}
         >
-          <YourSessionIDPill />
+          <YourHE4SIDPill />
           <SpacerLG />
-          <YourSessionIDSelectable />
-          <SessionSpinner loading={loading} height={'74px'} />
+          <YourHE4SIDSelectable />
+          <HE4SSpinner loading={loading} height={'74px'} />
           {!loading ? <Spacer2XL /> : null}
           {mode === 'default' || mode === 'qr' || mode === 'lightbox' ? (
             <Flex
@@ -367,7 +367,7 @@ export const EditProfileDialog = () => {
                 dataTestId="copy-button-profile-update"
               />
               {mode === 'default' ? (
-                <SessionButton
+                <HE4SButton
                   text={window.i18n('qrView')}
                   onClick={() => {
                     setMode('qr');
@@ -378,7 +378,7 @@ export const EditProfileDialog = () => {
             </Flex>
           ) : (
             !loading && (
-              <SessionButton
+              <HE4SButton
                 text={window.i18n('save')}
                 onClick={onClickOK}
                 disabled={loading}
@@ -388,8 +388,8 @@ export const EditProfileDialog = () => {
           )}
 
           {!loading ? <SpacerSM /> : null}
-        </StyledSessionIdSection>
-      </SessionWrapperModal>
+        </StyledHE4SIdSection>
+      </HE4SWrapperModal>
     </StyledEditProfileDialog>
   );
 };

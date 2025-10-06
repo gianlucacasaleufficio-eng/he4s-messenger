@@ -132,7 +132,7 @@ export const createTemplate = (
       ],
     },
     {
-      label: withAcceleratorPrefix(i18n('sessionHelp')),
+      label: withAcceleratorPrefix(i18n('he4sHelp')),
       role: 'help',
       submenu: [
         {

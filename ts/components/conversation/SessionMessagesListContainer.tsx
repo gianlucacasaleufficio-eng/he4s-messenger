@@ -12,7 +12,7 @@ import {
   resetOldBottomMessageId,
   resetOldTopMessageId,
 } from '../../state/ducks/conversations';
-import { SessionScrollButton } from '../SessionScrollButton';
+import { HE4SScrollButton } from '../HE4SScrollButton';
 
 import {
   ScrollToLoadedMessageContext,
@@ -26,15 +26,15 @@ import {
 } from '../../state/selectors/conversations';
 import { getSelectedConversationKey } from '../../state/selectors/selectedConversation';
 import { ConversationMessageRequestButtons } from './MessageRequestButtons';
-import { SessionMessagesList } from './SessionMessagesList';
+import { HE4SMessagesList } from './HE4SMessagesList';
 import { TypingBubble } from './TypingBubble';
 
-export type SessionMessageListProps = {
+export type HE4SMessageListProps = {
   messageContainerRef: RefObject<HTMLDivElement>;
 };
 export const messageContainerDomID = 'messages-container';
 
-type Props = SessionMessageListProps & {
+type Props = HE4SMessageListProps & {
   conversationKey?: string;
   messagesProps: Array<SortedMessageModelProps>;
 
@@ -55,7 +55,7 @@ const StyledMessagesContainer = styled.div`
   padding-top: var(--margins-sm);
   padding-bottom: var(--margins-xl);
 
-  .session-icon-button {
+  .he4s-icon-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,7 +70,7 @@ const StyledTypingBubbleContainer = styled.div`
   padding: var(--margins-xs) var(--margins-lg) 0;
 `;
 
-class SessionMessagesListContainerInner extends Component<Props> {
+class HE4SMessagesListContainerInner extends Component<Props> {
   private timeoutResetQuotedScroll: NodeJS.Timeout | null = null;
 
   public constructor(props: Props) {
@@ -129,7 +129,7 @@ class SessionMessagesListContainerInner extends Component<Props> {
         <ConversationMessageRequestButtons />
 
         <ScrollToLoadedMessageContext.Provider value={this.scrollToLoadedMessage}>
-          <SessionMessagesList
+          <HE4SMessagesList
             scrollAfterLoadMore={(
               messageIdToScrollTo: string,
               type: 'load-more-top' | 'load-more-bottom'
@@ -143,7 +143,7 @@ class SessionMessagesListContainerInner extends Component<Props> {
           />
         </ScrollToLoadedMessageContext.Provider>
 
-        <SessionScrollButton
+        <HE4SScrollButton
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClickScrollBottom={this.props.scrollToNow}
           key="scroll-down-button"
@@ -308,4 +308,4 @@ const mapStateToProps = (state: StateType) => {
 
 const smart = connect(mapStateToProps);
 
-export const SessionMessagesListContainer = smart(SessionMessagesListContainerInner);
+export const HE4SMessagesListContainer = smart(HE4SMessagesListContainerInner);

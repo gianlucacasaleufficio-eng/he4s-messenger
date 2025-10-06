@@ -1,15 +1,15 @@
 import styled, { css, CSSProperties, keyframes } from 'styled-components';
 
 import { memo } from 'react';
-import { icons, SessionIconSize, SessionIconType } from '.';
+import { icons, HE4SIconSize, HE4SIconType } from '.';
 import { ClipRule, FillRule } from './Icons';
 
-export type SessionIconProps = {
-  iconType: SessionIconType;
+export type HE4SIconProps = {
+  iconType: HE4SIconType;
   /**
    * iconSize is usually the height of the icon, we then have a ratio for each icons to calculate the width.
    * see sizeIsWidth for how to do the opposite */
-  iconSize: SessionIconSize | number;
+  iconSize: HE4SIconSize | number;
   iconColor?: string;
   iconRotation?: number;
   iconPadding?: string;
@@ -26,7 +26,7 @@ export type SessionIconProps = {
   sizeIsWidth?: boolean;
 };
 
-const getIconDimensionFromIconSize = (iconSize: SessionIconSize | number) => {
+const getIconDimensionFromIconSize = (iconSize: HE4SIconSize | number) => {
   if (typeof iconSize === 'number') {
     return iconSize;
   }
@@ -140,7 +140,7 @@ const Svg = memo(styled.svg<StyledSvgProps>`
   transition: inherit;
 `);
 
-const SessionSvg = (
+const HE4SSvg = (
   props: StyledSvgProps & {
     viewBox: string;
     path: string | Array<string>;
@@ -179,7 +179,7 @@ const SessionSvg = (
   );
 };
 
-export const SessionIcon = (props: SessionIconProps) => {
+export const HE4SIcon = (props: HE4SIconProps) => {
   const {
     iconType,
     iconColor,
@@ -209,7 +209,7 @@ export const SessionIcon = (props: SessionIconProps) => {
   const height = sizeIsWidth ? calculatedIconSize / ratio : calculatedIconSize;
 
   return (
-    <SessionSvg
+    <HE4SSvg
       viewBox={iconDef.viewBox}
       path={iconDef.path}
       width={width}

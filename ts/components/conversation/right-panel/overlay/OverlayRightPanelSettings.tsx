@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import useInterval from 'react-use/lib/useInterval';
 import styled from 'styled-components';
 import { Data } from '../../../../data/data';
-import { SessionIconButton } from '../../../icon';
+import { HE4SIconButton } from '../../../icon';
 
 import {
   useConversationUsername,
@@ -20,7 +20,7 @@ import {
   showUpdateGroupMembersByConvoId,
   showUpdateGroupNameByConvoId,
 } from '../../../../interactions/conversationInteractions';
-import { Constants } from '../../../../session';
+import { Constants } from '../../../../he4s';
 import { closeRightPanel } from '../../../../state/ducks/conversations';
 import { resetRightOverlayMode, setRightOverlayMode } from '../../../../state/ducks/section';
 import {
@@ -157,7 +157,7 @@ const HeaderItem = () => {
       >
         <Avatar size={AvatarSize.XL} pubkey={selectedConvoKey} />
         {showInviteContacts && (
-          <SessionIconButton
+          <HE4SIconButton
             iconType="addUser"
             iconSize="medium"
             onClick={() => {

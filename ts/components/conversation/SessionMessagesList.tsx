@@ -25,7 +25,7 @@ import { MessageRequestResponse } from './message/message-item/MessageRequestRes
 import { CallNotification } from './message/message-item/notification-bubble/CallNotification';
 
 import { IsDetailMessageViewContext } from '../../contexts/isDetailViewContext';
-import { SessionLastSeenIndicator } from './SessionLastSeenIndicator';
+import { HE4SLastSeenIndicator } from './HE4SLastSeenIndicator';
 import { TimerNotification } from './TimerNotification';
 import { DataExtractionNotification } from './message/message-item/DataExtractionNotification';
 import { InteractionNotification } from './message/message-item/InteractionNotification';
@@ -37,7 +37,7 @@ function isNotTextboxEvent(e: KeyboardEvent) {
 
 let previousRenderedConvo: string | undefined;
 
-export const SessionMessagesList = (props: {
+export const HE4SMessagesList = (props: {
   scrollAfterLoadMore: (
     messageIdToScrollTo: string,
     type: 'load-more-top' | 'load-more-bottom'
@@ -102,7 +102,7 @@ export const SessionMessagesList = (props: {
       {messagesProps.map(messageProps => {
         const messageId = messageProps.message.props.messageId;
         const unreadIndicator = messageProps.showUnreadIndicator ? (
-          <SessionLastSeenIndicator
+          <HE4SLastSeenIndicator
             key={'unread-indicator'}
             messageId={messageId}
             didScroll={didScroll}

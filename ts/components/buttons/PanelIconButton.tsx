@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { SessionIcon, SessionIconSize, SessionIconType } from '../icon';
+import { HE4SIcon, HE4SIconSize, HE4SIconType } from '../icon';
 import { PanelButton, PanelButtonProps, PanelButtonText, StyledContent } from './PanelButton';
 
 interface PanelIconButton extends Omit<PanelButtonProps, 'children'> {
   text: string;
-  iconType: SessionIconType;
-  iconSize?: SessionIconSize;
+  iconType: HE4SIconType;
+  iconSize?: HE4SIconSize;
   subtitle?: string;
   color?: string;
 }
@@ -32,7 +32,7 @@ export const PanelIconButton = (props: PanelIconButton) => {
     <PanelButton disabled={disabled} onClick={onClick} dataTestId={dataTestId}>
       <StyledContent disabled={disabled}>
         <IconContainer>
-          <SessionIcon iconType={iconType} iconColor={color} iconSize={iconSize || 'large'} />
+          <HE4SIcon iconType={iconType} iconColor={color} iconSize={iconSize || 'large'} />
         </IconContainer>
         <PanelButtonText text={text} subtitle={subtitle} color={color} />
       </StyledContent>

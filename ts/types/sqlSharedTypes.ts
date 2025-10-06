@@ -6,11 +6,11 @@ import {
   DisappearingMessageConversationModeType,
   LegacyGroupInfo,
   LegacyGroupMemberInfo,
-} from 'libsession_util_nodejs';
+} from 'libhe4s_util_nodejs';
 import { from_hex } from 'libsodium-wrappers-sumo';
 import { isArray, isEmpty, isEqual } from 'lodash';
-import { fromHexToArray } from '../session/utils/String';
-import { ConfigWrapperObjectTypes } from '../webworker/workers/browser/libsession_worker_functions';
+import { fromHexToArray } from '../he4s/utils/String';
+import { ConfigWrapperObjectTypes } from '../webworker/workers/browser/libhe4s_worker_functions';
 import { OpenGroupRequestCommonType, OpenGroupV2Room } from '../data/types';
 
 /**
@@ -45,7 +45,7 @@ export type UpdateLastHashType = {
 export type ConfigDumpRow = {
   variant: ConfigWrapperObjectTypes; // the variant this entry is about. (user pr, contacts, ...)
   publicKey: string; // either our pubkey if a dump for our own swarm or the closed group pubkey
-  data: Uint8Array; // the blob returned by libsession.dump() call
+  data: Uint8Array; // the blob returned by libhe4s.dump() call
 };
 
 export type ConfigDumpRowWithoutData = Pick<ConfigDumpRow, 'publicKey' | 'variant'>;
@@ -108,7 +108,7 @@ export type SaveConversationReturn = {
 } | null;
 
 /**
- * NOTE This code should always match the last known version of the same function used in a libsession migration (V34)
+ * NOTE This code should always match the last known version of the same function used in a libhe4s migration (V34)
  *
  * This function returns a contactInfo for the wrapper to understand from the DB values.
  * Created in this file so we can reuse it during the migration (node side), and from the renderer side
@@ -172,7 +172,7 @@ export type CommunityInfoFromDBValues = {
 };
 
 /**
- * NOTE This code should always match the last known version of the same function used in a libsession migration (V31)
+ * NOTE This code should always match the last known version of the same function used in a libhe4s migration (V31)
  *
  * This function returns a CommunityInfo for the wrapper to understand from the DB values.
  * It is created in this file so we can reuse it during the migration (node side), and from the renderer side
@@ -209,7 +209,7 @@ export function maybeArrayJSONtoArray(arr: string | Array<string>): Array<string
 }
 
 /**
- * NOTE This code should always match the last known version of the same function used in a libsession migration (V34)
+ * NOTE This code should always match the last known version of the same function used in a libhe4s migration (V34)
  */
 export function getLegacyGroupInfoFromDBValues({
   id,

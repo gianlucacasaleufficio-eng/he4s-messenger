@@ -1,0 +1,26 @@
+{
+  "network": {
+    "name": "HE4S Network",
+    "tokenSymbol": "HE4S",
+    "serviceNodes": [
+      "https://node1.he4s.network",
+      "https://node2.he4s.network",
+      "https://node3.he4s.network"
+    ],
+    "seedNodes": [
+      "seed1.he4s.network:8080",
+      "seed2.he4s.network:8080"
+    ]
+  },
+  "app": {
+    "name": "HE4S Messenger",
+    "version": "1.0.0",
+    "homepage": "https://he4s.network"
+  },
+  "features": {
+    "swap": {
+      "enabled": true,
+      "pairs": ["HE4S/OXEN", "HE4S/USDT"]
+    }
+  }
+}

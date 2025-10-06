@@ -4,8 +4,8 @@ import { Data } from '../../data/data';
 import { AdvancedSearchOptions, SearchOptions } from '../../types/Search';
 import { cleanSearchTerm } from '../../util/cleanSearchTerm';
 
-import { PubKey } from '../../session/types';
-import { UserUtils } from '../../session/utils';
+import { PubKey } from '../../he4s/types';
+import { UserUtils } from '../../he4s/utils';
 import { MessageResultProps } from '../../types/message';
 import { ReduxConversationType } from './conversations';
 

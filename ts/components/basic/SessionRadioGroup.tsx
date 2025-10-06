@@ -2,13 +2,13 @@ import { useState } from 'react';
 import useMount from 'react-use/lib/useMount';
 import styled, { CSSProperties } from 'styled-components';
 
-import { SessionRadio } from './SessionRadio';
+import { HE4SRadio } from './HE4SRadio';
 
-export type SessionRadioItems = Array<{ value: string; label: string }>;
+export type HE4SRadioItems = Array<{ value: string; label: string }>;
 
 interface Props {
   initialItem: string;
-  items: SessionRadioItems;
+  items: HE4SRadioItems;
   group: string;
   onClick: (selectedValue: string) => void;
   radioPosition?: 'left' | 'right';
@@ -31,7 +31,7 @@ const StyledFieldSet = styled.fieldset`
   }
 `;
 
-export const SessionRadioGroup = (props: Props) => {
+export const HE4SRadioGroup = (props: Props) => {
   const { items, group, initialItem, radioPosition, style } = props;
   const [activeItem, setActiveItem] = useState('');
 
@@ -45,7 +45,7 @@ export const SessionRadioGroup = (props: Props) => {
         const itemIsActive = item.value === activeItem;
 
         return (
-          <SessionRadio
+          <HE4SRadio
             key={item.value}
             label={item.label}
             active={itemIsActive}

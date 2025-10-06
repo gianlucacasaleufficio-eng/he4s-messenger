@@ -2,8 +2,8 @@ import { isEmpty } from 'lodash';
 import { Data } from '../data/data';
 import { MessageModel } from '../models/message';
 import { SignalService } from '../protobuf';
-import { isUsAnySogsFromCache } from '../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { ToastUtils, UserUtils } from '../session/utils';
+import { isUsAnySogsFromCache } from '../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { ToastUtils, UserUtils } from '../he4s/utils';
 
 import { Action, OpenGroupReactionList, ReactionList, RecentReactions } from '../types/Reaction';
 import { getRecentReactions, saveRecentReations } from './storage';

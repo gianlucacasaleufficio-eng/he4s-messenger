@@ -1,6 +1,6 @@
 // The list of permissions is here:
-//   https://electronjs.org/docs/api/session#sessetpermissionrequesthandlerhandler
-import { session } from 'electron';
+//   https://electronjs.org/docs/api/he4s#sessetpermissionrequesthandlerhandler
+import { he4s } from 'electron';
 
 import { UserConfig } from './config/user_config';
 
@@ -40,7 +40,7 @@ export function installPermissionsHandler({ userConfig }: { userConfig: UserConf
   // Setting the permission request handler to null first forces any permissions to be
   //   requested again. Without this, revoked permissions might still be available if
   //   they've already been used successfully.
-  session.defaultSession.setPermissionRequestHandler(null);
+  he4s.defaultHE4S.setPermissionRequestHandler(null);
 
-  session.defaultSession.setPermissionRequestHandler(createPermissionHandler(userConfig));
+  he4s.defaultHE4S.setPermissionRequestHandler(createPermissionHandler(userConfig));
 }

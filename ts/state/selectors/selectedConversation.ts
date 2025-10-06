@@ -6,9 +6,9 @@ import { ConversationTypeEnum } from '../../models/types';
 import {
   DisappearingMessageConversationModeType,
   DisappearingMessageConversationModes,
-} from '../../session/disappearing_messages/types';
-import { PubKey } from '../../session/types';
-import { UserUtils } from '../../session/utils';
+} from '../../he4s/disappearing_messages/types';
+import { PubKey } from '../../he4s/types';
+import { UserUtils } from '../../he4s/utils';
 import { StateType } from '../reducer';
 import {
   getIsMessageSelectionMode,

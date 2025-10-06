@@ -31,7 +31,7 @@ const StyledContactSection = styled.div`
   .module-conversation-list-item __buttons {
     display: flex;
 
-    .session-button {
+    .he4s-button {
       font-size: var(--font-size-xs);
       padding: 6px;
       height: auto;

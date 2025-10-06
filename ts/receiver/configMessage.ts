@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-import { ContactInfo } from 'libsession_util_nodejs';
+import { ContactInfo } from 'libhe4s_util_nodejs';
 import { compact, difference, isEmpty, isNil, isNumber, toNumber } from 'lodash';
 import { ConfigDumpData } from '../data/configDump/configDump';
 import { Data } from '../data/data';
@@ -7,26 +7,26 @@ import { SettingsKey } from '../data/settings-key';
 import { ConversationInteraction } from '../interactions';
 import { deleteAllMessagesByConvoIdNoConfirmation } from '../interactions/conversationInteractions';
 import { SignalService } from '../protobuf';
-import { ClosedGroup } from '../session';
+import { ClosedGroup } from '../he4s';
 import {
   joinOpenGroupV2WithUIEvents,
   parseOpenGroupV2,
-} from '../session/apis/open_group_api/opengroupV2/JoinOpenGroupV2';
-import { getOpenGroupManager } from '../session/apis/open_group_api/opengroupV2/OpenGroupManagerV2';
-import { OpenGroupUtils } from '../session/apis/open_group_api/utils';
-import { getOpenGroupV2ConversationId } from '../session/apis/open_group_api/utils/OpenGroupUtils';
-import { getSwarmPollingInstance } from '../session/apis/snode_api';
-import { getConversationController } from '../session/conversations';
-import { Profile, ProfileManager } from '../session/profile_manager/ProfileManager';
-import { PubKey } from '../session/types';
-import { StringUtils, UserUtils } from '../session/utils';
-import { toHex } from '../session/utils/String';
-import { ConfigurationSync } from '../session/utils/job_runners/jobs/ConfigurationSyncJob';
-import { FetchMsgExpirySwarm } from '../session/utils/job_runners/jobs/FetchMsgExpirySwarmJob'; // eslint-disable-next-line import/no-unresolved, import/extensions
-import { IncomingConfResult, LibSessionUtil } from '../session/utils/libsession/libsession_utils';
-import { SessionUtilContact } from '../session/utils/libsession/libsession_utils_contacts';
-import { SessionUtilConvoInfoVolatile } from '../session/utils/libsession/libsession_utils_convo_info_volatile';
-import { SessionUtilUserGroups } from '../session/utils/libsession/libsession_utils_user_groups';
+} from '../he4s/apis/open_group_api/opengroupV2/JoinOpenGroupV2';
+import { getOpenGroupManager } from '../he4s/apis/open_group_api/opengroupV2/OpenGroupManagerV2';
+import { OpenGroupUtils } from '../he4s/apis/open_group_api/utils';
+import { getOpenGroupV2ConversationId } from '../he4s/apis/open_group_api/utils/OpenGroupUtils';
+import { getSwarmPollingInstance } from '../he4s/apis/snode_api';
+import { getConversationController } from '../he4s/conversations';
+import { Profile, ProfileManager } from '../he4s/profile_manager/ProfileManager';
+import { PubKey } from '../he4s/types';
+import { StringUtils, UserUtils } from '../he4s/utils';
+import { toHex } from '../he4s/utils/String';
+import { ConfigurationSync } from '../he4s/utils/job_runners/jobs/ConfigurationSyncJob';
+import { FetchMsgExpirySwarm } from '../he4s/utils/job_runners/jobs/FetchMsgExpirySwarmJob'; // eslint-disable-next-line import/no-unresolved, import/extensions
+import { IncomingConfResult, LibHE4SUtil } from '../he4s/utils/libhe4s/libhe4s_utils';
+import { HE4SUtilContact } from '../he4s/utils/libhe4s/libhe4s_utils_contacts';
+import { HE4SUtilConvoInfoVolatile } from '../he4s/utils/libhe4s/libhe4s_utils_convo_info_volatile';
+import { HE4SUtilUserGroups } from '../he4s/utils/libhe4s/libhe4s_utils_user_groups';
 import { configurationMessageReceived, trigger } from '../shims/events';
 import { getCurrentlySelectedConversationOutsideRedux } from '../state/selectors/conversations';
 import { assertUnreachable } from '../types/sqlSharedTypes';
@@ -35,24 +35,24 @@ import { Registration } from '../util/registration';
 import { ReleasedFeatures } from '../util/releaseFeature';
 import { Storage, isSignInByLinking, setLastProfileUpdateTimestamp } from '../util/storage';
 
-import { SnodeNamespaces } from '../session/apis/snode_api/namespaces';
-import { RetrieveMessageItemWithNamespace } from '../session/apis/snode_api/types';
+import { SnodeNamespaces } from '../he4s/apis/snode_api/namespaces';
+import { RetrieveMessageItemWithNamespace } from '../he4s/apis/snode_api/types';
 // eslint-disable-next-line import/no-unresolved
-import { ConfigWrapperObjectTypes } from '../webworker/workers/browser/libsession_worker_functions';
+import { ConfigWrapperObjectTypes } from '../webworker/workers/browser/libhe4s_worker_functions';
 import {
   ContactsWrapperActions,
   ConvoInfoVolatileWrapperActions,
   GenericWrapperActions,
   UserConfigWrapperActions,
   UserGroupsWrapperActions,
-} from '../webworker/workers/browser/libsession_worker_interface';
+} from '../webworker/workers/browser/libhe4s_worker_interface';
 import { removeFromCache } from './cache';
 import { addKeyPairToCacheAndDBIfNeeded } from './closedGroups';
 import { HexKeyPair } from './keypairs';
 import { queueAllCachedFromSource } from './receiver';
 import { EnvelopePlus } from './types';
 import { ConversationTypeEnum, CONVERSATION_PRIORITIES } from '../models/types';
-import { CONVERSATION } from '../session/constants';
+import { CONVERSATION } from '../he4s/constants';
 
 function groupByNamespace(incomingConfigs: Array<RetrieveMessageItemWithNamespace>) {
   const groupedByVariant: Map<
@@ -109,7 +109,7 @@ async function mergeConfigsWithIncomingUpdates(
         data: StringUtils.fromBase64ToArray(msg.data),
         hash: msg.hash,
       }));
-      if (window.sessionFeatureFlags.debug.debugLibsessionDumps) {
+      if (window.he4sFeatureFlags.debug.debugLibhe4sDumps) {
         window.log.info(
           `printDumpsForDebugging: before merge of ${variant}:`,
           StringUtils.toHex(await GenericWrapperActions.dump(variant))
@@ -136,7 +136,7 @@ async function mergeConfigsWithIncomingUpdates(
         `${variant}: "${publicKey}" needsPush:${needsPush} needsDump:${needsDump}; mergedCount:${hashesMerged.length}`
       );
 
-      if (window.sessionFeatureFlags.debug.debugLibsessionDumps) {
+      if (window.he4sFeatureFlags.debug.debugLibhe4sDumps) {
         window.log.info(
           `printDumpsForDebugging: after merge of ${variant}:`,
           StringUtils.toHex(await GenericWrapperActions.dump(variant))
@@ -145,7 +145,7 @@ async function mergeConfigsWithIncomingUpdates(
       const incomingConfResult: IncomingConfResult = {
         needsDump,
         needsPush,
-        kind: LibSessionUtil.variantToKind(variant),
+        kind: LibHE4SUtil.variantToKind(variant),
         publicKey,
         latestEnvelopeTimestamp: latestEnvelopeTimestamp || Date.now(),
       };
@@ -159,7 +159,7 @@ async function mergeConfigsWithIncomingUpdates(
   }
 }
 
-export function getSettingsKeyFromLibsessionWrapper(
+export function getSettingsKeyFromLibhe4sWrapper(
   wrapperType: ConfigWrapperObjectTypes
 ): string | null {
   switch (wrapperType) {
@@ -175,7 +175,7 @@ export function getSettingsKeyFromLibsessionWrapper(
       try {
         assertUnreachable(
           wrapperType,
-          `getSettingsKeyFromLibsessionWrapper unknown type: ${wrapperType}`
+          `getSettingsKeyFromLibhe4sWrapper unknown type: ${wrapperType}`
         );
       } catch (e) {
         window.log.warn('assertUnreachable:', e.message);
@@ -184,11 +184,11 @@ export function getSettingsKeyFromLibsessionWrapper(
   }
 }
 
-async function updateLibsessionLatestProcessedUserTimestamp(
+async function updateLibhe4sLatestProcessedUserTimestamp(
   wrapperType: ConfigWrapperObjectTypes,
   latestEnvelopeTimestamp: number
 ) {
-  const settingsKey = getSettingsKeyFromLibsessionWrapper(wrapperType);
+  const settingsKey = getSettingsKeyFromLibhe4sWrapper(wrapperType);
   if (!settingsKey) {
     return;
   }
@@ -205,7 +205,7 @@ async function updateLibsessionLatestProcessedUserTimestamp(
 
 /**
  * NOTE When adding new properties to the wrapper, don't update the conversation model here because the merge has not been done yet.
- * Instead you will need to updateOurProfileLegacyOrViaLibSession() to support them
+ * Instead you will need to updateOurProfileLegacyOrViaLibHE4S() to support them
  */
 async function handleUserProfileUpdate(result: IncomingConfResult): Promise<IncomingConfResult> {
   const profilePic = await UserConfigWrapperActions.getProfilePic();
@@ -223,8 +223,8 @@ async function handleUserProfileUpdate(result: IncomingConfResult): Promise<Inco
 
   const picUpdate = !isEmpty(profilePic.key) && !isEmpty(profilePic.url);
 
-  // NOTE: if you do any changes to the user's settings which are synced, it should be done above the `updateOurProfileLegacyOrViaLibSession` call
-  await updateOurProfileLegacyOrViaLibSession({
+  // NOTE: if you do any changes to the user's settings which are synced, it should be done above the `updateOurProfileLegacyOrViaLibHE4S` call
+  await updateOurProfileLegacyOrViaLibHE4S({
     sentAt: result.latestEnvelopeTimestamp,
     displayName: displayName || '',
     profileUrl: picUpdate ? profilePic.url : null,
@@ -262,7 +262,7 @@ async function handleUserProfileUpdate(result: IncomingConfResult): Promise<Inco
       changes = success;
     }
 
-    // make sure to write the changes to the database now as the `AvatarDownloadJob` triggered by updateOurProfileLegacyOrViaLibSession might take some time before getting run
+    // make sure to write the changes to the database now as the `AvatarDownloadJob` triggered by updateOurProfileLegacyOrViaLibHE4S might take some time before getting run
     if (changes) {
       await ourConvo.commit();
     }
@@ -285,7 +285,7 @@ async function handleUserProfileUpdate(result: IncomingConfResult): Promise<Inco
 function getContactsToRemoveFromDB(contactsInWrapper: Array<ContactInfo>) {
   const allContactsInDBWhichShouldBeInWrapperIds = getConversationController()
     .getConversations()
-    .filter(SessionUtilContact.isContactToStoreInWrapper)
+    .filter(HE4SUtilContact.isContactToStoreInWrapper)
     .map(m => m.id as string);
 
   const currentlySelectedConversationId = getCurrentlySelectedConversationOutsideRedux();
@@ -445,7 +445,7 @@ async function handleCommunitiesUpdate() {
   );
   const allCommunitiesConversation = getConversationController()
     .getConversations()
-    .filter(SessionUtilUserGroups.isCommunityToStoreInWrapper);
+    .filter(HE4SUtilUserGroups.isCommunityToStoreInWrapper);
 
   const allCommunitiesIdsInDB = allCommunitiesConversation.map(m => m.id as string);
   window.log.debug('allCommunitiesIdsInDB', allCommunitiesIdsInDB);
@@ -539,7 +539,7 @@ async function handleLegacyGroupUpdate(latestEnvelopeTimestamp: number) {
   const allLegacyGroupsInWrapper = await UserGroupsWrapperActions.getAllLegacyGroups();
   const allLegacyGroupsInDb = getConversationController()
     .getConversations()
-    .filter(SessionUtilUserGroups.isLegacyGroupToRemoveFromDBIfNotInWrapper);
+    .filter(HE4SUtilUserGroups.isLegacyGroupToRemoveFromDBIfNotInWrapper);
 
   const allLegacyGroupsIdsInDB = allLegacyGroupsInDb.map(m => m.id as string);
   const allLegacyGroupsIdsInWrapper = allLegacyGroupsInWrapper.map(m => m.pubkeyHex);
@@ -685,7 +685,7 @@ async function handleLegacyGroupUpdate(latestEnvelopeTimestamp: number) {
 }
 
 async function handleUserGroupsUpdate(result: IncomingConfResult): Promise<IncomingConfResult> {
-  const toHandle = SessionUtilUserGroups.getUserGroupTypes();
+  const toHandle = HE4SUtilUserGroups.getUserGroupTypes();
   for (let index = 0; index < toHandle.length; index++) {
     const typeToHandle = toHandle[index];
     switch (typeToHandle) {
@@ -738,8 +738,8 @@ async function applyConvoVolatileUpdateFromWrapper(
     // this commits to the DB, if needed
     await foundConvo.markAsUnread(forcedUnread, true);
 
-    if (SessionUtilConvoInfoVolatile.isConvoToStoreInWrapper(foundConvo)) {
-      await SessionUtilConvoInfoVolatile.refreshConvoVolatileCached(
+    if (HE4SUtilConvoInfoVolatile.isConvoToStoreInWrapper(foundConvo)) {
+      await HE4SUtilConvoInfoVolatile.refreshConvoVolatileCached(
         foundConvo.id,
         foundConvo.isClosedGroup(),
         false
@@ -757,7 +757,7 @@ async function applyConvoVolatileUpdateFromWrapper(
 async function handleConvoInfoVolatileUpdate(
   result: IncomingConfResult
 ): Promise<IncomingConfResult> {
-  const types = SessionUtilConvoInfoVolatile.getConvoInfoVolatileTypes();
+  const types = HE4SUtilConvoInfoVolatile.getConvoInfoVolatileTypes();
   for (let typeIndex = 0; typeIndex < types.length; typeIndex++) {
     const type = types[typeIndex];
     switch (type) {
@@ -870,14 +870,14 @@ async function processMergingResults(results: Map<ConfigWrapperObjectTypes, Inco
           }
       }
 
-      const variant = LibSessionUtil.kindToVariant(kind);
+      const variant = LibHE4SUtil.kindToVariant(kind);
       try {
-        await updateLibsessionLatestProcessedUserTimestamp(
+        await updateLibhe4sLatestProcessedUserTimestamp(
           variant,
           incomingResult.latestEnvelopeTimestamp
         );
       } catch (e) {
-        window.log.error(`updateLibsessionLatestProcessedUserTimestamp failed with "${e.message}"`);
+        window.log.error(`updateLibhe4sLatestProcessedUserTimestamp failed with "${e.message}"`);
       }
 
       if (incomingResult.needsDump) {
@@ -906,12 +906,12 @@ async function processMergingResults(results: Map<ConfigWrapperObjectTypes, Inco
   }
 }
 
-async function handleConfigMessagesViaLibSession(
+async function handleConfigMessagesViaLibHE4S(
   configMessages: Array<RetrieveMessageItemWithNamespace>
 ) {
-  const userConfigLibsession = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
+  const userConfigLibhe4s = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
 
-  if (!userConfigLibsession) {
+  if (!userConfigLibhe4s) {
     return;
   }
 
@@ -920,7 +920,7 @@ async function handleConfigMessagesViaLibSession(
   }
 
   window?.log?.debug(
-    `Handling our sharedConfig message via libsession_util ${JSON.stringify(
+    `Handling our sharedConfig message via libhe4s_util ${JSON.stringify(
       configMessages.map(m => ({
         namespace: m.namespace,
         hash: m.hash,
@@ -933,7 +933,7 @@ async function handleConfigMessagesViaLibSession(
   await processMergingResults(incomingMergeResult);
 }
 
-async function updateOurProfileLegacyOrViaLibSession({
+async function updateOurProfileLegacyOrViaLibHE4S({
   sentAt,
   displayName,
   profileUrl,
@@ -960,9 +960,9 @@ async function handleGroupsAndContactsFromConfigMessageLegacy(
   envelope: EnvelopePlus,
   configMessage: SignalService.ConfigurationMessage
 ) {
-  const userConfigLibsession = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
+  const userConfigLibhe4s = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
 
-  if (userConfigLibsession && Registration.isDone()) {
+  if (userConfigLibhe4s && Registration.isDone()) {
     return;
   }
   const envelopeTimestamp = toNumber(envelope.timestamp);
@@ -1003,9 +1003,9 @@ async function handleGroupsAndContactsFromConfigMessageLegacy(
  * @param openGroups string array of open group urls
  */
 const handleOpenGroupsFromConfigLegacy = async (openGroups: Array<string>) => {
-  const userConfigLibsession = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
+  const userConfigLibhe4s = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
 
-  if (userConfigLibsession && Registration.isDone()) {
+  if (userConfigLibhe4s && Registration.isDone()) {
     return;
   }
   const numberOpenGroup = openGroups?.length || 0;
@@ -1033,9 +1033,9 @@ const handleContactFromConfigLegacy = async (
   contactReceived: SignalService.ConfigurationMessage.IContact,
   envelope: EnvelopePlus
 ) => {
-  const userConfigLibsession = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
+  const userConfigLibhe4s = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
 
-  if (userConfigLibsession && Registration.isDone()) {
+  if (userConfigLibhe4s && Registration.isDone()) {
     return;
   }
   try {
@@ -1102,9 +1102,9 @@ async function handleConfigurationMessageLegacy(
   // when the useSharedUtilForUserConfig flag is ON, we want only allow a legacy config message if we are registering a new user.
   // this is to allow users linking a device to find their config message if they do not have a shared config message yet.
   // the process of those messages is always done after the process of the shared config messages, so that's only a fallback.
-  const userConfigLibsession = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
+  const userConfigLibhe4s = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
 
-  if (userConfigLibsession && !isSignInByLinking()) {
+  if (userConfigLibhe4s && !isSignInByLinking()) {
     window?.log?.info(
       'useSharedUtilForUserConfig is set, not handling config messages with "handleConfigurationMessageLegacy()"'
     );
@@ -1131,5 +1131,5 @@ async function handleConfigurationMessageLegacy(
 
 export const ConfigMessageHandler = {
   handleConfigurationMessageLegacy,
-  handleConfigMessagesViaLibSession,
+  handleConfigMessagesViaLibHE4S,
 };

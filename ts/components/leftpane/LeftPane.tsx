@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { SectionType } from '../../state/ducks/section';
 import { getFocusedSection } from '../../state/selectors/section';
-import { SessionToastContainer } from '../SessionToastContainer';
+import { HE4SToastContainer } from '../HE4SToastContainer';
 import { CallInFullScreenContainer } from '../calling/CallInFullScreenContainer';
 import { DraggableCallContainer } from '../calling/DraggableCallContainer';
 import { IncomingCallDialog } from '../calling/IncomingCallDialog';
@@ -41,10 +41,10 @@ const CallContainer = () => {
 
 export const LeftPane = () => {
   return (
-    <div className="module-left-pane-session">
+    <div className="module-left-pane-he4s">
       <ModalContainer />
       <CallContainer />
-      <SessionToastContainer />
+      <HE4SToastContainer />
       <ActionsPanel />
 
       <StyledLeftPane className="module-left-pane">

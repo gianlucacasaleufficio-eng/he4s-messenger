@@ -1,20 +1,20 @@
 import { compact } from 'lodash';
-import { SessionButtonColor } from '../../components/basic/SessionButton';
+import { HE4SButtonColor } from '../../components/basic/HE4SButton';
 import { Data } from '../../data/data';
 import { ConversationModel } from '../../models/conversation';
 import { MessageModel } from '../../models/message';
-import { getMessageQueue } from '../../session';
-import { deleteSogsMessageByServerIds } from '../../session/apis/open_group_api/sogsv3/sogsV3DeleteMessages';
-import { SnodeAPI } from '../../session/apis/snode_api/SNodeAPI';
-import { SnodeNamespaces } from '../../session/apis/snode_api/namespaces';
-import { getConversationController } from '../../session/conversations';
-import { UnsendMessage } from '../../session/messages/outgoing/controlMessage/UnsendMessage';
-import { PubKey } from '../../session/types';
-import { ToastUtils, UserUtils } from '../../session/utils';
+import { getMessageQueue } from '../../he4s';
+import { deleteSogsMessageByServerIds } from '../../he4s/apis/open_group_api/sogsv3/sogsV3DeleteMessages';
+import { SnodeAPI } from '../../he4s/apis/snode_api/SNodeAPI';
+import { SnodeNamespaces } from '../../he4s/apis/snode_api/namespaces';
+import { getConversationController } from '../../he4s/conversations';
+import { UnsendMessage } from '../../he4s/messages/outgoing/controlMessage/UnsendMessage';
+import { PubKey } from '../../he4s/types';
+import { ToastUtils, UserUtils } from '../../he4s/utils';
 import { closeRightPanel, resetSelectedMessageIds } from '../../state/ducks/conversations';
 import { updateConfirmModal } from '../../state/ducks/modalDialog';
 import { resetRightOverlayMode } from '../../state/ducks/section';
-import { ed25519Str } from '../../session/utils/String';
+import { ed25519Str } from '../../he4s/utils/String';
 
 /**
  * Deletes messages for everyone in a 1-1 or everyone in a closed group conversation.
@@ -368,7 +368,7 @@ export async function deleteMessagesByIdForEveryone(
       title: window.i18n('clearMessagesForEveryone'),
       i18nMessage: { token: 'deleteMessage', args: { count: selectedMessages.length } },
       okText: window.i18n('clearMessagesForEveryone'),
-      okTheme: SessionButtonColor.Danger,
+      okTheme: HE4SButtonColor.Danger,
       onClickOk: async () => {
         await doDeleteSelectedMessages({ selectedMessages, conversation, deleteForEveryone: true });
 
@@ -407,7 +407,7 @@ export async function deleteMessagesById(messageIds: Array<string>, conversation
           ]
         : undefined,
       okText: window.i18n('delete'),
-      okTheme: SessionButtonColor.Danger,
+      okTheme: HE4SButtonColor.Danger,
       onClickOk: async args => {
         await doDeleteSelectedMessages({
           selectedMessages,

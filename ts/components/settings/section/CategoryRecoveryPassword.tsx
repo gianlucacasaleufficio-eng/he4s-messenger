@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useHotkey } from '../../../hooks/useHotkey';
 import { useIconToImageURL } from '../../../hooks/useIconToImageURL';
 import { usePasswordModal } from '../../../hooks/usePasswordModal';
-import { mnDecode } from '../../../session/crypto/mnemonic';
+import { mnDecode } from '../../../he4s/crypto/mnemonic';
 import {
   updateHideRecoveryPasswordModal,
   updateLightBoxOptions,
@@ -16,18 +16,18 @@ import { useIsDarkTheme } from '../../../state/selectors/theme';
 import { THEME_GLOBALS } from '../../../themes/globals';
 import { prepareQRCodeForLightBox } from '../../../util/qrCodes';
 import { getCurrentRecoveryPhrase } from '../../../util/storage';
-import { QRCodeLogoProps, SessionQRCode } from '../../SessionQRCode';
+import { QRCodeLogoProps, HE4SQRCode } from '../../HE4SQRCode';
 import { AnimatedFlex } from '../../basic/Flex';
 import { Localizer } from '../../basic/Localizer';
-import { SessionButtonColor } from '../../basic/SessionButton';
+import { HE4SButtonColor } from '../../basic/HE4SButton';
 import { SpacerMD, SpacerSM } from '../../basic/Text';
 import { CopyToClipboardIcon } from '../../buttons/CopyToClipboardButton';
-import { SessionIconButton } from '../../icon';
+import { HE4SIconButton } from '../../icon';
 import {
-  SessionSettingButtonItem,
-  SessionSettingsItemWrapper,
+  HE4SSettingButtonItem,
+  HE4SSettingsItemWrapper,
   StyledSettingItem,
-} from '../SessionSettingListItem';
+} from '../HE4SSettingListItem';
 
 const StyledSettingsItemContainer = styled.div`
   p {
@@ -103,8 +103,8 @@ export const SettingsCategoryRecoveryPassword = () => {
 
   return (
     <StyledSettingsItemContainer>
-      <SessionSettingsItemWrapper
-        title={window.i18n('sessionRecoveryPassword')}
+      <HE4SSettingsItemWrapper
+        title={window.i18n('he4sRecoveryPassword')}
         icon={{
           iconType: 'recoveryPasswordFill',
           iconSize: 18,
@@ -115,8 +115,8 @@ export const SettingsCategoryRecoveryPassword = () => {
       >
         <SpacerMD />
         {isQRVisible ? (
-          <SessionQRCode
-            id={'session-recovery-password'}
+          <HE4SQRCode
+            id={'he4s-recovery-password'}
             value={hexEncodedSeed}
             size={260}
             backgroundColor={backgroundColor}
@@ -130,7 +130,7 @@ export const SettingsCategoryRecoveryPassword = () => {
               window.inboxStore?.dispatch(updateLightBoxOptions(lightBoxOptions));
             }}
             ariaLabel={'Recovery Password QR Code'}
-            dataTestId={'session-recovery-password'}
+            dataTestId={'he4s-recovery-password'}
           />
         ) : (
           <StyledRecoveryPassword
@@ -158,7 +158,7 @@ export const SettingsCategoryRecoveryPassword = () => {
         )}
 
         <SpacerMD />
-        <SessionIconButton
+        <HE4SIconButton
           aria-label={isQRVisible ? 'View as password button' : 'View as QR code button'}
           iconType={isQRVisible ? 'password' : 'qr'}
           iconSize={isQRVisible ? 48 : 'huge'}
@@ -176,17 +176,17 @@ export const SettingsCategoryRecoveryPassword = () => {
           }}
         >
           {isQRVisible ? window.i18n('recoveryPasswordView') : window.i18n('qrView')}
-        </SessionIconButton>
-      </SessionSettingsItemWrapper>
+        </HE4SIconButton>
+      </HE4SSettingsItemWrapper>
       {!hideRecoveryPassword ? (
-        <SessionSettingButtonItem
+        <HE4SSettingButtonItem
           title={window.i18n('recoveryPasswordHideRecoveryPassword')}
           description={window.i18n('recoveryPasswordHideRecoveryPasswordDescription')}
           onClick={() => {
             dispatch(updateHideRecoveryPasswordModal({ state: 'firstWarning' }));
           }}
           buttonText={window.i18n('hide')}
-          buttonColor={SessionButtonColor.Danger}
+          buttonColor={HE4SButtonColor.Danger}
           dataTestId={'hide-recovery-password-button'}
         />
       ) : null}

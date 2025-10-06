@@ -16,7 +16,7 @@ import { getIsMessageRequestOverlayShown } from '../../../state/selectors/sectio
 import { assertUnreachable } from '../../../types/sqlSharedTypes';
 import { TypingAnimation } from '../../conversation/TypingAnimation';
 import { MessageBody } from '../../conversation/message/message-content/MessageBody';
-import { SessionIcon } from '../../icon';
+import { HE4SIcon } from '../../icon';
 import { InteractionItem } from './InteractionItem';
 
 export const MessageItem = () => {
@@ -75,7 +75,7 @@ function IconMessageStatus({ status }: { status: LastMessageStatusType }) {
   switch (status) {
     case 'error':
       return (
-        <SessionIcon
+        <HE4SIcon
           iconColor={'var(--danger-color'}
           iconType="error"
           iconSize="tiny"
@@ -84,7 +84,7 @@ function IconMessageStatus({ status }: { status: LastMessageStatusType }) {
       );
     case 'read':
       return (
-        <SessionIcon
+        <HE4SIcon
           iconColor={nonErrorIconColor}
           iconType="doubleCheckCircleFilled"
           iconSize="tiny"
@@ -93,7 +93,7 @@ function IconMessageStatus({ status }: { status: LastMessageStatusType }) {
       );
     case 'sending':
       return (
-        <SessionIcon
+        <HE4SIcon
           rotateDuration={2}
           iconColor={nonErrorIconColor}
           iconType="sending"
@@ -103,7 +103,7 @@ function IconMessageStatus({ status }: { status: LastMessageStatusType }) {
       );
     case 'sent':
       return (
-        <SessionIcon
+        <HE4SIcon
           iconColor={nonErrorIconColor}
           iconType="circleCheck"
           iconSize="tiny"

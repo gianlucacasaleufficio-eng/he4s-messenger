@@ -14,7 +14,7 @@ import {
   useMentionedUs,
   useUnreadCount,
 } from '../../../hooks/useParamSelector';
-import { Constants } from '../../../session';
+import { Constants } from '../../../he4s';
 import {
   openConversationToSpecificMessage,
   openConversationWithMessages,
@@ -22,7 +22,7 @@ import {
 import { useIsSearching } from '../../../state/selectors/search';
 import { getIsMessageSection } from '../../../state/selectors/section';
 import { Timestamp } from '../../conversation/Timestamp';
-import { SessionIcon } from '../../icon';
+import { HE4SIcon } from '../../icon';
 import { UserItem } from './UserItem';
 
 const NotificationSettingIcon = () => {
@@ -39,7 +39,7 @@ const NotificationSettingIcon = () => {
       return null;
     case 'disabled':
       return (
-        <SessionIcon
+        <HE4SIcon
           iconType="mute"
           iconColor={'var(--conversation-tab-text-color)'}
           iconSize="small"
@@ -47,7 +47,7 @@ const NotificationSettingIcon = () => {
       );
     case 'mentions_only':
       return (
-        <SessionIcon
+        <HE4SIcon
           iconType="bell"
           iconColor={'var(--conversation-tab-text-color)'}
           iconSize="small"
@@ -74,7 +74,7 @@ const PinIcon = () => {
   const isPinned = useIsPinned(conversationId);
 
   return isMessagesSection && isPinned ? (
-    <SessionIcon iconType="pin" iconColor={'var(--conversation-tab-text-color)'} iconSize="small" />
+    <HE4SIcon iconType="pin" iconColor={'var(--conversation-tab-text-color)'} iconSize="small" />
   ) : null;
 };
 
@@ -164,7 +164,7 @@ const UnreadCount = ({ convoId }: { convoId: string }) => {
       ? `${Constants.CONVERSATION.MAX_CONVO_UNREAD_COUNT}+`
       : unreadMsgCount || ' ';
 
-  // TODO would be good to merge the style of this with SessionNotificationCount or SessionUnreadCount at some point.
+  // TODO would be good to merge the style of this with HE4SNotificationCount or HE4SUnreadCount at some point.
   return unreadMsgCount > 0 || forcedUnread ? (
     <p className="module-conversation-list-item__unread-count">{unreadWithOverflow}</p>
   ) : null;

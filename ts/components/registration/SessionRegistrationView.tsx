@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import useMount from 'react-use/lib/useMount';
 import { onboardingStore } from '../../state/onboarding/store';
-import { SessionTheme } from '../../themes/SessionTheme';
+import { HE4STheme } from '../../themes/HE4STheme';
 import { setSignInByLinking } from '../../util/storage';
-import { SessionToastContainer } from '../SessionToastContainer';
+import { HE4SToastContainer } from '../HE4SToastContainer';
 import { Flex } from '../basic/Flex';
 import { ModalContainer } from './ModalContainer';
 import { RegistrationStages } from './RegistrationStages';
@@ -19,7 +19,7 @@ const StyledFullscreenContainer = styled(Flex)`
   color: var(--text-primary-color);
 `;
 
-const StyledSessionContent = styled(Flex)`
+const StyledHE4SContent = styled(Flex)`
   z-index: 1;
   &-accent {
     &-text {
@@ -55,17 +55,17 @@ const StyledSessionContent = styled(Flex)`
   }
 `;
 
-export const SessionRegistrationView = () => {
+export const HE4SRegistrationView = () => {
   useMount(() => {
     void setSignInByLinking(false);
   });
 
   return (
     <Provider store={onboardingStore}>
-      <SessionTheme>
+      <HE4STheme>
         <StyledFullscreenContainer container={true} alignItems="center">
           <Hero />
-          <StyledSessionContent
+          <StyledHE4SContent
             flexDirection="column"
             alignItems="center"
             container={true}
@@ -73,13 +73,13 @@ export const SessionRegistrationView = () => {
             flexGrow={1}
           >
             <Flex container={true} margin="auto" alignItems="center" flexDirection="column">
-              <SessionToastContainer />
+              <HE4SToastContainer />
               <ModalContainer />
               <RegistrationStages />
             </Flex>
-          </StyledSessionContent>
+          </StyledHE4SContent>
         </StyledFullscreenContainer>
-      </SessionTheme>
+      </HE4STheme>
     </Provider>
   );
 };

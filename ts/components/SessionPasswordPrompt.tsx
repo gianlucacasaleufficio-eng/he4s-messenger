@@ -5,15 +5,15 @@ import { PureComponent, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import { SessionButton, SessionButtonColor, SessionButtonType } from './basic/SessionButton';
-// import { SessionSpinner } from './basic/SessionSpinner';
-import { SessionTheme } from '../themes/SessionTheme';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from './basic/HE4SButton';
+// import { HE4SSpinner } from './basic/HE4SSpinner';
+import { HE4STheme } from '../themes/HE4STheme';
 import { switchPrimaryColorTo } from '../themes/switchPrimaryColor';
 import { switchThemeTo } from '../themes/switchTheme';
-import { SessionToastContainer } from './SessionToastContainer';
-import { SessionWrapperModal } from './SessionWrapperModal';
-import { SessionToast } from './basic/SessionToast';
-import { SessionSpinner } from './loading';
+import { HE4SToastContainer } from './HE4SToastContainer';
+import { HE4SWrapperModal } from './HE4SWrapperModal';
+import { HE4SToast } from './basic/HE4SToast';
+import { HE4SSpinner } from './loading';
 import { Localizer } from './basic/Localizer';
 
 interface State {
@@ -42,15 +42,15 @@ const StyledContent = styled.div`
 `;
 
 // We cannot import toastutils from the password window as it is pulling the whole sending
-// pipeline(and causing crashes on Session instances with password)
+// pipeline(and causing crashes on HE4S instances with password)
 function pushToastError(id: string, title: string, description?: string) {
-  toast.error(<SessionToast title={title} description={description} />, {
+  toast.error(<HE4SToast title={title} description={description} />, {
     toastId: id,
     updateId: id,
   });
 }
 
-class SessionPasswordPromptInner extends PureComponent<unknown, State> {
+class HE4SPasswordPromptInner extends PureComponent<unknown, State> {
   private inputRef?: any;
 
   constructor(props: any) {
@@ -73,13 +73,13 @@ class SessionPasswordPromptInner extends PureComponent<unknown, State> {
 
   public render() {
     const isLoading = this.state.loading;
-    const spinner = isLoading ? <SessionSpinner loading={true} /> : null;
+    const spinner = isLoading ? <HE4SSpinner loading={true} /> : null;
     const featureElement = this.state.clearDataView ? (
       <p>
         <Localizer token="clearDeviceDescription" />
       </p>
     ) : (
-      <div className="session-modal__input-group">
+      <div className="he4s-modal__input-group">
         <input
           type="password"
           id="password-prompt-input"
@@ -94,7 +94,7 @@ class SessionPasswordPromptInner extends PureComponent<unknown, State> {
     );
 
     return (
-      <SessionWrapperModal
+      <HE4SWrapperModal
         title={this.state.clearDataView ? window.i18n('clearDevice') : window.i18n('passwordEnter')}
       >
         {spinner || featureElement}
@@ -102,7 +102,7 @@ class SessionPasswordPromptInner extends PureComponent<unknown, State> {
         {this.state.clearDataView
           ? this.renderClearDataViewButtons()
           : this.renderPasswordViewButtons()}
-      </SessionWrapperModal>
+      </HE4SWrapperModal>
     );
   }
 
@@ -165,21 +165,21 @@ class SessionPasswordPromptInner extends PureComponent<unknown, State> {
     const showResetElements = this.state.errorCount >= MAX_LOGIN_TRIES;
 
     return (
-      <div className={classNames(showResetElements && 'session-modal__button-group')}>
+      <div className={classNames(showResetElements && 'he4s-modal__button-group')}>
         {showResetElements && (
           <>
-            <SessionButton
+            <HE4SButton
               text={window.i18n('clearDevice')}
-              buttonColor={SessionButtonColor.Danger}
-              buttonType={SessionButtonType.Simple}
+              buttonColor={HE4SButtonColor.Danger}
+              buttonType={HE4SButtonType.Simple}
               onClick={this.initClearDataView}
             />
           </>
         )}
         {!this.state.loading && (
-          <SessionButton
+          <HE4SButton
             text={showResetElements ? window.i18n('tryAgain') : window.i18n('done')}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
             onClick={this.initLogin}
             disabled={this.state.loading}
           />
@@ -190,16 +190,16 @@ class SessionPasswordPromptInner extends PureComponent<unknown, State> {
 
   private renderClearDataViewButtons(): JSX.Element {
     return (
-      <div className="session-modal__button-group">
-        <SessionButton
+      <div className="he4s-modal__button-group">
+        <HE4SButton
           text={window.i18n('clearDevice')}
-          buttonColor={SessionButtonColor.Danger}
-          buttonType={SessionButtonType.Simple}
+          buttonColor={HE4SButtonColor.Danger}
+          buttonType={HE4SButtonType.Simple}
           onClick={window.clearLocalData}
         />
-        <SessionButton
+        <HE4SButton
           text={window.i18n('cancel')}
-          buttonType={SessionButtonType.Simple}
+          buttonType={HE4SButtonType.Simple}
           onClick={() => {
             this.setState({ clearDataView: false });
           }}
@@ -209,7 +209,7 @@ class SessionPasswordPromptInner extends PureComponent<unknown, State> {
   }
 }
 
-export const SessionPasswordPrompt = () => {
+export const HE4SPasswordPrompt = () => {
   useEffect(() => {
     if (window.theme) {
       void switchThemeTo({
@@ -222,11 +222,11 @@ export const SessionPasswordPrompt = () => {
   }, []);
 
   return (
-    <SessionTheme>
-      <SessionToastContainer />
+    <HE4STheme>
+      <HE4SToastContainer />
       <StyledContent>
-        <SessionPasswordPromptInner />
+        <HE4SPasswordPromptInner />
       </StyledContent>
-    </SessionTheme>
+    </HE4STheme>
   );
 };

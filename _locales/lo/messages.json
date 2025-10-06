@@ -223,7 +223,7 @@
   "notificationsSystem": "{message_count} ຂໍ້ຄວາມໃໝ່ໃນ {conversation_count} ການສົນທະນາ",
   "onboardingAccountCreate": "ເກີນໄປກຽນແບບບັນດາເກື່ອນ",
   "onboardingAccountCreated": "ໄດ້ສ້າງແອກາດແລ້ວ",
-  "onboardingBubbleSessionIsEngineered": "{app_name} ໄດ້ຖືກຂຽນຂຶ້ນເພື່ອປົກປ້ອງຄວາມສ່ວນຕົວຂອງທ່ານ.",
+  "onboardingBubbleHE4SIsEngineered": "{app_name} ໄດ້ຖືກຂຽນຂຶ້ນເພື່ອປົກປ້ອງຄວາມສ່ວນຕົວຂອງທ່ານ.",
   "onboardingTosPrivacy": "ໂດຍການໃຊ້ບໍລິການນີ້, ທ່ານຕົຏຖ້ງກັບ <b>ຂໍ້ກຳນົດໃນການບໍລິການ</b> ແລະ <b>ນະໂປລິຊີຄວາມຊອບໃຊ້ຂໍ້ມູນສ່ວນບຸກຄົນ</b>.",
   "onionRoutingPathDescription": "{app_name} ປິດບັງທີ່ຢູ່ IP ຂອງທ່ານໂດຍຜ່ານຂໍ້ຄວາມຂອງທ່ານຜ່ານ Service Node ຫລາຍໜ່ວຍຂ່າຍໃນ {app_name} ເປັນຮູບແບບຂອງຂ່າຍອິດສະຫລະ. ນີ້ແມ່ນເສັ້ນທາງປັດຈຸບັນຂອງທ່ານ:",
   "onionRoutingPathDestination": "ຈຸດໝາຍ",
@@ -247,9 +247,9 @@
   "recoveryPasswordHidePermanentlyDescription2": "ທ່ານຫມັ່ນໃຈບໍ່ວ່າທ່ານຈະເມືອນຊົ່ວຫມົດ Recovery password ຂອງທ່ານເລັວ? ການນັ້ນບໍ່ສາມາດຖືກຄືນໄດ້.",
   "recoveryPasswordRestoreDescription": "ປ້ອນລະຫັດການຟື້ນຄືນຂອງທ່ານເພື່ອດາວໂຫຼດບັນດານຂອງທ່ານ. ຖ້າທ່ານຍັງບໍ່ໄດ້ຟອມມັນ, ທ່ານສາມາດຫາມັນໄດ້ໃນການຕັ້ງຄ່າແອັບຂອງທ່ານ.",
   "screenshotTaken": "<b>{name}</b>ໄດ້ຮອບພາບເຊັນຈໍ (screenshot).",
-  "sessionAppearance": "ຮູບລັກສະນະ",
-  "sessionClearData": "ລ້າງເວດຂໍ້ມູນ",
-  "sessionConversations": "ຫຼາຍເເລກ",
+  "he4sAppearance": "ຮູບລັກສະນະ",
+  "he4sClearData": "ລ້າງເວດຂໍ້ມູນ",
+  "he4sConversations": "ຫຼາຍເເລກ",
   "theContinue": "ເຂົ້າໄປ",
   "theDefault": "ການຕັ້ງຕົ້ນ",
   "theError": "ມີຂໍ້ຜິດພາດ",
@@ -258,7 +258,7 @@
   "updateError": "ບໍ່ສາມາດອັບເດດໄດ້",
   "updateNewVersion": "ວິທີໃຫມ່ຂອງ {app_name} ມີໃຫ້, ກົດເພື່ອອັບເດດ",
   "updateNewVersionDescription": "ວິທີໃຫມ່ຂອງ {app_name} ມີໃຫ້.",
-  "updateSession": "ອັບເດດ {app_name}",
+  "updateHE4S": "ອັບເດດ {app_name}",
   "urlCopy": "ເສັກກີ້າບເອີຢ໇ລໍ້າ"
 }
 

@@ -101,7 +101,7 @@ export const getPreview = async (
   };
 };
 
-export const SessionStagedLinkPreview = (props: StagedLinkPreviewProps) => {
+export const HE4SStagedLinkPreview = (props: StagedLinkPreviewProps) => {
   if (!props.url) {
     return null;
   }

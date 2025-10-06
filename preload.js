@@ -37,14 +37,14 @@ window.getOSRelease = () =>
   `${os.type()} ${os.release()}, Node.js ${config.node_version} ${os.platform()} ${os.arch()}`;
 window.saveLog = additionalText => ipc.send('save-debug-log', additionalText);
 
-window.sessionFeatureFlags = {
+window.he4sFeatureFlags = {
   useOnionRequests: true,
   useTestNet: isTestNet() || isTestIntegration(),
   useClosedGroupV3: false,
   replaceLocalizedStringsWithKeys: false,
   debug: {
     debugLogging: !_.isEmpty(process.env.SESSION_DEBUG),
-    debugLibsessionDumps: !_.isEmpty(process.env.SESSION_DEBUG_LIBSESSION_DUMPS),
+    debugLibhe4sDumps: !_.isEmpty(process.env.SESSION_DEBUG_LIBSESSION_DUMPS),
     debugFileServerRequests: false,
     debugNonSnodeRequests: false,
     debugOnionRequests: false,
@@ -256,7 +256,7 @@ window.nodeSetImmediate = setImmediate;
 const data = require('./ts/data/dataInit');
 window.Signal = data.initData();
 
-const { getConversationController } = require('./ts/session/conversations/ConversationController');
+const { getConversationController } = require('./ts/he4s/conversations/ConversationController');
 window.getConversationController = getConversationController;
 // Linux seems to periodically let the event loop stop, so this is a global workaround
 setInterval(() => {
@@ -266,13 +266,13 @@ setInterval(() => {
 window.clipboard = clipboard;
 
 window.getSeedNodeList = () =>
-  window.sessionFeatureFlags.useTestNet
-    ? ['http://seed2.getsession.org:38157']
+  window.he4sFeatureFlags.useTestNet
+    ? ['http://seed2.gethe4s.org:38157']
     : [
         // Note: for each of the seed nodes, the cert pinned is the one provided on the port 4443 and not the 4433, because the 4443 is a 10year one
-        'https://seed1.getsession.org:4443/',
-        'https://seed2.getsession.org:4443/',
-        'https://seed3.getsession.org:4443/',
+        'https://seed1.gethe4s.org:4443/',
+        'https://seed2.gethe4s.org:4443/',
+        'https://seed3.gethe4s.org:4443/',
       ];
 
 window.addEventListener('contextmenu', e => {

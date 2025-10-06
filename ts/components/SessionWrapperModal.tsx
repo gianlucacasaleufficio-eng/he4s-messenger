@@ -3,11 +3,11 @@ import { ReactNode, useRef } from 'react';
 import useKey from 'react-use/lib/useKey';
 
 import styled from 'styled-components';
-import { SessionIconButton } from './icon';
+import { HE4SIconButton } from './icon';
 
-import { SessionFocusTrap } from './SessionFocusTrap';
+import { HE4SFocusTrap } from './HE4SFocusTrap';
 import { Flex } from './basic/Flex';
-import { SessionButton, SessionButtonColor, SessionButtonType } from './basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from './basic/HE4SButton';
 import { SpacerXL } from './basic/Text';
 
 const StyledTitle = styled.div`
@@ -17,7 +17,7 @@ const StyledTitle = styled.div`
   padding: 0 var(--margins-sm);
 `;
 
-export type SessionWrapperModalType = {
+export type HE4SWrapperModalType = {
   title?: string;
   showHeader?: boolean;
   onConfirm?: () => void;
@@ -32,7 +32,7 @@ export type SessionWrapperModalType = {
   additionalClassName?: string;
 };
 
-export const SessionWrapperModal = (props: SessionWrapperModalType) => {
+export const HE4SWrapperModal = (props: HE4SWrapperModalType) => {
   const {
     title,
     onConfirm,
@@ -74,14 +74,14 @@ export const SessionWrapperModal = (props: SessionWrapperModalType) => {
   };
 
   return (
-    <SessionFocusTrap>
+    <HE4SFocusTrap>
       <div
         className={classNames('loki-dialog modal', additionalClassName || null)}
         onClick={handleClick}
         role="dialog"
       >
-        <div className="session-confirm-wrapper">
-          <div ref={modalRef} className="session-modal">
+        <div className="he4s-confirm-wrapper">
+          <div ref={modalRef} className="he4s-modal">
             {showHeader ? (
               <Flex
                 container={true}
@@ -89,7 +89,7 @@ export const SessionWrapperModal = (props: SessionWrapperModalType) => {
                 justifyContent={'space-between'}
                 alignItems={'center'}
                 padding={'var(--margins-lg)'}
-                className={'session-modal__header'}
+                className={'he4s-modal__header'}
               >
                 <Flex
                   container={true}
@@ -97,10 +97,10 @@ export const SessionWrapperModal = (props: SessionWrapperModalType) => {
                   alignItems={'center'}
                   padding={'0'}
                   margin={'0'}
-                  className={'session-modal__header__close'}
+                  className={'he4s-modal__header__close'}
                 >
                   {showExitIcon ? (
-                    <SessionIconButton
+                    <HE4SIconButton
                       iconType="exit"
                       iconSize="small"
                       onClick={() => {
@@ -119,11 +119,11 @@ export const SessionWrapperModal = (props: SessionWrapperModalType) => {
                         if (index > offset) {
                           return null;
                         }
-                        return <SpacerXL key={`session-modal__header_space-${index}`} />;
+                        return <SpacerXL key={`he4s-modal__header_space-${index}`} />;
                       })
                     : null}
                 </Flex>
-                <StyledTitle className="session-modal__header__title">{title}</StyledTitle>
+                <StyledTitle className="he4s-modal__header__title">{title}</StyledTitle>
                 <Flex
                   container={true}
                   flexDirection={headerReverse ? 'row-reverse' : 'row'}
@@ -134,7 +134,7 @@ export const SessionWrapperModal = (props: SessionWrapperModalType) => {
                   {headerIconButtons?.length ? (
                     headerIconButtons.map((iconItem: any) => {
                       return (
-                        <SessionIconButton
+                        <HE4SIconButton
                           key={iconItem.iconType}
                           iconType={iconItem.iconType}
                           iconSize={'large'}
@@ -152,24 +152,24 @@ export const SessionWrapperModal = (props: SessionWrapperModalType) => {
               </Flex>
             ) : null}
 
-            <div className="session-modal__body">
-              <div className="session-modal__centered">
+            <div className="he4s-modal__body">
+              <div className="he4s-modal__centered">
                 {props.children}
 
-                <div className="session-modal__button-group">
+                <div className="he4s-modal__button-group">
                   {onConfirm ? (
-                    <SessionButton buttonType={SessionButtonType.Simple} onClick={props.onConfirm}>
+                    <HE4SButton buttonType={HE4SButtonType.Simple} onClick={props.onConfirm}>
                       {confirmText || window.i18n('okay')}
-                    </SessionButton>
+                    </HE4SButton>
                   ) : null}
                   {onClose && showClose ? (
-                    <SessionButton
-                      buttonType={SessionButtonType.Simple}
-                      buttonColor={SessionButtonColor.Danger}
+                    <HE4SButton
+                      buttonType={HE4SButtonType.Simple}
+                      buttonColor={HE4SButtonColor.Danger}
                       onClick={props.onClose}
                     >
                       {cancelText || window.i18n('close')}
-                    </SessionButton>
+                    </HE4SButton>
                   ) : null}
                 </div>
               </div>
@@ -177,6 +177,6 @@ export const SessionWrapperModal = (props: SessionWrapperModalType) => {
           </div>
         </div>
       </div>
-    </SessionFocusTrap>
+    </HE4SFocusTrap>
   );
 };

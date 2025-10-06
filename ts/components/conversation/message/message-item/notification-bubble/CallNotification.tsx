@@ -2,14 +2,14 @@ import { CallNotificationType, PropsForCallNotification } from '../../../../../s
 
 import { useSelectedNicknameOrProfileNameOrShortenedPubkey } from '../../../../../state/selectors/selectedConversation';
 import type { LocalizerToken } from '../../../../../types/localizer';
-import { SessionIconType } from '../../../../icon';
+import { HE4SIconType } from '../../../../icon';
 import { ExpirableReadableMessage } from '../ExpirableReadableMessage';
 import { NotificationBubble } from './NotificationBubble';
 import { Localizer } from '../../../../basic/Localizer';
 
 type StyleType = Record<
   CallNotificationType,
-  { notificationTextKey: LocalizerToken; iconType: SessionIconType; iconColor: string }
+  { notificationTextKey: LocalizerToken; iconType: HE4SIconType; iconColor: string }
 >;
 
 const style = {

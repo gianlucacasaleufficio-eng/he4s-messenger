@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { sogsV3AddAdmin } from '../../session/apis/open_group_api/sogsv3/sogsV3AddRemoveMods';
-import { getConversationController } from '../../session/conversations';
-import { PubKey } from '../../session/types';
-import { ToastUtils } from '../../session/utils';
+import { sogsV3AddAdmin } from '../../he4s/apis/open_group_api/sogsv3/sogsV3AddRemoveMods';
+import { getConversationController } from '../../he4s/conversations';
+import { PubKey } from '../../he4s/types';
+import { ToastUtils } from '../../he4s/utils';
 import { updateAddModeratorsModal } from '../../state/ducks/modalDialog';
 import { useIsDarkTheme } from '../../state/selectors/theme';
-import { SessionHeaderSearchInput } from '../SessionHeaderSearchInput';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SHeaderSearchInput } from '../HE4SHeaderSearchInput';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { Flex } from '../basic/Flex';
-import { SessionButton, SessionButtonType } from '../basic/SessionButton';
-import { SessionSpinner } from '../loading';
+import { HE4SButton, HE4SButtonType } from '../basic/HE4SButton';
+import { HE4SSpinner } from '../loading';
 
 type Props = {
   conversationId: string;
@@ -72,7 +72,7 @@ export const AddModeratorsDialog = (props: Props) => {
   };
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       showExitIcon={true}
       title={window.i18n('adminPromote')}
       onClose={() => {
@@ -80,7 +80,7 @@ export const AddModeratorsDialog = (props: Props) => {
       }}
     >
       <Flex container={true} flexDirection="column" alignItems="center">
-        <SessionHeaderSearchInput
+        <HE4SHeaderSearchInput
           type="text"
           isDarkTheme={isDarkTheme}
           placeholder={window.i18n('accountIdEnter')}
@@ -90,15 +90,15 @@ export const AddModeratorsDialog = (props: Props) => {
           value={inputBoxValue}
           autoFocus={true}
         />
-        <SessionButton
-          buttonType={SessionButtonType.Simple}
+        <HE4SButton
+          buttonType={HE4SButtonType.Simple}
           onClick={addAsModerator}
           text={window.i18n('add')}
           disabled={addingInProgress}
         />
 
-        <SessionSpinner loading={addingInProgress} />
+        <HE4SSpinner loading={addingInProgress} />
       </Flex>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

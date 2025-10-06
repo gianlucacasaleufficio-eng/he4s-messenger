@@ -5,17 +5,17 @@ import { motion } from 'framer-motion';
 import { Component } from 'react';
 import styled from 'styled-components';
 import { ConversationModel } from '../../models/conversation';
-import { getConversationController } from '../../session/conversations';
-import { initiateClosedGroupUpdate } from '../../session/group/closed-group';
-import { initiateOpenGroupUpdate } from '../../session/group/open-group';
+import { getConversationController } from '../../he4s/conversations';
+import { initiateClosedGroupUpdate } from '../../he4s/group/closed-group';
+import { initiateOpenGroupUpdate } from '../../he4s/group/open-group';
 import { updateGroupNameModal } from '../../state/ducks/modalDialog';
 import { THEME_GLOBALS } from '../../themes/globals';
 import { pickFileForAvatar } from '../../types/attachments/VisualAttachment';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { Avatar, AvatarSize } from '../avatar/Avatar';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerMD } from '../basic/Text';
-import LIBSESSION_CONSTANTS from '../../session/utils/libsession/libsession_constants';
+import LIBSESSION_CONSTANTS from '../../he4s/utils/libhe4s/libhe4s_constants';
 
 const StyledErrorMessage = styled(motion.p)`
   text-align: center;
@@ -46,7 +46,7 @@ export class UpdateGroupNameDialog extends Component<Props, State> {
     this.convo = getConversationController().get(props.conversationId);
 
     this.state = {
-      groupName: this.convo.getRealSessionUsername(),
+      groupName: this.convo.getRealHE4SUsername(),
       errorDisplayed: false,
       errorMessage: 'placeholder',
       oldAvatarPath: this.convo.getAvatarPath(),
@@ -78,7 +78,7 @@ export class UpdateGroupNameDialog extends Component<Props, State> {
     }
 
     if (
-      trimmedGroupName !== this.convo.getRealSessionUsername() ||
+      trimmedGroupName !== this.convo.getRealHE4SUsername() ||
       newAvatarObjecturl !== oldAvatarPath
     ) {
       if (this.convo.isPublic()) {
@@ -103,7 +103,7 @@ export class UpdateGroupNameDialog extends Component<Props, State> {
     const isAdmin = !this.convo.isPublic();
 
     return (
-      <SessionWrapperModal
+      <HE4SWrapperModal
         title={window.i18n('groupName')}
         onClose={() => this.closeDialog()}
         additionalClassName="update-group-dialog"
@@ -141,20 +141,20 @@ export class UpdateGroupNameDialog extends Component<Props, State> {
           />
         ) : null}
 
-        <div className="session-modal__button-group">
-          <SessionButton
+        <div className="he4s-modal__button-group">
+          <HE4SButton
             text={okText}
             onClick={this.onClickOK}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
           />
-          <SessionButton
+          <HE4SButton
             text={cancelText}
-            buttonColor={SessionButtonColor.Danger}
-            buttonType={SessionButtonType.Simple}
+            buttonColor={HE4SButtonColor.Danger}
+            buttonType={HE4SButtonType.Simple}
             onClick={this.closeDialog}
           />
         </div>
-      </SessionWrapperModal>
+      </HE4SWrapperModal>
     );
   }
 

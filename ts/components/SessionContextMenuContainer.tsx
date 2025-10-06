@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SessionContextMenuContainer = styled.div.attrs({
+export const HE4SContextMenuContainer = styled.div.attrs({
   // custom props
 })`
   .contexify {

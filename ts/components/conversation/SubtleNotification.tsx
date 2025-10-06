@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useIsIncomingRequest, useIsOutgoingRequest } from '../../hooks/useParamSelector';
-import { SessionUtilContact } from '../../session/utils/libsession/libsession_utils_contacts';
+import { HE4SUtilContact } from '../../he4s/utils/libhe4s/libhe4s_utils_contacts';
 import {
   getSelectedHasMessages,
   hasSelectedConversationIncomingMessages,
@@ -47,12 +47,12 @@ export const ConversationOutgoingRequestExplanation = () => {
   if (!showMsgRequestUI || hasIncomingMessages || !selectedIsPrivate) {
     return null;
   }
-  const contactFromLibsession = SessionUtilContact.getContactCached(selectedConversation);
+  const contactFromLibhe4s = HE4SUtilContact.getContactCached(selectedConversation);
   // Note: we want to display this description when the conversation is private (or blinded) AND
-  // - the conversation is brand new (and not saved yet in libsession: transient conversation),
-  // - the conversation exists in libsession but we are not approved yet.
-  // This works because a blinded conversation is not saved in libsession currently, and will only be once approved_me is true
-  if (!contactFromLibsession || !contactFromLibsession.approvedMe) {
+  // - the conversation is brand new (and not saved yet in libhe4s: transient conversation),
+  // - the conversation exists in libhe4s but we are not approved yet.
+  // This works because a blinded conversation is not saved in libhe4s currently, and will only be once approved_me is true
+  if (!contactFromLibhe4s || !contactFromLibhe4s.approvedMe) {
     return (
       <Container data-testid={'empty-conversation-control-message'} style={{ padding: 0 }}>
         <TextInner>{window.i18n('messageRequestPendingDescription')}</TextInner>

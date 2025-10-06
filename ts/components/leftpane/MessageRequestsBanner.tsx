@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { getUnreadConversationRequests } from '../../state/selectors/conversations';
 import { useIsSearching } from '../../state/selectors/search';
 import { getHideMessageRequestBanner } from '../../state/selectors/userConfig';
-import { SessionIcon, SessionIconSize, SessionIconType } from '../icon';
+import { HE4SIcon, HE4SIconSize, HE4SIconType } from '../icon';
 import { MessageRequestBannerContextMenu } from '../menu/MessageRequestBannerContextMenu';
 import { Localizer } from '../basic/Localizer';
 
@@ -66,14 +66,14 @@ const StyledGridContainer = styled.div`
 `;
 
 export const CirclularIcon = (props: {
-  iconType: SessionIconType;
-  iconSize: SessionIconSize | number;
+  iconType: HE4SIconType;
+  iconSize: HE4SIconSize | number;
 }) => {
   const { iconSize, iconType } = props;
 
   return (
     <StyledGridContainer>
-      <SessionIcon
+      <HE4SIcon
         iconType={iconType}
         iconSize={iconSize}
         iconColor="var(--background-primary-color)"
@@ -122,7 +122,7 @@ export const MessageRequestsBanner = (props: { handleOnClick: () => any }) => {
       >
         <CirclularIcon iconType="messageRequest" iconSize={22} />
         <StyledMessageRequestBannerHeader>
-          <Localizer token="sessionMessageRequests" />
+          <Localizer token="he4sMessageRequests" />
         </StyledMessageRequestBannerHeader>
         <StyledUnreadCounter>
           <div>{conversationRequestsUnread || 0}</div>

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { SettingsKey } from '../../data/settings-key';
 import { updateHideRecoveryPasswordModal } from '../../state/ducks/modalDialog';
 import { showSettingsSection } from '../../state/ducks/section';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { Flex } from '../basic/Flex';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerMD } from '../basic/Text';
 import { Localizer } from '../basic/Localizer';
 
@@ -42,16 +42,16 @@ export function HideRecoveryPasswordDialog(props: HideRecoveryPasswordDialogProp
     state === 'firstWarning'
       ? {
           text: window.i18n('theContinue'),
-          buttonColor: SessionButtonColor.Danger,
+          buttonColor: HE4SButtonColor.Danger,
           onClick: () => {
             dispatch(updateHideRecoveryPasswordModal({ state: 'secondWarning' }));
           },
-          dataTestId: 'session-confirm-ok-button',
+          dataTestId: 'he4s-confirm-ok-button',
         }
       : {
           text: window.i18n('cancel'),
           onClick: onClose,
-          dataTestId: 'session-confirm-cancel-button',
+          dataTestId: 'he4s-confirm-cancel-button',
         };
 
   const rightButtonProps =
@@ -59,19 +59,19 @@ export function HideRecoveryPasswordDialog(props: HideRecoveryPasswordDialogProp
       ? {
           text: window.i18n('cancel'),
           onClick: onClose,
-          dataTestId: 'session-confirm-cancel-button',
+          dataTestId: 'he4s-confirm-cancel-button',
         }
       : {
           text: window.i18n('yes'),
-          buttonColor: SessionButtonColor.Danger,
+          buttonColor: HE4SButtonColor.Danger,
           onClick: () => {
             void onConfirmation();
           },
-          dataTestId: 'session-confirm-ok-button',
+          dataTestId: 'he4s-confirm-ok-button',
         };
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={window.i18n('recoveryPasswordHidePermanently')}
       onClose={onClose}
       showExitIcon={false}
@@ -89,9 +89,9 @@ export function HideRecoveryPasswordDialog(props: HideRecoveryPasswordDialogProp
       </StyledDescriptionContainer>
       <SpacerMD />
       <Flex container={true} justifyContent="center" alignItems="center" width="100%">
-        <SessionButton {...leftButtonProps} buttonType={SessionButtonType.Ghost} />
-        <SessionButton {...rightButtonProps} buttonType={SessionButtonType.Ghost} />
+        <HE4SButton {...leftButtonProps} buttonType={HE4SButtonType.Ghost} />
+        <HE4SButton {...rightButtonProps} buttonType={HE4SButtonType.Ghost} />
       </Flex>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 }

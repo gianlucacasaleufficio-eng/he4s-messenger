@@ -7,7 +7,7 @@ import * as GoogleChrome from '../../../../util/GoogleChrome';
 
 import { useDisableDrag } from '../../../../hooks/useDisableDrag';
 import { useEncryptedFileFetch } from '../../../../hooks/useEncryptedFileFetch';
-import { PubKey } from '../../../../session/types';
+import { PubKey } from '../../../../he4s/types';
 import {
   useSelectedIsPrivate,
   useSelectedIsPublic,

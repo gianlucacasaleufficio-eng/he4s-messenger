@@ -2,10 +2,10 @@ import { isEmpty } from 'lodash';
 import { useState } from 'react';
 import { clipboard } from 'electron';
 import { useHotkey } from '../../hooks/useHotkey';
-import { ToastUtils } from '../../session/utils';
-import { SessionButton, SessionButtonProps } from '../basic/SessionButton';
-import { SessionIconButton } from '../icon';
-import { SessionIconButtonProps } from '../icon/SessionIconButton';
+import { ToastUtils } from '../../he4s/utils';
+import { HE4SButton, HE4SButtonProps } from '../basic/HE4SButton';
+import { HE4SIconButton } from '../icon';
+import { HE4SIconButtonProps } from '../icon/HE4SIconButton';
 
 type CopyProps = {
   copyContent?: string;
@@ -13,7 +13,7 @@ type CopyProps = {
   hotkey?: boolean;
 };
 
-type CopyToClipboardButtonProps = Omit<SessionButtonProps, 'children' | 'onClick'> & CopyProps;
+type CopyToClipboardButtonProps = Omit<HE4SButtonProps, 'children' | 'onClick'> & CopyProps;
 
 export const CopyToClipboardButton = (props: CopyToClipboardButtonProps) => {
   const { copyContent, onCopyComplete, hotkey = false, text } = props;
@@ -41,7 +41,7 @@ export const CopyToClipboardButton = (props: CopyToClipboardButtonProps) => {
   useHotkey('c', onClick, !hotkey);
 
   return (
-    <SessionButton
+    <HE4SButton
       aria-label={'copy to clipboard button'}
       {...props}
       text={!isEmpty(text) ? text : copied ? window.i18n('copied') : window.i18n('copy')}
@@ -50,7 +50,7 @@ export const CopyToClipboardButton = (props: CopyToClipboardButtonProps) => {
   );
 };
 
-type CopyToClipboardIconProps = Omit<SessionIconButtonProps, 'children' | 'onClick' | 'iconType'> &
+type CopyToClipboardIconProps = Omit<HE4SIconButtonProps, 'children' | 'onClick' | 'iconType'> &
   CopyProps;
 
 export const CopyToClipboardIcon = (props: CopyToClipboardIconProps & { copyContent: string }) => {
@@ -67,7 +67,7 @@ export const CopyToClipboardIcon = (props: CopyToClipboardIconProps & { copyCont
   useHotkey('c', onClick, !hotkey);
 
   return (
-    <SessionIconButton
+    <HE4SIconButton
       aria-label={'copy to clipboard icon button'}
       padding="0"
       margin="0"

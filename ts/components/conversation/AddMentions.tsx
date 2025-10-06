@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { isUsAnySogsFromCache } from '../../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { getConversationController } from '../../session/conversations';
-import { PubKey } from '../../session/types';
+import { isUsAnySogsFromCache } from '../../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { getConversationController } from '../../he4s/conversations';
+import { PubKey } from '../../he4s/types';
 import { RenderTextCallbackType } from '../../types/Util';
 
 interface MentionProps {

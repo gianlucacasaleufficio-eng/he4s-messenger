@@ -7,10 +7,10 @@ import { updateBlockOrUnblockModal } from '../../state/ducks/modalDialog';
 import { BlockedNumberController } from '../../util';
 import { MemberListItem } from '../MemberListItem';
 import { Localizer } from '../basic/Localizer';
-import { SessionButton, SessionButtonColor } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor } from '../basic/HE4SButton';
 import { SpacerLG, SpacerSM } from '../basic/Text';
-import { SessionIconButton } from '../icon';
-import { SessionSettingsItemWrapper, SettingsTitleAndDescription } from './SessionSettingListItem';
+import { HE4SIconButton } from '../icon';
+import { HE4SSettingsItemWrapper, SettingsTitleAndDescription } from './HE4SSettingListItem';
 
 const BlockedEntriesContainer = styled.div`
   display: flex;
@@ -119,7 +119,7 @@ export const BlockedContactsList = () => {
   }
 
   return (
-    <SessionSettingsItemWrapper inline={false}>
+    <HE4SSettingsItemWrapper inline={false}>
       <StyledBlockedSettingItem
         clickable={!noBlockedNumbers}
         expanded={!noBlockedNumbers && expanded}
@@ -131,15 +131,15 @@ export const BlockedContactsList = () => {
           ) : (
             <BlockedContactListTitleButtons>
               {hasAtLeastOneSelected && expanded ? (
-                <SessionButton
-                  buttonColor={SessionButtonColor.Danger}
+                <HE4SButton
+                  buttonColor={HE4SButtonColor.Danger}
                   text={window.i18n('blockUnblock')}
                   onClick={unBlockThoseUsers}
                   dataTestId="unblock-button-settings-screen"
                 />
               ) : null}
               <SpacerLG />
-              <SessionIconButton
+              <HE4SIconButton
                 iconSize={'large'}
                 iconType={'chevron'}
                 onClick={toggleUnblockList}
@@ -161,6 +161,6 @@ export const BlockedContactsList = () => {
           <SpacerSM />
         </>
       ) : null}
-    </SessionSettingsItemWrapper>
+    </HE4SSettingsItemWrapper>
   );
 };

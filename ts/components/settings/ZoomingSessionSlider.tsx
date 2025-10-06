@@ -6,14 +6,14 @@ import { useState } from 'react';
 import useUpdate from 'react-use/lib/useUpdate';
 import styled from 'styled-components';
 import { Flex } from '../basic/Flex';
-import { SessionSettingsItemWrapper } from './SessionSettingListItem';
+import { HE4SSettingsItemWrapper } from './HE4SSettingListItem';
 
 const StyledZoomValue = styled.p`
   min-width: 40px;
   margin-inline-start: var(--margins-lg);
 `;
 
-export const ZoomingSessionSlider = (props: { onSliderChange?: (value: number) => void }) => {
+export const ZoomingHE4SSlider = (props: { onSliderChange?: (value: number) => void }) => {
   const [value, setValue] = useState(window.getSettingValue('zoom-factor-setting') || 100);
   const forceUpdate = useUpdate();
   const handleSlider = async (val: number | Array<number>) => {
@@ -26,7 +26,7 @@ export const ZoomingSessionSlider = (props: { onSliderChange?: (value: number) =
   };
 
   return (
-    <SessionSettingsItemWrapper title={window.i18n('appearanceZoom')} inline={false}>
+    <HE4SSettingsItemWrapper title={window.i18n('appearanceZoom')} inline={false}>
       <Flex
         container={true}
         justifyContent={'flex-start'}
@@ -48,6 +48,6 @@ export const ZoomingSessionSlider = (props: { onSliderChange?: (value: number) =
         />
         <StyledZoomValue>{value}%</StyledZoomValue>
       </Flex>
-    </SessionSettingsItemWrapper>
+    </HE4SSettingsItemWrapper>
   );
 };

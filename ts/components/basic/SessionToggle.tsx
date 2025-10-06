@@ -23,7 +23,7 @@ const StyledKnob = styled.div<{ active: boolean }>`
   transform: ${props => (props.active ? 'translateX(25px)' : '')};
 `;
 
-const StyledSessionToggle = styled.div<{ active: boolean }>`
+const StyledHE4SToggle = styled.div<{ active: boolean }>`
   width: 51px;
   height: 25px;
   background-color: (--toggle-switch-off-background-color);
@@ -51,7 +51,7 @@ type Props = {
   dataTestId?: string;
 };
 
-export const SessionToggle = (props: Props) => {
+export const HE4SToggle = (props: Props) => {
   const dispatch = useDispatch();
 
   const clickHandler = (event: MouseEvent<HTMLDivElement>) => {
@@ -87,13 +87,13 @@ export const SessionToggle = (props: Props) => {
   };
 
   return (
-    <StyledSessionToggle
+    <StyledHE4SToggle
       role="button"
       onClick={clickHandler}
       active={props.active}
       data-testid={props.dataTestId}
     >
       <StyledKnob active={props.active} />
-    </StyledSessionToggle>
+    </StyledHE4SToggle>
   );
 };

@@ -3,20 +3,20 @@
 import useUpdate from 'react-use/lib/useUpdate';
 import { SettingsKey } from '../../../data/settings-key';
 import { updateConfirmModal } from '../../../state/ducks/modalDialog';
-import { SessionButtonColor } from '../../basic/SessionButton';
+import { HE4SButtonColor } from '../../basic/HE4SButton';
 import { SpacerLG } from '../../basic/Text';
 import { TypingBubble } from '../../conversation/TypingBubble';
 
-import { UserUtils } from '../../../session/utils';
-import { ConfigurationSync } from '../../../session/utils/job_runners/jobs/ConfigurationSyncJob';
-import { SessionUtilUserProfile } from '../../../session/utils/libsession/libsession_utils_user_profile';
+import { UserUtils } from '../../../he4s/utils';
+import { ConfigurationSync } from '../../../he4s/utils/job_runners/jobs/ConfigurationSyncJob';
+import { HE4SUtilUserProfile } from '../../../he4s/utils/libhe4s/libhe4s_utils_user_profile';
 import {
   useHasBlindedMsgRequestsEnabled,
   useHasLinkPreviewEnabled,
 } from '../../../state/selectors/settings';
 import { Storage } from '../../../util/storage';
-import { SessionSettingButtonItem, SessionToggleWithDescription } from '../SessionSettingListItem';
-import { displayPasswordModal } from '../SessionSettings';
+import { HE4SSettingButtonItem, HE4SToggleWithDescription } from '../HE4SSettingListItem';
+import { displayPasswordModal } from '../HE4SSettings';
 import { ConversationTypeEnum } from '../../../models/types';
 
 async function toggleLinkPreviews(isToggleOn: boolean, forceUpdate: () => void) {
@@ -25,7 +25,7 @@ async function toggleLinkPreviews(isToggleOn: boolean, forceUpdate: () => void) 
       updateConfirmModal({
         title: window.i18n('linkPreviewsSend'),
         i18nMessage: { token: 'linkPreviewsSendModalDescription' },
-        okTheme: SessionButtonColor.Danger,
+        okTheme: HE4SButtonColor.Danger,
         onClickOk: async () => {
           const newValue = !isToggleOn;
           await window.setSettingValue(SettingsKey.settingsLinkPreview, newValue);
@@ -62,7 +62,7 @@ export const SettingsCategoryPrivacy = (props: {
 
   return (
     <>
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={async () => {
           const old = Boolean(window.getSettingValue(SettingsKey.settingsReadReceipt));
           await window.setSettingValue(SettingsKey.settingsReadReceipt, !old);
@@ -73,7 +73,7 @@ export const SettingsCategoryPrivacy = (props: {
         active={window.getSettingValue(SettingsKey.settingsReadReceipt)}
         dataTestId="enable-read-receipts"
       />
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={async () => {
           const old = Boolean(window.getSettingValue(SettingsKey.settingsTypingIndicator));
           await window.setSettingValue(SettingsKey.settingsTypingIndicator, !old);
@@ -84,7 +84,7 @@ export const SettingsCategoryPrivacy = (props: {
         active={Boolean(window.getSettingValue(SettingsKey.settingsTypingIndicator))}
         childrenDescription={<TypingBubbleItem />}
       />
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={() => {
           void toggleLinkPreviews(isLinkPreviewsOn, forceUpdate);
         }}
@@ -92,11 +92,11 @@ export const SettingsCategoryPrivacy = (props: {
         description={window.i18n('linkPreviewsDescription')}
         active={isLinkPreviewsOn}
       />
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={async () => {
           const toggledValue = !areBlindedRequestsEnabled;
           await window.setSettingValue(SettingsKey.hasBlindedMsgRequestsEnabled, toggledValue);
-          await SessionUtilUserProfile.insertUserProfileIntoWrapper(
+          await HE4SUtilUserProfile.insertUserProfileIntoWrapper(
             UserUtils.getOurPubKeyStrFromCache()
           );
           await ConfigurationSync.queueNewJobIfNeeded();
@@ -108,7 +108,7 @@ export const SettingsCategoryPrivacy = (props: {
       />
 
       {!props.hasPassword ? (
-        <SessionSettingButtonItem
+        <HE4SSettingButtonItem
           title={window.i18n('lockApp')}
           description={window.i18n('passwordDescription')}
           onClick={() => {
@@ -121,7 +121,7 @@ export const SettingsCategoryPrivacy = (props: {
       ) : (
         <>
           {/* We have a password, let's show the 'change' and 'remove' password buttons */}
-          <SessionSettingButtonItem
+          <HE4SSettingButtonItem
             title={window.i18n('passwordChange')}
             description={window.i18n('passwordChangeDescription')}
             onClick={() => {
@@ -131,13 +131,13 @@ export const SettingsCategoryPrivacy = (props: {
             buttonText={window.i18n('passwordChange')}
             dataTestId="change-password-settings-button"
           />
-          <SessionSettingButtonItem
+          <HE4SSettingButtonItem
             description={window.i18n('passwordRemoveDescription')}
             onClick={() => {
               displayPasswordModal('remove', props.onPasswordUpdated);
               forceUpdate();
             }}
-            buttonColor={SessionButtonColor.Danger}
+            buttonColor={HE4SButtonColor.Danger}
             buttonText={window.i18n('passwordRemove')}
             dataTestId="remove-password-settings-button"
           />

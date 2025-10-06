@@ -106,7 +106,7 @@ const isStringWithArgs = (localizedString: string): localizedString is ArgString
   localizedString.includes('{');
 
 const isReplaceLocalizedStringsWithKeysEnabled = () =>
-  !!(typeof window !== 'undefined' && window?.sessionFeatureFlags?.replaceLocalizedStringsWithKeys);
+  !!(typeof window !== 'undefined' && window?.he4sFeatureFlags?.replaceLocalizedStringsWithKeys);
 
 export class LocalizedStringBuilder<
   Dict extends GenericLocalizedDictionary,

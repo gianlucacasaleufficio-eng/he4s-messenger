@@ -1,5 +1,5 @@
 /* eslint-disable more/no-then */
-import { getSodiumRenderer } from '../../session/crypto';
+import { getSodiumRenderer } from '../../he4s/crypto';
 
 const PROFILE_IV_LENGTH = 12; // bytes
 const PROFILE_KEY_LENGTH = 32; // bytes

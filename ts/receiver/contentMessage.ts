@@ -4,7 +4,7 @@ import { handleSwarmDataMessage } from './dataMessage';
 import { EnvelopePlus } from './types';
 
 import { SignalService } from '../protobuf';
-import { KeyPrefixType, PubKey } from '../session/types';
+import { KeyPrefixType, PubKey } from '../he4s/types';
 import { removeFromCache, updateCacheWithDecryptedContent } from './cache';
 
 import { Data } from '../data/data';
@@ -13,22 +13,22 @@ import {
   deleteMessagesFromSwarmAndCompletelyLocally,
   deleteMessagesFromSwarmAndMarkAsDeletedLocally,
 } from '../interactions/conversations/unsendingInteractions';
-import { findCachedBlindedMatchOrLookupOnAllServers } from '../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { getConversationController } from '../session/conversations';
-import { concatUInt8Array, getSodiumRenderer } from '../session/crypto';
-import { removeMessagePadding } from '../session/crypto/BufferPadding';
-import { DisappearingMessages } from '../session/disappearing_messages';
-import { ReadyToDisappearMsgUpdate } from '../session/disappearing_messages/types';
-import { ProfileManager } from '../session/profile_manager/ProfileManager';
-import { UserUtils } from '../session/utils';
-import { perfEnd, perfStart } from '../session/utils/Performance';
-import { fromHexToArray, toHex } from '../session/utils/String';
-import { isUsFromCache } from '../session/utils/User';
+import { findCachedBlindedMatchOrLookupOnAllServers } from '../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { getConversationController } from '../he4s/conversations';
+import { concatUInt8Array, getSodiumRenderer } from '../he4s/crypto';
+import { removeMessagePadding } from '../he4s/crypto/BufferPadding';
+import { DisappearingMessages } from '../he4s/disappearing_messages';
+import { ReadyToDisappearMsgUpdate } from '../he4s/disappearing_messages/types';
+import { ProfileManager } from '../he4s/profile_manager/ProfileManager';
+import { UserUtils } from '../he4s/utils';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
+import { fromHexToArray, toHex } from '../he4s/utils/String';
+import { isUsFromCache } from '../he4s/utils/User';
 import { assertUnreachable } from '../types/sqlSharedTypes';
 import { BlockedNumberController } from '../util';
 import { ReadReceipts } from '../util/readReceipts';
 import { Storage } from '../util/storage';
-import { ContactsWrapperActions } from '../webworker/workers/browser/libsession_worker_interface';
+import { ContactsWrapperActions } from '../webworker/workers/browser/libhe4s_worker_interface';
 import { handleCallMessage } from './callMessage';
 import { getAllCachedECKeyPair, sentAtMoreRecentThanWrapper } from './closedGroups';
 import { ConfigMessageHandler } from './configMessage';
@@ -94,7 +94,7 @@ async function decryptForClosedGroup(envelope: EnvelopePlus) {
         const encryptionKeyPair = ECKeyPair.fromHexKeyPair(hexEncryptionKeyPair);
 
         // eslint-disable-next-line no-await-in-loop
-        decryptedContent = await decryptWithSessionProtocol(
+        decryptedContent = await decryptWithHE4SProtocol(
           envelope,
           envelope.content,
           encryptionKeyPair,
@@ -132,7 +132,7 @@ async function decryptForClosedGroup(envelope: EnvelopePlus) {
      *
      */
 
-    window?.log?.warn('decryptWithSessionProtocol for medium group message throw:', e.message);
+    window?.log?.warn('decryptWithHE4SProtocol for medium group message throw:', e.message);
     const groupPubKey = PubKey.cast(envelope.source);
 
     // IMPORTANT do not remove the message from the cache just yet.
@@ -151,13 +151,13 @@ async function decryptForClosedGroup(envelope: EnvelopePlus) {
  * We do not unpad the result here, as in the case of the keypair wrapper, there is not padding.
  * Instead, it is the caller who needs to removeMessagePadding() the content.
  */
-export async function decryptWithSessionProtocol(
+export async function decryptWithHE4SProtocol(
   envelope: EnvelopePlus,
   ciphertextObj: ArrayBuffer,
   x25519KeyPair: ECKeyPair,
   isClosedGroup?: boolean
 ): Promise<ArrayBuffer> {
-  perfStart(`decryptWithSessionProtocol-${envelope.id}`);
+  perfStart(`decryptWithHE4SProtocol-${envelope.id}`);
   const recipientX25519PrivateKey = x25519KeyPair.privateKeyData;
   const hex = toHex(new Uint8Array(x25519KeyPair.publicKeyData));
 
@@ -174,7 +174,7 @@ export async function decryptWithSessionProtocol(
     new Uint8Array(recipientX25519PrivateKey)
   );
   if (plaintextWithMetadata.byteLength <= signatureSize + ed25519PublicKeySize) {
-    perfEnd(`decryptWithSessionProtocol-${envelope.id}`, 'decryptWithSessionProtocol');
+    perfEnd(`decryptWithHE4SProtocol-${envelope.id}`, 'decryptWithHE4SProtocol');
 
     throw new Error('Decryption failed.'); // throw Error.decryptionFailed;
   }
@@ -196,14 +196,14 @@ export async function decryptWithSessionProtocol(
   );
 
   if (!isValid) {
-    perfEnd(`decryptWithSessionProtocol-${envelope.id}`, 'decryptWithSessionProtocol');
+    perfEnd(`decryptWithHE4SProtocol-${envelope.id}`, 'decryptWithHE4SProtocol');
 
     throw new Error('Invalid message signature.');
   }
   // 4. ) Get the sender's X25519 public key
   const senderX25519PublicKey = sodium.crypto_sign_ed25519_pk_to_curve25519(senderED25519PublicKey);
   if (!senderX25519PublicKey) {
-    perfEnd(`decryptWithSessionProtocol-${envelope.id}`, 'decryptWithSessionProtocol');
+    perfEnd(`decryptWithHE4SProtocol-${envelope.id}`, 'decryptWithHE4SProtocol');
 
     throw new Error('Decryption failed.'); // Error.decryptionFailed
   }
@@ -216,7 +216,7 @@ export async function decryptWithSessionProtocol(
     // eslint-disable-next-line no-param-reassign
     envelope.source = `${KeyPrefixType.standard}${toHex(senderX25519PublicKey)}`;
   }
-  perfEnd(`decryptWithSessionProtocol-${envelope.id}`, 'decryptWithSessionProtocol');
+  perfEnd(`decryptWithHE4SProtocol-${envelope.id}`, 'decryptWithHE4SProtocol');
 
   return plaintext;
 }
@@ -245,18 +245,18 @@ export async function decryptEnvelopeWithOurKey(
     // keep the await so the try catch works as expected
     perfStart(`decryptUnidentifiedSender-${envelope.id}`);
 
-    const retSessionProtocol = await decryptWithSessionProtocol(
+    const retHE4SProtocol = await decryptWithHE4SProtocol(
       envelope,
       envelope.content,
       ecKeyPair
     );
 
-    const ret = removeMessagePadding(retSessionProtocol);
+    const ret = removeMessagePadding(retHE4SProtocol);
     perfEnd(`decryptUnidentifiedSender-${envelope.id}`, 'decryptUnidentifiedSender');
 
     return ret;
   } catch (e) {
-    window?.log?.warn('decryptWithSessionProtocol for unidentified message throw:', e);
+    window?.log?.warn('decryptWithHE4SProtocol for unidentified message throw:', e);
     return null;
   }
 }
@@ -327,12 +327,12 @@ async function shouldDropIncomingPrivateMessage(
         if (us && ourPriority <= CONVERSATION_PRIORITIES.hidden) {
           // if the wrapper data is more recent than this message and the NTS conversation is hidden, just drop this incoming message to avoid showing the NTS conversation again.
           window.log.info(
-            `shouldDropIncomingPrivateMessage: received message in NTS which appears to be hidden in our most recent libsession userconfig, sentAt: ${sentAtTimestamp}. Dropping it`
+            `shouldDropIncomingPrivateMessage: received message in NTS which appears to be hidden in our most recent libhe4s userconfig, sentAt: ${sentAtTimestamp}. Dropping it`
           );
           return true;
         }
         window.log.info(
-          `shouldDropIncomingPrivateMessage: received message on conversation ${syncTargetOrSource} which appears to NOT be hidden/removed in our most recent libsession userconfig, sentAt: ${sentAtTimestamp}. `
+          `shouldDropIncomingPrivateMessage: received message on conversation ${syncTargetOrSource} which appears to NOT be hidden/removed in our most recent libhe4s userconfig, sentAt: ${sentAtTimestamp}. `
         );
         return false;
       }
@@ -349,13 +349,13 @@ async function shouldDropIncomingPrivateMessage(
         ) {
           // the wrapper is more recent that this message and there is no such private conversation. Just drop this incoming message.
           window.log.info(
-            `shouldDropIncomingPrivateMessage: received message on conversation ${syncTargetOrSource} which appears to be hidden/removed in our most recent libsession contactconfig, sentAt: ${sentAtTimestamp}. Dropping it`
+            `shouldDropIncomingPrivateMessage: received message on conversation ${syncTargetOrSource} which appears to be hidden/removed in our most recent libhe4s contactconfig, sentAt: ${sentAtTimestamp}. Dropping it`
           );
           return true;
         }
 
         window.log.info(
-          `shouldDropIncomingPrivateMessage: received message on conversation ${syncTargetOrSource} which appears to NOT be hidden/removed in our most recent libsession contactconfig, sentAt: ${sentAtTimestamp}. `
+          `shouldDropIncomingPrivateMessage: received message on conversation ${syncTargetOrSource} which appears to NOT be hidden/removed in our most recent libhe4s contactconfig, sentAt: ${sentAtTimestamp}. `
         );
       } else {
         window.log.info(

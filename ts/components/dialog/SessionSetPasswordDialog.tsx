@@ -3,15 +3,15 @@
 import autoBind from 'auto-bind';
 import { isEmpty } from 'lodash';
 import { Component } from 'react';
-import { ToastUtils } from '../../session/utils';
-import { sessionPassword } from '../../state/ducks/modalDialog';
+import { ToastUtils } from '../../he4s/utils';
+import { he4sPassword } from '../../state/ducks/modalDialog';
 import type { PasswordAction } from '../../types/ReduxTypes';
 import { assertUnreachable } from '../../types/sqlSharedTypes';
 import { matchesHash, validatePassword } from '../../util/passwordUtils';
 import { getPasswordHash, Storage } from '../../util/storage';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerSM } from '../basic/Text';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 
 interface Props {
   passwordAction: PasswordAction;
@@ -25,7 +25,7 @@ interface State {
   currentPasswordRetypeEntered: string | null;
 }
 
-export class SessionSetPasswordDialog extends Component<Props, State> {
+export class HE4SSetPasswordDialog extends Component<Props, State> {
   private passportInput: HTMLInputElement | null = null;
 
   constructor(props: any) {
@@ -92,10 +92,10 @@ export class SessionSetPasswordDialog extends Component<Props, State> {
     };
 
     return (
-      <SessionWrapperModal title={titleString()} onClose={this.closeDialog}>
+      <HE4SWrapperModal title={titleString()} onClose={this.closeDialog}>
         <SpacerSM />
 
-        <div className="session-modal__input-group">
+        <div className="he4s-modal__input-group">
           <input
             type="password"
             id="password-modal-input"
@@ -131,11 +131,11 @@ export class SessionSetPasswordDialog extends Component<Props, State> {
 
         <SpacerSM />
 
-        <div className="session-modal__button-group">
-          <SessionButton
+        <div className="he4s-modal__button-group">
+          <HE4SButton
             text={confirmButtonText}
-            buttonColor={passwordAction === 'remove' ? SessionButtonColor.Danger : undefined}
-            buttonType={SessionButtonType.Simple}
+            buttonColor={passwordAction === 'remove' ? HE4SButtonColor.Danger : undefined}
+            buttonType={HE4SButtonType.Simple}
             onClick={this.setPassword}
             disabled={
               (passwordAction === 'change' ||
@@ -145,15 +145,15 @@ export class SessionSetPasswordDialog extends Component<Props, State> {
             }
           />
           {passwordAction !== 'enter' && (
-            <SessionButton
+            <HE4SButton
               text={window.i18n('cancel')}
-              buttonColor={passwordAction !== 'remove' ? SessionButtonColor.Danger : undefined}
-              buttonType={SessionButtonType.Simple}
+              buttonColor={passwordAction !== 'remove' ? HE4SButtonColor.Danger : undefined}
+              buttonType={HE4SButtonType.Simple}
               onClick={this.closeDialog}
             />
           )}
         </div>
-      </SessionWrapperModal>
+      </HE4SWrapperModal>
     );
   }
 
@@ -388,7 +388,7 @@ export class SessionSetPasswordDialog extends Component<Props, State> {
   }
 
   private closeDialog() {
-    window.inboxStore?.dispatch(sessionPassword(null));
+    window.inboxStore?.dispatch(he4sPassword(null));
   }
 
   private onPasswordInput(event: any) {

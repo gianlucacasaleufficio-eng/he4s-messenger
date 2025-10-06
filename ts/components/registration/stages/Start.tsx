@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
 import styled from 'styled-components';
-import { sleepFor } from '../../../session/utils/Promise';
+import { sleepFor } from '../../../he4s/utils/Promise';
 import {
   AccountCreation,
   AccountRestoration,
@@ -13,7 +13,7 @@ import {
   setDirection,
   setOnboardingStep,
 } from '../../../state/onboarding/ducks/registration';
-import { SessionButton, SessionButtonColor } from '../../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor } from '../../basic/HE4SButton';
 import { SpacerLG } from '../../basic/Text';
 import { resetRegistration } from '../RegistrationStages';
 import { TermsAndConditions } from '../TermsAndConditions';
@@ -22,7 +22,7 @@ import { TermsAndConditions } from '../TermsAndConditions';
 const StyledStart = styled.div<{ ready: boolean }>`
   ${props =>
     !props.ready &&
-    `.session-button {
+    `.he4s-button {
     transition: none;
   }`}
 `;
@@ -42,9 +42,9 @@ export const Start = () => {
 
   return (
     <StyledStart ready={ready}>
-      <SessionButton
+      <HE4SButton
         ariaLabel={'Create account button'}
-        buttonColor={SessionButtonColor.White}
+        buttonColor={HE4SButtonColor.White}
         onClick={() => {
           dispatch(setDirection('forward'));
           dispatch(setAccountCreationStep(AccountCreation.DisplayName));
@@ -54,9 +54,9 @@ export const Start = () => {
         dataTestId="create-account-button"
       />
       <SpacerLG />
-      <SessionButton
+      <HE4SButton
         ariaLabel={'Restore account button'}
-        buttonColor={SessionButtonColor.White}
+        buttonColor={HE4SButtonColor.White}
         onClick={() => {
           dispatch(setDirection('forward'));
           dispatch(setOnboardingStep(Onboarding.RestoreAccount));

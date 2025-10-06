@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Flex } from './basic/Flex';
-import { SessionIconButton } from './icon';
+import { HE4SIconButton } from './icon';
 
 const StyledNoticeBanner = styled(Flex)`
   position: relative;
@@ -10,7 +10,7 @@ const StyledNoticeBanner = styled(Flex)`
   padding: var(--margins-xs) var(--margins-sm);
   text-align: center;
   flex-shrink: 0;
-  .session-icon-button {
+  .he4s-icon-button {
     position: absolute;
     right: var(--margins-sm);
   }
@@ -36,7 +36,7 @@ export const NoticeBanner = (props: NoticeBannerProps) => {
       alignItems={'center'}
     >
       <StyledText>{text}</StyledText>
-      <SessionIconButton
+      <HE4SIconButton
         iconType="exit"
         iconColor="inherit"
         iconSize="small"

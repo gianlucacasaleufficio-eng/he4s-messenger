@@ -7,18 +7,18 @@ import { ConversationModel } from '../../models/conversation';
 import {
   sogsV3BanUser,
   sogsV3UnbanUser,
-} from '../../session/apis/open_group_api/sogsv3/sogsV3BanUnban';
-import { getConversationController } from '../../session/conversations/ConversationController';
-import { PubKey } from '../../session/types';
-import { ToastUtils } from '../../session/utils';
+} from '../../he4s/apis/open_group_api/sogsv3/sogsV3BanUnban';
+import { getConversationController } from '../../he4s/conversations/ConversationController';
+import { PubKey } from '../../he4s/types';
+import { ToastUtils } from '../../he4s/utils';
 import { BanType, updateBanOrUnbanUserModal } from '../../state/ducks/modalDialog';
 import { useIsDarkTheme } from '../../state/selectors/theme';
-import { SessionHeaderSearchInput } from '../SessionHeaderSearchInput';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SHeaderSearchInput } from '../HE4SHeaderSearchInput';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { Flex } from '../basic/Flex';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerSM } from '../basic/Text';
-import { SessionSpinner } from '../loading';
+import { HE4SSpinner } from '../loading';
 
 async function banOrUnBanUserCall(
   convo: ConversationModel,
@@ -121,7 +121,7 @@ export const BanOrUnBanUserDialog = (props: {
   const buttonText = isBan ? i18n('banUser') : i18n('banUnbanUser');
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       showExitIcon={true}
       title={title}
       onClose={() => {
@@ -129,7 +129,7 @@ export const BanOrUnBanUserDialog = (props: {
       }}
     >
       <Flex container={true} flexDirection="column" alignItems="center">
-        <SessionHeaderSearchInput
+        <HE4SHeaderSearchInput
           ref={inputRef}
           type="text"
           isDarkTheme={isDarkTheme}
@@ -140,8 +140,8 @@ export const BanOrUnBanUserDialog = (props: {
           value={wasGivenAPubkey ? inputTextToDisplay : inputBoxValue}
         />
         <Flex container={true}>
-          <SessionButton
-            buttonType={SessionButtonType.Simple}
+          <HE4SButton
+            buttonType={HE4SButtonType.Simple}
             onClick={banOrUnBanUser}
             text={buttonText}
             disabled={inProgress}
@@ -149,9 +149,9 @@ export const BanOrUnBanUserDialog = (props: {
           {isBan && (
             <>
               <SpacerSM />
-              <SessionButton
-                buttonType={SessionButtonType.Simple}
-                buttonColor={SessionButtonColor.Danger}
+              <HE4SButton
+                buttonType={HE4SButtonType.Simple}
+                buttonColor={HE4SButtonColor.Danger}
                 onClick={startBanAndDeleteAllSequence}
                 text={i18n('banDeleteAll')}
                 disabled={inProgress}
@@ -159,8 +159,8 @@ export const BanOrUnBanUserDialog = (props: {
             </>
           )}
         </Flex>
-        <SessionSpinner loading={inProgress} />
+        <HE4SSpinner loading={inProgress} />
       </Flex>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

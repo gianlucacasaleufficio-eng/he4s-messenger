@@ -6,7 +6,7 @@ import { Data } from '../../../data/data';
 import { OpenGroupData } from '../../../data/opengroups';
 
 import { loadLocalizedDictionary } from '../../../node/locale';
-import * as libsessionWorker from '../../../webworker/workers/browser/libsession_worker_interface';
+import * as libhe4sWorker from '../../../webworker/workers/browser/libhe4s_worker_interface';
 import * as utilWorker from '../../../webworker/workers/browser/util_worker_interface';
 
 const globalAny: any = global;
@@ -48,8 +48,8 @@ export function stubUtilWorker(fnName: string, returnedValue: any): sinon.SinonS
     .resolves(returnedValue);
 }
 
-export function stubLibSessionWorker(value: any) {
-  Sinon.stub(libsessionWorker, 'callLibSessionWorker').resolves(value);
+export function stubLibHE4SWorker(value: any) {
+  Sinon.stub(libhe4sWorker, 'callLibHE4SWorker').resolves(value);
 }
 
 export function stubCreateObjectUrl() {
@@ -107,7 +107,7 @@ export const stubWindowLog = () => {
 };
 
 export const stubWindowFeatureFlags = () => {
-  stubWindow('sessionFeatureFlags', { debug: {} } as any);
+  stubWindow('he4sFeatureFlags', { debug: {} } as any);
 };
 
 export const stubWindowWhisper = () => {

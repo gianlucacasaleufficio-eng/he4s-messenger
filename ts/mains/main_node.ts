@@ -165,7 +165,7 @@ import { classicDark } from '../themes';
 import type { SetupI18nReturnType } from '../types/localizer';
 
 import {
-  isSessionLocaleSet,
+  isHE4SLocaleSet,
   getTranslationDictionary,
   getCrowdinLocale,
 } from '../util/i18n/shared';
@@ -312,7 +312,7 @@ async function createWindow() {
     },
     // only set icon for Linux, the executable one will be used by default for other platforms
     icon:
-      (osPlatform === 'linux' && path.join(getAppRootPath(), 'images/session/session_icon.png')) ||
+      (osPlatform === 'linux' && path.join(getAppRootPath(), 'images/he4s/he4s_icon.png')) ||
       undefined,
     ...picked,
   };
@@ -529,12 +529,12 @@ setTimeout(readyForUpdates, TEN_MINUTES);
 
 function openReleaseNotes() {
   void shell.openExternal(
-    `https://github.com/oxen-io/session-desktop/releases/tag/v${app.getVersion()}`
+    `https://github.com/oxen-io/he4s-desktop/releases/tag/v${app.getVersion()}`
   );
 }
 
 function openSupportPage() {
-  void shell.openExternal('https://docs.oxen.io/products-built-on-oxen/session');
+  void shell.openExternal('https://docs.oxen.io/products-built-on-oxen/he4s');
 }
 
 let passwordWindow: BrowserWindow | null = null;
@@ -666,7 +666,7 @@ async function saveDebugLog(_event: any, additionalInfo?: string) {
     title: 'Save debug log',
     defaultPath: path.join(
       app.getPath('desktop'),
-      `session_debug_${new Date().toISOString().replace(/:/g, '_')}.txt`
+      `he4s_debug_${new Date().toISOString().replace(/:/g, '_')}.txt`
     ),
     properties: ['createDirectory'],
   };
@@ -722,7 +722,7 @@ app.on('ready', async () => {
   logger = getLogger();
   assertLogger().info('app ready');
   assertLogger().info(`starting version ${packageJson.version}`);
-  if (!isSessionLocaleSet()) {
+  if (!isHE4SLocaleSet()) {
     const appLocale = process.env.LANGUAGE || app.getLocale() || 'en';
     const loadedLocale = loadLocalizedDictionary({ appLocale, logger });
     i18n = loadedLocale.i18n;
@@ -1123,7 +1123,7 @@ ipc.on('set-call-media-permissions', (event, value) => {
   event.sender.send('set-success-call-media-permissions', null);
 });
 
-// Session - Auto updating
+// HE4S - Auto updating
 ipc.on('get-auto-update-setting', event => {
   const configValue = userConfig.get('autoUpdate');
   // eslint-disable-next-line no-param-reassign

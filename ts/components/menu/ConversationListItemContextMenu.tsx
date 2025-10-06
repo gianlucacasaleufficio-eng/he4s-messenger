@@ -3,10 +3,10 @@ import { Menu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import { useConvoIdFromContext } from '../../contexts/ConvoIdContext';
 import { useIsPinned, useIsPrivate, useIsPrivateAndFriend } from '../../hooks/useParamSelector';
-import { getConversationController } from '../../session/conversations';
+import { getConversationController } from '../../he4s/conversations';
 import { useIsSearching } from '../../state/selectors/search';
 import { getIsMessageSection } from '../../state/selectors/section';
-import { SessionContextMenuContainer } from '../SessionContextMenuContainer';
+import { HE4SContextMenuContainer } from '../HE4SContextMenuContainer';
 import {
   AcceptMsgRequestMenuItem,
   BanMenuItem,
@@ -45,7 +45,7 @@ const ConversationListItemContextMenu = (props: PropsContextConversationItem) =>
   }
 
   return (
-    <SessionContextMenuContainer>
+    <HE4SContextMenuContainer>
       <Menu id={triggerId} animation={getMenuAnimation()}>
         {/* Message request related actions */}
         <AcceptMsgRequestMenuItem />
@@ -73,7 +73,7 @@ const ConversationListItemContextMenu = (props: PropsContextConversationItem) =>
         <LeaveGroupOrCommunityMenuItem />
         <ShowUserDetailsMenuItem />
       </Menu>
-    </SessionContextMenuContainer>
+    </HE4SContextMenuContainer>
   );
 };
 

@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { SettingsKey } from '../../data/settings-key';
 import { isAudioNotificationSupported } from '../../types/Settings';
 import { Notifications } from '../../util/notifications';
-import { SessionButton } from '../basic/SessionButton';
-import { SessionRadioGroup } from '../basic/SessionRadioGroup';
+import { HE4SButton } from '../basic/HE4SButton';
+import { HE4SRadioGroup } from '../basic/HE4SRadioGroup';
 import { SpacerLG } from '../basic/Text';
-import { SessionSettingsItemWrapper, SessionToggleWithDescription } from './SessionSettingListItem';
+import { HE4SSettingsItemWrapper, HE4SToggleWithDescription } from './HE4SSettingListItem';
 
 enum NOTIFICATION {
   MESSAGE = 'message',
@@ -24,7 +24,7 @@ const StyledButtonContainer = styled.div`
   padding-inline-start: var(--margins-lg);
 `;
 
-export const SessionNotificationGroupSettings = () => {
+export const HE4SNotificationGroupSettings = () => {
   const forceUpdate = useUpdate();
 
   const initialNotificationEnabled =
@@ -67,7 +67,7 @@ export const SessionNotificationGroupSettings = () => {
 
   return (
     <>
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={async () => {
           await window.setSettingValue(
             SettingsKey.settingsNotification,
@@ -75,11 +75,11 @@ export const SessionNotificationGroupSettings = () => {
           );
           forceUpdate();
         }}
-        title={window.i18n('sessionNotifications')}
+        title={window.i18n('he4sNotifications')}
         active={notificationsAreEnabled}
       />
       {notificationsAreEnabled && isAudioNotificationSupported() && (
-        <SessionToggleWithDescription
+        <HE4SToggleWithDescription
           onClickToggle={async () => {
             await window.setSettingValue(
               SettingsKey.settingsAudioNotification,
@@ -92,12 +92,12 @@ export const SessionNotificationGroupSettings = () => {
         />
       )}
       {notificationsAreEnabled ? (
-        <SessionSettingsItemWrapper
+        <HE4SSettingsItemWrapper
           title={window.i18n('notificationsContent')}
           description={window.i18n('notificationsContentDescription')}
           inline={false}
         >
-          <SessionRadioGroup
+          <HE4SRadioGroup
             initialItem={initialNotificationEnabled}
             group={SettingsKey.settingsNotification}
             items={items}
@@ -108,9 +108,9 @@ export const SessionNotificationGroupSettings = () => {
           />
           <StyledButtonContainer>
             <SpacerLG />
-            <SessionButton text={window.i18n('preview')} onClick={onClickPreview} />
+            <HE4SButton text={window.i18n('preview')} onClick={onClickPreview} />
           </StyledButtonContainer>
-        </SessionSettingsItemWrapper>
+        </HE4SSettingsItemWrapper>
       ) : null}
     </>
   );

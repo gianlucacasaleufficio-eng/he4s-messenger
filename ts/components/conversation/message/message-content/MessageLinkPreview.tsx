@@ -9,7 +9,7 @@ import {
 } from '../../../../state/selectors';
 import { useIsMessageSelectionMode } from '../../../../state/selectors/selectedConversation';
 import { isImageAttachment } from '../../../../types/Attachment';
-import { SessionIcon } from '../../../icon';
+import { HE4SIcon } from '../../../icon';
 import { Image } from '../../Image';
 import { showLinkVisitWarningDialog } from '../../../dialog/OpenUrlModal';
 import { AriaLabels } from '../../../../util/hardcodedAriaLabels';
@@ -87,7 +87,7 @@ export const MessageLinkPreview = (props: Props) => {
           <div className="module-message__link-preview__icon_container">
             <div className="module-message__link-preview__icon_container__inner">
               <div className="module-message__link-preview__icon-container__circle-background">
-                <SessionIcon iconType="link" iconSize="small" />
+                <HE4SIcon iconType="link" iconSize="small" />
               </div>
             </div>
           </div>

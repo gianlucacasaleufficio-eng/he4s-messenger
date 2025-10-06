@@ -2,10 +2,10 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { useIsOutgoingRequest } from '../../../hooks/useParamSelector';
 import { useSelectedConversationKey } from '../../../state/selectors/selectedConversation';
-import { SessionIconButton } from '../../icon';
+import { HE4SIconButton } from '../../icon';
 
 const StyledChatButtonContainer = styled.div<{ disabled?: boolean }>`
-  .session-icon-button {
+  .he4s-icon-button {
     svg {
       background-color: var(--chat-buttons-background-color);
     }
@@ -24,7 +24,7 @@ export const AddStagedAttachmentButton = (props: { onClick: () => void }) => {
 
   return (
     <StyledChatButtonContainer disabled={isOutgoingRequest}>
-      <SessionIconButton
+      <HE4SIconButton
         iconType="plusThin"
         backgroundColor={'var(--chat-buttons-background-color)'}
         iconColor={'var(--chat-buttons-icon-color)'}
@@ -45,7 +45,7 @@ export const StartRecordingButton = (props: { onClick: () => void }) => {
 
   return (
     <StyledChatButtonContainer disabled={isOutgoingRequest}>
-      <SessionIconButton
+      <HE4SIconButton
         iconType="microphone"
         iconSize={'huge2'}
         backgroundColor={'var(--chat-buttons-background-color)'}
@@ -65,7 +65,7 @@ export const ToggleEmojiButton = forwardRef<HTMLButtonElement, { onClick: () => 
   (props, ref) => {
     return (
       <StyledChatButtonContainer>
-        <SessionIconButton
+        <HE4SIconButton
           iconType="emoji"
           ref={ref}
           backgroundColor={'var(--chat-buttons-background-color)'}
@@ -84,7 +84,7 @@ export const ToggleEmojiButton = forwardRef<HTMLButtonElement, { onClick: () => 
 export const SendMessageButton = (props: { onClick: () => void }) => {
   return (
     <StyledChatButtonContainer>
-      <SessionIconButton
+      <HE4SIconButton
         iconType="send"
         backgroundColor={'var(--chat-buttons-background-color)'}
         iconColor={'var(--chat-buttons-icon-color)'}

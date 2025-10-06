@@ -4,15 +4,15 @@ import { queueAttachmentDownloads } from './attachments';
 import { Data } from '../data/data';
 import { ConversationModel } from '../models/conversation';
 import { MessageModel } from '../models/message';
-import { getConversationController } from '../session/conversations';
+import { getConversationController } from '../he4s/conversations';
 import { Quote } from './types';
 
 import { MessageDirection } from '../models/messageType';
 import { SignalService } from '../protobuf';
-import { DisappearingMessages } from '../session/disappearing_messages';
-import { ProfileManager } from '../session/profile_manager/ProfileManager';
-import { PubKey } from '../session/types';
-import { UserUtils } from '../session/utils';
+import { DisappearingMessages } from '../he4s/disappearing_messages';
+import { ProfileManager } from '../he4s/profile_manager/ProfileManager';
+import { PubKey } from '../he4s/types';
+import { UserUtils } from '../he4s/utils';
 import {
   MessageModelPropsWithoutConvoProps,
   lookupQuote,
@@ -72,7 +72,7 @@ async function copyFromQuotedMessage(
 
   // If the quote is not found in memory, we try to find it in the DB
   if (!quotedMessage) {
-    // We always look for the quote by sentAt timestamp, for opengroups, closed groups and session chats
+    // We always look for the quote by sentAt timestamp, for opengroups, closed groups and he4s chats
     // this will return an array of sent messages by id that we have locally.
     const quotedMessagesCollection = await Data.getMessagesBySenderAndSentAt([
       {

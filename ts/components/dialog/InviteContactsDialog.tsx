@@ -2,20 +2,20 @@ import useKey from 'react-use/lib/useKey';
 
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { VALIDATION } from '../../session/constants';
-import { getConversationController } from '../../session/conversations';
-import { ToastUtils, UserUtils } from '../../session/utils';
+import { VALIDATION } from '../../he4s/constants';
+import { getConversationController } from '../../he4s/conversations';
+import { ToastUtils, UserUtils } from '../../he4s/utils';
 import { updateInviteContactModal } from '../../state/ducks/modalDialog';
 import { SpacerLG } from '../basic/Text';
 
 import { useConversationPropsById } from '../../hooks/useParamSelector';
 import { useSet } from '../../hooks/useSet';
-import { initiateClosedGroupUpdate } from '../../session/group/closed-group';
-import { SessionUtilUserGroups } from '../../session/utils/libsession/libsession_utils_user_groups';
+import { initiateClosedGroupUpdate } from '../../he4s/group/closed-group';
+import { HE4SUtilUserGroups } from '../../he4s/utils/libhe4s/libhe4s_utils_user_groups';
 import { getPrivateContactsPubkeys } from '../../state/selectors/conversations';
 import { MemberListItem } from '../MemberListItem';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { ConversationTypeEnum } from '../../models/types';
 import { Localizer } from '../basic/Localizer';
 
@@ -29,7 +29,7 @@ async function submitForOpenGroup(convoId: string, pubkeys: Array<string>) {
     throw new Error('submitForOpenGroup group not found');
   }
   try {
-    const roomDetails = await SessionUtilUserGroups.getCommunityByConvoIdNotCached(convo.id);
+    const roomDetails = await HE4SUtilUserGroups.getCommunityByConvoIdNotCached(convo.id);
     if (!roomDetails) {
       throw new Error(`getCommunityByFullUrl returned no result for ${convo.id}`);
     }
@@ -156,7 +156,7 @@ const InviteContactsDialogInner = (props: Props) => {
   const hasContacts = validContactsForInvite.length > 0;
 
   return (
-    <SessionWrapperModal title={titleText} onClose={closeDialog}>
+    <HE4SWrapperModal title={titleText} onClose={closeDialog}>
       <SpacerLG />
 
       <div className="contact-selection-list">
@@ -183,21 +183,21 @@ const InviteContactsDialogInner = (props: Props) => {
       </div>
       <SpacerLG />
 
-      <div className="session-modal__button-group">
-        <SessionButton
+      <div className="he4s-modal__button-group">
+        <HE4SButton
           text={okText}
-          buttonType={SessionButtonType.Simple}
+          buttonType={HE4SButtonType.Simple}
           disabled={!hasContacts}
           onClick={onClickOK}
         />
-        <SessionButton
+        <HE4SButton
           text={cancelText}
-          buttonColor={SessionButtonColor.Danger}
-          buttonType={SessionButtonType.Simple}
+          buttonColor={HE4SButtonColor.Danger}
+          buttonType={HE4SButtonType.Simple}
           onClick={closeDialog}
         />
       </div>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };
 

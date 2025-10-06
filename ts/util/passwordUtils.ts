@@ -1,6 +1,6 @@
 import * as crypto from 'crypto';
 import { isString } from 'lodash';
-import { PASSWORD_LENGTH } from '../session/constants';
+import { PASSWORD_LENGTH } from '../he4s/constants';
 
 const ERRORS = {
   TYPE: 'Password must be a string',

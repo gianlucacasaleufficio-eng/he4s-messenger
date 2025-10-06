@@ -3,13 +3,13 @@ import { isArray, isEqual, unset } from 'lodash';
 import { ElementType, ReactElement, ReactNode } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import TestRenderer from 'react-test-renderer';
-import { SessionTheme } from '../../themes/SessionTheme';
+import { HE4STheme } from '../../themes/HE4STheme';
 
 const Providers = ({ children }: { children: ReactNode }) => {
   MotionGlobalConfig.skipAnimations = false;
 
   return (
-    <SessionTheme>
+    <HE4STheme>
       <AnimatePresence>
         <ErrorBoundary
           fallback={<>{`Failed to render a component!\n\t${JSON.stringify(children)}`}</>}
@@ -17,7 +17,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
           {children}
         </ErrorBoundary>
       </AnimatePresence>
-    </SessionTheme>
+    </HE4STheme>
   );
 };
 

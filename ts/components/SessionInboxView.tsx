@@ -10,8 +10,8 @@ import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import { LeftPane } from './leftpane/LeftPane';
 // moment does not support es-419 correctly (and cause white screen on app start)
-import { getConversationController } from '../session/conversations';
-import { UserUtils } from '../session/utils';
+import { getConversationController } from '../he4s/conversations';
+import { UserUtils } from '../he4s/utils';
 import { createStore } from '../state/createStore';
 import { initialCallState } from '../state/ducks/call';
 import {
@@ -28,13 +28,13 @@ import { getEmptyStagedAttachmentsState } from '../state/ducks/stagedAttachments
 import { initialThemeState } from '../state/ducks/theme';
 import { initialUserConfigState } from '../state/ducks/userConfig';
 import { StateType } from '../state/reducer';
-import { SessionMainPanel } from './SessionMainPanel';
+import { HE4SMainPanel } from './HE4SMainPanel';
 
 import { SettingsKey } from '../data/settings-key';
 import { getSettingsInitialState, updateAllOnStorageReady } from '../state/ducks/settings';
 import { initialSogsRoomInfoState } from '../state/ducks/sogsRoomInfo';
 import { useHasDeviceOutdatedSyncing } from '../state/selectors/settings';
-import { SessionTheme } from '../themes/SessionTheme';
+import { HE4STheme } from '../themes/HE4STheme';
 import { Storage } from '../util/storage';
 import { NoticeBanner } from './NoticeBanner';
 import { Flex } from './basic/Flex';
@@ -51,7 +51,7 @@ const StyledGutter = styled.div`
   transition: none;
 `;
 
-function createSessionInboxStore() {
+function createHE4SInboxStore() {
   // Here we set up a full redux store with initial state for our LeftPane Root
   const conversations = getConversationController()
     .getConversations()
@@ -85,7 +85,7 @@ function createSessionInboxStore() {
 
 function setupLeftPane(forceUpdateInboxComponent: () => void) {
   window.openConversationWithMessages = openConversationWithMessages;
-  window.inboxStore = createSessionInboxStore();
+  window.inboxStore = createHE4SInboxStore();
 
   window.inboxStore.dispatch(
     updateAllOnStorageReady({
@@ -120,7 +120,7 @@ const SomeDeviceOutdatedSyncingNotice = () => {
   );
 };
 
-export const SessionInboxView = () => {
+export const HE4SInboxView = () => {
   const update = useUpdate();
   // run only on mount
   useMount(() => {
@@ -138,17 +138,17 @@ export const SessionInboxView = () => {
     <div className="inbox index">
       <Provider store={window.inboxStore}>
         <PersistGate loading={null} persistor={persistor}>
-          <SessionTheme>
+          <HE4STheme>
             <SomeDeviceOutdatedSyncingNotice />
             <AnimatePresence>
               <Flex container={true} height="0" flexShrink={100} flexGrow={1}>
                 <StyledGutter>
                   <LeftPane />
                 </StyledGutter>
-                <SessionMainPanel />
+                <HE4SMainPanel />
               </Flex>
             </AnimatePresence>
-          </SessionTheme>
+          </HE4STheme>
         </PersistGate>
       </Provider>
     </div>

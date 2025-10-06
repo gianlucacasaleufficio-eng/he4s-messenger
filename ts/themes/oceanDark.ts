@@ -127,9 +127,9 @@ export const oceanDark: ThemeColorVariables = {
   '--right-panel-item-background-hover-color': THEMES.OCEAN_DARK.COLOR4,
   '--right-panel-item-text-color': 'var(--text-primary-color)',
 
-  '--session-logo-text-light-filter': 'none',
-  '--session-logo-text-dark-filter': 'none',
-  '--session-logo-text-current-filter': 'var(--session-logo-text-light-filter)',
+  '--he4s-logo-text-light-filter': 'none',
+  '--he4s-logo-text-dark-filter': 'none',
+  '--he4s-logo-text-current-filter': 'var(--he4s-logo-text-light-filter)',
 
   '--context-menu-background-color': 'var(--background-primary-color)',
   '--context-menu-background-hover-color': 'var(--primary-color)',
@@ -164,7 +164,7 @@ export const oceanDark: ThemeColorVariables = {
   '--file-dropzone-background-color': 'var(--message-link-preview-background-color)',
   '--file-dropzone-border-color': 'var(--primary-color)',
 
-  '--session-recording-pulse-color': hexColorToRGB(THEMES.OCEAN_DARK.DANGER),
+  '--he4s-recording-pulse-color': hexColorToRGB(THEMES.OCEAN_DARK.DANGER),
 
   '--renderer-span-primary-color': 'var(--primary-color)',
 };

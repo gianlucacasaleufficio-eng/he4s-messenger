@@ -6,10 +6,10 @@ import {
   hasValidIncomingRequestValues,
   hasValidOutgoingRequestValues,
 } from '../models/conversation';
-import { isUsAnySogsFromCache } from '../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { TimerOptions, TimerOptionsArray } from '../session/disappearing_messages/timerOptions';
-import { PubKey } from '../session/types';
-import { UserUtils } from '../session/utils';
+import { isUsAnySogsFromCache } from '../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { TimerOptions, TimerOptionsArray } from '../he4s/disappearing_messages/timerOptions';
+import { PubKey } from '../he4s/types';
+import { UserUtils } from '../he4s/utils';
 import { PropsForExpiringMessage } from '../state/ducks/conversations';
 import { StateType } from '../state/reducer';
 import {

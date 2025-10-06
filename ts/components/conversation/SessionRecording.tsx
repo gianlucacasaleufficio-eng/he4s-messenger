@@ -6,10 +6,10 @@ import autoBind from 'auto-bind';
 import MicRecorder from 'mic-recorder-to-mp3';
 import { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Constants } from '../../session';
-import { MAX_ATTACHMENT_FILESIZE_BYTES } from '../../session/constants';
-import { ToastUtils } from '../../session/utils';
-import { SessionIconButton } from '../icon';
+import { Constants } from '../../he4s';
+import { MAX_ATTACHMENT_FILESIZE_BYTES } from '../../he4s/constants';
+import { ToastUtils } from '../../he4s/utils';
+import { HE4SIconButton } from '../icon';
 import { useFormattedDuration } from '../../hooks/useFormattedDuration';
 
 interface Props {
@@ -40,17 +40,17 @@ interface StyledFlexWrapperProps {
 const pulseColorAnimation = keyframes`
     0% {
       transform: scale(0.95);
-      box-shadow: 0 0 0 0 rgba(var(--session-recording-pulse-color), 0.7);
+      box-shadow: 0 0 0 0 rgba(var(--he4s-recording-pulse-color), 0.7);
     }
 
     70% {
       transform: scale(1);
-      box-shadow: 0 0 0 10px rgba(var(--session-recording-pulse-color), 0);
+      box-shadow: 0 0 0 10px rgba(var(--he4s-recording-pulse-color), 0);
     }
 
     100% {
       transform: scale(0.95);
-      box-shadow: 0 0 0 0 rgba(var(--session-recording-pulse-color), 0);
+      box-shadow: 0 0 0 0 rgba(var(--he4s-recording-pulse-color), 0);
     }
 `;
 
@@ -58,7 +58,7 @@ const StyledRecordTimerLight = styled.div`
   height: var(--margins-sm);
   width: var(--margins-sm);
   border-radius: 50%;
-  background-color: rgb(var(--session-recording-pulse-color));
+  background-color: rgb(var(--he4s-recording-pulse-color));
   margin: 0 var(--margins-sm);
   animation: ${pulseColorAnimation} var(--duration-pulse) infinite;
 `;
@@ -71,7 +71,7 @@ const StyledFlexWrapper = styled.div<StyledFlexWrapperProps>`
   flex-direction: row;
   align-items: center;
 
-  .session-button {
+  .he4s-button {
     margin: ${props => props.marginHorizontal};
   }
 `;
@@ -89,7 +89,7 @@ function RecordingDurations({
   const remainingTimeString = useFormattedDuration(remainingSeconds, { forceHours: false });
 
   return (
-    <div className={classNames('session-recording--timer', !isRecording && 'playback-timer')}>
+    <div className={classNames('he4s-recording--timer', !isRecording && 'playback-timer')}>
       {displayTimeString + (remainingTimeString ? ` / ${remainingTimeString}` : '')}
     </div>
   );
@@ -99,14 +99,14 @@ function RecordingTimer({ displaySeconds }: { displaySeconds: number }) {
   const displayTimeString = useFormattedDuration(displaySeconds, { forceHours: false });
 
   return (
-    <div className={classNames('session-recording--timer')}>
+    <div className={classNames('he4s-recording--timer')}>
       {displayTimeString}
       <StyledRecordTimerLight />
     </div>
   );
 }
 
-export class SessionRecording extends Component<Props, State> {
+export class HE4SRecording extends Component<Props, State> {
   private recorder?: any;
   private audioBlobMp3?: Blob;
   private audioElement?: HTMLAudioElement | null;
@@ -169,11 +169,11 @@ export class SessionRecording extends Component<Props, State> {
     const actionPauseFn = isPlaying ? this.pauseAudio : this.stopRecordingStream;
 
     return (
-      <div role="main" className="session-recording" tabIndex={0} onKeyDown={this.onKeyDown}>
-        <div className="session-recording--actions">
+      <div role="main" className="he4s-recording" tabIndex={0} onKeyDown={this.onKeyDown}>
+        <div className="he4s-recording--actions">
           <StyledFlexWrapper marginHorizontal="5px">
             {isRecording && (
-              <SessionIconButton
+              <HE4SIconButton
                 iconType="stop"
                 iconSize="medium"
                 iconColor={'var(--danger-color)'}
@@ -182,13 +182,13 @@ export class SessionRecording extends Component<Props, State> {
               />
             )}
             {actionPauseAudio && (
-              <SessionIconButton iconType="pause" iconSize="medium" onClick={actionPauseFn} />
+              <HE4SIconButton iconType="pause" iconSize="medium" onClick={actionPauseFn} />
             )}
             {hasRecordingAndPaused && (
-              <SessionIconButton iconType="play" iconSize="medium" onClick={this.playAudio} />
+              <HE4SIconButton iconType="play" iconSize="medium" onClick={this.playAudio} />
             )}
             {hasRecording && (
-              <SessionIconButton
+              <HE4SIconButton
                 iconType="delete"
                 iconSize="medium"
                 onClick={this.onDeleteVoiceMessage}
@@ -196,7 +196,7 @@ export class SessionRecording extends Component<Props, State> {
             )}
           </StyledFlexWrapper>
 
-          {actionDefault && <SessionIconButton iconType="microphone" iconSize={'huge'} />}
+          {actionDefault && <HE4SIconButton iconType="microphone" iconSize={'huge'} />}
         </div>
 
         {hasRecording && !isRecording ? (
@@ -211,7 +211,7 @@ export class SessionRecording extends Component<Props, State> {
 
         {!isRecording && (
           <div>
-            <SessionIconButton
+            <HE4SIconButton
               iconType="send"
               iconSize={'large'}
               iconRotation={90}

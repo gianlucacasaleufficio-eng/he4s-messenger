@@ -1,16 +1,13 @@
 {
-"name": "he4s-messenger",
-"productName": "HE4S Messenger",
-"description": "Private messaging powered by HE4S token",
+  "name": "he4s-messenger",
+  "productName": "HE4S Messenger",
+  "description": "Private messenger for HE4S Network",
   "version": "1.14.3",
   "license": "GPL-3.0",
-  "author": {
-    "name": "Oxen Labs",
-    "email": "team@oxen.io"
-  },
+  "author": "HE4S Team",
   "repository": {
     "type": "git",
-    "url": "https://github.com/session-foundation/session-desktop.git"
+    "url": "https://github.com/he4s-foundation/he4s-desktop.git"
   },
   "main": "ts/mains/main_node.js",
   "resolutions": {
@@ -40,7 +37,7 @@
     "build-everything:soft": "yarn clean && yarn protobuf && yarn update-git-info && yarn sass && yarn build:locales-soft && tsc && yarn build:workers",
     "build-everything:watch": "yarn clean && yarn protobuf && yarn update-git-info && yarn sass && yarn build:locales-soft && yarn build:workers && yarn tsc -w",
     "start-dev:pretty": "cross-env NODE_ENV=production NODE_APP_INSTANCE=devprod$MULTI electron . | npx bunyan",
-    "build:workers": "yarn worker:utils && yarn worker:libsession",
+    "build:workers": "yarn worker:utils && yarn worker:libhe4s",
     "build:locales": "python3 ./tools/localization/generateLocales.py --generate-types --print-problems --error-on-problems --error-old-dynamic-variables",
     "build:locales-soft": "python3 ./tools/localization/generateLocales.py --generate-types --print-problems --print-problem-strings",
     "watch": "yarn clean && yarn protobuf && yarn update-git-info && yarn build-everything:watch",
@@ -58,7 +55,7 @@
     "postinstall": "yarn patch-package && yarn electron-builder install-app-deps",
     "update-git-info": "node ./build/updateLocalConfig.js",
     "worker:utils": "webpack  --config=./utils.worker.config.js",
-    "worker:libsession": "rimraf 'ts/webworker/workers/node/libsession/*.node' && webpack  --config=./libsession.worker.config.js",
+    "worker:libhe4s": "rimraf 'ts/webworker/workers/node/libhe4s/*.node' && webpack  --config=./libhe4s.worker.config.js",
     "dedup-yarn-lock": "npx --yes yarn-deduplicate yarn.lock",
     "prepare": "husky install"
   },
@@ -91,7 +88,7 @@
     "fs-extra": "9.0.0",
     "glob": "7.1.2",
     "image-type": "^4.1.0",
-    "libsession_util_nodejs": "https://github.com/oxen-io/libsession-util-nodejs/releases/download/v0.3.23/libsession_util_nodejs-v0.3.23.tar.gz",
+    "libhe4s_util_nodejs": "https://github.com/oxen-io/libhe4s-util-nodejs/releases/download/v0.3.23/libhe4s_util_nodejs-v0.3.23.tar.gz",
     "libsodium-wrappers-sumo": "^0.7.9",
     "linkify-it": "^4.0.1",
     "lodash": "^4.17.21",
@@ -223,7 +220,7 @@
     ],
     "publish": {
       "provider": "github",
-      "repo": "session-desktop",
+      "repo": "he4s-desktop",
       "owner": "oxen-io",
       "releaseType": "release"
     },
@@ -240,8 +237,8 @@
       "entitlements": "build/entitlements.mac.plist",
       "entitlementsInherit": "build/entitlements.mac.plist",
       "extendInfo": {
-        "NSCameraUsageDescription": "Session requires camera access to record video.",
-        "NSMicrophoneUsageDescription": "Session requires microphone access to record audio."
+        "NSCameraUsageDescription": "HE4S requires camera access to record video.",
+        "NSMicrophoneUsageDescription": "HE4S requires microphone access to record audio."
       }
     },
     "dmg": {
@@ -249,7 +246,7 @@
     },
     "win": {
       "asarUnpack": "node_modules/spellchecker/vendor/hunspell_dictionaries",
-      "publisherName": "Oxen Labs",
+      "publisherName": "HE4S Network Labs",
       "verifyUpdateCodeSignature": false,
       "icon": "build/icon.ico",
       "target": [
@@ -264,16 +261,18 @@
     "linux": {
       "category": "Network",
       "desktop": {
-        "StartupWMClass": "Session"
+        "StartupWMClass": "HE4S"
       },
       "asarUnpack": "node_modules/spellchecker/vendor/hunspell_dictionaries",
-      "target": ["deb"],
+      "target": [
+        "deb"
+      ],
       "icon": "build/icon-linux.icns"
     },
     "asarUnpack": [
       "node_modules/@signalapp/better-sqlite3/build/Release/better_sqlite3.node",
-      "node_modules/libsession_util_nodejs/build/Release/libsession_util_nodejs.node",
-      "ts/webworker/workers/node/libsession/*.node",
+      "node_modules/libhe4s_util_nodejs/build/Release/libhe4s_util_nodejs.node",
+      "ts/webworker/workers/node/libhe4s/*.node",
       "ts/mains/main_node.js"
     ],
     "deb": {
@@ -339,7 +338,7 @@
       "!**/*.ts",
       "node_modules/spellchecker/build/Release/*.node",
       "node_modules/websocket/build/Release/*.node",
-      "node_modules/libsession_util_nodejs/build/Release/*.node",
+      "node_modules/libhe4s_util_nodejs/build/Release/*.node",
       "node_modules/socks/build/*.js",
       "node_modules/socks/build/common/*.js",
       "node_modules/socks/build/client/*.js",
@@ -353,9 +352,9 @@
       "!node_modules/@signalapp/better-sqlite3/src/*",
       "!node_modules/@signalapp/better-sqlite3/build/Release/obj/*",
       "node_modules/@signalapp/better-sqlite3/build/Release/better_sqlite3.node",
-      "!node_modules/libsession_util_nodejs/libsession-util/*",
-      "!node_modules/libsession_util_nodejs/src/*",
-      "ts/webworker/workers/node/libsession/*.node",
+      "!node_modules/libhe4s_util_nodejs/libhe4s-util/*",
+      "!node_modules/libhe4s_util_nodejs/src/*",
+      "ts/webworker/workers/node/libhe4s/*.node",
       "!dev-app-update.yml"
     ]
   }

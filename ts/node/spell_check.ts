@@ -3,7 +3,7 @@ import { sync as osLocaleSync } from 'os-locale';
 import type { SetupI18nReturnType } from '../types/localizer';
 
 export const setup = (browserWindow: BrowserWindow, i18n: SetupI18nReturnType) => {
-  const { session } = browserWindow.webContents;
+  const { he4s } = browserWindow.webContents;
   // NOTE: we do not rely on the locale parsed by node here because we want
   // to support a broader list of spell checks than what the app is localised for.
   // For instance: en_AU is not a supported language on crowdin, but we still want the user to
@@ -13,13 +13,13 @@ export const setup = (browserWindow: BrowserWindow, i18n: SetupI18nReturnType) =
     : osLocaleSync().replace(/_/g, '-');
   const userLocales = [userLocale, userLocale.split('-')[0], userLocale.split('_')[0]];
 
-  const available = session.availableSpellCheckerLanguages;
+  const available = he4s.availableSpellCheckerLanguages;
   const languages = userLocales.filter(l => available.includes(l));
   console.log(`spellcheck: userLocales: ${userLocales}`);
   console.log(`spellcheck: user locale: ${userLocale}`);
   console.log('spellcheck: available spellchecker languages: ', available);
   console.log('spellcheck: setting languages to: ', languages);
-  session.setSpellCheckerLanguages(languages);
+  he4s.setSpellCheckerLanguages(languages);
 
   browserWindow.webContents.on('context-menu', (_event: any, params: any) => {
     const { editFlags } = params;

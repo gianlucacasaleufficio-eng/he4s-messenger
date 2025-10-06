@@ -58,8 +58,8 @@ const _pathToRegExp = (filePath: string) => {
 };
 
 // Public API
-//      redactSessionID :: String -> String
-const redactSessionID = (text: string) => {
+//      redactHE4SID :: String -> String
+const redactHE4SID = (text: string) => {
   if (!isString(text)) {
     throw new TypeError("'text' must be a string");
   }
@@ -111,5 +111,5 @@ function shouldNotRedactLogs() {
 
 //      redactAll :: String -> String
 export const redactAll = !shouldNotRedactLogs()
-  ? compose(redactSensitivePaths, redactGroupIds, redactSessionID, redactSnodeIP, redactServerUrl)
+  ? compose(redactSensitivePaths, redactGroupIds, redactHE4SID, redactSnodeIP, redactServerUrl)
   : (text: string) => text;

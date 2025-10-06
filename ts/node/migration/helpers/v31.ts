@@ -7,7 +7,7 @@ import {
   LegacyGroupInfo,
   LegacyGroupMemberInfo,
   UserGroupsWrapperNode,
-} from 'libsession_util_nodejs';
+} from 'libhe4s_util_nodejs';
 import { isEmpty, isEqual, isFinite, isNumber } from 'lodash';
 import { from_hex } from 'libsodium-wrappers-sumo';
 import { MESSAGES_TABLE, toSqliteBoolean } from '../../database_utility';
@@ -16,7 +16,7 @@ import { maybeArrayJSONtoArray } from '../../../types/sqlSharedTypes';
 import { checkTargetMigration, hasDebugEnvVariable } from '../utils';
 import { sqlNode } from '../../sql';
 import { HexKeyPair } from '../../../receiver/keypairs';
-import { fromHexToArray } from '../../../session/utils/String';
+import { fromHexToArray } from '../../../he4s/utils/String';
 import { CONVERSATION_PRIORITIES } from '../../../models/types';
 
 const targetVersion = 31;

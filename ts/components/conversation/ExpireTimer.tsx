@@ -4,7 +4,7 @@ import useInterval from 'react-use/lib/useInterval';
 import styled, { CSSProperties } from 'styled-components';
 import { getTimerBucketIcon } from '../../util/timer';
 
-import { SessionIcon } from '../icon/SessionIcon';
+import { HE4SIcon } from '../icon/HE4SIcon';
 
 const ExpireTimerBucket = styled.div`
   font-size: var(--font-size-xs);
@@ -47,7 +47,7 @@ export const ExpireTimer = (props: Props) => {
 
   return (
     <ExpireTimerBucket style={style}>
-      <SessionIcon iconType={bucket} iconSize="tiny" iconColor={'var(--secondary-text-color)'} />
+      <HE4SIcon iconType={bucket} iconSize="tiny" iconColor={'var(--secondary-text-color)'} />
     </ExpireTimerBucket>
   );
 };

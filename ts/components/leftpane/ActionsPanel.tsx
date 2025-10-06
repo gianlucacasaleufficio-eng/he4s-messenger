@@ -8,9 +8,9 @@ import useTimeoutFn from 'react-use/lib/useTimeoutFn';
 import useThrottleFn from 'react-use/lib/useThrottleFn';
 
 import { Data } from '../../data/data';
-import { getConversationController } from '../../session/conversations';
-import { getMessageQueue } from '../../session/sending';
-import { syncConfigurationIfNeeded } from '../../session/utils/sync/syncUtils';
+import { getConversationController } from '../../he4s/conversations';
+import { getMessageQueue } from '../../he4s/sending';
+import { syncConfigurationIfNeeded } from '../../he4s/utils/sync/syncUtils';
 
 import { clearSearch } from '../../state/ducks/search';
 import { resetLeftOverlayMode, SectionType, showLeftPaneSection } from '../../state/ducks/section';
@@ -21,20 +21,20 @@ import {
 import { getFocusedSection } from '../../state/selectors/section';
 import { getOurNumber } from '../../state/selectors/user';
 
-import { cleanUpOldDecryptedMedias } from '../../session/crypto/DecryptedAttachmentsManager';
+import { cleanUpOldDecryptedMedias } from '../../he4s/crypto/DecryptedAttachmentsManager';
 
-import { DURATION } from '../../session/constants';
+import { DURATION } from '../../he4s/constants';
 
 import { uploadOurAvatar } from '../../interactions/conversationInteractions';
 import { editProfileModal, onionPathModal } from '../../state/ducks/modalDialog';
 
-import { loadDefaultRooms } from '../../session/apis/open_group_api/opengroupV2/ApiUtil';
-import { getOpenGroupManager } from '../../session/apis/open_group_api/opengroupV2/OpenGroupManagerV2';
-import { getSwarmPollingInstance } from '../../session/apis/snode_api';
-import { UserUtils } from '../../session/utils';
+import { loadDefaultRooms } from '../../he4s/apis/open_group_api/opengroupV2/ApiUtil';
+import { getOpenGroupManager } from '../../he4s/apis/open_group_api/opengroupV2/OpenGroupManagerV2';
+import { getSwarmPollingInstance } from '../../he4s/apis/snode_api';
+import { UserUtils } from '../../he4s/utils';
 import { Avatar, AvatarSize } from '../avatar/Avatar';
 import { ActionPanelOnionStatusLight } from '../dialog/OnionStatusPathDialog';
-import { SessionIconButton } from '../icon/SessionIconButton';
+import { HE4SIconButton } from '../icon/HE4SIconButton';
 import { LeftPaneSectionContainer } from './LeftPaneSectionContainer';
 
 import { SettingsKey } from '../../data/settings-key';
@@ -43,14 +43,14 @@ import { useHotkey } from '../../hooks/useHotkey';
 import {
   forceRefreshRandomSnodePool,
   getFreshSwarmFor,
-} from '../../session/apis/snode_api/snodePool';
-import { ConfigurationSync } from '../../session/utils/job_runners/jobs/ConfigurationSyncJob';
+} from '../../he4s/apis/snode_api/snodePool';
+import { ConfigurationSync } from '../../he4s/utils/job_runners/jobs/ConfigurationSyncJob';
 import { getIsModalVisble } from '../../state/selectors/modal';
 import { useIsDarkTheme } from '../../state/selectors/theme';
 import { switchThemeTo } from '../../themes/switchTheme';
 import { ReleasedFeatures } from '../../util/releaseFeature';
 import { getOppositeTheme } from '../../util/theme';
-import { SessionNotificationCount } from '../icon/SessionNotificationCount';
+import { HE4SNotificationCount } from '../icon/HE4SNotificationCount';
 
 const Section = (props: { type: SectionType }) => {
   const ourNumber = useSelector(getOurNumber);
@@ -114,19 +114,19 @@ const Section = (props: { type: SectionType }) => {
   switch (type) {
     case SectionType.Message:
       return (
-        <SessionIconButton
+        <HE4SIconButton
           iconSize="medium"
           dataTestId="message-section"
           iconType={'chatBubble'}
           onClick={handleClick}
           isSelected={isSelected}
         >
-          {Boolean(unreadToShow) && <SessionNotificationCount count={unreadToShow} />}
-        </SessionIconButton>
+          {Boolean(unreadToShow) && <HE4SNotificationCount count={unreadToShow} />}
+        </HE4SIconButton>
       );
     case SectionType.Settings:
       return (
-        <SessionIconButton
+        <HE4SIconButton
           iconSize="medium"
           dataTestId="settings-section"
           iconType={'gear'}
@@ -146,7 +146,7 @@ const Section = (props: { type: SectionType }) => {
     case SectionType.ColorMode:
     default:
       return (
-        <SessionIconButton
+        <HE4SIconButton
           iconSize="medium"
           iconType={isDarkTheme ? 'moon' : 'sun'}
           dataTestId="theme-section"

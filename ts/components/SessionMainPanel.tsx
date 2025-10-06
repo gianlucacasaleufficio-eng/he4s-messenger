@@ -2,13 +2,13 @@ import { useSelector } from 'react-redux';
 import { useAppIsFocused } from '../hooks/useAppFocused';
 import { getFocusedSettingsSection } from '../state/selectors/section';
 
-import { SmartSessionConversation } from '../state/smart/SessionConversation';
-import { SessionSettingsView } from './settings/SessionSettings';
+import { SmartHE4SConversation } from '../state/smart/HE4SConversation';
+import { HE4SSettingsView } from './settings/HE4SSettings';
 import { useHTMLDirection } from '../util/i18n/rtlSupport';
 
-const FilteredSettingsView = SessionSettingsView as any;
+const FilteredSettingsView = HE4SSettingsView as any;
 
-export const SessionMainPanel = () => {
+export const HE4SMainPanel = () => {
   const focusedSettingsSection = useSelector(getFocusedSettingsSection);
   const isSettingsView = focusedSettingsSection !== undefined;
   const htmlDirection = useHTMLDirection();
@@ -20,8 +20,8 @@ export const SessionMainPanel = () => {
     return <FilteredSettingsView category={focusedSettingsSection} />;
   }
   return (
-    <div className="session-conversation">
-      <SmartSessionConversation htmlDirection={htmlDirection} />
+    <div className="he4s-conversation">
+      <SmartHE4SConversation htmlDirection={htmlDirection} />
     </div>
   );
 };

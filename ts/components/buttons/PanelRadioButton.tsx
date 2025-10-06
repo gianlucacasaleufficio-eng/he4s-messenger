@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SessionRadio } from '../basic/SessionRadio';
+import { HE4SRadio } from '../basic/HE4SRadio';
 import { PanelButton, PanelButtonProps, PanelButtonText, StyledContent } from './PanelButton';
 
 const StyledPanelButton = styled(PanelButton)`
@@ -45,7 +45,7 @@ export const PanelRadioButton = (props: PanelRadioButtonProps) => {
       <StyledContent disabled={disabled}>
         <PanelButtonText text={text} subtitle={subtitle} />
         <StyledCheckContainer>
-          <SessionRadio
+          <HE4SRadio
             active={isSelected}
             value={value}
             inputName={value}

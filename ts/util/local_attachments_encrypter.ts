@@ -1,5 +1,5 @@
 import { isArrayBuffer } from 'lodash';
-import { fromHexToArray } from '../session/utils/String';
+import { fromHexToArray } from '../he4s/utils/String';
 import { callUtilsWorker } from '../webworker/workers/browser/util_worker_interface';
 import { Data } from '../data/data';
 

@@ -7,8 +7,8 @@ import { toLogFormat } from './Errors';
 import {
   getDecryptedBlob,
   getDecryptedMediaUrl,
-} from '../../session/crypto/DecryptedAttachmentsManager';
-import { ToastUtils } from '../../session/utils';
+} from '../../he4s/crypto/DecryptedAttachmentsManager';
+import { ToastUtils } from '../../he4s/utils';
 import { GoogleChrome } from '../../util';
 import { autoScaleForAvatar, autoScaleForThumbnail } from '../../util/attachmentsUtil';
 import { isAudio } from '../MIME';

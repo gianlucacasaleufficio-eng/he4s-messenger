@@ -46,8 +46,8 @@ import {
   ConversationNotificationSetting,
   ConversationNotificationSettingType,
 } from '../../models/conversationAttributes';
-import { getConversationController } from '../../session/conversations';
-import { PubKey } from '../../session/types';
+import { getConversationController } from '../../he4s/conversations';
+import { PubKey } from '../../he4s/types';
 import {
   changeNickNameModal,
   updateConfirmModal,
@@ -56,7 +56,7 @@ import {
 import { getIsMessageSection } from '../../state/selectors/section';
 import { useSelectedConversationKey } from '../../state/selectors/selectedConversation';
 import type { LocalizerToken } from '../../types/localizer';
-import { SessionButtonColor } from '../basic/SessionButton';
+import { HE4SButtonColor } from '../basic/HE4SButton';
 import { ItemWithDataTestId } from './items/MenuItemWithDataTestId';
 
 /** Menu items standardized */
@@ -127,7 +127,7 @@ export const DeletePrivateContactMenuItem = () => {
           title: menuItemText,
           i18nMessage: { token: 'contactDeleteDescription', args: { name } },
           onClickClose,
-          okTheme: SessionButtonColor.Danger,
+          okTheme: HE4SButtonColor.Danger,
           onClickOk: async () => {
             await getConversationController().delete1o1(convoId, {
               fromSyncMessage: false,
@@ -538,7 +538,7 @@ export const NotificationForConvoMenuItem = (): JSX.Element | null => {
   return (
     // Remove the && false to make context menu work with RTL support
     <Submenu
-      label={window.i18n('sessionNotifications') as any}
+      label={window.i18n('he4sNotifications') as any}
       // rtl={isRtlMode && false}
     >
       {(notificationForConvoOptions || []).map(item => {

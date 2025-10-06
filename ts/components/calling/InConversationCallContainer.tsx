@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import useInterval from 'react-use/lib/useInterval';
 import styled from 'styled-components';
-import { CallManager, UserUtils } from '../../session/utils';
+import { CallManager, UserUtils } from '../../he4s/utils';
 import {
   getCallIsInFullScreen,
   getCallWithFocusedConvoIsOffering,
@@ -17,11 +17,11 @@ import { StyledVideoElement } from './DraggableCallContainer';
 
 import { useModuloWithTripleDots } from '../../hooks/useModuloWithTripleDots';
 import { useVideoCallEventsListener } from '../../hooks/useVideoEventListener';
-import { DEVICE_DISABLED_DEVICE_ID } from '../../session/utils/calling/CallManager';
+import { DEVICE_DISABLED_DEVICE_ID } from '../../he4s/utils/calling/CallManager';
 import { CallWindowControls } from './CallButtons';
 
 import { useFormattedDuration } from '../../hooks/useFormattedDuration';
-import { SessionSpinner } from '../loading';
+import { HE4SSpinner } from '../loading';
 
 const VideoContainer = styled.div`
   height: 100%;
@@ -126,7 +126,7 @@ const StyledSpinner = styled.div<{ fullWidth: boolean }>`
 export const VideoLoadingSpinner = (props: { fullWidth: boolean }) => {
   return (
     <StyledSpinner fullWidth={props.fullWidth}>
-      <SessionSpinner loading={true} />
+      <HE4SSpinner loading={true} />
     </StyledSpinner>
   );
 };

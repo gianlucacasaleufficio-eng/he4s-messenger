@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { assertUnreachable } from '../../types/sqlSharedTypes';
-import { SettingsViewProps } from './SessionSettings';
+import { SettingsViewProps } from './HE4SSettings';
 
 type Props = Pick<SettingsViewProps, 'category'>;
 
@@ -26,25 +26,25 @@ export const SettingsHeader = (props: Props) => {
   let categoryTitle: string | null = null;
   switch (category) {
     case 'appearance':
-      categoryTitle = window.i18n('sessionAppearance');
+      categoryTitle = window.i18n('he4sAppearance');
       break;
     case 'conversations':
-      categoryTitle = window.i18n('sessionConversations');
+      categoryTitle = window.i18n('he4sConversations');
       break;
     case 'notifications':
-      categoryTitle = window.i18n('sessionNotifications');
+      categoryTitle = window.i18n('he4sNotifications');
       break;
     case 'help':
-      categoryTitle = window.i18n('sessionHelp');
+      categoryTitle = window.i18n('he4sHelp');
       break;
     case 'permissions':
-      categoryTitle = window.i18n('sessionPermissions');
+      categoryTitle = window.i18n('he4sPermissions');
       break;
     case 'privacy':
-      categoryTitle = window.i18n('sessionPrivacy');
+      categoryTitle = window.i18n('he4sPrivacy');
       break;
     case 'recoveryPassword':
-      categoryTitle = window.i18n('sessionRecoveryPassword');
+      categoryTitle = window.i18n('he4sRecoveryPassword');
       break;
     case 'clearData':
     case 'messageRequests':

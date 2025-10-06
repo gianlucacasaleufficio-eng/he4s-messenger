@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { useIsDetailMessageView } from '../../../../contexts/isDetailViewContext';
 import { useMessageReactsPropsById } from '../../../../hooks/useParamSelector';
 import { MessageRenderingProps } from '../../../../models/messageType';
-import { REACT_LIMIT } from '../../../../session/constants';
+import { REACT_LIMIT } from '../../../../he4s/constants';
 import { useSelectedIsGroupOrCommunity } from '../../../../state/selectors/selectedConversation';
 import { SortedReactionList } from '../../../../types/Reaction';
 import { nativeEmojiData } from '../../../../util/emoji';
 import { Flex } from '../../../basic/Flex';
-import { SessionIcon } from '../../../icon';
+import { HE4SIcon } from '../../../icon';
 import { Reaction, ReactionProps } from '../reactions/Reaction';
 import { StyledPopupContainer } from '../reactions/ReactionPopup';
 import { Localizer } from '../../../basic/Localizer';
@@ -127,7 +127,7 @@ const ExpandedReactions = (props: ExpandReactionsProps) => {
     <Flex container={true} flexDirection={'column'} alignItems={'center'} margin="4px 0 0">
       <Reactions {...props} />
       <StyledReadLess onClick={handleExpand}>
-        <SessionIcon iconType="chevron" iconSize="medium" iconRotation={180} />
+        <HE4SIcon iconType="chevron" iconSize="medium" iconRotation={180} />
         <Localizer token="showLess" />
       </StyledReadLess>
     </Flex>

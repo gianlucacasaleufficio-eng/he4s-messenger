@@ -12,7 +12,7 @@ import {
   useIsClosedGroup,
 } from '../../hooks/useParamSelector';
 import { isMessageSelectionMode } from '../../state/selectors/conversations';
-import { SessionIcon } from '../icon';
+import { HE4SIcon } from '../icon';
 import { AvatarPlaceHolder } from './AvatarPlaceHolder/AvatarPlaceHolder';
 import { ClosedGroupAvatar } from './AvatarPlaceHolder/ClosedGroupAvatar';
 
@@ -60,7 +60,7 @@ const CrownWrapper = styled.div`
 export const CrownIcon = () => {
   return (
     <CrownWrapper>
-      <SessionIcon
+      <HE4SIcon
         iconColor="#f7c347"
         iconSize={'small'}
         iconType="crown"

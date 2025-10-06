@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { SessionTheme } from '../themes/SessionTheme';
+import { HE4STheme } from '../themes/HE4STheme';
 import { switchThemeTo } from '../themes/switchTheme';
-import { SessionToastContainer } from './SessionToastContainer';
+import { HE4SToastContainer } from './HE4SToastContainer';
 import { Flex } from './basic/Flex';
-import { SessionButtonType } from './basic/SessionButton';
+import { HE4SButtonType } from './basic/HE4SButton';
 import { CopyToClipboardButton } from './buttons/CopyToClipboardButton';
 
 const StyledContent = styled(Flex)`
@@ -28,11 +28,11 @@ const StyledContent = styled(Flex)`
   }
 
   img:nth-child(2) {
-    filter: var(--session-logo-text-current-filter);
+    filter: var(--he4s-logo-text-current-filter);
     margin-bottom: var(--margins-xl);
   }
 
-  .session-button {
+  .he4s-button {
     font-size: var(--font-size-sm);
     font-weight: 400;
     min-height: var(--font-size-sm);
@@ -71,8 +71,8 @@ export const AboutView = () => {
   }, []);
 
   return (
-    <SessionTheme runSetup={false}>
-      <SessionToastContainer />
+    <HE4STheme runSetup={false}>
+      <HE4SToastContainer />
       <StyledContent
         container={true}
         flexDirection={'column'}
@@ -80,49 +80,49 @@ export const AboutView = () => {
         alignItems={'center'}
       >
         <img
-          src="images/session/session_icon.png"
-          alt="session brand icon"
+          src="images/he4s/he4s_icon.png"
+          alt="he4s brand icon"
           width="200"
           height="200"
         />
         <img
-          src="images/session/session-text.svg"
-          alt="session brand text"
+          src="images/he4s/he4s-text.svg"
+          alt="he4s brand text"
           width={192}
           height={26}
         />
         <CopyToClipboardButton
           className="version"
           text={versionInfo}
-          buttonType={SessionButtonType.Simple}
+          buttonType={HE4SButtonType.Simple}
         />
         <CopyToClipboardButton
           className="os"
           text={systemInfo}
-          buttonType={SessionButtonType.Simple}
+          buttonType={HE4SButtonType.Simple}
         />
         <CopyToClipboardButton
           className="commitHash"
           text={commitInfo}
-          buttonType={SessionButtonType.Simple}
+          buttonType={HE4SButtonType.Simple}
         />
         {environmentStates.length ? (
           <CopyToClipboardButton
             className="environment"
             text={environmentStates.join(' - ')}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
           />
         ) : null}
-        <a href="https://getsession.org">https://getsession.org</a>
+        <a href="https://gethe4s.org">https://gethe4s.org</a>
         <br />
-        <a className="privacy" href="https://getsession.org/privacy-policy">
+        <a className="privacy" href="https://gethe4s.org/privacy-policy">
           {window.i18n('onboardingPrivacy')}
         </a>
-        <a className="privacy" href="https://getsession.org/terms-of-service/">
+        <a className="privacy" href="https://gethe4s.org/terms-of-service/">
           {window.i18n('onboardingTos')}
         </a>
         <br />
       </StyledContent>
-    </SessionTheme>
+    </HE4STheme>
   );
 };

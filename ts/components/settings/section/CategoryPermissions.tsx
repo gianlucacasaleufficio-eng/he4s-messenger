@@ -2,11 +2,11 @@
 
 import useUpdate from 'react-use/lib/useUpdate';
 import { SettingsKey } from '../../../data/settings-key';
-import { CallManager, ToastUtils } from '../../../session/utils';
+import { CallManager, ToastUtils } from '../../../he4s/utils';
 import { updateConfirmModal } from '../../../state/ducks/modalDialog';
-import { SessionButtonColor } from '../../basic/SessionButton';
+import { HE4SButtonColor } from '../../basic/HE4SButton';
 
-import { SessionToggleWithDescription } from '../SessionSettingListItem';
+import { HE4SToggleWithDescription } from '../HE4SSettingListItem';
 
 const toggleCallMediaPermissions = async (triggerUIUpdate: () => void) => {
   const currentValue = window.getCallMediaPermissions();
@@ -15,7 +15,7 @@ const toggleCallMediaPermissions = async (triggerUIUpdate: () => void) => {
       updateConfirmModal({
         title: window.i18n('callsVoiceAndVideoBeta'),
         i18nMessage: { token: 'callsVoiceAndVideoModalDescription' },
-        okTheme: SessionButtonColor.Danger,
+        okTheme: HE4SButtonColor.Danger,
         okText: window.i18n('theContinue'),
         onClickOk: async () => {
           await window.toggleCallMediaPermissionsTo(true);
@@ -58,7 +58,7 @@ export const SettingsCategoryPermissions = () => {
 
   return (
     <>
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={async () => {
           await window.toggleMediaPermissions();
           forceUpdate();
@@ -68,7 +68,7 @@ export const SettingsCategoryPermissions = () => {
         active={Boolean(window.getSettingValue('media-permissions'))}
         dataTestId="enable-microphone"
       />
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={async () => {
           await toggleCallMediaPermissions(forceUpdate);
           forceUpdate();
@@ -78,7 +78,7 @@ export const SettingsCategoryPermissions = () => {
         active={Boolean(window.getCallMediaPermissions())}
         dataTestId="enable-calls"
       />
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={async () => {
           const old = Boolean(window.getSettingValue(SettingsKey.settingsAutoUpdate));
           await window.setSettingValue(SettingsKey.settingsAutoUpdate, !old);
@@ -88,7 +88,7 @@ export const SettingsCategoryPermissions = () => {
         description={window.i18n('permissionsAutoUpdateDescription')}
         active={Boolean(window.getSettingValue(SettingsKey.settingsAutoUpdate))}
       />
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         onClickToggle={async () => {
           await toggleStartInTray();
           forceUpdate();

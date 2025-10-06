@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { ONBOARDING_TIMES } from '../../../session/constants';
+import { ONBOARDING_TIMES } from '../../../he4s/constants';
 import {
   AccountRestoration,
   setAccountRestorationStep,

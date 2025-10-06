@@ -26,7 +26,7 @@ import {
 } from 'lodash';
 
 import { ConversationAttributes } from '../models/conversationAttributes';
-import { PubKey } from '../session/types/PubKey'; // checked - only node
+import { PubKey } from '../he4s/types/PubKey'; // checked - only node
 import { redactAll } from '../util/privacy'; // checked - only node
 import {
   arrayStrToJson,
@@ -65,8 +65,8 @@ import { KNOWN_BLINDED_KEYS_ITEM, SettingsKey } from '../data/settings-key';
 import { MessageAttributes } from '../models/messageType';
 import { SignalService } from '../protobuf';
 import { Quote } from '../receiver/types';
-import { DURATION } from '../session/constants';
-import { ed25519Str } from '../session/utils/String';
+import { DURATION } from '../he4s/constants';
+import { ed25519Str } from '../he4s/utils/String';
 import {
   getSQLCipherIntegrityCheck,
   openAndMigrateDatabase,
@@ -131,7 +131,7 @@ function _initializePaths(configDir: string) {
 
 function showFailedToStart() {
   const notification = new Notification({
-    title: 'Session failed to start',
+    title: 'HE4S failed to start',
     body: 'Please start from terminal and open a github issue',
   });
   notification.show();
@@ -632,7 +632,7 @@ function getUsBlindedInThatServerIfNeeded(
   try {
     const allBlinded = JSON.parse(blinded?.value);
     const found = allBlinded.find(
-      (m: any) => m.serverPublicKey === room.serverPublicKey && m.realSessionId === usNaked
+      (m: any) => m.serverPublicKey === room.serverPublicKey && m.realHE4SId === usNaked
     );
 
     const blindedId = found?.blindedId;

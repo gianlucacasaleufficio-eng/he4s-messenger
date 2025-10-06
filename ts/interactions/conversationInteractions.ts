@@ -3,25 +3,25 @@ import {
   ConversationNotificationSettingType,
   READ_MESSAGE_STATE,
 } from '../models/conversationAttributes';
-import { CallManager, SyncUtils, ToastUtils, UserUtils } from '../session/utils';
+import { CallManager, SyncUtils, ToastUtils, UserUtils } from '../he4s/utils';
 
-import { SessionButtonColor } from '../components/basic/SessionButton';
-import { getCallMediaPermissionsSettings } from '../components/settings/SessionSettings';
+import { HE4SButtonColor } from '../components/basic/HE4SButton';
+import { getCallMediaPermissionsSettings } from '../components/settings/HE4SSettings';
 import { Data } from '../data/data';
 import { SettingsKey } from '../data/settings-key';
 import { ConversationTypeEnum } from '../models/types';
-import { uploadFileToFsWithOnionV4 } from '../session/apis/file_server_api/FileServerApi';
-import { OpenGroupUtils } from '../session/apis/open_group_api/utils';
-import { GetNetworkTime } from '../session/apis/snode_api/getNetworkTime';
-import { getConversationController } from '../session/conversations';
-import { getSodiumRenderer } from '../session/crypto';
-import { getDecryptedMediaUrl } from '../session/crypto/DecryptedAttachmentsManager';
-import { DisappearingMessageConversationModeType } from '../session/disappearing_messages/types';
-import { perfEnd, perfStart } from '../session/utils/Performance';
-import { fromHexToArray, toHex } from '../session/utils/String';
-import { ConfigurationSync } from '../session/utils/job_runners/jobs/ConfigurationSyncJob';
-import { SessionUtilContact } from '../session/utils/libsession/libsession_utils_contacts';
-import { forceSyncConfigurationNowIfNeeded } from '../session/utils/sync/syncUtils';
+import { uploadFileToFsWithOnionV4 } from '../he4s/apis/file_server_api/FileServerApi';
+import { OpenGroupUtils } from '../he4s/apis/open_group_api/utils';
+import { GetNetworkTime } from '../he4s/apis/snode_api/getNetworkTime';
+import { getConversationController } from '../he4s/conversations';
+import { getSodiumRenderer } from '../he4s/crypto';
+import { getDecryptedMediaUrl } from '../he4s/crypto/DecryptedAttachmentsManager';
+import { DisappearingMessageConversationModeType } from '../he4s/disappearing_messages/types';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
+import { fromHexToArray, toHex } from '../he4s/utils/String';
+import { ConfigurationSync } from '../he4s/utils/job_runners/jobs/ConfigurationSyncJob';
+import { HE4SUtilContact } from '../he4s/utils/libhe4s/libhe4s_utils_contacts';
+import { forceSyncConfigurationNowIfNeeded } from '../he4s/utils/sync/syncUtils';
 import {
   conversationReset,
   quoteMessage,
@@ -45,7 +45,7 @@ import { urlToBlob } from '../types/attachments/VisualAttachment';
 import { encryptProfile } from '../util/crypto/profileEncrypter';
 import { ReleasedFeatures } from '../util/releaseFeature';
 import { Storage, setLastProfileUpdateTimestamp } from '../util/storage';
-import { UserGroupsWrapperActions } from '../webworker/workers/browser/libsession_worker_interface';
+import { UserGroupsWrapperActions } from '../webworker/workers/browser/libhe4s_worker_interface';
 import { ConversationInteractionStatus, ConversationInteractionType } from './types';
 import { BlockedNumberController } from '../util';
 
@@ -120,7 +120,7 @@ export async function declineConversationWithoutConfirm({
     return;
   }
 
-  // Note: do not set the active_at undefined as this would make that conversation not synced with the libsession wrapper
+  // Note: do not set the active_at undefined as this would make that conversation not synced with the libhe4s wrapper
   await conversationToDecline.setIsApproved(false, false);
   await conversationToDecline.setDidApproveMe(false, false);
   // this will update the value in the wrapper if needed but not remove the entry if we want it gone. The remove is done below with removeContactFromWrapper
@@ -132,9 +132,9 @@ export async function declineConversationWithoutConfirm({
 
   if (
     conversationToDecline.isPrivate() &&
-    !SessionUtilContact.isContactToStoreInWrapper(conversationToDecline)
+    !HE4SUtilContact.isContactToStoreInWrapper(conversationToDecline)
   ) {
-    await SessionUtilContact.removeContactFromWrapper(conversationToDecline.id);
+    await HE4SUtilContact.removeContactFromWrapper(conversationToDecline.id);
   }
 
   if (syncToDevices) {
@@ -181,8 +181,8 @@ export const declineConversationWithConfirm = ({
       onClickClose: () => {
         window?.inboxStore?.dispatch(updateConfirmModal(null));
       },
-      okTheme: SessionButtonColor.Danger,
-      closeTheme: SessionButtonColor.Primary,
+      okTheme: HE4SButtonColor.Danger,
+      closeTheme: HE4SButtonColor.Primary,
     })
   );
 };
@@ -263,7 +263,7 @@ export function showLeavePrivateConversationbyConvoId(conversationId: string) {
           },
       onClickOk,
       okText: isMe ? window.i18n('hide') : window.i18n('delete'),
-      okTheme: SessionButtonColor.Danger,
+      okTheme: HE4SButtonColor.Danger,
       onClickClose,
       conversationId,
     })
@@ -354,7 +354,7 @@ export async function showLeaveGroupByConvoId(conversationId: string, name: stri
         },
         onClickOk,
         okText: window.i18n('leave'),
-        okTheme: SessionButtonColor.Danger,
+        okTheme: HE4SButtonColor.Danger,
         onClickClose,
         conversationId,
       })
@@ -375,7 +375,7 @@ export async function showLeaveGroupByConvoId(conversationId: string, name: stri
     //     okText: window.i18n('addModerator'),
     //     cancelText: window.i18n('leave'),
     //     onClickCancel: onClickCloseLastAdmin,
-    //     closeTheme: SessionButtonColor.Danger,
+    //     closeTheme: HE4SButtonColor.Danger,
     //     onClickClose,
     //     showExitIcon: true,
     //     headerReverse: true,
@@ -389,7 +389,7 @@ export async function showLeaveGroupByConvoId(conversationId: string, name: stri
         i18nMessage: { token: 'groupLeaveDescription', args: { group_name: name ?? '' } },
         onClickOk,
         okText: window.i18n('leave'),
-        okTheme: SessionButtonColor.Danger,
+        okTheme: HE4SButtonColor.Danger,
         onClickClose,
         conversationId,
       })
@@ -483,7 +483,7 @@ export function deleteAllMessagesByConvoIdWithConfirmation(conversationId: strin
       title: window.i18n('deleteMessage', { count: 2 }), // count of 2 to get the plural "Messages Deleted"
       i18nMessage: { token: 'deleteAfterGroupPR3DeleteMessagesConfirmation' },
       onClickOk,
-      okTheme: SessionButtonColor.Danger,
+      okTheme: HE4SButtonColor.Danger,
       onClickClose,
     })
   );
@@ -598,7 +598,7 @@ export async function uploadOurAvatar(newAvatarDecrypted?: ArrayBuffer) {
   ourConvo.set({ profileKey: toHex(profileKey) });
   // Replace our temporary image with the attachment pointer from the server:
   // this commits already
-  await ourConvo.setSessionProfile({
+  await ourConvo.setHE4SProfile({
     avatarPath: upgraded.path,
     displayName,
     avatarImageId: fileId,
@@ -609,9 +609,9 @@ export async function uploadOurAvatar(newAvatarDecrypted?: ArrayBuffer) {
   if (newAvatarDecrypted) {
     await setLastProfileUpdateTimestamp(Date.now());
     await ConfigurationSync.queueNewJobIfNeeded();
-    const userConfigLibsession = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
+    const userConfigLibhe4s = await ReleasedFeatures.checkIsUserConfigFeatureReleased();
 
-    if (!userConfigLibsession) {
+    if (!userConfigLibhe4s) {
       await SyncUtils.forceSyncConfigurationNowIfNeeded(true);
     }
   } else {
@@ -703,7 +703,7 @@ export async function showLinkSharingConfirmationModalDialog(e: any) {
         updateConfirmModal({
           title: window.i18n('linkPreviewsEnable'),
           i18nMessage: { token: 'linkPreviewsFirstDescription' },
-          okTheme: SessionButtonColor.Danger,
+          okTheme: HE4SButtonColor.Danger,
           onClickOk: async () => {
             await window.setSettingValue(SettingsKey.settingsLinkPreview, true);
           },

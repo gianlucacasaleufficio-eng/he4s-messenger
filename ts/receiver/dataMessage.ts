@@ -7,9 +7,9 @@ import { EnvelopePlus } from './types';
 
 import { Data } from '../data/data';
 import { ConversationModel } from '../models/conversation';
-import { getConversationController } from '../session/conversations';
-import { PubKey } from '../session/types';
-import { StringUtils, UserUtils } from '../session/utils';
+import { getConversationController } from '../he4s/conversations';
+import { PubKey } from '../he4s/types';
+import { StringUtils, UserUtils } from '../he4s/utils';
 import { handleClosedGroupControlMessage } from './closedGroups';
 import { handleMessageJob, toRegularMessage } from './queuedJob';
 
@@ -18,10 +18,10 @@ import {
   createSwarmMessageSentFromNotUs,
   createSwarmMessageSentFromUs,
 } from '../models/messageFactory';
-import { DisappearingMessages } from '../session/disappearing_messages';
-import { DisappearingMessageUpdate } from '../session/disappearing_messages/types';
-import { ProfileManager } from '../session/profile_manager/ProfileManager';
-import { isUsFromCache } from '../session/utils/User';
+import { DisappearingMessages } from '../he4s/disappearing_messages';
+import { DisappearingMessageUpdate } from '../he4s/disappearing_messages/types';
+import { ProfileManager } from '../he4s/profile_manager/ProfileManager';
+import { isUsFromCache } from '../he4s/utils/User';
 import { Action, Reaction } from '../types/Reaction';
 import { toLogFormat } from '../types/attachments/Errors';
 import { Reactions } from '../util/reactions';
@@ -44,7 +44,7 @@ function cleanAttachments(decrypted: SignalService.DataMessage) {
 
   // Here we go from binary to string/base64 in all AttachmentPointer digest/key fields
 
-  // we do not care about group on Session
+  // we do not care about group on HE4S
 
   decrypted.group = null;
 

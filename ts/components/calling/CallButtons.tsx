@@ -3,13 +3,13 @@ import { contextMenu, Menu } from 'react-contexify';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { CallManager, ToastUtils } from '../../session/utils';
-import { InputItem } from '../../session/utils/calling/CallManager';
+import { CallManager, ToastUtils } from '../../he4s/utils';
+import { InputItem } from '../../he4s/utils/calling/CallManager';
 import { setFullScreenCall } from '../../state/ducks/call';
 import { getHasOngoingCallWithPubkey } from '../../state/selectors/call';
-import { SessionIconButton } from '../icon';
+import { HE4SIconButton } from '../icon';
 import { DropDownAndToggleButton } from '../icon/DropDownAndToggleButton';
-import { SessionContextMenuContainer } from '../SessionContextMenuContainer';
+import { HE4SContextMenuContainer } from '../HE4SContextMenuContainer';
 import { ItemWithDataTestId } from '../menu/items/MenuItemWithDataTestId';
 import { getMenuAnimation } from '../menu/MenuAnimation';
 
@@ -21,7 +21,7 @@ const VideoInputMenu = ({
   camerasList: Array<InputItem>;
 }) => {
   return (
-    <SessionContextMenuContainer>
+    <HE4SContextMenuContainer>
       <Menu id={triggerId} animation={getMenuAnimation()}>
         {camerasList.map(m => {
           return (
@@ -36,7 +36,7 @@ const VideoInputMenu = ({
           );
         })}
       </Menu>
-    </SessionContextMenuContainer>
+    </HE4SContextMenuContainer>
   );
 };
 
@@ -94,7 +94,7 @@ const AudioInputMenu = ({
   audioInputsList: Array<InputItem>;
 }) => {
   return (
-    <SessionContextMenuContainer>
+    <HE4SContextMenuContainer>
       <Menu id={triggerId} animation={getMenuAnimation()}>
         {audioInputsList.map(m => {
           return (
@@ -109,7 +109,7 @@ const AudioInputMenu = ({
           );
         })}
       </Menu>
-    </SessionContextMenuContainer>
+    </HE4SContextMenuContainer>
   );
 };
 
@@ -163,7 +163,7 @@ const AudioOutputMenu = ({
   audioOutputsList: Array<InputItem>;
 }) => {
   return (
-    <SessionContextMenuContainer>
+    <HE4SContextMenuContainer>
       <Menu id={triggerId} animation={getMenuAnimation()}>
         {audioOutputsList.map(m => {
           return (
@@ -178,7 +178,7 @@ const AudioOutputMenu = ({
           );
         })}
       </Menu>
-    </SessionContextMenuContainer>
+    </HE4SContextMenuContainer>
   );
 };
 
@@ -228,7 +228,7 @@ export const AudioOutputButton = ({
 };
 
 const StyledCallActionButton = styled.div<{ isFullScreen: boolean }>`
-  .session-icon-button {
+  .he4s-icon-button {
     background-color: var(--call-buttons-action-background-color);
     border-radius: 50%;
     transition-duration: var(--default-duration);
@@ -253,7 +253,7 @@ const ShowInFullScreenButton = ({ isFullScreen }: { isFullScreen: boolean }) => 
 
   return (
     <StyledCallActionButton isFullScreen={isFullScreen}>
-      <SessionIconButton
+      <HE4SIconButton
         iconSize={60}
         iconPadding="20px"
         iconType="fullscreen"
@@ -278,7 +278,7 @@ export const HangUpButton = ({ isFullScreen }: { isFullScreen: boolean }) => {
 
   return (
     <StyledCallActionButton isFullScreen={isFullScreen}>
-      <SessionIconButton
+      <HE4SIconButton
         iconSize={60}
         iconPadding="20px"
         iconType="hangup"

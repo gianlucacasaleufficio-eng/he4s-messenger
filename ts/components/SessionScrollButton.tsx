@@ -3,36 +3,36 @@ import styled from 'styled-components';
 import { getShowScrollButton } from '../state/selectors/conversations';
 
 import { useSelectedUnreadCount } from '../state/selectors/selectedConversation';
-import { SessionIconButton } from './icon';
-import { SessionUnreadCount } from './icon/SessionNotificationCount';
+import { HE4SIconButton } from './icon';
+import { HE4SUnreadCount } from './icon/HE4SNotificationCount';
 
-const SessionScrollButtonDiv = styled.div`
+const HE4SScrollButtonDiv = styled.div`
   position: fixed;
   z-index: 2;
   right: 60px;
   animation: fadein var(--default-duration);
 
-  .session-icon-button {
+  .he4s-icon-button {
     background-color: var(--message-bubbles-received-background-color);
     box-shadow: var(--scroll-button-shadow);
   }
 `;
 
-export const SessionScrollButton = (props: { onClickScrollBottom: () => void }) => {
+export const HE4SScrollButton = (props: { onClickScrollBottom: () => void }) => {
   const show = useSelector(getShowScrollButton);
   const unreadCount = useSelectedUnreadCount();
 
   return (
-    <SessionScrollButtonDiv>
-      <SessionIconButton
+    <HE4SScrollButtonDiv>
+      <HE4SIconButton
         iconType="chevron"
         iconSize={'huge'}
         isHidden={!show}
         onClick={props.onClickScrollBottom}
         dataTestId="scroll-to-bottom-button"
       >
-        {Boolean(unreadCount) && <SessionUnreadCount count={unreadCount} />}
-      </SessionIconButton>
-    </SessionScrollButtonDiv>
+        {Boolean(unreadCount) && <HE4SUnreadCount count={unreadCount} />}
+      </HE4SIconButton>
+    </HE4SScrollButtonDiv>
   );
 };

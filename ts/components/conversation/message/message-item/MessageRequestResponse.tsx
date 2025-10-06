@@ -1,6 +1,6 @@
 import { useNicknameOrProfileNameOrShortenedPubkey } from '../../../../hooks/useParamSelector';
 import { PropsForMessageRequestResponse } from '../../../../models/messageType';
-import { UserUtils } from '../../../../session/utils';
+import { UserUtils } from '../../../../he4s/utils';
 import { Flex } from '../../../basic/Flex';
 import { Localizer } from '../../../basic/Localizer';
 import { SpacerSM, TextWithChildren } from '../../../basic/Text';

@@ -1,5 +1,5 @@
 import { defaults } from 'lodash';
-import { DisappearingMessageConversationModeType } from '../session/disappearing_messages/types';
+import { DisappearingMessageConversationModeType } from '../he4s/disappearing_messages/types';
 import { ConversationTypeEnum, CONVERSATION_PRIORITIES } from './types';
 import { ConversationInteractionType, ConversationInteractionStatus } from '../interactions/types';
 import { LastMessageStatusType } from '../state/ducks/types';
@@ -69,8 +69,8 @@ export interface ConversationAttributes {
   zombies: Array<string>; // only used for closed groups. Zombies are users which left but not yet removed by the admin // TODOLATER to remove after legacy closed group are dropped
 
   // ===========================================================================
-  // All of the items below are duplicated one way or the other with libsession.
-  // It would be nice to at some point be able to only rely on libsession dumps
+  // All of the items below are duplicated one way or the other with libhe4s.
+  // It would be nice to at some point be able to only rely on libhe4s dumps
   // for those so there is no need to keep them in sync, but just have them in the dumps.
   // Note: If we do remove them, we also need to add some logic to the wrappers. For instance, we can currently search by nickname or display name and that works through the DB.
 

@@ -2,12 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import useKey from 'react-use/lib/useKey';
 import styled from 'styled-components';
 import { declineConversationWithoutConfirm } from '../../../interactions/conversationInteractions';
-import { forceSyncConfigurationNowIfNeeded } from '../../../session/utils/sync/syncUtils';
+import { forceSyncConfigurationNowIfNeeded } from '../../../he4s/utils/sync/syncUtils';
 import { updateConfirmModal } from '../../../state/ducks/modalDialog';
 import { resetLeftOverlayMode } from '../../../state/ducks/section';
 import { getConversationRequestsIds } from '../../../state/selectors/conversations';
 import { useSelectedConversationKey } from '../../../state/selectors/selectedConversation';
-import { SessionButton, SessionButtonColor } from '../../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor } from '../../basic/HE4SButton';
 import { SpacerLG } from '../../basic/Text';
 import { ConversationListItem } from '../conversation-list-item/ConversationListItem';
 import { Localizer } from '../../basic/Localizer';
@@ -87,8 +87,8 @@ export const OverlayMessageRequest = () => {
         onClickClose: () => {
           window.inboxStore?.dispatch(updateConfirmModal(null));
         },
-        okTheme: SessionButtonColor.Danger,
-        closeTheme: SessionButtonColor.Primary,
+        okTheme: HE4SButtonColor.Danger,
+        closeTheme: HE4SButtonColor.Primary,
         okText: window.i18n('clear'),
       })
     );
@@ -100,8 +100,8 @@ export const OverlayMessageRequest = () => {
         <>
           <MessageRequestList />
           <SpacerLG />
-          <SessionButton
-            buttonColor={SessionButtonColor.Danger}
+          <HE4SButton
+            buttonColor={HE4SButtonColor.Danger}
             text={buttonText}
             onClick={handleClearAllRequestsClick}
           />

@@ -12,7 +12,7 @@ const StyledPlaceholder = styled(Flex)`
   height: 100%;
 `;
 
-const StyledSessionFullLogo = styled(Flex)`
+const StyledHE4SFullLogo = styled(Flex)`
   img:first-child {
     height: 180px;
     filter: brightness(0) saturate(100%) invert(75%) sepia(84%) saturate(3272%) hue-rotate(103deg)
@@ -23,8 +23,8 @@ const StyledSessionFullLogo = styled(Flex)`
   img:nth-child(2) {
     margin-top: 10px;
     width: 250px;
-    transition: var(--duration-session-logo-text);
-    filter: var(--session-logo-text-current-filter);
+    transition: var(--duration-he4s-logo-text);
+    filter: var(--he4s-logo-text-current-filter);
     -webkit-user-drag: none;
   }
 `;
@@ -48,7 +48,7 @@ const StyledHeading = styled(StyledP)`
   font-weight: 700;
 `;
 
-const StyledSessionWelcome = styled(StyledP)<{ color: string }>`
+const StyledHE4SWelcome = styled(StyledP)<{ color: string }>`
   line-height: 1;
   color: ${props => props.color};
   font-size: 32px;
@@ -89,14 +89,14 @@ export const EmptyMessageView = () => {
           <StyledPartyPopper src="images/party-popper.svg" alt="party popper emoji" />
           <Spacer2XL />
           <StyledHeading>{window.i18n('onboardingAccountCreated')}</StyledHeading>
-          <StyledSessionWelcome
+          <StyledHE4SWelcome
             color={isDarkTheme ? 'var(--primary-color)' : 'var(--text-primary-color)'}
           >
-            <Localizer token="onboardingBubbleWelcomeToSession" args={{ emoji: '👋' }} />
-          </StyledSessionWelcome>
+            <Localizer token="onboardingBubbleWelcomeToHE4S" args={{ emoji: '👋' }} />
+          </StyledHE4SWelcome>
         </>
       ) : (
-        <StyledSessionFullLogo
+        <StyledHE4SFullLogo
           container={true}
           className="content"
           flexDirection="column"
@@ -104,9 +104,9 @@ export const EmptyMessageView = () => {
           alignItems="center"
           margin="0 auto"
         >
-          <img src="images/session/brand.svg" alt="full-brand-logo" />
-          <img src="images/session/session-text.svg" alt="full-brand-text" />
-        </StyledSessionFullLogo>
+          <img src="images/he4s/brand.svg" alt="full-brand-logo" />
+          <img src="images/he4s/he4s-text.svg" alt="full-brand-text" />
+        </StyledHE4SFullLogo>
       )}
       {!conversationCount ? (
         <>

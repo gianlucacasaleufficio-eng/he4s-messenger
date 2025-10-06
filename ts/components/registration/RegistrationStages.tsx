@@ -2,7 +2,7 @@ import { shell } from 'electron';
 import { AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import { Data } from '../../data/data';
-import { getConversationController } from '../../session/conversations';
+import { getConversationController } from '../../he4s/conversations';
 import {
   AccountCreation,
   AccountRestoration,
@@ -16,7 +16,7 @@ import {
 import { Storage } from '../../util/storage';
 import { Flex } from '../basic/Flex';
 import { SpacerSM, SpacerXL, SpacerXS } from '../basic/Text';
-import { SessionIcon, SessionIconButton } from '../icon';
+import { HE4SIcon, HE4SIconButton } from '../icon';
 import { OnboardContainer } from './components';
 import { CreateAccount, RestoreAccount, Start } from './stages';
 
@@ -30,7 +30,7 @@ export async function resetRegistration() {
 
 const StyledRegistrationContainer = styled(Flex)`
   width: 348px;
-  .session-button {
+  .he4s-button {
     width: 100%;
     margin: 0;
   }
@@ -45,13 +45,13 @@ export const RegistrationStages = () => {
     <AnimatePresence>
       <StyledRegistrationContainer container={true} flexDirection="column">
         <Flex container={true} alignItems="center" height={'30px'}>
-          <SessionIcon iconColor="var(--primary-color)" iconSize={'huge'} iconType="brand" />
+          <HE4SIcon iconColor="var(--primary-color)" iconSize={'huge'} iconType="brand" />
           <SpacerXS />
           <div style={{ flexGrow: 1, zIndex: -1 }}>
-            <SessionIcon iconSize={140} iconType="session" iconColor="var(--text-primary-color)" />
+            <HE4SIcon iconSize={140} iconType="he4s" iconColor="var(--text-primary-color)" />
           </div>
           <Flex container={true} alignItems="center">
-            <SessionIconButton
+            <HE4SIconButton
               ariaLabel="FAQ Link"
               iconType="question"
               iconSize={'medium'}
@@ -59,23 +59,23 @@ export const RegistrationStages = () => {
               iconColor="var(--text-primary-color)"
               padding={'0'}
               style={{ border: '2px solid var(--text-primary-color)', borderRadius: '9999px' }}
-              dataTestId="session-faq-link"
+              dataTestId="he4s-faq-link"
               onClick={() => {
-                void shell.openExternal('https://getsession.org/faq');
+                void shell.openExternal('https://gethe4s.org/faq');
               }}
             />
             <SpacerSM />
-            <SessionIconButton
-              ariaLabel="Session website link"
+            <HE4SIconButton
+              ariaLabel="HE4S website link"
               iconType="link"
               iconSize="medium"
               iconColor="var(--text-primary-color)"
               iconPadding="4px"
               padding={'0'}
               style={{ border: '2px solid var(--text-primary-color)', borderRadius: '9999px' }}
-              dataTestId="session-website-link"
+              dataTestId="he4s-website-link"
               onClick={() => {
-                void shell.openExternal('https://getsession.org');
+                void shell.openExternal('https://gethe4s.org');
               }}
             />
           </Flex>

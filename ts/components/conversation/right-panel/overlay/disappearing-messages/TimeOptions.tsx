@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 
-import { TimerOptionsArray } from '../../../../../session/disappearing_messages/timerOptions';
+import { TimerOptionsArray } from '../../../../../he4s/disappearing_messages/timerOptions';
 import { PanelButtonGroup, PanelLabel } from '../../../../buttons/PanelButton';
 import { PanelRadioButton } from '../../../../buttons/PanelRadioButton';
 import { Localizer } from '../../../../basic/Localizer';

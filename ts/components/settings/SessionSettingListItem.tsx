@@ -5,22 +5,22 @@ import { isEmpty, pick } from 'lodash';
 import { ReactNode } from 'react';
 import { Flex } from '../basic/Flex';
 import {
-  SessionButton,
-  SessionButtonColor,
-  SessionButtonShape,
-  SessionButtonType,
-} from '../basic/SessionButton';
-import { SessionToggle } from '../basic/SessionToggle';
+  HE4SButton,
+  HE4SButtonColor,
+  HE4SButtonShape,
+  HE4SButtonType,
+} from '../basic/HE4SButton';
+import { HE4SToggle } from '../basic/HE4SToggle';
 import { SpacerSM } from '../basic/Text';
-import { SessionConfirmDialogProps } from '../dialog/SessionConfirm';
-import { SessionIcon, SessionIconButton, SessionIconProps } from '../icon';
+import { HE4SConfirmDialogProps } from '../dialog/HE4SConfirm';
+import { HE4SIcon, HE4SIconButton, HE4SIconProps } from '../icon';
 
 type ButtonSettingsProps = {
   title?: string;
   description?: string;
-  buttonColor?: SessionButtonColor;
-  buttonType?: SessionButtonType;
-  buttonShape?: SessionButtonShape;
+  buttonColor?: HE4SButtonColor;
+  buttonType?: HE4SButtonType;
+  buttonShape?: HE4SButtonShape;
   buttonText: string;
   dataTestId?: string;
   onClick: () => void;
@@ -82,7 +82,7 @@ export const SettingsTitleAndDescription = (props: {
   title?: ReactNode;
   description?: ReactNode;
   childrenDescription?: ReactNode;
-  icon?: SessionIconProps;
+  icon?: HE4SIconProps;
 }) => {
   const { description, childrenDescription, title, icon } = props;
   return (
@@ -97,7 +97,7 @@ export const SettingsTitleAndDescription = (props: {
         {!isEmpty(icon) ? (
           <>
             <SpacerSM />
-            <SessionIcon {...pick(icon, ['iconType', 'iconSize', 'iconColor'])} />
+            <HE4SIcon {...pick(icon, ['iconType', 'iconSize', 'iconColor'])} />
           </>
         ) : null}
       </Flex>
@@ -111,10 +111,10 @@ export const SettingsTitleAndDescription = (props: {
   );
 };
 
-export const SessionSettingsItemWrapper = (props: {
+export const HE4SSettingsItemWrapper = (props: {
   inline: boolean;
   title?: string | ReactNode;
-  icon?: SessionIconProps;
+  icon?: HE4SIconProps;
   description?: string | ReactNode;
   children?: ReactNode;
   childrenDescription?: ReactNode;
@@ -134,7 +134,7 @@ export const SessionSettingsItemWrapper = (props: {
   );
 };
 
-export const SessionSettingsTitleWithLink = (props: { title: string; link: string }) => {
+export const HE4SSettingsTitleWithLink = (props: { title: string; link: string }) => {
   const { title, link } = props;
   return (
     <StyledSettingItemClickable
@@ -143,7 +143,7 @@ export const SessionSettingsTitleWithLink = (props: { title: string; link: strin
       }}
     >
       <SettingsTitleAndDescription title={title} />
-      <SessionIconButton
+      <HE4SIconButton
         title={link}
         iconSize={'medium'}
         iconType="externalLink"
@@ -153,12 +153,12 @@ export const SessionSettingsTitleWithLink = (props: { title: string; link: strin
   );
 };
 
-export const SessionToggleWithDescription = (props: {
+export const HE4SToggleWithDescription = (props: {
   title?: string;
   description?: string;
   active: boolean;
   onClickToggle: () => void;
-  confirmationDialogParams?: SessionConfirmDialogProps;
+  confirmationDialogParams?: HE4SConfirmDialogProps;
   childrenDescription?: ReactNode; // if set, those elements will be appended next to description field (only used for typing message settings as of now)
   dataTestId?: string;
 }) => {
@@ -173,23 +173,23 @@ export const SessionToggleWithDescription = (props: {
   } = props;
 
   return (
-    <SessionSettingsItemWrapper
+    <HE4SSettingsItemWrapper
       title={title}
       description={description}
       inline={true}
       childrenDescription={childrenDescription}
     >
-      <SessionToggle
+      <HE4SToggle
         active={active}
         onClick={onClickToggle}
         confirmationDialogParams={confirmationDialogParams}
         dataTestId={dataTestId}
       />
-    </SessionSettingsItemWrapper>
+    </HE4SSettingsItemWrapper>
   );
 };
 
-export const SessionSettingButtonItem = (props: ButtonSettingsProps) => {
+export const HE4SSettingButtonItem = (props: ButtonSettingsProps) => {
   const {
     title,
     description,
@@ -202,8 +202,8 @@ export const SessionSettingButtonItem = (props: ButtonSettingsProps) => {
   } = props;
 
   return (
-    <SessionSettingsItemWrapper title={title} description={description} inline={true}>
-      <SessionButton
+    <HE4SSettingsItemWrapper title={title} description={description} inline={true}>
+      <HE4SButton
         dataTestId={dataTestId}
         text={buttonText}
         buttonColor={buttonColor}
@@ -211,6 +211,6 @@ export const SessionSettingButtonItem = (props: ButtonSettingsProps) => {
         buttonShape={buttonShape}
         onClick={onClick}
       />
-    </SessionSettingsItemWrapper>
+    </HE4SSettingsItemWrapper>
   );
 };

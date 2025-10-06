@@ -14,8 +14,8 @@ export function createTrayIcon(
   i18n: SetupI18nReturnType
 ) {
   // keep the duplicated part to allow for search and find
-  const iconFile = process.platform === 'darwin' ? 'session_icon_16.png' : 'session_icon_32.png';
-  const iconNoNewMessages = path.join(getAppRootPath(), 'images', 'session', iconFile);
+  const iconFile = process.platform === 'darwin' ? 'he4s_icon_16.png' : 'he4s_icon_32.png';
+  const iconNoNewMessages = path.join(getAppRootPath(), 'images', 'he4s', iconFile);
   tray = new Tray(iconNoNewMessages);
   trayAny = tray;
   trayAny.forceOnTop = (mainWindow: BrowserWindow) => {

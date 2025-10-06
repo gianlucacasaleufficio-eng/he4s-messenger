@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DURATION } from '../../../../session/constants';
+import { DURATION } from '../../../../he4s/constants';
 import {
   formatFullDate,
   formatRelativeTimestampWithLocale,

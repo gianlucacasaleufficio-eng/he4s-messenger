@@ -1,8 +1,8 @@
 import { createRoot, Root } from 'react-dom/client';
-import { SessionQRCode, SessionQRCodeProps } from '../components/SessionQRCode';
+import { HE4SQRCode, HE4SQRCodeProps } from '../components/HE4SQRCode';
 import { convertIconToImageURL } from '../hooks/useIconToImageURL';
-import { UserUtils } from '../session/utils';
-import { sleepFor } from '../session/utils/Promise';
+import { UserUtils } from '../he4s/utils';
+import { sleepFor } from '../he4s/utils/Promise';
 import { LightBoxOptions } from '../state/ducks/modalDialog';
 
 export function prepareQRCodeForLightBox(fileName: string, url: string, onClose?: () => void) {
@@ -35,7 +35,7 @@ export function prepareQRCodeForLightBox(fileName: string, url: string, onClose?
   return lightBoxOptions;
 }
 
-export async function renderQRCode(props: SessionQRCodeProps, filename: string): Promise<string> {
+export async function renderQRCode(props: HE4SQRCodeProps, filename: string): Promise<string> {
   let url = '';
 
   let root: HTMLElement | null = null;
@@ -57,7 +57,7 @@ export async function renderQRCode(props: SessionQRCodeProps, filename: string):
 
     reactRoot = createRoot(divElement!);
     reactRoot.render(
-      <SessionQRCode
+      <HE4SQRCode
         id={props.id}
         value={props.value}
         size={props.size}

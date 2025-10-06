@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import useMount from 'react-use/lib/useMount';
-import { SessionIcon, SessionIconProps, SessionIconType } from '../components/icon';
-import { sleepFor } from '../session/utils/Promise';
+import { HE4SIcon, HE4SIconProps, HE4SIconType } from '../components/icon';
+import { sleepFor } from '../he4s/utils/Promise';
 import { useIsDarkTheme } from '../state/selectors/theme';
 import { ThemeKeys, getThemeValue } from '../themes/globals';
 
@@ -19,7 +19,7 @@ const chooseIconColors = (
 };
 
 export const convertIconToImageURL = async (
-  props: Pick<SessionIconProps, 'iconType' | 'iconSize'> & {
+  props: Pick<HE4SIconProps, 'iconType' | 'iconSize'> & {
     isThemed?: boolean;
     isDarkTheme?: boolean;
   }
@@ -50,7 +50,7 @@ export const convertIconToImageURL = async (
 
   const reactRoot = createRoot(divElement!);
   reactRoot.render(
-    <SessionIcon
+    <HE4SIcon
       iconType={iconType}
       iconSize={iconSize}
       iconColor={fgColor}
@@ -78,7 +78,7 @@ export const useIconToImageURL = ({
   iconSize,
   isThemed = true,
 }: {
-  iconType: SessionIconType;
+  iconType: HE4SIconType;
   iconSize: number;
   isThemed?: boolean;
 }) => {

@@ -19,30 +19,30 @@ import {
 
 import { v4 } from 'uuid';
 import { SignalService } from '../protobuf';
-import { getMessageQueue } from '../session';
-import { getConversationController } from '../session/conversations';
-import { ClosedGroupVisibleMessage } from '../session/messages/outgoing/visibleMessage/ClosedGroupVisibleMessage';
-import { PubKey } from '../session/types';
-import { ToastUtils, UserUtils } from '../session/utils';
+import { getMessageQueue } from '../he4s';
+import { getConversationController } from '../he4s/conversations';
+import { ClosedGroupVisibleMessage } from '../he4s/messages/outgoing/visibleMessage/ClosedGroupVisibleMessage';
+import { PubKey } from '../he4s/types';
+import { ToastUtils, UserUtils } from '../he4s/utils';
 import { BlockedNumberController } from '../util';
 import { MessageModel } from './message';
 import { MessageAttributesOptionals, MessageDirection } from './messageType';
 
 import { Data } from '../data/data';
-import { OpenGroupUtils } from '../session/apis/open_group_api/utils';
-import { getOpenGroupV2FromConversationId } from '../session/apis/open_group_api/utils/OpenGroupUtils';
-import { ExpirationTimerUpdateMessage } from '../session/messages/outgoing/controlMessage/ExpirationTimerUpdateMessage';
-import { ReadReceiptMessage } from '../session/messages/outgoing/controlMessage/receipt/ReadReceiptMessage';
-import { TypingMessage } from '../session/messages/outgoing/controlMessage/TypingMessage';
-import { GroupInvitationMessage } from '../session/messages/outgoing/visibleMessage/GroupInvitationMessage';
-import { OpenGroupVisibleMessage } from '../session/messages/outgoing/visibleMessage/OpenGroupVisibleMessage';
+import { OpenGroupUtils } from '../he4s/apis/open_group_api/utils';
+import { getOpenGroupV2FromConversationId } from '../he4s/apis/open_group_api/utils/OpenGroupUtils';
+import { ExpirationTimerUpdateMessage } from '../he4s/messages/outgoing/controlMessage/ExpirationTimerUpdateMessage';
+import { ReadReceiptMessage } from '../he4s/messages/outgoing/controlMessage/receipt/ReadReceiptMessage';
+import { TypingMessage } from '../he4s/messages/outgoing/controlMessage/TypingMessage';
+import { GroupInvitationMessage } from '../he4s/messages/outgoing/visibleMessage/GroupInvitationMessage';
+import { OpenGroupVisibleMessage } from '../he4s/messages/outgoing/visibleMessage/OpenGroupVisibleMessage';
 import {
   VisibleMessage,
   VisibleMessageParams,
-} from '../session/messages/outgoing/visibleMessage/VisibleMessage';
-import { perfEnd, perfStart } from '../session/utils/Performance';
-import { ed25519Str, toHex } from '../session/utils/String';
-import { createTaskWithTimeout } from '../session/utils/TaskWithTimeout';
+} from '../he4s/messages/outgoing/visibleMessage/VisibleMessage';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
+import { ed25519Str, toHex } from '../he4s/utils/String';
+import { createTaskWithTimeout } from '../he4s/utils/TaskWithTimeout';
 import {
   actions as conversationActions,
   conversationsChanged,
@@ -61,24 +61,24 @@ import {
   findCachedOurBlindedPubkeyOrLookItUp,
   getUsBlindedInThatServer,
   isUsAnySogsFromCache,
-} from '../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { SogsBlinding } from '../session/apis/open_group_api/sogsv3/sogsBlinding';
-import { sogsV3FetchPreviewAndSaveIt } from '../session/apis/open_group_api/sogsv3/sogsV3FetchFile';
-import { GetNetworkTime } from '../session/apis/snode_api/getNetworkTime';
-import { SnodeNamespaces } from '../session/apis/snode_api/namespaces';
-import { getSodiumRenderer } from '../session/crypto';
-import { addMessagePadding } from '../session/crypto/BufferPadding';
-import { getDecryptedMediaUrl } from '../session/crypto/DecryptedAttachmentsManager';
+} from '../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { SogsBlinding } from '../he4s/apis/open_group_api/sogsv3/sogsBlinding';
+import { sogsV3FetchPreviewAndSaveIt } from '../he4s/apis/open_group_api/sogsv3/sogsV3FetchFile';
+import { GetNetworkTime } from '../he4s/apis/snode_api/getNetworkTime';
+import { SnodeNamespaces } from '../he4s/apis/snode_api/namespaces';
+import { getSodiumRenderer } from '../he4s/crypto';
+import { addMessagePadding } from '../he4s/crypto/BufferPadding';
+import { getDecryptedMediaUrl } from '../he4s/crypto/DecryptedAttachmentsManager';
 import {
   MessageRequestResponse,
   MessageRequestResponseParams,
-} from '../session/messages/outgoing/controlMessage/MessageRequestResponse';
-import { ConfigurationSync } from '../session/utils/job_runners/jobs/ConfigurationSyncJob';
-import { SessionUtilContact } from '../session/utils/libsession/libsession_utils_contacts';
-import { SessionUtilConvoInfoVolatile } from '../session/utils/libsession/libsession_utils_convo_info_volatile';
-import { SessionUtilUserGroups } from '../session/utils/libsession/libsession_utils_user_groups';
-import { forceSyncConfigurationNowIfNeeded } from '../session/utils/sync/syncUtils';
-import { getOurProfile } from '../session/utils/User';
+} from '../he4s/messages/outgoing/controlMessage/MessageRequestResponse';
+import { ConfigurationSync } from '../he4s/utils/job_runners/jobs/ConfigurationSyncJob';
+import { HE4SUtilContact } from '../he4s/utils/libhe4s/libhe4s_utils_contacts';
+import { HE4SUtilConvoInfoVolatile } from '../he4s/utils/libhe4s/libhe4s_utils_convo_info_volatile';
+import { HE4SUtilUserGroups } from '../he4s/utils/libhe4s/libhe4s_utils_user_groups';
+import { forceSyncConfigurationNowIfNeeded } from '../he4s/utils/sync/syncUtils';
+import { getOurProfile } from '../he4s/utils/User';
 import {
   deleteExternalFilesOfConversation,
   getAbsoluteAttachmentPath,
@@ -105,8 +105,8 @@ import {
   READ_MESSAGE_STATE,
 } from './conversationAttributes';
 
-import { LibSessionUtil } from '../session/utils/libsession/libsession_utils';
-import { SessionUtilUserProfile } from '../session/utils/libsession/libsession_utils_user_profile';
+import { LibHE4SUtil } from '../he4s/utils/libhe4s/libhe4s_utils';
+import { HE4SUtilUserProfile } from '../he4s/utils/libhe4s/libhe4s_utils_user_profile';
 import { ReduxSogsRoomInfos } from '../state/ducks/sogsRoomInfo';
 import {
   getCanWriteOutsideRedux,
@@ -114,10 +114,10 @@ import {
   getSubscriberCountOutsideRedux,
 } from '../state/selectors/sogsRoomInfo'; // decide it it makes sense to move this to a redux slice?
 
-import { DisappearingMessages } from '../session/disappearing_messages';
-import { DisappearingMessageConversationModeType } from '../session/disappearing_messages/types';
-import { FetchMsgExpirySwarm } from '../session/utils/job_runners/jobs/FetchMsgExpirySwarmJob';
-import { UpdateMsgExpirySwarm } from '../session/utils/job_runners/jobs/UpdateMsgExpirySwarmJob';
+import { DisappearingMessages } from '../he4s/disappearing_messages';
+import { DisappearingMessageConversationModeType } from '../he4s/disappearing_messages/types';
+import { FetchMsgExpirySwarm } from '../he4s/utils/job_runners/jobs/FetchMsgExpirySwarmJob';
+import { UpdateMsgExpirySwarm } from '../he4s/utils/job_runners/jobs/UpdateMsgExpirySwarmJob';
 import { ReleasedFeatures } from '../util/releaseFeature';
 import { markAttributesAsReadIfNeeded } from './messageFactory';
 import { OpenGroupRequestCommonType } from '../data/types';
@@ -312,7 +312,7 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
         toRet.isMe = true;
       }
 
-      const foundContact = SessionUtilContact.getContactCached(this.id);
+      const foundContact = HE4SUtilContact.getContactCached(this.id);
 
       if (!toRet.activeAt && foundContact && isFinite(foundContact.createdAtSeconds)) {
         toRet.activeAt = foundContact.createdAtSeconds * 1000; // active at is in ms
@@ -452,7 +452,7 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
    * Fetches from the Database an update of what are the memory only informations like mentionedUs and the unreadCount, etc
    */
   public async refreshInMemoryDetails(providedMemoryDetails?: SaveConversationReturn) {
-    if (!SessionUtilConvoInfoVolatile.isConvoToStoreInWrapper(this)) {
+    if (!HE4SUtilConvoInfoVolatile.isConvoToStoreInWrapper(this)) {
       return;
     }
     const memoryDetails = providedMemoryDetails || (await Data.fetchConvoMemoryDetails(this.id));
@@ -849,7 +849,7 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
     providedSource,
     receivedAt, // is set if it comes from outside
     fromSync, // if the update comes from sync message ONLY
-    fromConfigMessage, // if the update comes from a libsession config message ONLY
+    fromConfigMessage, // if the update comes from a libhe4s config message ONLY
     fromCurrentDevice,
     shouldCommitConvo = true,
     existingMessage,
@@ -1247,7 +1247,7 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
     }
     // make sure to save the lokiDisplayName as name in the db. so a search of conversation returns it.
     // (we look for matches in name too)
-    const realUserName = this.getRealSessionUsername();
+    const realUserName = this.getRealHE4SUsername();
 
     if (!trimmed || !trimmed.length) {
       this.set({ nickname: undefined, displayNameInProfile: realUserName });
@@ -1260,15 +1260,15 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
     }
   }
 
-  public async setSessionProfile(newProfile: {
+  public async setHE4SProfile(newProfile: {
     displayName?: string | null;
     avatarPath?: string | null;
     avatarImageId?: number;
   }) {
     let changes = false;
 
-    const existingSessionName = this.getRealSessionUsername();
-    if (newProfile.displayName !== existingSessionName && newProfile.displayName) {
+    const existingHE4SName = this.getRealHE4SUsername();
+    if (newProfile.displayName !== existingHE4SName && newProfile.displayName) {
       this.set({
         displayNameInProfile: newProfile.displayName,
       });
@@ -1276,7 +1276,7 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
     }
 
     // a user cannot remove an avatar. Only change it
-    // if you change this behavior, double check all setSessionProfile calls (especially the one in EditProfileDialog)
+    // if you change this behavior, double check all setHE4SProfile calls (especially the one in EditProfileDialog)
     if (newProfile.avatarPath) {
       const originalAvatar = this.get('avatarInProfile');
       if (!isEqual(originalAvatar, newProfile.avatarPath)) {
@@ -1296,9 +1296,9 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
     }
   }
 
-  public setSessionDisplayNameNoCommit(newDisplayName?: string | null) {
-    const existingSessionName = this.getRealSessionUsername();
-    if (newDisplayName !== existingSessionName && newDisplayName) {
+  public setHE4SDisplayNameNoCommit(newDisplayName?: string | null) {
+    const existingHE4SName = this.getRealHE4SUsername();
+    if (newDisplayName !== existingHE4SName && newDisplayName) {
       this.set({ displayNameInProfile: newDisplayName });
     }
   }
@@ -1306,7 +1306,7 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
   /**
    * @returns `displayNameInProfile` so the real username as defined by that user/group
    */
-  public getRealSessionUsername(): string | undefined {
+  public getRealHE4SUsername(): string | undefined {
     return this.get('displayNameInProfile');
   }
 
@@ -1318,19 +1318,19 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
   }
 
   /**
-   * @returns `getNickname` if a private convo and a nickname is set, or `getRealSessionUsername`
+   * @returns `getNickname` if a private convo and a nickname is set, or `getRealHE4SUsername`
    */
   public getNicknameOrRealUsername(): string | undefined {
-    return this.getNickname() || this.getRealSessionUsername();
+    return this.getNickname() || this.getRealHE4SUsername();
   }
 
   /**
-   * @returns `getNickname` if a private convo and a nickname is set, or `getRealSessionUsername`
+   * @returns `getNickname` if a private convo and a nickname is set, or `getRealHE4SUsername`
    *
    * Can also a localized 'Anonymous' for an unknown private chat and localized 'Unknown' for an unknown group (open/closed)
    */
   public getNicknameOrRealUsernameOrPlaceholder(): string {
-    const nickOrReal = this.getNickname() || this.getRealSessionUsername();
+    const nickOrReal = this.getNickname() || this.getRealHE4SUsername();
 
     if (nickOrReal) {
       return nickOrReal;
@@ -1396,7 +1396,7 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
   /**
    * Toggle the pinned state of a conversation.
    * Any conversation can be pinned and the higher the priority, the higher it will be in the list.
-   * Note: Currently, we do not have an order in the list of pinned conversation, but the libsession util wrapper can handle the order.
+   * Note: Currently, we do not have an order in the list of pinned conversation, but the libhe4s util wrapper can handle the order.
    */
   public async togglePinned(shouldCommit: boolean = true) {
     this.set({ priority: this.isPinned() ? 0 : 1 });
@@ -1597,9 +1597,9 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
       type: 'mods',
     });
 
-    if (details.name && details.name !== this.getRealSessionUsername()) {
+    if (details.name && details.name !== this.getRealHE4SUsername()) {
       hasChange = hasChange || true;
-      this.setSessionDisplayNameNoCommit(details.name);
+      this.setHE4SDisplayNameNoCommit(details.name);
     }
 
     hasChange = hasChange || modsChanged;
@@ -1723,7 +1723,7 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
 
   public async getNotificationIcon() {
     const avatarUrl = this.getAvatarPath();
-    const noIconUrl = 'images/session/session_icon_32.png';
+    const noIconUrl = 'images/he4s/he4s_icon_32.png';
 
     if (!avatarUrl) {
       return noIconUrl;
@@ -2370,17 +2370,17 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
       .catch(window?.log?.error);
   }
 
-  private async replaceWithOurRealSessionId(toReplace: Array<string>) {
+  private async replaceWithOurRealHE4SId(toReplace: Array<string>) {
     const roomInfos = OpenGroupData.getV2OpenGroupRoom(this.id);
     const sodium = await getSodiumRenderer();
     const ourBlindedPubkeyForThisSogs =
       roomInfos && roomHasBlindEnabled(roomInfos)
         ? await findCachedOurBlindedPubkeyOrLookItUp(roomInfos?.serverPublicKey, sodium)
         : UserUtils.getOurPubKeyStrFromCache();
-    const replacedWithOurRealSessionId = toReplace.map(m =>
+    const replacedWithOurRealHE4SId = toReplace.map(m =>
       m === ourBlindedPubkeyForThisSogs ? UserUtils.getOurPubKeyStrFromCache() : m
     );
-    return replacedWithOurRealSessionId;
+    return replacedWithOurRealHE4SId;
   }
 
   private async handleSogsModsOrAdminsChanges({
@@ -2398,15 +2398,15 @@ export class ConversationModel extends Backbone.Model<ConversationAttributes> {
         localModsOrAdmins.push(...hiddenModsOrAdmins);
       }
 
-      const replacedWithOurRealSessionId = await this.replaceWithOurRealSessionId(
+      const replacedWithOurRealHE4SId = await this.replaceWithOurRealHE4SId(
         uniq(localModsOrAdmins)
       );
 
       switch (type) {
         case 'admins':
-          return this.updateGroupAdmins(replacedWithOurRealSessionId, false);
+          return this.updateGroupAdmins(replacedWithOurRealHE4SId, false);
         case 'mods':
-          ReduxSogsRoomInfos.setModeratorsOutsideRedux(this.id, replacedWithOurRealSessionId);
+          ReduxSogsRoomInfos.setModeratorsOutsideRedux(this.id, replacedWithOurRealHE4SId);
           return false;
         default:
           assertUnreachable(type, `handleSogsModsOrAdminsChanges: unhandled switch case: ${type}`);
@@ -2517,32 +2517,32 @@ export async function commitConversationAndRefreshWrapper(id: string) {
   await convo.refreshInMemoryDetails(savedDetails);
 
   // Performance impact on this is probably to be pretty bad. We might want to push for that DB refactor to be done sooner so we do not need to fetch info from the DB anymore
-  for (let index = 0; index < LibSessionUtil.requiredUserVariants.length; index++) {
-    const variant = LibSessionUtil.requiredUserVariants[index];
+  for (let index = 0; index < LibHE4SUtil.requiredUserVariants.length; index++) {
+    const variant = LibHE4SUtil.requiredUserVariants[index];
 
     switch (variant) {
       case 'UserConfig':
-        if (SessionUtilUserProfile.isUserProfileToStoreInWrapper(convo.id)) {
+        if (HE4SUtilUserProfile.isUserProfileToStoreInWrapper(convo.id)) {
           // eslint-disable-next-line no-await-in-loop
-          await SessionUtilUserProfile.insertUserProfileIntoWrapper(convo.id);
+          await HE4SUtilUserProfile.insertUserProfileIntoWrapper(convo.id);
         }
         break;
       case 'ContactsConfig':
-        if (SessionUtilContact.isContactToStoreInWrapper(convo)) {
+        if (HE4SUtilContact.isContactToStoreInWrapper(convo)) {
           // eslint-disable-next-line no-await-in-loop
-          await SessionUtilContact.insertContactFromDBIntoWrapperAndRefresh(convo.id);
+          await HE4SUtilContact.insertContactFromDBIntoWrapperAndRefresh(convo.id);
         }
         break;
       case 'UserGroupsConfig':
-        if (SessionUtilUserGroups.isUserGroupToStoreInWrapper(convo)) {
+        if (HE4SUtilUserGroups.isUserGroupToStoreInWrapper(convo)) {
           // eslint-disable-next-line no-await-in-loop
-          await SessionUtilUserGroups.insertGroupsFromDBIntoWrapperAndRefresh(convo.id);
+          await HE4SUtilUserGroups.insertGroupsFromDBIntoWrapperAndRefresh(convo.id);
         }
         break;
       case 'ConvoInfoVolatileConfig':
-        if (SessionUtilConvoInfoVolatile.isConvoToStoreInWrapper(convo)) {
+        if (HE4SUtilConvoInfoVolatile.isConvoToStoreInWrapper(convo)) {
           // eslint-disable-next-line no-await-in-loop
-          await SessionUtilConvoInfoVolatile.insertConvoFromDBIntoWrapperAndRefresh(convo.id);
+          await HE4SUtilConvoInfoVolatile.insertConvoFromDBIntoWrapperAndRefresh(convo.id);
         }
         break;
       default:

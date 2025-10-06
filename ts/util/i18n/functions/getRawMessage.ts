@@ -48,7 +48,7 @@ export function getRawMessage<
   try {
     if (
       typeof window !== 'undefined' &&
-      window?.sessionFeatureFlags?.replaceLocalizedStringsWithKeys
+      window?.he4sFeatureFlags?.replaceLocalizedStringsWithKeys
     ) {
       return token as T;
     }

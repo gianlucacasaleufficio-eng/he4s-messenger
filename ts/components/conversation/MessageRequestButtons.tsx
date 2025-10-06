@@ -5,10 +5,10 @@ import {
   approveConvoAndSendResponse,
   declineConversationWithConfirm,
 } from '../../interactions/conversationInteractions';
-import { getConversationController } from '../../session/conversations';
+import { getConversationController } from '../../he4s/conversations';
 import { hasSelectedConversationIncomingMessages } from '../../state/selectors/conversations';
 import { useSelectedConversationKey } from '../../state/selectors/selectedConversation';
-import { SessionButton, SessionButtonColor } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor } from '../basic/HE4SButton';
 import {
   ConversationIncomingRequestExplanation,
   ConversationOutgoingRequestExplanation,
@@ -29,7 +29,7 @@ const ConversationBannerRow = styled.div`
   gap: var(--margins-lg);
   justify-content: center;
 
-  .session-button {
+  .he4s-button {
     padding: 0 36px;
   }
 `;
@@ -102,15 +102,15 @@ export const ConversationMessageRequestButtons = () => {
           </StyledBlockUserText>
           <ConversationIncomingRequestExplanation />
           <ConversationBannerRow>
-            <SessionButton
+            <HE4SButton
               onClick={async () => {
                 await handleAcceptConversationRequest(selectedConvoId);
               }}
               text={window.i18n('accept')}
               dataTestId="accept-message-request"
             />
-            <SessionButton
-              buttonColor={SessionButtonColor.Danger}
+            <HE4SButton
+              buttonColor={HE4SButtonColor.Danger}
               text={window.i18n('decline')}
               onClick={() => {
                 handleDeclineConversationRequest(selectedConvoId, selectedConvoId);

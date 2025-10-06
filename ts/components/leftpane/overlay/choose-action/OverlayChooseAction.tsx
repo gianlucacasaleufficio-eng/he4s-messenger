@@ -92,7 +92,7 @@ export const OverlayChooseAction = () => {
           dataTestId="chooser-new-community"
         />
         <ActionRow
-          title={window.i18n('sessionInviteAFriend')}
+          title={window.i18n('he4sInviteAFriend')}
           ariaLabel={'Invite a friend button'}
           iconType={'addUser'}
           iconSize={20}

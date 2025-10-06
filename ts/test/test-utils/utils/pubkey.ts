@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import _ from 'lodash';
 import { Snode } from '../../../data/types';
 import { ECKeyPair } from '../../../receiver/keypairs';
-import { PubKey } from '../../../session/types';
+import { PubKey } from '../../../he4s/types';
 
 export function generateFakePubKey(): PubKey {
   // Generates a mock pubkey for testing

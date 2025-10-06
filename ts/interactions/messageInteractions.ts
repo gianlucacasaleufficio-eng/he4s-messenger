@@ -1,15 +1,15 @@
-import { joinOpenGroupV2WithUIEvents } from '../session/apis/open_group_api/opengroupV2/JoinOpenGroupV2';
+import { joinOpenGroupV2WithUIEvents } from '../he4s/apis/open_group_api/opengroupV2/JoinOpenGroupV2';
 import {
   sogsV3AddAdmin,
   sogsV3RemoveAdmins,
-} from '../session/apis/open_group_api/sogsv3/sogsV3AddRemoveMods';
+} from '../he4s/apis/open_group_api/sogsv3/sogsV3AddRemoveMods';
 import {
   isOpenGroupV2,
   openGroupV2CompleteURLRegex,
-} from '../session/apis/open_group_api/utils/OpenGroupUtils';
-import { getConversationController } from '../session/conversations';
-import { PubKey } from '../session/types';
-import { ToastUtils } from '../session/utils';
+} from '../he4s/apis/open_group_api/utils/OpenGroupUtils';
+import { getConversationController } from '../he4s/conversations';
+import { PubKey } from '../he4s/types';
+import { ToastUtils } from '../he4s/utils';
 
 import { updateBanOrUnbanUserModal, updateConfirmModal } from '../state/ducks/modalDialog';
 

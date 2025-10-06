@@ -15,10 +15,10 @@ import { useIsDarkTheme } from '../../state/selectors/theme';
 import { getShowRecoveryPhrasePrompt } from '../../state/selectors/userConfig';
 import { isSignWithRecoveryPhrase } from '../../util/storage';
 import { Flex } from '../basic/Flex';
-import { SessionButton } from '../basic/SessionButton';
+import { HE4SButton } from '../basic/HE4SButton';
 import { SpacerMD, SpacerSM } from '../basic/Text';
 import { MenuButton } from '../buttons';
-import { SessionIcon, SessionIconButton } from '../icon';
+import { HE4SIcon, HE4SIconButton } from '../icon';
 import { Localizer } from '../basic/Localizer';
 
 const StyledLeftPaneSectionHeader = styled(Flex)`
@@ -58,7 +58,7 @@ const StyledBanner = styled(Flex)`
     font-size: 12px;
   }
 
-  .session-button {
+  .he4s-button {
     width: 100%;
   }
 
@@ -98,10 +98,10 @@ function getLeftPaneHeaderLabel(
       label = window.i18n('messageNew', { count: 1 });
       break;
     case 'message-requests':
-      label = window.i18n('sessionMessageRequests');
+      label = window.i18n('he4sMessageRequests');
       break;
     case 'invite-a-friend':
-      label = window.i18n('sessionInviteAFriend');
+      label = window.i18n('he4sInviteAFriend');
       break;
     case 'choose-action':
     default:
@@ -110,7 +110,7 @@ function getLeftPaneHeaderLabel(
 
   switch (focusedSection) {
     case SectionType.Settings:
-      label = window.i18n('sessionSettings');
+      label = window.i18n('he4sSettings');
       break;
     case SectionType.Message:
     default:
@@ -153,7 +153,7 @@ export const LeftPaneBanner = () => {
           <StyledBannerTitle>
             <Localizer token="recoveryPasswordBannerTitle" />
           </StyledBannerTitle>
-          <SessionIcon
+          <HE4SIcon
             iconType={isDarkTheme ? 'recoveryPasswordFill' : 'recoveryPasswordOutline'}
             iconSize="medium"
             iconColor="var(--text-primary-color)"
@@ -161,7 +161,7 @@ export const LeftPaneBanner = () => {
         </Flex>
         <p>{window.i18n('recoveryPasswordBannerDescription')}</p>
         <SpacerMD />
-        <SessionButton
+        <HE4SButton
           ariaLabel="Reveal recovery phrase button"
           text={window.i18n('theContinue')}
           onClick={showRecoveryPhraseModal}
@@ -199,7 +199,7 @@ export const LeftPaneSectionHeader = () => {
         {leftOverlayMode &&
         leftOverlayMode !== 'choose-action' &&
         leftOverlayMode !== 'message-requests' ? (
-          <SessionIconButton
+          <HE4SIconButton
             ariaLabel="Back button"
             iconSize="medium"
             iconType="chevron"

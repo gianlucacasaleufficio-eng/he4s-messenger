@@ -1,5 +1,5 @@
 import { padStart } from 'lodash';
-import { SessionIconType } from '../components/icon/Icons';
+import { HE4SIconType } from '../components/icon/Icons';
 
 export function getIncrement(length: number): number {
   if (length < 0) {
@@ -13,7 +13,7 @@ export function getIncrement(length: number): number {
   return Math.ceil(length / 12);
 }
 
-export function getTimerBucketIcon(expirationMs: number, length: number): SessionIconType {
+export function getTimerBucketIcon(expirationMs: number, length: number): HE4SIconType {
   const now = Date.now();
   const delta = expirationMs - now;
 

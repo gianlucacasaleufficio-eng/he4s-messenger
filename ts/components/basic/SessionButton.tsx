@@ -2,21 +2,21 @@ import classNames from 'classnames';
 import { ReactNode, RefObject } from 'react';
 import styled from 'styled-components';
 
-export enum SessionButtonType {
+export enum HE4SButtonType {
   Outline = 'outline',
   Simple = 'simple',
   Solid = 'solid',
   Ghost = 'ghost',
 }
 
-export enum SessionButtonShape {
+export enum HE4SButtonShape {
   Round = 'round',
   Square = 'square',
   None = 'none',
 }
 
 // NOTE References ts/themes/colors.tsx
-export enum SessionButtonColor {
+export enum HE4SButtonColor {
   Green = 'green',
   Blue = 'blue',
   Yellow = 'yellow',
@@ -32,10 +32,10 @@ export enum SessionButtonColor {
 
 const StyledButton = styled.button<{
   color: string | undefined;
-  buttonType: SessionButtonType;
-  buttonShape: SessionButtonShape;
+  buttonType: HE4SButtonType;
+  buttonShape: HE4SButtonShape;
 }>`
-  width: ${props => (props.buttonType === SessionButtonType.Ghost ? '100%' : 'auto')};
+  width: ${props => (props.buttonType === HE4SButtonType.Ghost ? '100%' : 'auto')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,36 +47,36 @@ const StyledButton = styled.button<{
   transition: var(--default-duration);
   background-repeat: no-repeat;
   overflow: hidden;
-  height: ${props => (props.buttonType === SessionButtonType.Ghost ? undefined : '34px')};
-  min-height: ${props => (props.buttonType === SessionButtonType.Ghost ? undefined : '34px')};
+  height: ${props => (props.buttonType === HE4SButtonType.Ghost ? undefined : '34px')};
+  min-height: ${props => (props.buttonType === HE4SButtonType.Ghost ? undefined : '34px')};
   padding: ${props =>
-    props.buttonType === SessionButtonType.Ghost ? '18px 24px 22px' : '0px 18px'};
+    props.buttonType === HE4SButtonType.Ghost ? '18px 24px 22px' : '0px 18px'};
   background-color: ${props =>
-    props.buttonType === SessionButtonType.Solid && props.color
+    props.buttonType === HE4SButtonType.Solid && props.color
       ? `var(--${props.color}-color)`
       : `var(--button-${props.buttonType}-background-color)`};
   color: ${props =>
     props.color
-      ? props.buttonType !== SessionButtonType.Solid
+      ? props.buttonType !== HE4SButtonType.Solid
         ? `var(--${props.color}-color)`
         : 'var(--white-color)'
       : `var(--button-${props.buttonType}-text-color)`};
   ${props =>
-    props.buttonType === SessionButtonType.Outline &&
+    props.buttonType === HE4SButtonType.Outline &&
     `outline: none; border: 1px solid ${
       props.color ? `var(--${props.color}-color)` : 'var(--button-outline-border-color)'
     }`};
   ${props =>
-    props.buttonType === SessionButtonType.Solid &&
+    props.buttonType === HE4SButtonType.Solid &&
     'box-shadow: 0px 0px 6px var(--button-solid-shadow-color);'}
   border-radius: ${props =>
-    props.buttonShape === SessionButtonShape.Round
+    props.buttonShape === HE4SButtonShape.Round
       ? '17px'
-      : props.buttonShape === SessionButtonShape.Square
+      : props.buttonShape === HE4SButtonShape.Square
         ? '6px'
         : '0px'};
 
-  .session-icon {
+  .he4s-icon {
     fill: var(--background-primary-color);
   }
 
@@ -88,13 +88,13 @@ const StyledButton = styled.button<{
     cursor: not-allowed;
     outline: none;
     ${props =>
-      props.buttonType === SessionButtonType.Solid
+      props.buttonType === HE4SButtonType.Solid
         ? 'background-color: var(--button-solid-disabled-color)'
-        : props.buttonType === SessionButtonType.Outline
+        : props.buttonType === HE4SButtonType.Outline
           ? 'border: 1px solid var(--button-outline-disabled-color)'
           : ''};
     color: ${props =>
-      props.buttonType === SessionButtonType.Solid
+      props.buttonType === HE4SButtonType.Solid
         ? 'var(--button-solid-text-color)'
         : `var(--button-${props.buttonType}-disabled-color)`};
   }
@@ -106,19 +106,19 @@ const StyledButton = styled.button<{
         props.buttonType &&
         `background-color: var(--button-${props.buttonType}-background-hover-color);`};
       ${props =>
-        props.buttonType === SessionButtonType.Outline &&
+        props.buttonType === HE4SButtonType.Outline &&
         'outline: none; border: 1px solid var(--button-outline-border-hover-color);'};
     }
   }
 `;
 
-export type SessionButtonProps = {
+export type HE4SButtonProps = {
   text?: string;
   ariaLabel?: string;
   disabled?: boolean;
-  buttonType?: SessionButtonType;
-  buttonShape?: SessionButtonShape;
-  buttonColor?: SessionButtonColor; // will override theme
+  buttonType?: HE4SButtonType;
+  buttonShape?: HE4SButtonShape;
+  buttonColor?: HE4SButtonColor; // will override theme
   onClick?: any;
   children?: ReactNode;
   margin?: string;
@@ -127,12 +127,12 @@ export type SessionButtonProps = {
   dataTestId?: string;
 };
 
-export const SessionButton = (props: SessionButtonProps) => {
+export const HE4SButton = (props: HE4SButtonProps) => {
   const {
-    buttonType = SessionButtonType.Outline,
-    buttonShape = buttonType === SessionButtonType.Ghost
-      ? SessionButtonShape.None
-      : SessionButtonShape.Round,
+    buttonType = HE4SButtonType.Outline,
+    buttonShape = buttonType === HE4SButtonType.Ghost
+      ? HE4SButtonShape.None
+      : HE4SButtonShape.Round,
     reference,
     className,
     dataTestId,
@@ -159,7 +159,7 @@ export const SessionButton = (props: SessionButtonProps) => {
       buttonShape={buttonShape}
       buttonType={buttonType}
       className={classNames(
-        'session-button',
+        'he4s-button',
         buttonShape,
         buttonType,
         buttonColor ?? '',

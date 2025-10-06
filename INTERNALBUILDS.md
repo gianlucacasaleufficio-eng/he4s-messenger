@@ -4,7 +4,7 @@ This document alongside [Releasing.md](RELEASING.md) primarily cover our interna
 
 ## Automated
 
-Automatic building of session binaries is done using github actions. Windows and linux binaries will build right out of the box but there are some extra steps needed for Mac OS
+Automatic building of he4s binaries is done using github actions. Windows and linux binaries will build right out of the box but there are some extra steps needed for Mac OS
 
 ### Mac OS
 

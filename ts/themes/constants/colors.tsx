@@ -26,8 +26,8 @@ export type ColorsType = {
   GREY: string;
 };
 
-// Session Brand Color
-const sessionGreen = '#00f782';
+// HE4S Brand Color
+const he4sGreen = '#00f782';
 
 // Primary (can override theme default)
 const primaryGreen = '#31F196';
@@ -78,7 +78,7 @@ const COLORS: ColorsType = {
     CONNECTING: pathConnecting,
     ERROR: pathError,
   },
-  SESSION: sessionGreen,
+  SESSION: he4sGreen,
   TRANSPARENT: transparent,
   WHITE: white,
   BLACK: black,
@@ -237,10 +237,10 @@ const THEMES: Themes = {
 type ThemeType = {
   id: ThemeStateType;
   title: string;
-  style: StyleSessionSwitcher;
+  style: StyleHE4SSwitcher;
 };
 
-export type StyleSessionSwitcher = {
+export type StyleHE4SSwitcher = {
   background: string;
   border: string;
   receivedBackground: string;

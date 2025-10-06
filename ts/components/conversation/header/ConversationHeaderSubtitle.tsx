@@ -1,6 +1,6 @@
 import styled, { CSSProperties } from 'styled-components';
 import { Flex } from '../../basic/Flex';
-import { SessionIconButton } from '../../icon';
+import { HE4SIconButton } from '../../icon';
 import { SubtitleStrings, SubtitleStringsType } from './ConversationHeaderTitle';
 
 function loadDataTestId(currentSubtitle: SubtitleStringsType) {
@@ -106,7 +106,7 @@ export const ConversationHeaderSubtitle = (props: ConversationHeaderSubtitleProp
         alignItems={'center'}
         width={'100%'}
       >
-        <SessionIconButton
+        <HE4SIconButton
           iconColor={'var(--button-icon-stroke-selected-color)'}
           iconSize={'small'}
           iconType="chevron"
@@ -119,7 +119,7 @@ export const ConversationHeaderSubtitle = (props: ConversationHeaderSubtitleProp
           tabIndex={0}
         />
         {showDisappearingMessageIcon && (
-          <SessionIconButton
+          <HE4SIconButton
             iconColor={'var(--button-icon-stroke-selected-color)'}
             iconSize={'tiny'}
             iconType="timerFixed"
@@ -141,7 +141,7 @@ export const ConversationHeaderSubtitle = (props: ConversationHeaderSubtitleProp
         >
           {subtitleStrings[currentSubtitle]}
         </span>
-        <SessionIconButton
+        <HE4SIconButton
           iconColor={'var(--button-icon-stroke-selected-color)'}
           iconSize={'small'}
           iconType="chevron"

@@ -22,7 +22,7 @@ type ReceivedProps = {
  *
  * @returns The rendered HTML as a string.
  */
-export const SessionHtmlRenderer = ({ tag = 'div', key, html, className }: ReceivedProps) => {
+export const HE4SHtmlRenderer = ({ tag = 'div', key, html, className }: ReceivedProps) => {
   const clean = DOMPurify.sanitize(html, {
     USE_PROFILES: { html: true },
     ALLOWED_TAGS: supportedFormattingTags,

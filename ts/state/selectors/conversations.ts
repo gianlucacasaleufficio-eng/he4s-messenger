@@ -24,16 +24,16 @@ import { MessageTextSelectorProps } from '../../components/conversation/message/
 import { GenericReadableMessageSelectorProps } from '../../components/conversation/message/message-item/GenericReadableMessage';
 import { hasValidIncomingRequestValues } from '../../models/conversation';
 import { isOpenOrClosedGroup } from '../../models/conversationAttributes';
-import { getConversationController } from '../../session/conversations';
-import { UserUtils } from '../../session/utils';
+import { getConversationController } from '../../he4s/conversations';
+import { UserUtils } from '../../he4s/utils';
 import { BlockedNumberController } from '../../util';
 import { Storage } from '../../util/storage';
 import { getIntl } from './user';
 
 import { MessageReactsSelectorProps } from '../../components/conversation/message/message-content/MessageReactions';
 import { processQuoteAttachment } from '../../models/message';
-import { isUsAnySogsFromCache } from '../../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { PubKey } from '../../session/types';
+import { isUsAnySogsFromCache } from '../../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { PubKey } from '../../he4s/types';
 import { getSelectedConversationKey } from './selectedConversation';
 import { getModeratorsOutsideRedux } from './sogsRoomInfo';
 import { CONVERSATION_PRIORITIES } from '../../models/types';

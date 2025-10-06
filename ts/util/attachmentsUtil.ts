@@ -6,15 +6,15 @@ import loadImage from 'blueimp-load-image';
 import fileSize from 'filesize';
 import { StagedAttachmentType } from '../components/conversation/composition/CompositionBox';
 import { SignalService } from '../protobuf';
-import { getDecryptedMediaUrl } from '../session/crypto/DecryptedAttachmentsManager';
-import { sendDataExtractionNotification } from '../session/messages/outgoing/controlMessage/DataExtractionNotificationMessage';
+import { getDecryptedMediaUrl } from '../he4s/crypto/DecryptedAttachmentsManager';
+import { sendDataExtractionNotification } from '../he4s/messages/outgoing/controlMessage/DataExtractionNotificationMessage';
 import { AttachmentType, save } from '../types/Attachment';
 import { IMAGE_GIF, IMAGE_JPEG, IMAGE_PNG, IMAGE_TIFF, IMAGE_UNKNOWN } from '../types/MIME';
 import { getAbsoluteAttachmentPath, processNewAttachment } from '../types/MessageAttachment';
 import { THUMBNAIL_SIDE } from '../types/attachments/VisualAttachment';
 
-import { FILESIZE, MAX_ATTACHMENT_FILESIZE_BYTES } from '../session/constants';
-import { perfEnd, perfStart } from '../session/utils/Performance';
+import { FILESIZE, MAX_ATTACHMENT_FILESIZE_BYTES } from '../he4s/constants';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
 
 /**
  * The logic for sending attachments is as follow:

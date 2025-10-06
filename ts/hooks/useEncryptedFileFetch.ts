@@ -3,8 +3,8 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   getAlreadyDecryptedMediaUrl,
   getDecryptedMediaUrl,
-} from '../session/crypto/DecryptedAttachmentsManager';
-import { perfEnd, perfStart } from '../session/utils/Performance';
+} from '../he4s/crypto/DecryptedAttachmentsManager';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
 
 export const useEncryptedFileFetch = (
   /** undefined if the message is not visible yet, url is '' if something is broken */

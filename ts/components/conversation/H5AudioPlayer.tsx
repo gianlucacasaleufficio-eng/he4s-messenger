@@ -12,14 +12,14 @@ import {
   isMessageSelectionMode,
 } from '../../state/selectors/conversations';
 import { getAudioAutoplay } from '../../state/selectors/userConfig';
-import { SessionButton, SessionButtonType } from '../basic/SessionButton';
-import { SessionIcon } from '../icon';
+import { HE4SButton, HE4SButtonType } from '../basic/HE4SButton';
+import { HE4SIcon } from '../icon';
 
 const StyledSpeedButton = styled.div`
   padding: var(--margins-xs);
   transition: none;
 
-  .session-button {
+  .he4s-button {
     transition: none;
     width: 34px;
     padding: 0px;
@@ -258,18 +258,18 @@ export const AudioPlayerWithEncryptedFile = (props: {
       customControlsSection={[
         RHAP_UI.MAIN_CONTROLS,
         <StyledSpeedButton key="togglePlaybackSpeed">
-          <SessionButton
+          <HE4SButton
             text={`${playbackSpeed}x`}
             onClick={() => {
               setPlaybackSpeed(playbackSpeed === 1 ? 1.5 : 1);
             }}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
           />
         </StyledSpeedButton>,
       ]}
       customIcons={{
-        play: <SessionIcon iconType="play" iconSize="small" iconColor={iconColor} />,
-        pause: <SessionIcon iconType="pause" iconSize="small" iconColor={iconColor} />,
+        play: <HE4SIcon iconType="play" iconSize="small" iconColor={iconColor} />,
+        pause: <HE4SIcon iconType="pause" iconSize="small" iconColor={iconColor} />,
       }}
       dropShadow={selected}
     />

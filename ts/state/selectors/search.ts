@@ -4,7 +4,7 @@ import { compact, isEmpty, remove, sortBy } from 'lodash';
 import { useSelector } from 'react-redux';
 import { StateType } from '../reducer';
 
-import { UserUtils } from '../../session/utils';
+import { UserUtils } from '../../he4s/utils';
 import { MessageResultProps } from '../../types/message';
 
 import { ConversationLookupType } from '../ducks/conversations';
@@ -113,7 +113,7 @@ export const getSearchResultsList = createSelector([getSearchResults], searchSta
       builtList.unshift({ contactConvoId: us, displayName: window.i18n('noteToSelf') });
     }
 
-    builtList.unshift(window.i18n('sessionConversations'));
+    builtList.unshift(window.i18n('he4sConversations'));
   }
 
   if (messages.length) {

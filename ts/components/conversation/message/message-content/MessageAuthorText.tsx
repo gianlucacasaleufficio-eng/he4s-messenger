@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PubKey } from '../../../../session/types';
+import { PubKey } from '../../../../he4s/types';
 import {
   useAuthorName,
   useAuthorProfileName,

@@ -44,7 +44,7 @@ const LastSeenBarContainer = styled.div<{ isDarkTheme?: boolean }>`
   }
 `;
 
-export const SessionLastSeenIndicator = (props: {
+export const HE4SLastSeenIndicator = (props: {
   messageId: string;
   didScroll: boolean;
   setDidScroll: (scroll: boolean) => void;
@@ -59,7 +59,7 @@ export const SessionLastSeenIndicator = (props: {
   /**
    * If this unread-indicator is rendered, we want to scroll here only if:
    * 1. the conversation was not opened to a specific message (quoted message)
-   * 2. we already scrolled to this unread banner once for this convo https://github.com/oxen-io/session-desktop/issues/2308
+   * 2. we already scrolled to this unread banner once for this convo https://github.com/oxen-io/he4s-desktop/issues/2308
    *
    * To achieve 2. we store the didScroll state in the parent and track the last rendered conversation in it.
    */

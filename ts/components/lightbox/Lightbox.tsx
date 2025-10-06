@@ -11,7 +11,7 @@ import * as MIME from '../../types/MIME';
 import { assertUnreachable } from '../../types/sqlSharedTypes';
 import { GoogleChrome } from '../../util';
 import { Flex } from '../basic/Flex';
-import { SessionIconButton, SessionIconSize, SessionIconType } from '../icon';
+import { HE4SIconButton, HE4SIconSize, HE4SIconType } from '../icon';
 import { AriaLabels } from '../../util/hardcodedAriaLabels';
 
 const colorSVG = (url: string, color: string) => {
@@ -124,7 +124,7 @@ const styles = {
 };
 
 const StyledIconButton = styled.div`
-  .session-icon-button {
+  .he4s-icon-button {
     opacity: 0.4;
     transition: opacity var(--default-duration);
 
@@ -148,8 +148,8 @@ const IconButton = ({ onClick, type }: IconButtonProps) => {
     onClick();
   };
   let iconRotation = 0;
-  let iconType: SessionIconType = 'chevron';
-  let iconSize: SessionIconSize = 'huge';
+  let iconType: HE4SIconType = 'chevron';
+  let iconSize: HE4SIconSize = 'huge';
   switch (type) {
     case 'next':
       iconRotation = 270;
@@ -170,7 +170,7 @@ const IconButton = ({ onClick, type }: IconButtonProps) => {
 
   return (
     <StyledIconButton>
-      <SessionIconButton
+      <HE4SIconButton
         iconType={iconType}
         iconSize={iconSize}
         iconRotation={iconRotation}

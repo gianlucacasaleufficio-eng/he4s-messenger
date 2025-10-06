@@ -1,6 +1,6 @@
 import { AsyncObjectWrapper, ConfigDumpDataNode, ConfigDumpRow } from '../../types/sqlSharedTypes';
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import { ConfigWrapperObjectTypes } from '../../webworker/workers/browser/libsession_worker_functions';
+import { ConfigWrapperObjectTypes } from '../../webworker/workers/browser/libhe4s_worker_functions';
 import { channels } from '../channels';
 import { cleanData } from '../dataUtils';
 

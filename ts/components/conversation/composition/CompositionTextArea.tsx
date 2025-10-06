@@ -1,6 +1,6 @@
 import { RefObject, useState } from 'react';
 import { Mention, MentionsInput } from 'react-mentions';
-import { getConversationController } from '../../../session/conversations';
+import { getConversationController } from '../../../he4s/conversations';
 import {
   useSelectedConversationKey,
   useSelectedIsBlocked,
@@ -8,7 +8,7 @@ import {
   useSelectedIsLeft,
   useSelectedNicknameOrProfileNameOrShortenedPubkey,
 } from '../../../state/selectors/selectedConversation';
-import { updateDraftForConversation } from '../SessionConversationDrafts';
+import { updateDraftForConversation } from '../HE4SConversationDrafts';
 import { renderEmojiQuickResultRow, searchEmojiForQuery } from './EmojiQuickResult';
 import { renderUserMentionRow, styleForCompositionBoxSuggestions } from './UserMentions';
 import { HTMLDirection, useHTMLDirection } from '../../../util/i18n/rtlSupport';

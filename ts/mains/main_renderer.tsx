@@ -7,20 +7,20 @@ import { ipcRenderer } from 'electron';
 // eslint-disable-next-line import/no-named-default
 
 import { isMacOS } from '../OS';
-import { SessionInboxView } from '../components/SessionInboxView';
-import { SessionRegistrationView } from '../components/registration/SessionRegistrationView';
+import { HE4SInboxView } from '../components/HE4SInboxView';
+import { HE4SRegistrationView } from '../components/registration/HE4SRegistrationView';
 import { Data } from '../data/data';
 import { OpenGroupData } from '../data/opengroups';
 import { SettingsKey } from '../data/settings-key';
 import { MessageModel } from '../models/message';
 import { queueAllCached } from '../receiver/receiver';
-import { loadKnownBlindedKeys } from '../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { getConversationController } from '../session/conversations';
-import { DisappearingMessages } from '../session/disappearing_messages';
-import { AttachmentDownloads, ToastUtils } from '../session/utils';
-import { getOurPubKeyStrFromCache } from '../session/utils/User';
-import { runners } from '../session/utils/job_runners/JobRunner';
-import { LibSessionUtil } from '../session/utils/libsession/libsession_utils';
+import { loadKnownBlindedKeys } from '../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { getConversationController } from '../he4s/conversations';
+import { DisappearingMessages } from '../he4s/disappearing_messages';
+import { AttachmentDownloads, ToastUtils } from '../he4s/utils';
+import { getOurPubKeyStrFromCache } from '../he4s/utils/User';
+import { runners } from '../he4s/utils/job_runners/JobRunner';
+import { LibHE4SUtil } from '../he4s/utils/libhe4s/libhe4s_utils';
 import { switchPrimaryColorTo } from '../themes/switchPrimaryColor';
 import { switchThemeTo } from '../themes/switchTheme';
 import { BlockedNumberController } from '../util';
@@ -216,9 +216,9 @@ Storage.onready(async () => {
   try {
     if (Registration.isDone()) {
       try {
-        await LibSessionUtil.initializeLibSessionUtilWrappers();
+        await LibHE4SUtil.initializeLibHE4SUtilWrappers();
       } catch (e) {
-        window.log.warn('LibSessionUtil.initializeLibSessionUtilWrappers failed with', e.message);
+        window.log.warn('LibHE4SUtil.initializeLibHE4SUtilWrappers failed with', e.message);
         // I don't think there is anything we can do if this happens
         throw e;
       }
@@ -309,14 +309,14 @@ async function start() {
       ?.then(() => {
         const container = document.getElementById('root');
         const root = createRoot(container!);
-        root.render(<SessionInboxView />);
+        root.render(<HE4SInboxView />);
       });
   }
 
   function showRegistrationView() {
     const container = document.getElementById('root');
     const root = createRoot(container!);
-    root.render(<SessionRegistrationView />);
+    root.render(<HE4SRegistrationView />);
     switchBodyToRtlIfNeeded();
   }
 

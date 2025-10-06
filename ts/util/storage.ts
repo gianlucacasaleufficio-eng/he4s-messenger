@@ -1,13 +1,13 @@
 import { isBoolean } from 'lodash';
-import { SessionKeyPair } from '../receiver/keypairs';
-import { DEFAULT_RECENT_REACTS } from '../session/constants';
+import { HE4SKeyPair } from '../receiver/keypairs';
+import { DEFAULT_RECENT_REACTS } from '../he4s/constants';
 import { deleteSettingsBoolValue, updateSettingsBoolValue } from '../state/ducks/settings';
 import { ReleasedFeatures } from './releaseFeature';
 import { Data } from '../data/data';
 
 let ready = false;
 
-type ValueType = string | number | boolean | SessionKeyPair | Array<string>;
+type ValueType = string | number | boolean | HE4SKeyPair | Array<string>;
 type InsertedValueType = { id: string; value: ValueType };
 let items: Record<string, InsertedValueType>;
 let callbacks: Array<() => void> = [];

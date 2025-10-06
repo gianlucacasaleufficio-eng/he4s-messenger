@@ -11,9 +11,9 @@ import {
 } from '../../state/ducks/section';
 import { getFocusedSettingsSection } from '../../state/selectors/section';
 import { useHideRecoveryPasswordEnabled } from '../../state/selectors/settings';
-import type { SessionSettingCategory } from '../../types/ReduxTypes';
+import type { HE4SSettingCategory } from '../../types/ReduxTypes';
 import { Flex } from '../basic/Flex';
-import { SessionIcon, SessionIconType } from '../icon';
+import { HE4SIcon, HE4SIconType } from '../icon';
 import { LeftPaneSectionHeader } from './LeftPaneSectionHeader';
 
 const StyledSettingsSectionTitle = styled.span`
@@ -43,10 +43,10 @@ const StyledIconContainer = styled.div`
 `;
 
 type Categories = {
-  id: SessionSettingCategory;
+  id: HE4SSettingCategory;
   title: string;
   icon: {
-    type: SessionIconType;
+    type: HE4SIconType;
     size: number;
     color?: string;
   };
@@ -57,47 +57,47 @@ const getCategories = (): Array<Categories> => {
   return [
     {
       id: 'privacy' as const,
-      title: window.i18n('sessionPrivacy'),
+      title: window.i18n('he4sPrivacy'),
       icon: { type: 'padlock', ...forcedSize },
     },
     {
       id: 'notifications' as const,
-      title: window.i18n('sessionNotifications'),
+      title: window.i18n('he4sNotifications'),
       icon: { type: 'speaker', ...forcedSize },
     },
     {
       id: 'conversations' as const,
-      title: window.i18n('sessionConversations'),
+      title: window.i18n('he4sConversations'),
       icon: { type: 'chatBubble', ...forcedSize },
     },
     {
       id: 'messageRequests' as const,
-      title: window.i18n('sessionMessageRequests'),
+      title: window.i18n('he4sMessageRequests'),
       icon: { type: 'messageRequest', ...forcedSize },
     },
     {
       id: 'appearance' as const,
-      title: window.i18n('sessionAppearance'),
+      title: window.i18n('he4sAppearance'),
       icon: { type: 'paintbrush', ...forcedSize },
     },
     {
       id: 'permissions',
-      title: window.i18n('sessionPermissions'),
+      title: window.i18n('he4sPermissions'),
       icon: { type: 'checkCircle', ...forcedSize },
     },
     {
       id: 'help' as const,
-      title: window.i18n('sessionHelp'),
+      title: window.i18n('he4sHelp'),
       icon: { type: 'question', ...forcedSize },
     },
     {
       id: 'recoveryPassword' as const,
-      title: window.i18n('sessionRecoveryPassword'),
+      title: window.i18n('he4sRecoveryPassword'),
       icon: { type: 'recoveryPasswordFill', ...forcedSize },
     },
     {
       id: 'clearData' as const,
-      title: window.i18n('sessionClearData'),
+      title: window.i18n('he4sClearData'),
       icon: { type: 'delete', ...forcedSize, color: 'var(--danger-color)' },
     },
   ];
@@ -141,7 +141,7 @@ const LeftPaneSettingsCategoryRow = (props: { item: Categories }) => {
       data-testid={dataTestId}
     >
       <StyledIconContainer>
-        <SessionIcon
+        <HE4SIcon
           iconType={icon.type}
           iconSize={icon.size}
           sizeIsWidth={true}
@@ -153,7 +153,7 @@ const LeftPaneSettingsCategoryRow = (props: { item: Categories }) => {
       </StyledSettingsSectionTitle>
 
       {id === focusedSettingsSection && (
-        <SessionIcon
+        <HE4SIcon
           iconSize={'medium'}
           iconType="chevron"
           iconColor={'var(--text-primary-color)'}

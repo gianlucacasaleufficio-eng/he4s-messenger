@@ -7,10 +7,10 @@ import { useHotkey } from '../../../hooks/useHotkey';
 import { useConversationsNicknameRealNameOrShortenPubkey } from '../../../hooks/useParamSelector';
 import { updateBlockOrUnblockModal } from '../../../state/ducks/modalDialog';
 import { BlockedNumberController } from '../../../util';
-import { SessionWrapperModal } from '../../SessionWrapperModal';
+import { HE4SWrapperModal } from '../../HE4SWrapperModal';
 import { Flex } from '../../basic/Flex';
 import { Localizer } from '../../basic/Localizer';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../../basic/HE4SButton';
 import { StyledModalDescriptionContainer } from '../shared/ModalDescriptionContainer';
 import { BlockOrUnblockModalState } from './BlockOrUnblockModalState';
 import type { LocalizerComponentPropsObject } from '../../../types/localizer';
@@ -85,30 +85,30 @@ export const BlockOrUnblockDialog = ({ pubkeys, action, onConfirmed }: NonNullab
   }
 
   return (
-    <SessionWrapperModal showExitIcon={true} title={localizedAction} onClose={closeModal}>
+    <HE4SWrapperModal showExitIcon={true} title={localizedAction} onClose={closeModal}>
       <StyledModalDescriptionContainer data-testid="block-unblock-modal-description">
         <Localizer {...args} />
       </StyledModalDescriptionContainer>
       <Flex container={true} flexDirection="column" alignItems="center">
         <Flex container={true}>
-          <div className="session-modal__button-group">
-            <SessionButton
-              buttonType={SessionButtonType.Simple}
-              buttonColor={SessionButtonColor.Danger}
+          <div className="he4s-modal__button-group">
+            <HE4SButton
+              buttonType={HE4SButtonType.Simple}
+              buttonColor={HE4SButtonColor.Danger}
               onClick={onConfirm}
               text={localizedAction}
-              dataTestId="session-confirm-ok-button"
+              dataTestId="he4s-confirm-ok-button"
             />
-            <SessionButton
-              buttonType={SessionButtonType.Simple}
-              buttonColor={SessionButtonColor.White}
+            <HE4SButton
+              buttonType={HE4SButtonType.Simple}
+              buttonColor={HE4SButtonColor.White}
               onClick={closeModal}
               text={window.i18n('cancel')}
-              dataTestId="session-cancel-ok-button"
+              dataTestId="he4s-cancel-ok-button"
             />
           </div>
         </Flex>
       </Flex>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

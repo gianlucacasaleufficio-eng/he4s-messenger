@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import styled from 'styled-components';
 import { findAndFormatContact } from '../../../../models/message';
-import { PubKey } from '../../../../session/types/PubKey';
+import { PubKey } from '../../../../he4s/types/PubKey';
 
 import { Localizer } from '../../../basic/Localizer';
 import { nativeEmojiData } from '../../../../util/emoji';

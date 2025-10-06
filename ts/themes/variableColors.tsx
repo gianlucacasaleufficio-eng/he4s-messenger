@@ -154,16 +154,16 @@ export type ThemeColorVariables = {
   '--toast-progress-color': string;
 
   /* Right Panel Items */
-  /* Also used for Session Dropdown */
+  /* Also used for HE4S Dropdown */
   '--right-panel-item-background-color': string;
   '--right-panel-item-background-hover-color': string;
   '--right-panel-item-text-color': string;
 
-  /* Session Text Logo */
+  /* HE4S Text Logo */
   /* Loads SVG as IMG and uses a filter to change color */
-  '--session-logo-text-light-filter': string;
-  '--session-logo-text-dark-filter': string;
-  '--session-logo-text-current-filter': string;
+  '--he4s-logo-text-light-filter': string;
+  '--he4s-logo-text-dark-filter': string;
+  '--he4s-logo-text-current-filter': string;
 
   /* Right Click / Context Menu) */
   '--context-menu-background-color': string;
@@ -205,8 +205,8 @@ export type ThemeColorVariables = {
   '--file-dropzone-background-color': string;
   '--file-dropzone-border-color': string;
 
-  /* Session Recording */
-  '--session-recording-pulse-color': string;
+  /* HE4S Recording */
+  '--he4s-recording-pulse-color': string;
 
   /* HTML Renderer */
   /**

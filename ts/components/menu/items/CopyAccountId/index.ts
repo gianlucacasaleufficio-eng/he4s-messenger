@@ -1,4 +1,4 @@
-import { PubKey } from '../../../../session/types';
+import { PubKey } from '../../../../he4s/types';
 
 export function showCopyAccountIdAction({
   isPrivate,

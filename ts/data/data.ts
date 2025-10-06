@@ -8,10 +8,10 @@ import { MessageAttributes, MessageDirection } from '../models/messageType';
 import { StorageItem } from '../node/storage_item';
 import { HexKeyPair } from '../receiver/keypairs';
 import { Quote } from '../receiver/types';
-import { getSodiumRenderer } from '../session/crypto';
-import { DisappearingMessages } from '../session/disappearing_messages';
-import { PubKey } from '../session/types';
-import { fromArrayBufferToBase64, fromBase64ToArrayBuffer } from '../session/utils/String';
+import { getSodiumRenderer } from '../he4s/crypto';
+import { DisappearingMessages } from '../he4s/disappearing_messages';
+import { PubKey } from '../he4s/types';
+import { fromArrayBufferToBase64, fromBase64ToArrayBuffer } from '../he4s/utils/String';
 import { MessageResultProps } from '../types/message';
 import {
   AsyncWrapper,

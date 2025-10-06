@@ -1,33 +1,33 @@
 import { isEmpty } from 'lodash';
-import { getConversationController } from '../session/conversations';
-import { getSodiumRenderer } from '../session/crypto';
-import { ed25519Str, fromArrayBufferToBase64, fromHex, toHex } from '../session/utils/String';
+import { getConversationController } from '../he4s/conversations';
+import { getSodiumRenderer } from '../he4s/crypto';
+import { ed25519Str, fromArrayBufferToBase64, fromHex, toHex } from '../he4s/utils/String';
 import { configurationMessageReceived, trigger } from '../shims/events';
 
-import { SessionButtonColor } from '../components/basic/SessionButton';
+import { HE4SButtonColor } from '../components/basic/HE4SButton';
 import { Data } from '../data/data';
 import { SettingsKey } from '../data/settings-key';
 import { ConversationTypeEnum } from '../models/types';
 import { deleteAllLogs } from '../node/logs';
-import { SessionKeyPair } from '../receiver/keypairs';
-import { clearInbox } from '../session/apis/open_group_api/sogsv3/sogsV3ClearInbox';
-import { getAllValidOpenGroupV2ConversationRoomInfos } from '../session/apis/open_group_api/utils/OpenGroupUtils';
-import { getSwarmPollingInstance } from '../session/apis/snode_api';
-import { mnDecode, mnEncode } from '../session/crypto/mnemonic';
-import { getOurPubKeyStrFromCache } from '../session/utils/User';
-import { LibSessionUtil } from '../session/utils/libsession/libsession_utils';
-import { forceSyncConfigurationNowIfNeeded } from '../session/utils/sync/syncUtils';
+import { HE4SKeyPair } from '../receiver/keypairs';
+import { clearInbox } from '../he4s/apis/open_group_api/sogsv3/sogsV3ClearInbox';
+import { getAllValidOpenGroupV2ConversationRoomInfos } from '../he4s/apis/open_group_api/utils/OpenGroupUtils';
+import { getSwarmPollingInstance } from '../he4s/apis/snode_api';
+import { mnDecode, mnEncode } from '../he4s/crypto/mnemonic';
+import { getOurPubKeyStrFromCache } from '../he4s/utils/User';
+import { LibHE4SUtil } from '../he4s/utils/libhe4s/libhe4s_utils';
+import { forceSyncConfigurationNowIfNeeded } from '../he4s/utils/sync/syncUtils';
 import { updateConfirmModal, updateDeleteAccountModal } from '../state/ducks/modalDialog';
 import { actions as userActions } from '../state/ducks/user';
 import { Registration } from './registration';
 import { Storage, saveRecoveryPhrase, setLocalPubKey, setSignInByLinking } from './storage';
-import { PromiseUtils } from '../session/utils';
-import { SnodeAPI } from '../session/apis/snode_api/SNodeAPI';
+import { PromiseUtils } from '../he4s/utils';
+import { SnodeAPI } from '../he4s/apis/snode_api/SNodeAPI';
 
 /**
  * Might throw
  */
-export async function sessionGenerateKeyPair(seed: ArrayBuffer): Promise<SessionKeyPair> {
+export async function he4sGenerateKeyPair(seed: ArrayBuffer): Promise<HE4SKeyPair> {
   const sodium = await getSodiumRenderer();
 
   const ed25519KeyPair = sodium.crypto_sign_seed_keypair(new Uint8Array(seed));
@@ -52,7 +52,7 @@ export async function sessionGenerateKeyPair(seed: ArrayBuffer): Promise<Session
 const generateKeypair = async (
   mnemonic: string,
   mnemonicLanguage: string
-): Promise<SessionKeyPair> => {
+): Promise<HE4SKeyPair> => {
   let seedHex = mnDecode(mnemonic, mnemonicLanguage);
   // handle shorter than 32 bytes seeds
   const privKeyHexLength = 32 * 2;
@@ -61,7 +61,7 @@ const generateKeypair = async (
     seedHex = seedHex.substring(0, privKeyHexLength);
   }
   const seed = fromHex(seedHex);
-  return sessionGenerateKeyPair(seed);
+  return he4sGenerateKeyPair(seed);
 };
 
 /**
@@ -78,7 +78,7 @@ export async function registerSingleDevice(
   registerCallback?: (pubkey: string) => Promise<void>
 ) {
   if (isEmpty(generatedMnemonic)) {
-    throw new Error('Session always needs a mnemonic. Either generated or given by the user');
+    throw new Error('HE4S always needs a mnemonic. Either generated or given by the user');
   }
   if (isEmpty(mnemonicLanguage)) {
     throw new Error('We always need a mnemonicLanguage');
@@ -106,7 +106,7 @@ export async function registerSingleDevice(
 
 /**
  * Restores a users account with their recovery password and try to recover display name and avatar from the first encountered configuration message.
- * @param mnemonic the mnemonic the user duly saved in a safe place. We will restore his sessionID based on this.
+ * @param mnemonic the mnemonic the user duly saved in a safe place. We will restore his he4sID based on this.
  * @param mnemonicLanguage 'english' only is supported
  * @param loadingAnimationCallback a callback to trigger a loading animation while fetching
  *
@@ -118,7 +118,7 @@ export async function signInByLinkingDevice(
   abortSignal?: AbortSignal
 ) {
   if (isEmpty(mnemonic)) {
-    throw new Error('Session always needs a mnemonic. Either generated or given by the user');
+    throw new Error('HE4S always needs a mnemonic. Either generated or given by the user');
   }
   if (isEmpty(mnemonicLanguage)) {
     throw new Error('We always need a mnemonicLanguage');
@@ -153,7 +153,7 @@ export async function generateMnemonic() {
   return mnEncode(hex);
 }
 
-async function createAccount(identityKeyPair: SessionKeyPair) {
+async function createAccount(identityKeyPair: HE4SKeyPair) {
   const sodium = await getSodiumRenderer();
 
   let password = fromArrayBufferToBase64(sodium.randombytes_buf(16));
@@ -207,15 +207,15 @@ export async function registrationDone(ourPubkey: string, displayName: string) {
     `[onboarding] registration done with user provided displayName "${displayName}" and pubkey "${ourPubkey}"`
   );
 
-  // initializeLibSessionUtilWrappers needs our publicKey to be set
+  // initializeLibHE4SUtilWrappers needs our publicKey to be set
   await Storage.put('primaryDevicePubKey', ourPubkey);
   await Registration.markDone();
 
   try {
-    await LibSessionUtil.initializeLibSessionUtilWrappers();
+    await LibHE4SUtil.initializeLibHE4SUtilWrappers();
   } catch (e) {
     window.log.warn(
-      '[onboarding] registration done but LibSessionUtil.initializeLibSessionUtilWrappers failed with',
+      '[onboarding] registration done but LibHE4SUtil.initializeLibHE4SUtilWrappers failed with',
       e.message || e
     );
     throw e;
@@ -226,7 +226,7 @@ export async function registrationDone(ourPubkey: string, displayName: string) {
     ourPubkey,
     ConversationTypeEnum.PRIVATE
   );
-  conversation.setSessionDisplayNameNoCommit(displayName);
+  conversation.setHE4SDisplayNameNoCommit(displayName);
 
   await conversation.setIsApproved(true, false);
   await conversation.setDidApproveMe(true, false);
@@ -358,7 +358,7 @@ export async function deleteEverythingAndNetworkData() {
         updateConfirmModal({
           title: window.i18n('clearDataAll'),
           i18nMessage: { token: 'clearDataErrorDescriptionGeneric' },
-          okTheme: SessionButtonColor.Danger,
+          okTheme: HE4SButtonColor.Danger,
           okText: window.i18n('clearDevice'),
           cancelText: window.i18n('cancel'),
           onClickOk: async () => {

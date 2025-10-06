@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 import { Flex } from './Flex';
 
-import { SessionIcon, SessionIconType } from '../icon';
+import { HE4SIcon, HE4SIconType } from '../icon';
 
 // NOTE We don't change the color strip on the left based on the type. 16/09/2022
-export enum SessionToastType {
+export enum HE4SToastType {
   Info = 'info',
   Success = 'success',
   Warning = 'warning',
@@ -17,8 +17,8 @@ export enum SessionToastType {
 type Props = {
   title: string;
   id?: string;
-  type?: SessionToastType;
-  icon?: SessionIconType;
+  type?: HE4SToastType;
+  icon?: HE4SIconType;
   description?: string;
   closeToast?: any;
   onToastClick?: () => void;
@@ -46,7 +46,7 @@ const IconDiv = styled.div`
   margin: 0 var(--margins-sm) 0 var(--margins-xs);
 `;
 
-export const SessionToast = (props: Props) => {
+export const HE4SToast = (props: Props) => {
   const { title, description, type, icon } = props;
 
   const toastDesc = description || '';
@@ -56,16 +56,16 @@ export const SessionToast = (props: Props) => {
   let toastIcon = icon || undefined;
   if (!toastIcon) {
     switch (type) {
-      case SessionToastType.Info:
+      case HE4SToastType.Info:
         toastIcon = 'info';
         break;
-      case SessionToastType.Success:
+      case HE4SToastType.Success:
         toastIcon = 'check';
         break;
-      case SessionToastType.Error:
+      case HE4SToastType.Error:
         toastIcon = 'error';
         break;
-      case SessionToastType.Warning:
+      case HE4SToastType.Warning:
         toastIcon = 'warning';
         break;
       default:
@@ -80,17 +80,17 @@ export const SessionToast = (props: Props) => {
       container={true}
       alignItems="center"
       onClick={onToastClick}
-      data-testid="session-toast"
+      data-testid="he4s-toast"
       padding="var(--margins-sm) 0"
     >
       <IconDiv>
-        <SessionIcon iconType={toastIcon} iconSize={toastIconSize} />
+        <HE4SIcon iconType={toastIcon} iconSize={toastIconSize} />
       </IconDiv>
       <Flex
         container={true}
         justifyContent="flex-start"
         flexDirection="column"
-        className="session-toast"
+        className="he4s-toast"
       >
         <TitleDiv>{title}</TitleDiv>
         {toastDesc && <DescriptionDiv>{toastDesc}</DescriptionDiv>}

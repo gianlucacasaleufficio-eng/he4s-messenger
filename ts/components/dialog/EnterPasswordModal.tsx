@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { useRef } from 'react';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useMount from 'react-use/lib/useMount';
-import { ToastUtils } from '../../session/utils';
+import { ToastUtils } from '../../he4s/utils';
 
 import { updateEnterPasswordModal } from '../../state/ducks/modalDialog';
 import { SpacerSM } from '../basic/Text';
 
 import { useHotkey } from '../../hooks/useHotkey';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 
 const StyledModalContainer = styled.div`
   margin: var(--margins-md) var(--margins-sm);
@@ -25,7 +25,7 @@ export type EnterPasswordModalProps = {
 
 export const EnterPasswordModal = (props: EnterPasswordModalProps) => {
   const { setPasswordValid, onClickOk, onClickClose } = props;
-  const title = window.i18n('sessionRecoveryPassword');
+  const title = window.i18n('he4sRecoveryPassword');
 
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
@@ -81,7 +81,7 @@ export const EnterPasswordModal = (props: EnterPasswordModalProps) => {
   });
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={title || window.i18n('passwordEnter')}
       onClose={onClose}
       showExitIcon={true}
@@ -89,7 +89,7 @@ export const EnterPasswordModal = (props: EnterPasswordModalProps) => {
       <StyledModalContainer>
         <SpacerSM />
 
-        <div className="session-modal__input-group">
+        <div className="he4s-modal__input-group">
           <input
             type="password"
             ref={passwordInputRef}
@@ -101,24 +101,24 @@ export const EnterPasswordModal = (props: EnterPasswordModalProps) => {
         <SpacerSM />
 
         <div
-          className="session-modal__button-group"
+          className="he4s-modal__button-group"
           style={{ justifyContent: 'center', width: '100%' }}
         >
-          <SessionButton
+          <HE4SButton
             text={window.i18n('done')}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
             onClick={verifyPassword}
-            dataTestId="session-confirm-ok-button"
+            dataTestId="he4s-confirm-ok-button"
           />
-          <SessionButton
+          <HE4SButton
             text={window.i18n('cancel')}
-            buttonType={SessionButtonType.Simple}
-            buttonColor={SessionButtonColor.Danger}
+            buttonType={HE4SButtonType.Simple}
+            buttonColor={HE4SButtonColor.Danger}
             onClick={onClose}
-            dataTestId="session-confirm-cancel-button"
+            dataTestId="he4s-confirm-cancel-button"
           />
         </div>
       </StyledModalContainer>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

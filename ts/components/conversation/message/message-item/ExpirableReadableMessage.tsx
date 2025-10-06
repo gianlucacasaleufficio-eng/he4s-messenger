@@ -7,7 +7,7 @@ import { useIsDetailMessageView } from '../../../../contexts/isDetailViewContext
 import { Data } from '../../../../data/data';
 import { useMessageExpirationPropsById } from '../../../../hooks/useParamSelector';
 import { MessageModelType } from '../../../../models/messageType';
-import { getConversationController } from '../../../../session/conversations';
+import { getConversationController } from '../../../../he4s/conversations';
 import { PropsForExpiringMessage, messagesExpired } from '../../../../state/ducks/conversations';
 import { getIncrement } from '../../../../util/timer';
 import { ExpireTimer } from '../../ExpireTimer';

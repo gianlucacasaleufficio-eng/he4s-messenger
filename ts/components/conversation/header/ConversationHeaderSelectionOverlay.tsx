@@ -9,13 +9,13 @@ import {
   useSelectedIsPublic,
 } from '../../../state/selectors/selectedConversation';
 import {
-  SessionButton,
-  SessionButtonColor,
-  SessionButtonShape,
-  SessionButtonType,
-} from '../../basic/SessionButton';
-import { SessionIconButton } from '../../icon';
-import { SessionFocusTrap } from '../../SessionFocusTrap';
+  HE4SButton,
+  HE4SButtonColor,
+  HE4SButtonShape,
+  HE4SButtonType,
+} from '../../basic/HE4SButton';
+import { HE4SIconButton } from '../../icon';
+import { HE4SFocusTrap } from '../../HE4SFocusTrap';
 
 export const SelectionOverlay = () => {
   const selectedMessageIds = useSelector(getSelectedMessageIds);
@@ -27,7 +27,7 @@ export const SelectionOverlay = () => {
     dispatch(resetSelectedMessageIds());
   }
   /**
-   * This is a duplicate with the onKeyDown of SessionConversation.
+   * This is a duplicate with the onKeyDown of HE4SConversation.
    * At some point we'll make a global handler to deal with the key presses
    * and handle them depending on what is visible, but that's not part of this PR
    */
@@ -68,17 +68,17 @@ export const SelectionOverlay = () => {
   const classNameAndId = 'message-selection-overlay';
 
   return (
-    <SessionFocusTrap>
+    <HE4SFocusTrap>
       <div className={classNameAndId} id={classNameAndId}>
         <div className="close-button">
-          <SessionIconButton iconType="exit" iconSize="medium" onClick={onCloseOverlay} />
+          <HE4SIconButton iconType="exit" iconSize="medium" onClick={onCloseOverlay} />
         </div>
 
         <div className="button-group">
-          <SessionButton
-            buttonColor={SessionButtonColor.Danger}
-            buttonShape={SessionButtonShape.Square}
-            buttonType={SessionButtonType.Solid}
+          <HE4SButton
+            buttonColor={HE4SButtonColor.Danger}
+            buttonShape={HE4SButtonShape.Square}
+            buttonType={HE4SButtonType.Solid}
             text={window.i18n('delete')}
             onClick={async () => {
               if (selectedConversationKey) {
@@ -92,6 +92,6 @@ export const SelectionOverlay = () => {
           />
         </div>
       </div>
-    </SessionFocusTrap>
+    </HE4SFocusTrap>
   );
 };

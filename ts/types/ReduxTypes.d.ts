@@ -5,7 +5,7 @@
  * e.g. import type { YourTypeHere } from 'path/to/ReduxTypes';
  */
 
-export type SessionSettingCategory =
+export type HE4SSettingCategory =
   | 'privacy'
   | 'notifications'
   | 'conversations'

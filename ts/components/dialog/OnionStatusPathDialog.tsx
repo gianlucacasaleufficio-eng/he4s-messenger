@@ -19,9 +19,9 @@ import { Flex } from '../basic/Flex';
 
 import { Snode } from '../../data/types';
 import { THEME_GLOBALS } from '../../themes/globals';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionIcon, SessionIconButton } from '../icon';
-import { SessionSpinner } from '../loading';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SIcon, HE4SIconButton } from '../icon';
+import { HE4SSpinner } from '../loading';
 import { getCrowdinLocale } from '../../util/i18n/shared';
 
 export type StatusLightType = {
@@ -101,7 +101,7 @@ const OnionPathModalInner = () => {
   });
 
   if (!isOnline || !onionPath || onionPath.length === 0) {
-    return <SessionSpinner loading={true} />;
+    return <HE4SSpinner loading={true} />;
   }
 
   const nodes = [
@@ -192,7 +192,7 @@ export const ModalStatusLight = (props: StatusLightType) => {
 
   return (
     <StyledGrowingIcon>
-      <SessionIcon
+      <HE4SIcon
         borderRadius={'50px'}
         iconColor={color}
         glowDuration={glowDuration}
@@ -234,7 +234,7 @@ export const ActionPanelOnionStatusLight = (props: {
   }
 
   return (
-    <SessionIconButton
+    <HE4SIconButton
       iconSize={'small'}
       iconType="circle"
       iconColor={iconColor}
@@ -252,11 +252,11 @@ export const ActionPanelOnionStatusLight = (props: {
 
 export const OnionPathModal = () => {
   const onConfirm = () => {
-    void shell.openExternal('https://getsession.org/faq/#onion-routing');
+    void shell.openExternal('https://gethe4s.org/faq/#onion-routing');
   };
   const dispatch = useDispatch();
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={window.i18n('onionRoutingPath')}
       confirmText={window.i18n('learnMore')}
       cancelText={window.i18n('cancel')}
@@ -265,6 +265,6 @@ export const OnionPathModal = () => {
       showExitIcon={true}
     >
       <OnionPathModalInner />
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

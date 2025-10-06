@@ -1,6 +1,6 @@
 import { Data } from '../data/data';
 import { commitConversationAndRefreshWrapper } from '../models/conversation';
-import { PubKey } from '../session/types';
+import { PubKey } from '../he4s/types';
 import { Storage } from './storage';
 
 const BLOCKED_NUMBERS_ID = 'blocked';
@@ -26,7 +26,7 @@ export class BlockedNumberController {
 
   /**
    * Block a user or group.
-   * @param user The sessionID or groupID to block.
+   * @param user The he4sID or groupID to block.
    */
   public static async block(user: string): Promise<void> {
     // The reason we add all linked device to block number set instead of checking if any device of a user is in the `isBlocked` function because
@@ -66,7 +66,7 @@ export class BlockedNumberController {
         await commitConversationAndRefreshWrapper(user);
       } catch (e) {
         window.log.warn(
-          'failed to SessionUtilContact.insertContactFromDBIntoWrapperAndRefresh with: ',
+          'failed to HE4SUtilContact.insertContactFromDBIntoWrapperAndRefresh with: ',
           user
         );
       }

@@ -2,30 +2,30 @@ import _, { isNumber, toNumber } from 'lodash';
 
 import { Data } from '../data/data';
 import { SignalService } from '../protobuf';
-import { getMessageQueue } from '../session';
-import { getConversationController } from '../session/conversations';
-import * as ClosedGroup from '../session/group/closed-group';
-import { PubKey } from '../session/types';
-import { toHex } from '../session/utils/String';
+import { getMessageQueue } from '../he4s';
+import { getConversationController } from '../he4s/conversations';
+import * as ClosedGroup from '../he4s/group/closed-group';
+import { PubKey } from '../he4s/types';
+import { toHex } from '../he4s/utils/String';
 import { BlockedNumberController } from '../util';
 import { removeFromCache } from './cache';
-import { decryptWithSessionProtocol } from './contentMessage';
+import { decryptWithHE4SProtocol } from './contentMessage';
 import { EnvelopePlus } from './types';
 
 import { ConversationModel } from '../models/conversation';
 
-import { getSwarmPollingInstance } from '../session/apis/snode_api';
-import { GetNetworkTime } from '../session/apis/snode_api/getNetworkTime';
-import { SnodeNamespaces } from '../session/apis/snode_api/namespaces';
-import { DisappearingMessageUpdate } from '../session/disappearing_messages/types';
-import { ClosedGroupEncryptionPairReplyMessage } from '../session/messages/outgoing/controlMessage/group/ClosedGroupEncryptionPairReplyMessage';
-import { UserUtils } from '../session/utils';
-import { perfEnd, perfStart } from '../session/utils/Performance';
+import { getSwarmPollingInstance } from '../he4s/apis/snode_api';
+import { GetNetworkTime } from '../he4s/apis/snode_api/getNetworkTime';
+import { SnodeNamespaces } from '../he4s/apis/snode_api/namespaces';
+import { DisappearingMessageUpdate } from '../he4s/disappearing_messages/types';
+import { ClosedGroupEncryptionPairReplyMessage } from '../he4s/messages/outgoing/controlMessage/group/ClosedGroupEncryptionPairReplyMessage';
+import { UserUtils } from '../he4s/utils';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
 import { ReleasedFeatures } from '../util/releaseFeature';
 import { Storage } from '../util/storage';
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import { ConfigWrapperObjectTypes } from '../webworker/workers/browser/libsession_worker_functions';
-import { getSettingsKeyFromLibsessionWrapper } from './configMessage';
+import { ConfigWrapperObjectTypes } from '../webworker/workers/browser/libhe4s_worker_functions';
+import { getSettingsKeyFromLibhe4sWrapper } from './configMessage';
 import { ECKeyPair, HexKeyPair } from './keypairs';
 import { queueAllCachedFromSource } from './receiver';
 import { ConversationTypeEnum } from '../models/types';
@@ -227,7 +227,7 @@ export async function sentAtMoreRecentThanWrapper(
     return 'unknown';
   }
 
-  const settingsKey = getSettingsKeyFromLibsessionWrapper(variant);
+  const settingsKey = getSettingsKeyFromLibhe4sWrapper(variant);
   if (!settingsKey) {
     return 'unknown';
   }
@@ -455,7 +455,7 @@ async function handleClosedGroupEncryptionKeyPair(
   try {
     perfStart(`encryptionKeyPair-${envelope.id}`);
 
-    const buffer = await decryptWithSessionProtocol(
+    const buffer = await decryptWithHE4SProtocol(
       envelope,
       ourWrapper.encryptedKeyPair,
       ECKeyPair.fromKeyPair(ourKeyPair)

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Flex } from '../../../basic/Flex';
-import { SessionIcon, SessionIconSize, SessionIconType } from '../../../icon';
+import { HE4SIcon, HE4SIconSize, HE4SIconType } from '../../../icon';
 
 const StyledActionRow = styled.button`
   border: none;
@@ -49,8 +49,8 @@ export const StyledActionRowContainer = styled(Flex)`
 type ActionRowProps = {
   title: string;
   ariaLabel: string;
-  iconType: SessionIconType;
-  iconSize?: number | SessionIconSize;
+  iconType: HE4SIconType;
+  iconSize?: number | HE4SIconSize;
   onClick: () => void;
   dataTestId: string;
 };
@@ -61,7 +61,7 @@ export function ActionRow(props: ActionRowProps) {
   return (
     <StyledActionRow onClick={onClick} data-testid={dataTestId} aria-label={ariaLabel}>
       <StyledIcon>
-        <SessionIcon
+        <HE4SIcon
           iconType={iconType}
           iconSize={iconSize || 'large'}
           iconColor="var(--text-primary-color)"

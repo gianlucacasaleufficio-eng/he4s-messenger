@@ -7,7 +7,7 @@ import { useIsDetailMessageView } from '../../../../contexts/isDetailViewContext
 import { getMostRecentOutgoingMessageId } from '../../../../state/selectors/conversations';
 import { useSelectedIsGroupOrCommunity } from '../../../../state/selectors/selectedConversation';
 import { SpacerXS } from '../../../basic/Text';
-import { SessionIcon, SessionIconType } from '../../../icon';
+import { HE4SIcon, HE4SIconType } from '../../../icon';
 import { ExpireTimer } from '../../ExpireTimer';
 import { saveLogToDesktop } from '../../../../util/logging';
 
@@ -97,19 +97,19 @@ const TextDetails = ({ text, textColor }: { text: string; textColor: string }) =
   );
 };
 
-function IconDanger({ iconType }: { iconType: SessionIconType }) {
-  return <SessionIcon iconColor={'var(--danger-color'} iconType={iconType} iconSize="tiny" />;
+function IconDanger({ iconType }: { iconType: HE4SIconType }) {
+  return <HE4SIcon iconColor={'var(--danger-color'} iconType={iconType} iconSize="tiny" />;
 }
 
 function IconNormal({
   iconType,
   rotateDuration,
 }: {
-  iconType: SessionIconType;
+  iconType: HE4SIconType;
   rotateDuration?: number | undefined;
 }) {
   return (
-    <SessionIcon
+    <HE4SIcon
       rotateDuration={rotateDuration}
       iconColor={'var(--text-secondary-color)'}
       iconType={iconType}
@@ -171,7 +171,7 @@ const MessageStatusSending = ({ dataTestId }: Omit<Props, 'isDetailView'>) => {
 function IconForExpiringMessageId({
   messageId,
   iconType,
-}: Pick<Props, 'messageId'> & { iconType: SessionIconType }) {
+}: Pick<Props, 'messageId'> & { iconType: HE4SIconType }) {
   const isExpiring = useIsExpiring(messageId);
 
   return isExpiring ? (

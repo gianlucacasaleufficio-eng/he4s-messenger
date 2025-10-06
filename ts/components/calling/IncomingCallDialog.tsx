@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 import { useConversationUsername } from '../../hooks/useParamSelector';
-import { CallManager } from '../../session/utils';
-import { ed25519Str } from '../../session/utils/String';
-import { callTimeoutMs } from '../../session/utils/calling/CallManager';
+import { CallManager } from '../../he4s/utils';
+import { ed25519Str } from '../../he4s/utils/String';
+import { callTimeoutMs } from '../../he4s/utils/calling/CallManager';
 import { getHasIncomingCall, getHasIncomingCallFrom } from '../../state/selectors/call';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { Avatar, AvatarSize } from '../avatar/Avatar';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 
 export const CallWindow = styled.div`
   position: absolute;
@@ -76,7 +76,7 @@ export const IncomingCallDialog = () => {
 
   if (hasIncomingCall) {
     return (
-      <SessionWrapperModal
+      <HE4SWrapperModal
         title={window.i18n('callsIncoming', {
           name: from ?? window.i18n('unknown'),
         })}
@@ -84,20 +84,20 @@ export const IncomingCallDialog = () => {
         <IncomingCallAvatarContainer>
           <Avatar size={AvatarSize.XL} pubkey={incomingCallFromPubkey} />
         </IncomingCallAvatarContainer>
-        <div className="session-modal__button-group">
-          <SessionButton
+        <div className="he4s-modal__button-group">
+          <HE4SButton
             text={window.i18n('accept')}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
             onClick={handleAcceptIncomingCall}
           />
-          <SessionButton
+          <HE4SButton
             text={window.i18n('decline')}
-            buttonColor={SessionButtonColor.Danger}
-            buttonType={SessionButtonType.Simple}
+            buttonColor={HE4SButtonColor.Danger}
+            buttonType={HE4SButtonType.Simple}
             onClick={handleDeclineIncomingCall}
           />
         </div>
-      </SessionWrapperModal>
+      </HE4SWrapperModal>
     );
   }
   // display spinner while connecting

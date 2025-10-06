@@ -1,20 +1,20 @@
-import { GetNetworkTime } from '../session/apis/snode_api/getNetworkTime';
-import { FEATURE_RELEASE_TIMESTAMPS } from '../session/constants';
-import { ConfigurationSync } from '../session/utils/job_runners/jobs/ConfigurationSyncJob';
+import { GetNetworkTime } from '../he4s/apis/snode_api/getNetworkTime';
+import { FEATURE_RELEASE_TIMESTAMPS } from '../he4s/constants';
+import { ConfigurationSync } from '../he4s/utils/job_runners/jobs/ConfigurationSyncJob';
 import { assertUnreachable } from '../types/sqlSharedTypes';
 import { Storage } from './storage';
 
 let isDisappearingMessageFeatureReleased: boolean | undefined;
-let isUserConfigLibsessionFeatureReleased: boolean | undefined;
+let isUserConfigLibhe4sFeatureReleased: boolean | undefined;
 // TODO DO NOT MERGE Remove export after QA
-export type FeatureNameTracked = 'disappearing_messages' | 'user_config_libsession';
+export type FeatureNameTracked = 'disappearing_messages' | 'user_config_libhe4s';
 
 /**
  * This is only intended for testing. Do not call this in production.
  */
 export function resetFeatureReleasedCachedValue() {
   isDisappearingMessageFeatureReleased = undefined;
-  isUserConfigLibsessionFeatureReleased = undefined;
+  isUserConfigLibhe4sFeatureReleased = undefined;
 }
 
 // eslint-disable-next-line consistent-return
@@ -22,8 +22,8 @@ function getIsFeatureReleasedCached(featureName: FeatureNameTracked) {
   switch (featureName) {
     case 'disappearing_messages':
       return isDisappearingMessageFeatureReleased;
-    case 'user_config_libsession':
-      return isUserConfigLibsessionFeatureReleased;
+    case 'user_config_libhe4s':
+      return isUserConfigLibhe4sFeatureReleased;
     default:
       assertUnreachable(featureName, 'case not handled for getIsFeatureReleasedCached');
   }
@@ -34,8 +34,8 @@ function setIsFeatureReleasedCached(featureName: FeatureNameTracked, value: bool
     case 'disappearing_messages':
       isDisappearingMessageFeatureReleased = value;
       break;
-    case 'user_config_libsession':
-      isUserConfigLibsessionFeatureReleased = value;
+    case 'user_config_libhe4s':
+      isUserConfigLibhe4sFeatureReleased = value;
       break;
     default:
       assertUnreachable(featureName, 'case not handled for setIsFeatureReleasedCached');
@@ -47,7 +47,7 @@ function getFeatureReleaseTimestamp(featureName: FeatureNameTracked) {
   switch (featureName) {
     case 'disappearing_messages':
       return FEATURE_RELEASE_TIMESTAMPS.DISAPPEARING_MESSAGES_V2;
-    case 'user_config_libsession':
+    case 'user_config_libhe4s':
       return FEATURE_RELEASE_TIMESTAMPS.USER_CONFIG;
     default:
       assertUnreachable(featureName, 'case not handled for getFeatureReleaseTimestamp');
@@ -96,7 +96,7 @@ async function checkIsFeatureReleased(featureName: FeatureNameTracked): Promise<
 }
 
 async function checkIsUserConfigFeatureReleased() {
-  return checkIsFeatureReleased('user_config_libsession');
+  return checkIsFeatureReleased('user_config_libhe4s');
 }
 
 async function checkIsDisappearMessageV2FeatureReleased() {
@@ -107,7 +107,7 @@ async function checkIsDisappearMessageV2FeatureReleased() {
 }
 
 function isUserConfigFeatureReleasedCached(): boolean {
-  return !!isUserConfigLibsessionFeatureReleased;
+  return !!isUserConfigLibhe4sFeatureReleased;
 }
 
 // NOTE Make sure to call checkIsDisappearMessageV2FeatureReleased at least once and then use this. It's mostly used in components that are rendered where we don't want to do async calls

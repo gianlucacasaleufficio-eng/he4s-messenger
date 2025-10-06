@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BlockOrUnblockModalState } from '../../components/dialog/blockOrUnblock/BlockOrUnblockModalState';
 import { EnterPasswordModalProps } from '../../components/dialog/EnterPasswordModal';
 import { HideRecoveryPasswordDialogProps } from '../../components/dialog/HideRecoveryPasswordDialog';
-import { SessionConfirmDialogProps } from '../../components/dialog/SessionConfirm';
+import { HE4SConfirmDialogProps } from '../../components/dialog/HE4SConfirm';
 import { MediaItemType } from '../../components/lightbox/LightboxGallery';
 import { AttachmentTypeWithPath } from '../../types/Attachment';
 import type { EditProfilePictureModalProps, PasswordAction } from '../../types/ReduxTypes';
 
 export type BanType = 'ban' | 'unban';
 
-export type ConfirmModalState = SessionConfirmDialogProps | null;
+export type ConfirmModalState = HE4SConfirmDialogProps | null;
 export type InviteContactModalState = { conversationId: string } | null;
 export type BanOrUnbanUserModalState = {
   conversationId: string;
@@ -27,7 +27,7 @@ export type EnterPasswordModalState = EnterPasswordModalProps | null;
 export type DeleteAccountModalState = EditProfileModalState;
 export type OpenUrlModalState = { urlToOpen: string } | null;
 
-export type SessionPasswordModalState = { passwordAction: PasswordAction; onOk: () => void } | null;
+export type HE4SPasswordModalState = { passwordAction: PasswordAction; onOk: () => void } | null;
 
 export type UserDetailsModalState = {
   conversationId: string;
@@ -65,7 +65,7 @@ export type ModalState = {
   editProfileModal: EditProfileModalState;
   onionPathModal: OnionPathModalState;
   enterPasswordModal: EnterPasswordModalState;
-  sessionPasswordModal: SessionPasswordModalState;
+  he4sPasswordModal: HE4SPasswordModalState;
   deleteAccountModal: DeleteAccountModalState;
   reactListModalState: ReactModalsState;
   reactClearAllModalState: ReactModalsState;
@@ -89,7 +89,7 @@ export const initialModalState: ModalState = {
   editProfileModal: null,
   onionPathModal: null,
   enterPasswordModal: null,
-  sessionPasswordModal: null,
+  he4sPasswordModal: null,
   deleteAccountModal: null,
   reactListModalState: null,
   reactClearAllModalState: null,
@@ -142,8 +142,8 @@ const ModalSlice = createSlice({
     updateEnterPasswordModal(state, action: PayloadAction<EnterPasswordModalState | null>) {
       return { ...state, enterPasswordModal: action.payload };
     },
-    sessionPassword(state, action: PayloadAction<SessionPasswordModalState>) {
-      return { ...state, sessionPasswordModal: action.payload };
+    he4sPassword(state, action: PayloadAction<HE4SPasswordModalState>) {
+      return { ...state, he4sPasswordModal: action.payload };
     },
     updateDeleteAccountModal(state, action: PayloadAction<DeleteAccountModalState>) {
       return { ...state, deleteAccountModal: action.payload };
@@ -196,7 +196,7 @@ export const {
   editProfileModal,
   onionPathModal,
   updateEnterPasswordModal,
-  sessionPassword,
+  he4sPassword,
   updateDeleteAccountModal,
   updateBanOrUnbanUserModal,
   updateBlockOrUnblockModal,

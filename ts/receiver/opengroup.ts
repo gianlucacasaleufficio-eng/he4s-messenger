@@ -4,13 +4,13 @@ import {
   createPublicMessageSentFromUs,
 } from '../models/messageFactory';
 import { SignalService } from '../protobuf';
-import { OpenGroupMessageV4 } from '../session/apis/open_group_api/opengroupV2/OpenGroupServerPoller';
-import { isUsAnySogsFromCache } from '../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { getOpenGroupV2ConversationId } from '../session/apis/open_group_api/utils/OpenGroupUtils';
-import { getConversationController } from '../session/conversations';
-import { removeMessagePadding } from '../session/crypto/BufferPadding';
-import { perfEnd, perfStart } from '../session/utils/Performance';
-import { fromBase64ToArray } from '../session/utils/String';
+import { OpenGroupMessageV4 } from '../he4s/apis/open_group_api/opengroupV2/OpenGroupServerPoller';
+import { isUsAnySogsFromCache } from '../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { getOpenGroupV2ConversationId } from '../he4s/apis/open_group_api/utils/OpenGroupUtils';
+import { getConversationController } from '../he4s/conversations';
+import { removeMessagePadding } from '../he4s/crypto/BufferPadding';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
+import { fromBase64ToArray } from '../he4s/utils/String';
 import { cleanIncomingDataMessage, messageHasVisibleContent } from './dataMessage';
 import { handleMessageJob, toRegularMessage } from './queuedJob';
 import { OpenGroupRequestCommonType } from '../data/types';
@@ -19,9 +19,9 @@ export const handleOpenGroupV4Message = async (
   message: OpenGroupMessageV4,
   roomInfos: OpenGroupRequestCommonType
 ) => {
-  const { data, id, posted, session_id } = message;
-  if (data && posted && session_id) {
-    await handleOpenGroupMessage(roomInfos, data, posted, session_id, id);
+  const { data, id, posted, he4s_id } = message;
+  if (data && posted && he4s_id) {
+    await handleOpenGroupMessage(roomInfos, data, posted, he4s_id, id);
   } else {
     throw Error('Missing data passed to handleOpenGroupV4Message.');
   }

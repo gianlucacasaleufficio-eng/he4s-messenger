@@ -1,8 +1,8 @@
 import { isEmpty } from 'lodash';
 import { useSelector } from 'react-redux';
 import useInterval from 'react-use/lib/useInterval';
-import { fetchLatestRelease } from '../session/fetch_latest_release';
-import { UserUtils } from '../session/utils';
+import { fetchLatestRelease } from '../he4s/fetch_latest_release';
+import { UserUtils } from '../he4s/utils';
 import { getOurPrimaryConversation } from '../state/selectors/conversations';
 
 export function useFetchLatestReleaseFromFileServer() {

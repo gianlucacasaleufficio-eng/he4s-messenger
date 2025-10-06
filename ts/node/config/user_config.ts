@@ -23,7 +23,7 @@ if (!isProduction) {
 }
 
 if (storageProfile) {
-  const userData = path.join(app.getPath('appData'), `Session-${storageProfile}`);
+  const userData = path.join(app.getPath('appData'), `HE4S-${storageProfile}`);
 
   app.setPath('userData', userData);
 }

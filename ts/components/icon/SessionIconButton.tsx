@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import { KeyboardEvent, MouseEvent, ReactNode, forwardRef, memo } from 'react';
 import styled from 'styled-components';
-import { SessionIcon, SessionIconProps } from './SessionIcon';
+import { HE4SIcon, HE4SIconProps } from './HE4SIcon';
 
-export type SessionIconButtonProps = SessionIconProps & {
+export type HE4SIconButtonProps = HE4SIconProps & {
   onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
   isSelected?: boolean;
   isHidden?: boolean;
@@ -20,7 +20,7 @@ export type SessionIconButtonProps = SessionIconProps & {
   disabled?: boolean;
 };
 
-const StyledSessionIconButton = styled.button<{ color?: string; isSelected?: boolean }>`
+const StyledHE4SIconButton = styled.button<{ color?: string; isSelected?: boolean }>`
   background-color: var(--button-icon-background-color);
 
   svg path {
@@ -43,7 +43,7 @@ const StyledSessionIconButton = styled.button<{ color?: string; isSelected?: boo
 `;
 
 // eslint-disable-next-line react/display-name
-const SessionIconButtonInner = forwardRef<HTMLButtonElement, SessionIconButtonProps>(
+const HE4SIconButtonInner = forwardRef<HTMLButtonElement, HE4SIconButtonProps>(
   (props, ref) => {
     const {
       iconType,
@@ -85,10 +85,10 @@ const SessionIconButtonInner = forwardRef<HTMLButtonElement, SessionIconButtonPr
     };
 
     return (
-      <StyledSessionIconButton
+      <StyledHE4SIconButton
         color={iconColor}
         isSelected={isSelected}
-        className={classNames('session-icon-button', iconSize, className)}
+        className={classNames('he4s-icon-button', iconSize, className)}
         ref={ref}
         id={id}
         title={title}
@@ -105,7 +105,7 @@ const SessionIconButtonInner = forwardRef<HTMLButtonElement, SessionIconButtonPr
         disabled={disabled}
         data-testid={dataTestId}
       >
-        <SessionIcon
+        <HE4SIcon
           iconType={iconType}
           iconSize={iconSize}
           iconColor={iconColor}
@@ -119,9 +119,9 @@ const SessionIconButtonInner = forwardRef<HTMLButtonElement, SessionIconButtonPr
           dataTestId={dataTestIdIcon}
         />
         {children}
-      </StyledSessionIconButton>
+      </StyledHE4SIconButton>
     );
   }
 );
 
-export const SessionIconButton = memo(SessionIconButtonInner, _.isEqual);
+export const HE4SIconButton = memo(HE4SIconButtonInner, _.isEqual);

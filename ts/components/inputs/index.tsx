@@ -1,3 +1,3 @@
-import { SessionInput } from './SessionInput';
+import { HE4SInput } from './HE4SInput';
 
-export { SessionInput };
+export { HE4SInput };

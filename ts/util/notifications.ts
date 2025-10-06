@@ -24,7 +24,7 @@ function filter(text?: string) {
 
 let sound: any;
 
-export type SessionNotification = {
+export type HE4SNotification = {
   conversationId: string;
   iconUrl: string | null;
   isExpiringMessage: boolean;
@@ -37,7 +37,7 @@ export type SessionNotification = {
 let isEnabled: boolean = false;
 let lastNotificationDisplayed: null | Notification = null;
 
-let currentNotifications: Array<SessionNotification> = [];
+let currentNotifications: Array<HE4SNotification> = [];
 
 // Testing indicated that trying to create/destroy notifications too quickly
 //   resulted in notifications that stuck around forever, requiring the user
@@ -77,7 +77,7 @@ function disable() {
  *
  * @param forceRefresh Should only be set when the user triggers a test notification from the settings
  */
-function addNotification(notif: SessionNotification) {
+function addNotification(notif: HE4SNotification) {
   const alreadyThere = currentNotifications.find(
     n => n.conversationId === notif.conversationId && n.messageId === notif.messageId
   );
@@ -92,7 +92,7 @@ function addNotification(notif: SessionNotification) {
 /**
  * Special case when we want to display a preview of what notifications looks like
  */
-function addPreviewNotification(notif: SessionNotification) {
+function addPreviewNotification(notif: HE4SNotification) {
   currentNotifications.push(notif);
   update(true);
 }
@@ -178,7 +178,7 @@ function update(forceRefresh = false) {
 
   switch (userSetting) {
     case SettingNames.COUNT:
-      title = 'Session';
+      title = 'HE4S';
 
       if (messagesNotificationCount > 0) {
         message = newMessageCountLabel;

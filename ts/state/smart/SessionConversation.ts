@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { SessionConversation } from '../../components/conversation/SessionConversation';
+import { HE4SConversation } from '../../components/conversation/HE4SConversation';
 import { mapDispatchToProps } from '../actions';
 import { StateType } from '../reducer';
 import { getHasOngoingCallWithFocusedConvo } from '../selectors/call';
@@ -16,11 +16,11 @@ import { getTheme } from '../selectors/theme';
 import { getOurDisplayNameInProfile, getOurNumber } from '../selectors/user';
 import { HTMLDirection } from '../../util/i18n/rtlSupport';
 
-type SmartSessionConversationOwnProps = {
+type SmartHE4SConversationOwnProps = {
   htmlDirection: HTMLDirection;
 };
 
-const mapStateToProps = (state: StateType, ownProps: SmartSessionConversationOwnProps) => {
+const mapStateToProps = (state: StateType, ownProps: SmartHE4SConversationOwnProps) => {
   return {
     selectedConversation: getSelectedConversation(state),
     selectedConversationKey: getSelectedConversationKey(state),
@@ -48,4 +48,4 @@ const smart = connect(
     };
   }
 );
-export const SmartSessionConversation = smart(SessionConversation);
+export const SmartHE4SConversation = smart(HE4SConversation);

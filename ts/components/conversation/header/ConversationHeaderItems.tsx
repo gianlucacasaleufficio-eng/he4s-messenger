@@ -11,7 +11,7 @@ import {
   useSelectedIsPrivateFriend,
 } from '../../../state/selectors/selectedConversation';
 import { Avatar, AvatarSize } from '../../avatar/Avatar';
-import { SessionIconButton } from '../../icon';
+import { HE4SIconButton } from '../../icon';
 
 export const AvatarHeader = (props: {
   pubkey: string;
@@ -42,7 +42,7 @@ export const BackButton = (props: { onGoBack: () => void; showBackButton: boolea
   }
 
   return (
-    <SessionIconButton
+    <HE4SIconButton
       iconType="chevron"
       iconSize="large"
       iconRotation={90}
@@ -77,7 +77,7 @@ export const CallButton = () => {
   }
 
   return (
-    <SessionIconButton
+    <HE4SIconButton
       iconType="phone"
       iconSize="large"
       iconPadding="2px"

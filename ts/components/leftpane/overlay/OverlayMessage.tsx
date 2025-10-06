@@ -5,20 +5,20 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { isEmpty } from 'lodash';
 import { useDispatch } from 'react-redux';
-import { getConversationController } from '../../../session/conversations';
-import { PubKey } from '../../../session/types';
+import { getConversationController } from '../../../he4s/conversations';
+import { PubKey } from '../../../he4s/types';
 import { openConversationWithMessages } from '../../../state/ducks/conversations';
 import { resetLeftOverlayMode } from '../../../state/ducks/section';
-import { SessionButton } from '../../basic/SessionButton';
-import { SessionSpinner } from '../../loading';
+import { HE4SButton } from '../../basic/HE4SButton';
+import { HE4SSpinner } from '../../loading';
 
-import { ONSResolve } from '../../../session/apis/snode_api/onsResolve';
-import { NotFoundError, SnodeResponseError } from '../../../session/utils/errors';
+import { ONSResolve } from '../../../he4s/apis/snode_api/onsResolve';
+import { NotFoundError, SnodeResponseError } from '../../../he4s/utils/errors';
 import { THEME_GLOBALS } from '../../../themes/globals';
 import { Flex } from '../../basic/Flex';
 import { SpacerLG, SpacerMD } from '../../basic/Text';
 import { HelpDeskButton } from '../../buttons';
-import { SessionInput } from '../../inputs';
+import { HE4SInput } from '../../inputs';
 import { ConversationTypeEnum } from '../../../models/types';
 import { Localizer } from '../../basic/Localizer';
 
@@ -27,7 +27,7 @@ const StyledDescriptionContainer = styled(motion.div)`
   text-align: center;
   padding: 0 var(--margins-md);
 
-  .session-icon-button {
+  .he4s-icon-button {
     border: 1px solid var(--text-secondary-color);
     border-radius: 9999px;
     margin-inline-start: var(--margins-xs);
@@ -39,7 +39,7 @@ const StyledDescriptionContainer = styled(motion.div)`
   }
 `;
 
-const SessionIDDescription = styled.span`
+const HE4SIDDescription = styled.span`
   color: var(--text-secondary-color);
   font-family: var(--font-default);
   font-style: normal;
@@ -53,7 +53,7 @@ export const StyledLeftPaneOverlay = styled(Flex)`
   overflow-y: auto;
   overflow-x: hidden;
 
-  .session-button {
+  .he4s-button {
     width: 100%;
   }
 `;
@@ -72,9 +72,9 @@ export const OverlayMessage = () => {
 
   const disableNextButton = !pubkeyOrOns || loading;
 
-  async function openConvoOnceResolved(resolvedSessionID: string) {
+  async function openConvoOnceResolved(resolvedHE4SID: string) {
     const convo = await getConversationController().getOrCreateAndWait(
-      resolvedSessionID,
+      resolvedHE4SID,
       ConversationTypeEnum.PRIVATE
     );
 
@@ -89,7 +89,7 @@ export const OverlayMessage = () => {
       await convo.commit();
     }
 
-    await openConversationWithMessages({ conversationKey: resolvedSessionID, messageId: null });
+    await openConversationWithMessages({ conversationKey: resolvedHE4SID, messageId: null });
 
     closeOverlay();
   }
@@ -126,15 +126,15 @@ export const OverlayMessage = () => {
 
     setLoading(true);
     try {
-      const resolvedSessionID = await ONSResolve.getSessionIDForOnsName(pubkeyorOnsTrimmed);
-      const idValidationError = PubKey.validateWithErrorNoBlinding(resolvedSessionID);
+      const resolvedHE4SID = await ONSResolve.getHE4SIDForOnsName(pubkeyorOnsTrimmed);
+      const idValidationError = PubKey.validateWithErrorNoBlinding(resolvedHE4SID);
 
       if (idValidationError) {
         setPubkeyOrOnsError(window.i18n('onsErrorNotRecognized'));
         return;
       }
 
-      await openConvoOnceResolved(resolvedSessionID);
+      await openConvoOnceResolved(resolvedHE4SID);
     } catch (e) {
       setPubkeyOrOnsError(
         e instanceof SnodeResponseError
@@ -156,7 +156,7 @@ export const OverlayMessage = () => {
       alignItems={'center'}
       padding={'var(--margins-md)'}
     >
-      <SessionInput
+      <HE4SInput
         ariaLabel="New conversation input"
         autoFocus={true}
         type="text"
@@ -167,10 +167,10 @@ export const OverlayMessage = () => {
         error={pubkeyOrOnsError}
         centerText={true}
         isTextArea={true}
-        inputDataTestId="new-session-conversation"
+        inputDataTestId="new-he4s-conversation"
       />
       <SpacerMD />
-      <SessionSpinner loading={loading} />
+      <HE4SSpinner loading={loading} />
 
       {!pubkeyOrOnsError && !loading ? (
         <>
@@ -180,9 +180,9 @@ export const OverlayMessage = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: THEME_GLOBALS['--default-duration-seconds'] }}
           >
-            <SessionIDDescription>
+            <HE4SIDDescription>
               <Localizer token="messageNewDescriptionDesktop" />
-            </SessionIDDescription>
+            </HE4SIDDescription>
             <HelpDeskButton style={{ display: 'inline-flex' }} />
           </StyledDescriptionContainer>
           <SpacerLG />
@@ -190,7 +190,7 @@ export const OverlayMessage = () => {
       ) : null}
 
       {!isEmpty(pubkeyOrOns) ? (
-        <SessionButton
+        <HE4SButton
           ariaLabel={window.i18n('theContinue')}
           text={window.i18n('theContinue')}
           disabled={disableNextButton}

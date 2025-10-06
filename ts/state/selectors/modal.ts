@@ -16,7 +16,7 @@ import {
   OnionPathModalState,
   ReactModalsState,
   RemoveModeratorsModalState,
-  SessionPasswordModalState,
+  HE4SPasswordModalState,
   UpdateGroupMembersModalState,
   UpdateGroupNameModalState,
   UserDetailsModalState,
@@ -103,9 +103,9 @@ export const getEnterPasswordModalState = createSelector(
   (state: ModalState): EnterPasswordModalState => state.enterPasswordModal
 );
 
-export const getSessionPasswordDialog = createSelector(
+export const getHE4SPasswordDialog = createSelector(
   getModal,
-  (state: ModalState): SessionPasswordModalState => state.sessionPasswordModal
+  (state: ModalState): HE4SPasswordModalState => state.he4sPasswordModal
 );
 
 export const getDeleteAccountModalState = createSelector(

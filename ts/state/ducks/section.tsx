@@ -1,6 +1,6 @@
 // TODO move into redux slice
 
-import type { SessionSettingCategory } from '../../types/ReduxTypes';
+import type { HE4SSettingCategory } from '../../types/ReduxTypes';
 
 export const FOCUS_SECTION = 'FOCUS_SECTION';
 export const FOCUS_SETTINGS_SECTION = 'FOCUS_SETTINGS_SECTION';
@@ -25,7 +25,7 @@ type FocusSectionActionType = {
 
 type FocusSettingsSectionActionType = {
   type: 'FOCUS_SETTINGS_SECTION';
-  payload: SessionSettingCategory;
+  payload: HE4SSettingCategory;
 };
 
 type IsAppFocusedActionType = {
@@ -114,7 +114,7 @@ export function resetRightOverlayMode(): ResetRightOverlayModeActionType {
 }
 
 export function showSettingsSection(
-  category: SessionSettingCategory
+  category: HE4SSettingCategory
 ): FocusSettingsSectionActionType {
   return {
     type: FOCUS_SETTINGS_SECTION,
@@ -141,7 +141,7 @@ export const initialSectionState: SectionStateType = {
 
 export type SectionStateType = {
   focusedSection: SectionType;
-  focusedSettingsSection?: SessionSettingCategory;
+  focusedSettingsSection?: HE4SSettingCategory;
   isAppFocused: boolean;
   leftOverlayMode: LeftOverlayMode | undefined;
   rightOverlayMode: RightOverlayMode | undefined;

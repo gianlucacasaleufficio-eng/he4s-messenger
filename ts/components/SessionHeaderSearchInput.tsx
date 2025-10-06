@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SessionHeaderSearchInput = styled.input<{ isDarkTheme: boolean }>`
+export const HE4SHeaderSearchInput = styled.input<{ isDarkTheme: boolean }>`
   color: var(--search-bar-text-control-color);
   background-color: var(--search-bar-background-color);
   border: 1px solid var(--input-border-color);

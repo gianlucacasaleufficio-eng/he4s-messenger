@@ -1,7 +1,7 @@
 import { Menu } from 'react-contexify';
 import { useDispatch } from 'react-redux';
 
-import { SessionContextMenuContainer } from '../SessionContextMenuContainer';
+import { HE4SContextMenuContainer } from '../HE4SContextMenuContainer';
 
 import { hideMessageRequestBanner } from '../../state/ducks/userConfig';
 import { ItemWithDataTestId } from './items/MenuItemWithDataTestId';
@@ -28,10 +28,10 @@ export const MessageRequestBannerContextMenu = (props: PropsContextConversationI
   const { triggerId } = props;
 
   return (
-    <SessionContextMenuContainer>
+    <HE4SContextMenuContainer>
       <Menu id={triggerId} animation={getMenuAnimation()}>
         <HideBannerMenuItem />
       </Menu>
-    </SessionContextMenuContainer>
+    </HE4SContextMenuContainer>
   );
 };

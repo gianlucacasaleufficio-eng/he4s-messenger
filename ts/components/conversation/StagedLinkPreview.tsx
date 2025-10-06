@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 import { Image } from './Image';
 
-import { fromArrayBufferToBase64 } from '../../session/utils/String';
+import { fromArrayBufferToBase64 } from '../../he4s/utils/String';
 import { isImage } from '../../types/MIME';
 import { Flex } from '../basic/Flex';
-import { SessionIconButton } from '../icon';
-import { SessionSpinner } from '../loading';
+import { HE4SIconButton } from '../icon';
+import { HE4SSpinner } from '../loading';
 import { StagedLinkPreviewImage } from './composition/CompositionBox';
 import { AriaLabels } from '../../util/hardcodedAriaLabels';
 
@@ -74,7 +74,7 @@ export const StagedLinkPreview = (props: Props) => {
         justifyContent={isLoading ? 'center' : 'flex-start'}
         alignItems={'center'}
       >
-        {isLoading ? <SessionSpinner loading={isLoading} /> : null}
+        {isLoading ? <HE4SSpinner loading={isLoading} /> : null}
         {isLoaded && image && isContentTypeImage ? (
           <StyledImage>
             <Image
@@ -89,7 +89,7 @@ export const StagedLinkPreview = (props: Props) => {
         ) : null}
         {isLoaded ? <StyledText>{title}</StyledText> : null}
       </Flex>
-      <SessionIconButton
+      <HE4SIconButton
         iconType="exit"
         iconColor="var(--chat-buttons-icon-color)"
         iconSize="small"

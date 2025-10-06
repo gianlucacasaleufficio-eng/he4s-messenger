@@ -1,21 +1,21 @@
 import classNames from 'classnames';
-import { SessionIcon, SessionIconType } from '../icon';
+import { HE4SIcon, HE4SIconType } from '../icon';
 
-export enum SessionDropDownItemType {
+export enum HE4SDropDownItemType {
   Default = 'default',
   Danger = 'danger',
 }
 
 type Props = {
   content: string;
-  type: SessionDropDownItemType;
-  icon: SessionIconType | null;
+  type: HE4SDropDownItemType;
+  icon: HE4SIconType | null;
   active: boolean;
   onClick: any;
   dataTestId?: string;
 };
 
-export const SessionDropdownItem = (props: Props) => {
+export const HE4SDropdownItem = (props: Props) => {
   const clickHandler = (e: any) => {
     if (props.onClick) {
       e.stopPropagation();
@@ -28,15 +28,15 @@ export const SessionDropdownItem = (props: Props) => {
   return (
     <div
       className={classNames(
-        'session-dropdown__item',
+        'he4s-dropdown__item',
         active ? 'active' : '',
-        type || SessionDropDownItemType.Default
+        type || HE4SDropDownItemType.Default
       )}
       role="button"
       onClick={clickHandler}
       data-testid={dataTestId}
     >
-      {icon ? <SessionIcon iconType={icon} iconSize="small" /> : ''}
+      {icon ? <HE4SIcon iconType={icon} iconSize="small" /> : ''}
       <div className="item-content">{content}</div>
     </div>
   );

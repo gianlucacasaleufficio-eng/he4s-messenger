@@ -3,19 +3,19 @@ import { useDispatch } from 'react-redux';
 import useKey from 'react-use/lib/useKey';
 import styled from 'styled-components';
 
-import { ToastUtils, UserUtils } from '../../session/utils';
+import { ToastUtils, UserUtils } from '../../he4s/utils';
 
 import { updateGroupMembersModal } from '../../state/ducks/modalDialog';
 import { MemberListItem } from '../MemberListItem';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerLG } from '../basic/Text';
 
 import { useConversationPropsById, useWeAreAdmin } from '../../hooks/useParamSelector';
 
 import { useSet } from '../../hooks/useSet';
-import { getConversationController } from '../../session/conversations';
-import { initiateClosedGroupUpdate } from '../../session/group/closed-group';
+import { getConversationController } from '../../he4s/conversations';
+import { initiateClosedGroupUpdate } from '../../he4s/group/closed-group';
 
 type Props = {
   conversationId: string;
@@ -187,7 +187,7 @@ export const UpdateGroupMembersDialog = (props: Props) => {
   const titleText = window.i18n('groupMembers');
 
   return (
-    <SessionWrapperModal title={titleText} onClose={closeDialog}>
+    <HE4SWrapperModal title={titleText} onClose={closeDialog}>
       <StyledClassicMemberList className="contact-selection-list">
         <ClassicMemberList
           convoId={conversationId}
@@ -200,17 +200,17 @@ export const UpdateGroupMembersDialog = (props: Props) => {
 
       <SpacerLG />
 
-      <div className="session-modal__button-group">
+      <div className="he4s-modal__button-group">
         {weAreAdmin && (
-          <SessionButton text={okText} onClick={onClickOK} buttonType={SessionButtonType.Simple} />
+          <HE4SButton text={okText} onClick={onClickOK} buttonType={HE4SButtonType.Simple} />
         )}
-        <SessionButton
+        <HE4SButton
           text={cancelText}
-          buttonColor={weAreAdmin ? SessionButtonColor.Danger : undefined}
-          buttonType={SessionButtonType.Simple}
+          buttonColor={weAreAdmin ? HE4SButtonColor.Danger : undefined}
+          buttonType={HE4SButtonType.Simple}
           onClick={closeDialog}
         />
       </div>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

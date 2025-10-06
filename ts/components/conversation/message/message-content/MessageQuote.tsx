@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useIsDetailMessageView } from '../../../../contexts/isDetailViewContext';
 import { Data } from '../../../../data/data';
 import { MessageRenderingProps } from '../../../../models/messageType';
-import { ToastUtils } from '../../../../session/utils';
+import { ToastUtils } from '../../../../he4s/utils';
 import { openConversationToSpecificMessage } from '../../../../state/ducks/conversations';
 import { StateType } from '../../../../state/reducer';
 import { useMessageDirection } from '../../../../state/selectors';
@@ -57,7 +57,7 @@ export const MessageQuote = (props: Props) => {
 
     // If the quote is not found in memory, we try to find it in the DB
     if (quoteNotFound && quote.id && quote.author) {
-      // We always look for the quote by sentAt timestamp, for opengroups, closed groups and session chats
+      // We always look for the quote by sentAt timestamp, for opengroups, closed groups and he4s chats
       // this will return an array of sent messages by id that we have locally.
       const quotedMessagesCollection = await Data.getMessagesBySenderAndSentAt([
         {

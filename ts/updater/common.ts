@@ -25,7 +25,7 @@ export async function showDownloadUpdateDialog(
   const options = {
     type: 'info' as const,
     buttons: [i18n('download'), i18n('later')],
-    title: i18n('updateSession'),
+    title: i18n('updateHE4S'),
     message: i18n('updateNewVersionDescription'),
     defaultId: LATER_BUTTON,
     cancelId: DOWNLOAD_BUTTON,
@@ -45,7 +45,7 @@ export async function showUpdateDialog(
   const options: Electron.MessageBoxOptions = {
     type: 'info' as const,
     buttons: [i18n('restart'), i18n('later')],
-    title: i18n('updateSession'),
+    title: i18n('updateHE4S'),
     message: i18n('updateDownloaded'),
     defaultId: LATER_BUTTON,
     cancelId: RESTART_BUTTON,

@@ -1,5 +1,5 @@
-import { getConversationController } from '../session/conversations';
-import { UserUtils } from '../session/utils';
+import { getConversationController } from '../he4s/conversations';
+import { UserUtils } from '../he4s/utils';
 import type { LocalizerComponentPropsObject } from '../types/localizer';
 
 // to remove after merge with groups

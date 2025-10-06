@@ -1,9 +1,9 @@
 import { shell } from 'electron';
 import { useDispatch } from 'react-redux';
 import { updateTermsOfServicePrivacyModal } from '../../state/onboarding/ducks/modals';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { Flex } from '../basic/Flex';
-import { SessionButton, SessionButtonType } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerSM } from '../basic/Text';
 
 export type TermsOfServicePrivacyDialogProps = {
@@ -24,7 +24,7 @@ export function TermsOfServicePrivacyDialog(props: TermsOfServicePrivacyDialogPr
   }
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={window.i18n('urlOpen')}
       onClose={onClose}
       showExitIcon={true}
@@ -35,25 +35,25 @@ export function TermsOfServicePrivacyDialog(props: TermsOfServicePrivacyDialogPr
       <span>{window.i18n('urlOpenBrowser')}</span>
       <SpacerSM />
       <Flex container={true} width={'100%'} justifyContent="center" alignItems="center">
-        <SessionButton
+        <HE4SButton
           ariaLabel={'Terms of service button'}
           text={window.i18n('onboardingTos')}
-          buttonType={SessionButtonType.Ghost}
+          buttonType={HE4SButtonType.Ghost}
           onClick={() => {
-            void shell.openExternal('https://getsession.org/terms-of-service');
+            void shell.openExternal('https://gethe4s.org/terms-of-service');
           }}
           dataTestId="terms-of-service-button"
         />
-        <SessionButton
+        <HE4SButton
           ariaLabel={'Privacy policy button'}
           text={window.i18n('onboardingPrivacy')}
-          buttonType={SessionButtonType.Ghost}
+          buttonType={HE4SButtonType.Ghost}
           onClick={() => {
-            void shell.openExternal('https://getsession.org/privacy-policy');
+            void shell.openExternal('https://gethe4s.org/privacy-policy');
           }}
           dataTestId="privacy-policy-button"
         />
       </Flex>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 }

@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import useKey from 'react-use/lib/useKey';
 import { CSSProperties } from 'styled-components';
 import { updateQuitModal } from '../../state/onboarding/ducks/modals';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { Flex } from '../basic/Flex';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerLG, SpacerSM } from '../basic/Text';
-import { SessionConfirmDialogProps } from './SessionConfirm';
+import { HE4SConfirmDialogProps } from './HE4SConfirm';
 import { StyledI18nSubText } from '../basic/StyledI18nSubText';
 
 const modalStyle: CSSProperties = {
@@ -16,13 +16,13 @@ const modalStyle: CSSProperties = {
   lineHeight: 1.4,
 };
 
-export const QuitModal = (props: SessionConfirmDialogProps) => {
+export const QuitModal = (props: HE4SConfirmDialogProps) => {
   const dispatch = useDispatch();
   const {
     title = '',
     i18nMessage,
     okTheme,
-    closeTheme = SessionButtonColor.Danger,
+    closeTheme = HE4SButtonColor.Danger,
     onClickOk,
     onClickClose,
     onClickCancel,
@@ -69,7 +69,7 @@ export const QuitModal = (props: SessionConfirmDialogProps) => {
   });
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={title}
       onClose={onClickClose}
       showExitIcon={false}
@@ -91,23 +91,23 @@ export const QuitModal = (props: SessionConfirmDialogProps) => {
       ) : null}
       <SpacerSM />
       <Flex container={true} width={'100%'} justifyContent="center" alignItems="center">
-        <SessionButton
+        <HE4SButton
           text={okText}
           buttonColor={okTheme}
-          buttonType={SessionButtonType.Ghost}
+          buttonType={HE4SButtonType.Ghost}
           onClick={onClickOkHandler}
           disabled={isLoading}
-          dataTestId="session-confirm-ok-button"
+          dataTestId="he4s-confirm-ok-button"
         />
-        <SessionButton
+        <HE4SButton
           text={cancelText}
           buttonColor={!okTheme ? closeTheme : undefined}
-          buttonType={SessionButtonType.Ghost}
+          buttonType={HE4SButtonType.Ghost}
           onClick={onClickCancelHandler}
           disabled={isLoading}
-          dataTestId="session-confirm-cancel-button"
+          dataTestId="he4s-confirm-cancel-button"
         />
       </Flex>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

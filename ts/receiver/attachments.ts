@@ -2,17 +2,17 @@ import { omit, startsWith } from 'lodash';
 
 import { MessageModel } from '../models/message';
 import { Data } from '../data/data';
-import { AttachmentDownloads } from '../session/utils';
+import { AttachmentDownloads } from '../he4s/utils';
 import { ConversationModel } from '../models/conversation';
-import { getUnpaddedAttachment } from '../session/crypto/BufferPadding';
+import { getUnpaddedAttachment } from '../he4s/crypto/BufferPadding';
 import { decryptAttachment } from '../util/crypto/attachmentsEncrypter';
 import { callUtilsWorker } from '../webworker/workers/browser/util_worker_interface';
-import { sogsV3FetchFileByFileID } from '../session/apis/open_group_api/sogsv3/sogsV3FetchFile';
+import { sogsV3FetchFileByFileID } from '../he4s/apis/open_group_api/sogsv3/sogsV3FetchFile';
 import { OpenGroupData } from '../data/opengroups';
 import {
   downloadFileFromFileServer,
   fileServerURL,
-} from '../session/apis/file_server_api/FileServerApi';
+} from '../he4s/apis/file_server_api/FileServerApi';
 import { OpenGroupRequestCommonType } from '../data/types';
 
 export async function downloadAttachment(attachment: {

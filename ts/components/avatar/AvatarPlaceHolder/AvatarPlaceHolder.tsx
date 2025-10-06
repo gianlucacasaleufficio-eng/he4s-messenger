@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getSodiumRenderer } from '../../../session/crypto';
-import { allowOnlyOneAtATime } from '../../../session/utils/Promise';
-import { toHex } from '../../../session/utils/String';
+import { getSodiumRenderer } from '../../../he4s/crypto';
+import { allowOnlyOneAtATime } from '../../../he4s/utils/Promise';
+import { toHex } from '../../../he4s/utils/String';
 import { COLORS } from '../../../themes/constants/colors';
 import { getInitials } from '../../../util/getInitials';
 import { MemberAvatarPlaceHolder } from '../../icon/MemberAvatarPlaceHolder';

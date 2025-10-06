@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useScrollToLoadedMessage } from '../../../../contexts/ScrollToLoadedMessage';
 import { Data } from '../../../../data/data';
 import { useHasUnread } from '../../../../hooks/useParamSelector';
-import { getConversationController } from '../../../../session/conversations';
+import { getConversationController } from '../../../../he4s/conversations';
 import {
   fetchBottomMessagesForConversation,
   fetchTopMessagesForConversation,

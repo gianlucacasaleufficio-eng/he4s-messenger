@@ -1,8 +1,8 @@
 export enum LOCALE_DEFAULTS {
-  app_name = 'Session',
-  session_download_url = 'https://getsession.org/download',
+  app_name = 'HE4S',
+  he4s_download_url = 'https://gethe4s.org/download',
   gif = 'GIF',
-  oxen_foundation = 'Oxen Foundation',
+  oxen_foundation = 'HE4S Network Foundation',
 }
 
 export const rtlLocales = ['ar', 'fa', 'he', 'ps', 'ur'];

@@ -8,7 +8,7 @@ import {
   getMessageTextProps,
   isMessageSelectionMode,
 } from '../../../../state/selectors/conversations';
-import { SessionIcon } from '../../../icon';
+import { HE4SIcon } from '../../../icon';
 import { MessageBody } from './MessageBody';
 
 type Props = {
@@ -37,7 +37,7 @@ export const MessageText = (props: Props) => {
 
   return (
     <div dir="auto" className={classNames('module-message__text')}>
-      {isDeleted && <SessionIcon iconType="delete" iconSize="small" />}
+      {isDeleted && <HE4SIcon iconType="delete" iconSize="small" />}
       <MessageBody
         text={contents || ''}
         disableLinks={multiSelectMode}

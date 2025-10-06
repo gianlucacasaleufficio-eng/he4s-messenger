@@ -5,10 +5,10 @@ import {
   useIsPublic,
   useNicknameOrProfileNameOrShortenedPubkey,
 } from '../../hooks/useParamSelector';
-import { isUsAnySogsFromCache } from '../../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { PubKey } from '../../session/types';
-import { UserUtils } from '../../session/utils';
-import { getOurPubKeyStrFromCache } from '../../session/utils/User';
+import { isUsAnySogsFromCache } from '../../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { PubKey } from '../../he4s/types';
+import { UserUtils } from '../../he4s/utils';
+import { getOurPubKeyStrFromCache } from '../../he4s/utils/User';
 import { openConversationToSpecificMessage } from '../../state/ducks/conversations';
 import { MessageResultProps } from '../../types/message';
 import { Avatar, AvatarSize } from '../avatar/Avatar';

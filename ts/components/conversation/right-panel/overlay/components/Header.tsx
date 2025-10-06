@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { closeRightPanel } from '../../../../../state/ducks/conversations';
 import { resetRightOverlayMode } from '../../../../../state/ducks/section';
 import { Flex } from '../../../../basic/Flex';
-import { SessionIconButton } from '../../../../icon';
+import { HE4SIconButton } from '../../../../icon';
 
 export const HeaderTitle = styled.h2`
   font-family: var(--font-default);
@@ -46,7 +46,7 @@ export const Header = (props: HeaderProps) => {
   return (
     <Flex container={true} width={'100%'} padding={'32px var(--margins-lg) var(--margins-md)'}>
       {!hideBackButton && (
-        <SessionIconButton
+        <HE4SIconButton
           iconSize={'medium'}
           iconType={'chevron'}
           iconRotation={backButtonDirection === 'left' ? 90 : 270}
@@ -71,7 +71,7 @@ export const Header = (props: HeaderProps) => {
         {children}
       </Flex>
       {!hideCloseButton && (
-        <SessionIconButton
+        <HE4SIconButton
           iconSize={'tiny'}
           iconType={'exit'}
           onClick={() => {

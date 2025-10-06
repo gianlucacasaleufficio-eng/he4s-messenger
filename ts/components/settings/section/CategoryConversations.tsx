@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import useUpdate from 'react-use/lib/useUpdate';
 import { SettingsKey } from '../../../data/settings-key';
-import { ToastUtils } from '../../../session/utils';
+import { ToastUtils } from '../../../he4s/utils';
 import { toggleAudioAutoplay } from '../../../state/ducks/userConfig';
 import { useHasEnterSendEnabled } from '../../../state/selectors/settings';
 import { getAudioAutoplay } from '../../../state/selectors/userConfig';
-import { SessionRadioGroup } from '../../basic/SessionRadioGroup';
+import { HE4SRadioGroup } from '../../basic/HE4SRadioGroup';
 import { BlockedContactsList } from '../BlockedList';
 import {
-  SessionSettingsItemWrapper,
-  SessionToggleWithDescription,
-} from '../SessionSettingListItem';
+  HE4SSettingsItemWrapper,
+  HE4SToggleWithDescription,
+} from '../HE4SSettingListItem';
 
 async function toggleCommunitiesPruning() {
   try {
@@ -32,7 +32,7 @@ const CommunitiesPruningSetting = () => {
     window.getSettingValue(SettingsKey.settingsOpengroupPruning)
   );
   return (
-    <SessionToggleWithDescription
+    <HE4SToggleWithDescription
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onClickToggle={async () => {
         await toggleCommunitiesPruning();
@@ -53,7 +53,7 @@ const SpellCheckSetting = () => {
       ? true
       : window.getSettingValue(SettingsKey.settingsSpellCheck);
   return (
-    <SessionToggleWithDescription
+    <HE4SToggleWithDescription
       onClickToggle={() => {
         window.toggleSpellCheck();
         forceUpdate();
@@ -71,7 +71,7 @@ const AudioMessageAutoPlaySetting = () => {
   const forceUpdate = useUpdate();
 
   return (
-    <SessionToggleWithDescription
+    <HE4SToggleWithDescription
       onClickToggle={() => {
         dispatch(toggleAudioAutoplay());
         forceUpdate();
@@ -99,12 +99,12 @@ const EnterKeyFunctionSetting = () => {
   ];
 
   return (
-    <SessionSettingsItemWrapper
+    <HE4SSettingsItemWrapper
       title={window.i18n('conversationsEnter')}
       description={window.i18n('conversationsEnterDescription')}
       inline={false}
     >
-      <SessionRadioGroup
+      <HE4SRadioGroup
         initialItem={initialSetting ? 'enterForNewLine' : 'enterForSend'}
         group={SettingsKey.hasShiftSendEnabled} // make sure to define this key in your SettingsKey enum
         items={items}
@@ -115,7 +115,7 @@ const EnterKeyFunctionSetting = () => {
           );
         }}
       />
-    </SessionSettingsItemWrapper>
+    </HE4SSettingsItemWrapper>
   );
 };
 

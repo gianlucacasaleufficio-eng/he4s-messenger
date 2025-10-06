@@ -10,13 +10,13 @@ import autoBind from 'auto-bind';
 import { Component, RefObject, createRef } from 'react';
 import * as MIME from '../../../types/MIME';
 
-import { SessionEmojiPanel, StyledEmojiPanel } from '../SessionEmojiPanel';
-import { SessionRecording } from '../SessionRecording';
+import { HE4SEmojiPanel, StyledEmojiPanel } from '../HE4SEmojiPanel';
+import { HE4SRecording } from '../HE4SRecording';
 
 import { SettingsKey } from '../../../data/settings-key';
 import { showLinkSharingConfirmationModalDialog } from '../../../interactions/conversationInteractions';
-import { getConversationController } from '../../../session/conversations';
-import { ToastUtils } from '../../../session/utils';
+import { getConversationController } from '../../../he4s/conversations';
+import { ToastUtils } from '../../../he4s/utils';
 import { ReduxConversationType } from '../../../state/ducks/conversations';
 import { removeAllStagedAttachmentsInConversation } from '../../../state/ducks/stagedAttachments';
 import { StateType } from '../../../state/reducer';
@@ -40,14 +40,14 @@ import {
 import { LinkPreviews } from '../../../util/linkPreviews';
 import { CaptionEditor } from '../../CaptionEditor';
 import { Flex } from '../../basic/Flex';
-import { getMediaPermissionsSettings } from '../../settings/SessionSettings';
-import { getDraftForConversation, updateDraftForConversation } from '../SessionConversationDrafts';
-import { SessionQuotedMessageComposition } from '../SessionQuotedMessageComposition';
+import { getMediaPermissionsSettings } from '../../settings/HE4SSettings';
+import { getDraftForConversation, updateDraftForConversation } from '../HE4SConversationDrafts';
+import { HE4SQuotedMessageComposition } from '../HE4SQuotedMessageComposition';
 import {
   LINK_PREVIEW_TIMEOUT,
-  SessionStagedLinkPreview,
+  HE4SStagedLinkPreview,
   getPreview,
-} from '../SessionStagedLinkPreview';
+} from '../HE4SStagedLinkPreview';
 import { StagedAttachmentList } from '../StagedAttachmentList';
 import {
   AddStagedAttachmentButton,
@@ -298,7 +298,7 @@ class CompositionBoxInner extends Component<Props, State> {
 
     return (
       <Flex flexDirection="column">
-        <SessionQuotedMessageComposition />
+        <HE4SQuotedMessageComposition />
         {this.renderStagedLinkPreview()}
         {this.renderAttachmentsStaged()}
         <div className="composition-container">
@@ -378,7 +378,7 @@ class CompositionBoxInner extends Component<Props, State> {
 
   private renderRecordingView() {
     return (
-      <SessionRecording
+      <HE4SRecording
         sendVoiceMessage={this.sendVoiceMessage}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onLoadVoiceNoteView={this.onLoadVoiceNoteView}
@@ -442,7 +442,7 @@ class CompositionBoxInner extends Component<Props, State> {
         {showSendButton && <SendMessageButton onClick={this.onSendMessage} />}
         {typingEnabled && showEmojiPanel && (
           <StyledEmojiPanelContainer role="button" dir={this.props.htmlDirection}>
-            <SessionEmojiPanel
+            <HE4SEmojiPanel
               ref={this.emojiPanel}
               show={showEmojiPanel}
               onEmojiClicked={this.onEmojiClick}
@@ -578,7 +578,7 @@ class CompositionBoxInner extends Component<Props, State> {
     const { isLoaded, title, domain, image } = this.state.stagedLinkPreview;
 
     return (
-      <SessionStagedLinkPreview
+      <HE4SStagedLinkPreview
         isLoaded={isLoaded}
         title={title}
         domain={domain}
@@ -939,12 +939,12 @@ class CompositionBoxInner extends Component<Props, State> {
     });
     // { ...savedAudioFile, path: savedAudioFile.path },
     const audioAttachment: StagedAttachmentType = {
-      file: new File([], 'session-audio-message'), // this is just to emulate a file for the staged attachment type of that audio file
+      file: new File([], 'he4s-audio-message'), // this is just to emulate a file for the staged attachment type of that audio file
       contentType: MIME.AUDIO_MP3,
       size: savedAudioFile.size,
       fileSize: null,
       screenshot: null,
-      fileName: 'session-audio-message',
+      fileName: 'he4s-audio-message',
       thumbnail: null,
       url: '',
       isVoiceMessage: true,

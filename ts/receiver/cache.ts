@@ -1,7 +1,7 @@
 import { map, toNumber } from 'lodash';
 
 import { EnvelopePlus } from './types';
-import { StringUtils } from '../session/utils';
+import { StringUtils } from '../he4s/utils';
 import { Data } from '../data/data';
 import { UnprocessedParameter } from '../types/sqlSharedTypes';
 

@@ -2,20 +2,20 @@ import { isEmpty } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { TestUtils } from '..';
 import { MessageModel } from '../../../models/message';
-import { OpenGroupMessageV2 } from '../../../session/apis/open_group_api/opengroupV2/OpenGroupMessageV2';
+import { OpenGroupMessageV2 } from '../../../he4s/apis/open_group_api/opengroupV2/OpenGroupMessageV2';
 import {
   OpenGroupMessageV4,
   OpenGroupReactionMessageV4,
-} from '../../../session/apis/open_group_api/opengroupV2/OpenGroupServerPoller';
+} from '../../../he4s/apis/open_group_api/opengroupV2/OpenGroupServerPoller';
 import {
   DisappearingMessageType,
   ExpirationTimerUpdate,
-} from '../../../session/disappearing_messages/types';
-import { ExpirationTimerUpdateMessage } from '../../../session/messages/outgoing/controlMessage/ExpirationTimerUpdateMessage';
-import { ClosedGroupVisibleMessage } from '../../../session/messages/outgoing/visibleMessage/ClosedGroupVisibleMessage';
-import { OpenGroupVisibleMessage } from '../../../session/messages/outgoing/visibleMessage/OpenGroupVisibleMessage';
-import { VisibleMessage } from '../../../session/messages/outgoing/visibleMessage/VisibleMessage';
-import { PubKey } from '../../../session/types';
+} from '../../../he4s/disappearing_messages/types';
+import { ExpirationTimerUpdateMessage } from '../../../he4s/messages/outgoing/controlMessage/ExpirationTimerUpdateMessage';
+import { ClosedGroupVisibleMessage } from '../../../he4s/messages/outgoing/visibleMessage/ClosedGroupVisibleMessage';
+import { OpenGroupVisibleMessage } from '../../../he4s/messages/outgoing/visibleMessage/OpenGroupVisibleMessage';
+import { VisibleMessage } from '../../../he4s/messages/outgoing/visibleMessage/VisibleMessage';
+import { PubKey } from '../../../he4s/types';
 import { OpenGroupReaction } from '../../../types/Reaction';
 import { generateFakePubKey } from './pubkey';
 import { OpenGroupRequestCommonType } from '../../../data/types';
@@ -52,7 +52,7 @@ export function generateOpenGroupMessageV4(): OpenGroupMessageV4 {
     posted: Date.now(),
     reactions: {},
     seqno: 0,
-    session_id: TestUtils.generateFakePubKey().key,
+    he4s_id: TestUtils.generateFakePubKey().key,
 
     id: Math.floor(Math.random() * 100000),
     data: 'whatever',
@@ -83,7 +83,7 @@ export function generateOpenGroupVisibleMessage(): OpenGroupVisibleMessage {
 }
 
 export function generateOpenGroupV2RoomInfos(): OpenGroupRequestCommonType {
-  return { roomId: 'main', serverUrl: 'http://open.getsession.org' };
+  return { roomId: 'main', serverUrl: 'http://open.gethe4s.org' };
 }
 
 export function generateClosedGroupMessage(

@@ -101,7 +101,7 @@ export const DropDownAndToggleButton = (props: SProps) => {
 
   return (
     <StyledContainer
-      className="session-call-button"
+      className="he4s-call-button"
       isFullScreen={isFullScreen}
       isMuted={isMuted || false}
     >

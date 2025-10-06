@@ -13,7 +13,7 @@ import {
   MESSAGES_TABLE,
 } from '../database_utility';
 import { getAppRootPath } from '../getRootPath';
-import { updateSessionSchema } from './sessionMigrations';
+import { updateHE4SSchema } from './he4sMigrations';
 
 // eslint:disable: quotemark non-literal-fs-path one-variable-per-declaration
 const openDbOptions = {
@@ -251,13 +251,13 @@ function updateToSchemaVersion6(currentVersion: number, db: BetterSqlite3.Databa
       );
 
 
-      CREATE TABLE sessions(
+      CREATE TABLE he4ss(
         id STRING PRIMARY KEY ASC,
         number STRING,
         json TEXT
       );
 
-      CREATE INDEX sessions_number ON sessions (
+      CREATE INDEX he4ss_number ON he4ss (
         number
       ) WHERE number IS NOT NULL;
 
@@ -331,20 +331,20 @@ function updateToSchemaVersion7(currentVersion: number, db: BetterSqlite3.Databa
     db.exec(`
         -- SQLite has been coercing our STRINGs into numbers, so we force it with TEXT
         -- We create a new table then copy the data into it, since we can't modify columns
-        DROP INDEX sessions_number;
-        ALTER TABLE sessions RENAME TO sessions_old;
+        DROP INDEX he4ss_number;
+        ALTER TABLE he4ss RENAME TO he4ss_old;
 
-        CREATE TABLE sessions(
+        CREATE TABLE he4ss(
           id TEXT PRIMARY KEY,
           number TEXT,
           json TEXT
         );
-        CREATE INDEX sessions_number ON sessions (
+        CREATE INDEX he4ss_number ON he4ss (
           number
         ) WHERE number IS NOT NULL;
-        INSERT INTO sessions(id, number, json)
-      SELECT id, number, json FROM sessions_old;
-        DROP TABLE sessions_old;
+        INSERT INTO he4ss(id, number, json)
+      SELECT id, number, json FROM he4ss_old;
+        DROP TABLE he4ss_old;
       `);
 
     db.pragma('user_version = 7');
@@ -545,7 +545,7 @@ export async function updateSchema(db: BetterSqlite3.Database) {
     const runSchemaUpdate = SCHEMA_VERSIONS[index];
     runSchemaUpdate(schemaVersion, db);
   }
-  await updateSessionSchema(db);
+  await updateHE4SSchema(db);
 }
 
 function migrateSchemaVersion(db: BetterSqlite3.Database) {

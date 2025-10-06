@@ -36,7 +36,7 @@ const WrappedToastContainer = ({
   </div>
 );
 
-export const SessionToastContainer = () => {
+export const HE4SToastContainer = () => {
   return (
     <WrappedToastContainer
       position="bottom-right"

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 import { useIsPrivate, useIsPublic } from '../../../hooks/useParamSelector';
-import { getConversationController } from '../../../session/conversations';
+import { getConversationController } from '../../../he4s/conversations';
 import { assertUnreachable } from '../../../types/sqlSharedTypes';
 import { MessageBody } from '../../conversation/message/message-content/MessageBody';
 import {

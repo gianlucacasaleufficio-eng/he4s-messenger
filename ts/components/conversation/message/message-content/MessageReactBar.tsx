@@ -4,11 +4,11 @@ import { isEmpty } from 'lodash';
 import useBoolean from 'react-use/lib/useBoolean';
 import useInterval from 'react-use/lib/useInterval';
 import { useMessageExpirationPropsById } from '../../../../hooks/useParamSelector';
-import { DURATION } from '../../../../session/constants';
+import { DURATION } from '../../../../he4s/constants';
 import { nativeEmojiData } from '../../../../util/emoji';
 import { getRecentReactions } from '../../../../util/storage';
 import { SpacerSM } from '../../../basic/Text';
-import { SessionIcon, SessionIconButton } from '../../../icon';
+import { HE4SIcon, HE4SIconButton } from '../../../icon';
 import { formatAbbreviatedExpireDoubleTimer } from '../../../../util/i18n/formatting/expirationTimer';
 
 type Props = {
@@ -31,7 +31,7 @@ const StyledMessageReactBar = styled.div`
   display: flex;
   align-items: center;
 
-  .session-icon-button {
+  .he4s-icon-button {
     margin: 0 4px;
 
     &:hover svg {
@@ -139,7 +139,7 @@ const ExpiresInItem = ({ expirationTimestamp }: { expirationTimestamp?: number |
 
   return (
     <StyledExpiresIn>
-      <SessionIcon iconSize={'small'} iconType="timerFixed" />
+      <HE4SIcon iconSize={'small'} iconType="timerFixed" />
       <SpacerSM />
       <span>{formatTimeLeft({ timeLeftMs })}</span>
     </StyledExpiresIn>
@@ -168,7 +168,7 @@ export const MessageReactBar = ({ action, additionalAction, messageId }: Props) 
               {emoji}
             </ReactButton>
           ))}
-        <SessionIconButton
+        <HE4SIconButton
           iconColor={'var(--emoji-reaction-bar-icon-color)'}
           iconPadding={'8px'}
           iconSize={'huge'}

@@ -86,7 +86,7 @@ const VirtualizedList = () => {
                   key={key}
                   title={row}
                   isSubtitle={
-                    row !== window.i18n('sessionConversations') && row !== window.i18n('messages')
+                    row !== window.i18n('he4sConversations') && row !== window.i18n('messages')
                   }
                   style={style as CSSProperties}
                 />

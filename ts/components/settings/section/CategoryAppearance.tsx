@@ -1,11 +1,11 @@
 import useUpdate from 'react-use/lib/useUpdate';
 import { SettingsKey } from '../../../data/settings-key';
 import { useHasFollowSystemThemeEnabled } from '../../../state/selectors/settings';
-import { ensureThemeConsistency } from '../../../themes/SessionTheme';
+import { ensureThemeConsistency } from '../../../themes/HE4STheme';
 import { isHideMenuBarSupported } from '../../../types/Settings';
-import { SessionToggleWithDescription } from '../SessionSettingListItem';
+import { HE4SToggleWithDescription } from '../HE4SSettingListItem';
 import { SettingsThemeSwitcher } from '../SettingsThemeSwitcher';
-import { ZoomingSessionSlider } from '../ZoomingSessionSlider';
+import { ZoomingHE4SSlider } from '../ZoomingHE4SSlider';
 
 export const SettingsCategoryAppearance = () => {
   const forceUpdate = useUpdate();
@@ -19,9 +19,9 @@ export const SettingsCategoryAppearance = () => {
   return (
     <>
       <SettingsThemeSwitcher />
-      <ZoomingSessionSlider />
+      <ZoomingHE4SSlider />
       {isHideMenuBarSupported() && (
-        <SessionToggleWithDescription
+        <HE4SToggleWithDescription
           onClickToggle={() => {
             window.toggleMenuBar();
             forceUpdate();
@@ -31,7 +31,7 @@ export const SettingsCategoryAppearance = () => {
           active={isHideMenuBarActive}
         />
       )}
-      <SessionToggleWithDescription
+      <HE4SToggleWithDescription
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClickToggle={async () => {
           const toggledValue = !isFollowSystemThemeEnabled;

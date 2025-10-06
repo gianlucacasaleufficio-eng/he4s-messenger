@@ -5,7 +5,7 @@ import { MIME } from '../../../../../types';
 import { GoogleChrome } from '../../../../../util';
 import { QuotedAttachmentThumbnailType, QuoteProps } from './Quote';
 
-import { icons, SessionIconType } from '../../../../icon';
+import { icons, HE4SIconType } from '../../../../icon';
 import { QuoteImage } from './QuoteImage';
 
 function getObjectUrl(thumbnail: QuotedAttachmentThumbnailType | undefined): string | undefined {
@@ -58,7 +58,7 @@ const StyledQuoteIconBackground = styled.div`
   }
 `;
 
-type QuoteIconTypes = Extract<SessionIconType, 'file' | 'image' | 'play' | 'movie' | 'microphone'>;
+type QuoteIconTypes = Extract<HE4SIconType, 'file' | 'image' | 'play' | 'movie' | 'microphone'>;
 
 type QuoteIconProps = {
   icon: QuoteIconTypes;

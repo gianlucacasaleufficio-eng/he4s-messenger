@@ -63,7 +63,7 @@ type ThemeGlobals = {
   '--duration-message-highlight': string;
   '--duration-message-highlight-seconds': string;
   '--duration-typing-animation': string;
-  '--duration-session-spinner': string;
+  '--duration-he4s-spinner': string;
   '--duration-spinner': string;
   '--duration-pulse': string;
   '--duration-right-panel': string;
@@ -73,7 +73,7 @@ type ThemeGlobals = {
   '--duration-modal-error-faded': string;
   '--duration-modal-error-shown': string;
   '--duration-modal-to-inbox': string;
-  '--duration-session-logo-text': string;
+  '--duration-he4s-logo-text': string;
 
   /* Colors */
   '--green-color': string;
@@ -196,7 +196,7 @@ export const THEME_GLOBALS: ThemeGlobals = {
   '--duration-message-highlight': setDuration('1s'),
   '--duration-message-highlight-seconds': setDuration(1),
   '--duration-typing-animation': setDuration('1600ms'),
-  '--duration-session-spinner': setDuration('0.6s'),
+  '--duration-he4s-spinner': setDuration('0.6s'),
   '--duration-spinner': setDuration('3000ms'),
   '--duration-pulse': setDuration('1s'),
   '--duration-right-panel': setDuration('0.3s'),
@@ -206,7 +206,7 @@ export const THEME_GLOBALS: ThemeGlobals = {
   '--duration-modal-error-faded': setDuration('100ms'),
   '--duration-modal-error-shown': setDuration(0.25),
   '--duration-modal-to-inbox': setDuration('0.1s'),
-  '--duration-session-logo-text': setDuration('0s'),
+  '--duration-he4s-logo-text': setDuration('0s'),
 
   '--green-color': COLORS.PRIMARY.GREEN,
   '--blue-color': COLORS.PRIMARY.BLUE,

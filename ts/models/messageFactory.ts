@@ -1,5 +1,5 @@
-import { UserUtils } from '../session/utils';
-import { SessionUtilConvoInfoVolatile } from '../session/utils/libsession/libsession_utils_convo_info_volatile';
+import { UserUtils } from '../he4s/utils';
+import { HE4SUtilConvoInfoVolatile } from '../he4s/utils/libhe4s/libhe4s_utils_convo_info_volatile';
 import { READ_MESSAGE_STATE } from './conversationAttributes';
 import { MessageModel } from './message';
 import { MessageAttributesOptionals, MessageModelType } from './messageType';
@@ -108,7 +108,7 @@ function getSharedAttributesForIncomingMessage() {
 export function markAttributesAsReadIfNeeded(messageAttributes: MessageAttributesOptionals) {
   // if the message is trying to be added unread, make sure that it shouldn't be already read from our other devices
   if (messageAttributes.unread === READ_MESSAGE_STATE.unread) {
-    const latestUnreadForThisConvo = SessionUtilConvoInfoVolatile.getVolatileInfoCached(
+    const latestUnreadForThisConvo = HE4SUtilConvoInfoVolatile.getVolatileInfoCached(
       messageAttributes.conversationId
     );
     const sentAt = messageAttributes.serverTimestamp || messageAttributes.sent_at;

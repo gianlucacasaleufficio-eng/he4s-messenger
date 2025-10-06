@@ -10,12 +10,12 @@ import {
   PropsForDataExtractionNotification,
   PropsForMessageRequestResponse,
 } from '../../models/messageType';
-import { getConversationController } from '../../session/conversations';
-import { DisappearingMessages } from '../../session/disappearing_messages';
+import { getConversationController } from '../../he4s/conversations';
+import { DisappearingMessages } from '../../he4s/disappearing_messages';
 import {
   DisappearingMessageConversationModeType,
   DisappearingMessageType,
-} from '../../session/disappearing_messages/types';
+} from '../../he4s/disappearing_messages/types';
 import { ReactionList } from '../../types/Reaction';
 import { resetRightOverlayMode } from './section';
 import { CONVERSATION_PRIORITIES, ConversationTypeEnum } from '../../models/types';
@@ -195,7 +195,7 @@ export type PropsForMessageWithConvoProps = PropsForMessageWithoutConvoProps & {
 export interface ReduxConversationType {
   id: string;
   /**
-   * This must hold the real session username of the user for a private chat (not the nickname), and the real name of the group/closed group otherwise
+   * This must hold the real he4s username of the user for a private chat (not the nickname), and the real name of the group/closed group otherwise
    */
   displayNameInProfile?: string;
   nickname?: string;

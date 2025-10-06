@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styled from 'styled-components';
-import { parseOpenGroupV2 } from '../../../session/apis/open_group_api/opengroupV2/JoinOpenGroupV2';
-import { sogsV3FetchPreviewBase64 } from '../../../session/apis/open_group_api/sogsv3/sogsV3FetchFile';
+import { parseOpenGroupV2 } from '../../../he4s/apis/open_group_api/opengroupV2/JoinOpenGroupV2';
+import { sogsV3FetchPreviewBase64 } from '../../../he4s/apis/open_group_api/sogsv3/sogsV3FetchFile';
 import { DefaultRoomsState, updateDefaultBase64RoomData } from '../../../state/ducks/defaultRooms';
 import { StateType } from '../../../state/reducer';
 import { Avatar, AvatarSize } from '../../avatar/Avatar';
@@ -11,7 +11,7 @@ import { Flex } from '../../basic/Flex';
 import { H4 } from '../../basic/Heading';
 import { PillContainerHoverable, StyledPillContainerHoverable } from '../../basic/PillContainer';
 import { SpacerXS } from '../../basic/Text';
-import { SessionSpinner } from '../../loading';
+import { HE4SSpinner } from '../../loading';
 import { useHTMLDirection } from '../../../util/i18n/rtlSupport';
 import { Localizer } from '../../basic/Localizer';
 
@@ -24,7 +24,7 @@ export type JoinableRoomProps = {
   base64Data?: string;
 };
 
-const SessionJoinableRoomAvatar = (props: JoinableRoomProps) => {
+const HE4SJoinableRoomAvatar = (props: JoinableRoomProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -92,11 +92,11 @@ const StyledRoomName = styled(Flex)`
   margin: 0 var(--margins-sm);
 `;
 
-const SessionJoinableRoomName = (props: JoinableRoomProps) => {
+const HE4SJoinableRoomName = (props: JoinableRoomProps) => {
   return <StyledRoomName>{props.name}</StyledRoomName>;
 };
 
-const SessionJoinableRoomRow = (props: JoinableRoomProps) => {
+const HE4SJoinableRoomRow = (props: JoinableRoomProps) => {
   const { onClick, completeUrl } = props;
   const onClickWithUrl = onClick
     ? () => {
@@ -111,8 +111,8 @@ const SessionJoinableRoomRow = (props: JoinableRoomProps) => {
         margin={'var(--margins-sm)'}
         padding="var(--margins-xs) var(--margins-sm)"
       >
-        <SessionJoinableRoomAvatar {...props} />
-        <SessionJoinableRoomName {...props} />
+        <HE4SJoinableRoomAvatar {...props} />
+        <HE4SJoinableRoomName {...props} />
       </PillContainerHoverable>
     </StyledPillContainerHoverable>
   );
@@ -127,7 +127,7 @@ const JoinableRooms = (props: {
     <>
       {props.joinableRooms.rooms.map(r => {
         return (
-          <SessionJoinableRoomRow
+          <HE4SJoinableRoomRow
             key={r.id}
             completeUrl={r.completeUrl}
             name={r.name}
@@ -142,7 +142,7 @@ const JoinableRooms = (props: {
   );
 };
 
-export const SessionJoinableRooms = (props: {
+export const HE4SJoinableRooms = (props: {
   onJoinClick?: (completeUrl: string) => void;
   alreadyJoining: boolean;
 }) => {
@@ -184,7 +184,7 @@ export const SessionJoinableRooms = (props: {
         margin={'0 0 0 calc(var(--margins-md) * -1)'}
       >
         {joinableRooms.inProgress ? (
-          <SessionSpinner loading={true} />
+          <HE4SSpinner loading={true} />
         ) : (
           <JoinableRooms
             joinableRooms={joinableRooms}

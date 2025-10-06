@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Data } from '../../data/data';
 import { useMessageReactsPropsById } from '../../hooks/useParamSelector';
-import { isUsAnySogsFromCache } from '../../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { UserUtils } from '../../session/utils';
+import { isUsAnySogsFromCache } from '../../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { UserUtils } from '../../he4s/utils';
 import {
   updateReactClearAllModal,
   updateReactListModal,
@@ -21,11 +21,11 @@ import { nativeEmojiData } from '../../util/emoji';
 import { Reactions } from '../../util/reactions';
 import { Avatar, AvatarSize } from '../avatar/Avatar';
 import { Flex } from '../basic/Flex';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { ContactName } from '../conversation/ContactName';
 import { MessageReactions } from '../conversation/message/message-content/MessageReactions';
-import { SessionIconButton } from '../icon';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SIconButton } from '../icon';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { findAndFormatContact } from '../../models/message';
 import { Localizer } from '../basic/Localizer';
 
@@ -75,7 +75,7 @@ const StyledReactionBar = styled(Flex)`
     }
   }
 
-  .session-button {
+  .he4s-button {
     font-weight: 400;
     padding: 0px;
   }
@@ -160,7 +160,7 @@ const ReactionSenders = (props: ReactionSendersProps) => {
             )}
           </Flex>
           {sender === me && (
-            <SessionIconButton
+            <HE4SIconButton
               iconType="exit"
               iconSize="small"
               onClick={() => {
@@ -328,7 +328,7 @@ export const ReactListModal = (props: Props) => {
   };
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       additionalClassName={'reaction-list-modal no-body-padding'}
       showHeader={false}
       onClose={handleClose}
@@ -367,10 +367,10 @@ export const ReactListModal = (props: Props) => {
                 )}
               </p>
               {isPublic && (weAreAdmin || weAreModerator) && (
-                <SessionButton
+                <HE4SButton
                   text={window.i18n('clearAll')}
-                  buttonColor={SessionButtonColor.Danger}
-                  buttonType={SessionButtonType.Simple}
+                  buttonColor={HE4SButtonColor.Danger}
+                  buttonType={HE4SButtonType.Simple}
                   onClick={handleClearReactions}
                 />
               )}
@@ -390,6 +390,6 @@ export const ReactListModal = (props: Props) => {
           </StyledSendersContainer>
         )}
       </StyledReactListContainer>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

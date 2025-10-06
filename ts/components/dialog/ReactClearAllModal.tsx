@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useMessageReactsPropsById } from '../../hooks/useParamSelector';
-import { clearSogsReactionByServerId } from '../../session/apis/open_group_api/sogsv3/sogsV3ClearReaction';
-import { getConversationController } from '../../session/conversations';
+import { clearSogsReactionByServerId } from '../../he4s/apis/open_group_api/sogsv3/sogsV3ClearReaction';
+import { getConversationController } from '../../he4s/conversations';
 import { updateReactClearAllModal } from '../../state/ducks/modalDialog';
-import { SessionWrapperModal } from '../SessionWrapperModal';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
 import { Flex } from '../basic/Flex';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
-import { SessionSpinner } from '../loading';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
+import { HE4SSpinner } from '../loading';
 
 type Props = {
   reaction: string;
@@ -27,7 +27,7 @@ const StyledButtonContainer = styled.div`
 const StyledReactClearAllContainer = styled(Flex)`
   margin: var(--margins-lg);
 
-  .session-button {
+  .he4s-button {
     font-size: 16px;
     height: 36px;
     padding-top: 3px;
@@ -72,7 +72,7 @@ export const ReactClearAllModal = (props: Props) => {
   };
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       additionalClassName={'reaction-list-modal'}
       showHeader={false}
       onClose={handleClose}
@@ -81,23 +81,23 @@ export const ReactClearAllModal = (props: Props) => {
         <StyledDescription>
           {window.i18n('emojiReactsClearAll', { emoji: reaction })}
         </StyledDescription>
-        <StyledButtonContainer className="session-modal__button-group">
-          <SessionButton
+        <StyledButtonContainer className="he4s-modal__button-group">
+          <HE4SButton
             text={window.i18n('clear')}
-            buttonColor={SessionButtonColor.Danger}
-            buttonType={SessionButtonType.Simple}
+            buttonColor={HE4SButtonColor.Danger}
+            buttonType={HE4SButtonType.Simple}
             onClick={handleClearAll}
             disabled={clearingInProgress}
           />
-          <SessionButton
+          <HE4SButton
             text={window.i18n('cancel')}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
             onClick={handleClose}
             disabled={clearingInProgress}
           />
         </StyledButtonContainer>
-        <SessionSpinner loading={clearingInProgress} />
+        <HE4SSpinner loading={clearingInProgress} />
       </StyledReactClearAllContainer>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

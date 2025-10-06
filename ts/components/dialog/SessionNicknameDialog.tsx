@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
-import { getConversationController } from '../../session/conversations';
+import { getConversationController } from '../../he4s/conversations';
 
 import { changeNickNameModal } from '../../state/ducks/modalDialog';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerLG } from '../basic/Text';
 import { useConversationRealName } from '../../hooks/useParamSelector';
-import { PubKey } from '../../session/types';
+import { PubKey } from '../../he4s/types';
 import { Localizer } from '../basic/Localizer';
 
 type Props = {
@@ -21,7 +21,7 @@ const StyledMaxWidth = styled.span`
   max-width: 30ch;
 `;
 
-export const SessionNicknameDialog = (props: Props) => {
+export const HE4SNicknameDialog = (props: Props) => {
   const { conversationId } = props;
   const [nickname, setNickname] = useState('');
   // this resolves to the real user name, and not the nickname (if set) like we do usually
@@ -59,13 +59,13 @@ export const SessionNicknameDialog = (props: Props) => {
   };
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={window.i18n('nicknameSet')}
       onClose={onClickClose}
       showExitIcon={false}
       showHeader={true}
     >
-      <StyledMaxWidth className="session-modal__centered">
+      <StyledMaxWidth className="he4s-modal__centered">
         <Localizer
           token="nicknameDescription"
           args={{
@@ -86,20 +86,20 @@ export const SessionNicknameDialog = (props: Props) => {
         data-testid="nickname-input"
       />
 
-      <div className="session-modal__button-group">
-        <SessionButton
+      <div className="he4s-modal__button-group">
+        <HE4SButton
           text={window.i18n('save')}
-          buttonType={SessionButtonType.Simple}
+          buttonType={HE4SButtonType.Simple}
           onClick={saveNickname}
           dataTestId="confirm-nickname"
         />
-        <SessionButton
+        <HE4SButton
           text={window.i18n('cancel')}
-          buttonColor={SessionButtonColor.Danger}
-          buttonType={SessionButtonType.Simple}
+          buttonColor={HE4SButtonColor.Danger}
+          buttonType={HE4SButtonType.Simple}
           onClick={onClickClose}
         />
       </div>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

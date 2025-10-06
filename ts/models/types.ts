@@ -21,7 +21,7 @@ export enum ConversationTypeEnum {
  * * anything over 0 means pinned with the higher priority the better. (No sorting currently implemented)
  *
  * When our local user pins a conversation we should use 1 as the priority.
- * When we get an update from the libsession util wrapper, we should trust the value and set it locally as is.
+ * When we get an update from the libhe4s util wrapper, we should trust the value and set it locally as is.
  * So if we get 100 as priority, we set the conversation priority to 100.
  * If we get -20 as priority we set it as is, even if our current client does not understand what that means.
  *

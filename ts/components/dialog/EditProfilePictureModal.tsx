@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { clearOurAvatar, uploadOurAvatar } from '../../interactions/conversationInteractions';
-import { ToastUtils } from '../../session/utils';
+import { ToastUtils } from '../../he4s/utils';
 import { editProfileModal, updateEditProfilePictureModal } from '../../state/ducks/modalDialog';
 import type { EditProfilePictureModalProps } from '../../types/ReduxTypes';
 import { pickFileForAvatar } from '../../types/attachments/VisualAttachment';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerLG } from '../basic/Text';
-import { SessionIconButton } from '../icon';
-import { SessionSpinner } from '../loading';
+import { HE4SIconButton } from '../icon';
+import { HE4SSpinner } from '../loading';
 import { ProfileAvatar } from './edit-profile/components';
 
 const StyledAvatarContainer = styled.div`
@@ -27,9 +27,9 @@ const UploadImageButton = () => {
   return (
     <div style={{ position: 'relative' }}>
       <StyledUploadButton>
-        <SessionIconButton iconType="thumbnail" iconSize={80} iconPadding="16px" />
+        <HE4SIconButton iconType="thumbnail" iconSize={80} iconPadding="16px" />
       </StyledUploadButton>
-      <SessionIconButton
+      <HE4SIconButton
         iconType="plusFat"
         iconSize={23}
         iconColor="var(--modal-background-content-color)"
@@ -107,7 +107,7 @@ export const EditProfilePictureModal = (props: EditProfilePictureModalProps) => 
   };
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={window.i18n('profileDisplayPictureSet')}
       onClose={closeDialog}
       showHeader={true}
@@ -135,28 +135,28 @@ export const EditProfilePictureModal = (props: EditProfilePictureModalProps) => 
       </div>
 
       {loading ? (
-        <SessionSpinner loading={loading} />
+        <HE4SSpinner loading={loading} />
       ) : (
         <>
           <SpacerLG />
-          <div className="session-modal__button-group">
-            <SessionButton
+          <div className="he4s-modal__button-group">
+            <HE4SButton
               text={window.i18n('save')}
-              buttonType={SessionButtonType.Simple}
+              buttonType={HE4SButtonType.Simple}
               onClick={handleUpload}
               disabled={newAvatarObjectUrl === avatarPath}
               dataTestId="save-button-profile-update"
             />
-            <SessionButton
+            <HE4SButton
               text={window.i18n('remove')}
-              buttonColor={SessionButtonColor.Danger}
-              buttonType={SessionButtonType.Simple}
+              buttonColor={HE4SButtonColor.Danger}
+              buttonType={HE4SButtonType.Simple}
               onClick={handleRemove}
               disabled={!avatarPath}
             />
           </div>
         </>
       )}
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

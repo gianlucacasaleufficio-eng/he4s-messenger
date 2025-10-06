@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   DisappearingMessageType,
   ExpirationTimerUpdate,
-} from '../session/disappearing_messages/types';
+} from '../he4s/disappearing_messages/types';
 import { PropsForMessageWithConvoProps } from '../state/ducks/conversations';
 import { AttachmentTypeWithPath } from '../types/Attachment';
 import { Reaction, ReactionList, SortedReactionList } from '../types/Reaction';

@@ -5,20 +5,20 @@ import { useLastMessage } from '../../hooks/useParamSelector';
 import { updateConversationInteractionState } from '../../interactions/conversationInteractions';
 import { ConversationInteractionStatus } from '../../interactions/types';
 import { updateConfirmModal } from '../../state/ducks/modalDialog';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
-import { SessionRadioGroup, SessionRadioItems } from '../basic/SessionRadioGroup';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
+import { HE4SRadioGroup, HE4SRadioItems } from '../basic/HE4SRadioGroup';
 import { SpacerLG } from '../basic/Text';
-import { SessionSpinner } from '../loading';
+import { HE4SSpinner } from '../loading';
 import type { LocalizerComponentPropsObject } from '../../types/localizer';
 
 import { StyledI18nSubText } from '../basic/StyledI18nSubText';
 
-export interface SessionConfirmDialogProps {
+export interface HE4SConfirmDialogProps {
   i18nMessage?: LocalizerComponentPropsObject;
   i18nMessageSub?: LocalizerComponentPropsObject;
   title?: string;
-  radioOptions?: SessionRadioItems;
+  radioOptions?: HE4SRadioItems;
   onOk?: any;
   onClose?: any;
   closeAfterInput?: boolean;
@@ -39,14 +39,14 @@ export interface SessionConfirmDialogProps {
   okText?: string;
   cancelText?: string;
   hideCancel?: boolean;
-  okTheme?: SessionButtonColor;
-  closeTheme?: SessionButtonColor;
+  okTheme?: HE4SButtonColor;
+  closeTheme?: HE4SButtonColor;
   showExitIcon?: boolean | undefined;
   headerReverse?: boolean;
   conversationId?: string;
 }
 
-export const SessionConfirm = (props: SessionConfirmDialogProps) => {
+export const HE4SConfirm = (props: HE4SConfirmDialogProps) => {
   const dispatch = useDispatch();
   const {
     title = '',
@@ -54,7 +54,7 @@ export const SessionConfirm = (props: SessionConfirmDialogProps) => {
     i18nMessageSub,
     radioOptions,
     okTheme,
-    closeTheme = SessionButtonColor.Danger,
+    closeTheme = HE4SButtonColor.Danger,
     onClickOk,
     onClickClose,
     hideCancel = false,
@@ -123,7 +123,7 @@ export const SessionConfirm = (props: SessionConfirmDialogProps) => {
   };
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={title}
       onClose={onClickClose}
       showExitIcon={showExitIcon}
@@ -132,14 +132,14 @@ export const SessionConfirm = (props: SessionConfirmDialogProps) => {
     >
       {!showHeader && <SpacerLG />}
 
-      <div className="session-modal__centered">
+      <div className="he4s-modal__centered">
         {i18nMessage ? <StyledI18nSubText {...i18nMessage} /> : null}
         {i18nMessageSub ? (
-          <StyledI18nSubText {...i18nMessageSub} className="session-confirm-sub-message" />
+          <StyledI18nSubText {...i18nMessageSub} className="he4s-confirm-sub-message" />
         ) : null}
         {radioOptions && chosenOption !== '' ? (
-          <SessionRadioGroup
-            group="session-confirm-radio-group"
+          <HE4SRadioGroup
+            group="he4s-confirm-radio-group"
             initialItem={chosenOption}
             items={radioOptions}
             radioPosition="right"
@@ -150,27 +150,27 @@ export const SessionConfirm = (props: SessionConfirmDialogProps) => {
             }}
           />
         ) : null}
-        <SessionSpinner loading={isLoading} />
+        <HE4SSpinner loading={isLoading} />
       </div>
 
-      <div className="session-modal__button-group">
-        <SessionButton
+      <div className="he4s-modal__button-group">
+        <HE4SButton
           text={okText}
           buttonColor={okTheme}
-          buttonType={SessionButtonType.Simple}
+          buttonType={HE4SButtonType.Simple}
           onClick={onClickOkHandler}
-          dataTestId="session-confirm-ok-button"
+          dataTestId="he4s-confirm-ok-button"
         />
         {!hideCancel && (
-          <SessionButton
+          <HE4SButton
             text={cancelText}
             buttonColor={!okTheme ? closeTheme : undefined}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
             onClick={onClickCancelHandler}
-            dataTestId="session-confirm-cancel-button"
+            dataTestId="he4s-confirm-cancel-button"
           />
         )}
       </div>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

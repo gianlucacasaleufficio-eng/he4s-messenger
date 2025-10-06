@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import useKey from 'react-use/lib/useKey';
 import styled from 'styled-components';
-import { SessionIcon, SessionIconButton } from '../icon';
+import { HE4SIcon, HE4SIconButton } from '../icon';
 
 import { quoteMessage } from '../../state/ducks/conversations';
 import { getQuotedMessage } from '../../state/selectors/conversations';
@@ -79,7 +79,7 @@ function renderSubtitleText(
             : null;
 }
 
-export const SessionQuotedMessageComposition = () => {
+export const HE4SQuotedMessageComposition = () => {
   const dispatch = useDispatch();
   const quotedMessageProps = useSelector(getQuotedMessage);
 
@@ -146,7 +146,7 @@ export const SessionQuotedMessageComposition = () => {
               />
             ) : hasAudioAttachment ? (
               <div style={{ margin: '0 var(--margins-xs) 0 0' }}>
-                <SessionIcon iconType="microphone" iconSize="huge" />
+                <HE4SIcon iconType="microphone" iconSize="huge" />
               </div>
             ) : null}
           </StyledImage>
@@ -161,7 +161,7 @@ export const SessionQuotedMessageComposition = () => {
           {subtitleText && <Subtle>{subtitleText}</Subtle>}
         </StyledText>
       </QuotedMessageCompositionReply>
-      <SessionIconButton
+      <HE4SIconButton
         iconType="exit"
         iconColor="var(--chat-buttons-icon-color)"
         iconSize="small"

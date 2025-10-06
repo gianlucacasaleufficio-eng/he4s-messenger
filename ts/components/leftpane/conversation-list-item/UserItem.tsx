@@ -5,7 +5,7 @@ import {
   useHasNickname,
   useIsMe,
 } from '../../../hooks/useParamSelector';
-import { PubKey } from '../../../session/types';
+import { PubKey } from '../../../he4s/types';
 import { useIsSearching } from '../../../state/selectors/search';
 import { ContactName } from '../../conversation/ContactName';
 

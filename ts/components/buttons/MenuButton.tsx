@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { clearSearch } from '../../state/ducks/search';
 import { resetLeftOverlayMode, setLeftOverlayMode } from '../../state/ducks/section';
 import { getLeftOverlayMode } from '../../state/selectors/section';
-import { SessionIcon } from '../icon';
+import { HE4SIcon } from '../icon';
 
 const StyledMenuButton = styled.button`
   position: relative;
@@ -32,7 +32,7 @@ const StyledMenuButton = styled.button`
 `;
 
 /**
- * This is the Session Menu Button. i.e. the button on top of the conversation list to start a new conversation.
+ * This is the HE4S Menu Button. i.e. the button on top of the conversation list to start a new conversation.
  * It has two state: selected or not and so we use an checkbox input to keep the state in sync.
  */
 export const MenuButton = () => {
@@ -48,7 +48,7 @@ export const MenuButton = () => {
 
   return (
     <StyledMenuButton data-testid="new-conversation-button" onClick={onClickFn}>
-      <SessionIcon
+      <HE4SIcon
         iconSize="medium"
         iconType="plus"
         iconColor="var(--menu-button-icon-color)"

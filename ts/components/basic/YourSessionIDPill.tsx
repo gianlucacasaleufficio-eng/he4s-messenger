@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { UserUtils } from '../../session/utils';
+import { UserUtils } from '../../he4s/utils';
 
 const StyledPillDividerLine = styled.div`
   border-bottom: 1px solid var(--border-color);
@@ -23,7 +23,7 @@ const StyledPillDivider = styled.div`
   margin: 0;
 `;
 
-export const YourSessionIDPill = () => {
+export const YourHE4SIDPill = () => {
   return (
     <StyledPillDivider>
       <StyledPillDividerLine />
@@ -33,7 +33,7 @@ export const YourSessionIDPill = () => {
   );
 };
 
-const StyledYourSessionIDSelectable = styled.p`
+const StyledYourHE4SIDSelectable = styled.p`
   user-select: none;
   text-align: center;
   word-break: break-all;
@@ -43,13 +43,13 @@ const StyledYourSessionIDSelectable = styled.p`
   flex-shrink: 0;
 `;
 
-export const YourSessionIDSelectable = () => {
-  const ourSessionID = UserUtils.getOurPubKeyStrFromCache();
+export const YourHE4SIDSelectable = () => {
+  const ourHE4SID = UserUtils.getOurPubKeyStrFromCache();
   return (
-    <StyledYourSessionIDSelectable data-testid="your-session-id">
-      {ourSessionID.slice(0, 33)}
+    <StyledYourHE4SIDSelectable data-testid="your-he4s-id">
+      {ourHE4SID.slice(0, 33)}
       <br />
-      {ourSessionID.slice(33)}
-    </StyledYourSessionIDSelectable>
+      {ourHE4SID.slice(33)}
+    </StyledYourHE4SIDSelectable>
   );
 };

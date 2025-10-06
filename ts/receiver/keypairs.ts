@@ -1,12 +1,12 @@
 import { KeyPair } from 'libsodium-wrappers-sumo';
-import { fromHexToArray, toHex } from '../session/utils/String';
+import { fromHexToArray, toHex } from '../he4s/utils/String';
 
 export type HexKeyPair = {
   publicHex: string;
   privateHex: string;
 };
 
-export type SessionKeyPair = {
+export type HE4SKeyPair = {
   /**
    * The curve25519 pubkey with prepended 5
    */
@@ -33,7 +33,7 @@ export class ECKeyPair {
     return new ECKeyPair(new Uint8Array(pub), new Uint8Array(priv));
   }
 
-  public static fromKeyPair(pair: SessionKeyPair) {
+  public static fromKeyPair(pair: HE4SKeyPair) {
     return new ECKeyPair(new Uint8Array(pair.pubKey), new Uint8Array(pair.privKey));
   }
 

@@ -40,7 +40,7 @@ type Props = {
   showPercentage?: boolean;
 };
 
-export function SessionProgressBar(props: Props) {
+export function HE4SProgressBar(props: Props) {
   const {
     initialValue,
     progress,

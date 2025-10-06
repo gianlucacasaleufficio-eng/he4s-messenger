@@ -1,7 +1,7 @@
 import { cloneDeep, isNumber, uniq } from 'lodash';
 import { channels } from './channels';
 import { OpenGroupRequestCommonType, OpenGroupV2Room } from './types';
-import { isOpenGroupV2 } from '../session/apis/open_group_api/utils/OpenGroupUtils';
+import { isOpenGroupV2 } from '../he4s/apis/open_group_api/utils/OpenGroupUtils';
 
 export type OpenGroupV2RoomWithImageID = {
   serverUrl: string;

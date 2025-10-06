@@ -50,7 +50,7 @@ import { PanelButtonGroup, PanelIconButton } from '../../../../buttons';
 import { Message } from '../../../message/message-item/Message';
 import { AttachmentInfo, MessageInfo } from './components';
 import { AttachmentCarousel } from './components/AttachmentCarousel';
-import { ToastUtils } from '../../../../../session/utils';
+import { ToastUtils } from '../../../../../he4s/utils';
 import { showCopyAccountIdAction } from '../../../../menu/items/CopyAccountId';
 
 // NOTE we override the default max-widths when in the detail isDetailView
@@ -235,7 +235,7 @@ function ReplyToMessageButton({ messageId }: WithMessageIdOpt) {
   );
 }
 
-function CopySenderSessionId({ messageId }: WithMessageIdOpt) {
+function CopySenderHE4SId({ messageId }: WithMessageIdOpt) {
   const isGroupOrCommunity = useSelectedIsGroupOrCommunity();
   const isPrivate = useSelectedIsPrivate();
   const isPublic = useSelectedIsPublic();
@@ -367,7 +367,7 @@ export const OverlayMessageInfo = () => {
             {/* CopyMessageBodyButton is always shown so the PanelButtonGroup always has at least one item */}
             <CopyMessageBodyButton messageId={messageId} />
             <ReplyToMessageButton messageId={messageId} />
-            <CopySenderSessionId messageId={messageId} />
+            <CopySenderHE4SId messageId={messageId} />
             {hasErrors && direction === 'outgoing' && (
               <PanelIconButton
                 text={window.i18n('resend')}

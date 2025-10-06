@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { acceptOpenGroupInvitation } from '../../../../interactions/messageInteractions';
 import { PropsForGroupInvitation } from '../../../../state/ducks/conversations';
-import { SessionIconButton } from '../../../icon';
+import { HE4SIconButton } from '../../../icon';
 import { ExpirableReadableMessage } from './ExpirableReadableMessage';
 
 const StyledGroupInvitation = styled.div`
@@ -18,7 +18,7 @@ const StyledGroupInvitation = styled.div`
       .group-details {
         color: var(--message-bubbles-sent-text-color);
       }
-      .session-icon-button {
+      .he4s-icon-button {
         background-color: var(--transparent-color);
       }
     }
@@ -56,7 +56,7 @@ const StyledGroupInvitation = styled.div`
       }
     }
 
-    .session-icon-button {
+    .he4s-icon-button {
       background-color: var(--primary-color);
     }
   }
@@ -85,7 +85,7 @@ export const GroupInvitation = (props: PropsForGroupInvitation) => {
       <StyledGroupInvitation className={classNames(classes)}>
         <div className="contents">
           <StyledIconContainer>
-            <SessionIconButton
+            <HE4SIconButton
               iconColor={
                 props.direction === 'outgoing'
                   ? 'var(--message-bubbles-sent-text-color)'

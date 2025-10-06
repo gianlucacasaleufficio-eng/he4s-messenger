@@ -5,18 +5,18 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { resetLeftOverlayMode } from '../../../state/ducks/section';
 
-import { UserUtils } from '../../../session/utils';
+import { UserUtils } from '../../../he4s/utils';
 import { Flex } from '../../basic/Flex';
 import { SpacerLG, SpacerMD, SpacerSM } from '../../basic/Text';
 import { HelpDeskButton } from '../../buttons';
 import { CopyToClipboardButton } from '../../buttons/CopyToClipboardButton';
-import { SessionIcon } from '../../icon';
-import { SessionInput } from '../../inputs';
+import { HE4SIcon } from '../../icon';
+import { HE4SInput } from '../../inputs';
 import { StyledLeftPaneOverlay } from './OverlayMessage';
-import { StyledTextAreaContainer } from '../../inputs/SessionInput';
+import { StyledTextAreaContainer } from '../../inputs/HE4SInput';
 
 const StyledHeadingContainer = styled(Flex)`
-  .session-icon-button {
+  .he4s-icon-button {
     border: 1px solid var(--text-primary-color);
     border-radius: 9999px;
     margin-inline-start: var(--margins-sm);
@@ -47,7 +47,7 @@ const StyledDescription = styled.div`
 `;
 
 const StyledButtonerContainer = styled.div`
-  .session-button {
+  .he4s-button {
     width: 160px;
     height: 41px;
   }
@@ -64,7 +64,7 @@ const StyledInputContainer = styled(Flex)`
 `;
 
 export const OverlayInvite = () => {
-  const ourSessionID = UserUtils.getOurPubKeyStrFromCache();
+  const ourHE4SID = UserUtils.getOurPubKeyStrFromCache();
 
   const [idCopied, setIdCopied] = useState(false);
 
@@ -92,9 +92,9 @@ export const OverlayInvite = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <SessionInput
+            <HE4SInput
               type="text"
-              value={ourSessionID}
+              value={ourHE4SID}
               editable={false}
               centerText={true}
               isTextArea={true}
@@ -107,7 +107,7 @@ export const OverlayInvite = () => {
           <SpacerLG />
           <StyledButtonerContainer>
             <CopyToClipboardButton
-              copyContent={ourSessionID}
+              copyContent={ourHE4SID}
               onCopyComplete={() => setIdCopied(true)}
               hotkey={true}
               dataTestId="copy-button-account-id"
@@ -116,7 +116,7 @@ export const OverlayInvite = () => {
         </>
       ) : (
         <>
-          <SessionIcon
+          <HE4SIcon
             iconType={'checkCircle'}
             iconSize={'huge2'}
             iconColor={'var(--primary-color)'}

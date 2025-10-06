@@ -1,12 +1,12 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { isEmpty } from 'lodash';
 import { useDispatch } from 'react-redux';
-import { ONBOARDING_TIMES } from '../../../session/constants';
-import { InvalidWordsError, NotEnoughWordsError } from '../../../session/crypto/mnemonic';
-import { ProfileManager } from '../../../session/profile_manager/ProfileManager';
-import { PromiseUtils } from '../../../session/utils';
-import { TaskTimedOutError } from '../../../session/utils/Promise';
-import { NotFoundError } from '../../../session/utils/errors';
+import { ONBOARDING_TIMES } from '../../../he4s/constants';
+import { InvalidWordsError, NotEnoughWordsError } from '../../../he4s/crypto/mnemonic';
+import { ProfileManager } from '../../../he4s/profile_manager/ProfileManager';
+import { PromiseUtils } from '../../../he4s/utils';
+import { TaskTimedOutError } from '../../../he4s/utils/Promise';
+import { NotFoundError } from '../../../he4s/utils/errors';
 import { trigger } from '../../../shims/events';
 import {
   AccountRestoration,
@@ -34,9 +34,9 @@ import {
 import { setSignInByLinking, setSignWithRecoveryPhrase } from '../../../util/storage';
 import { Flex } from '../../basic/Flex';
 import { SpacerLG, SpacerSM } from '../../basic/Text';
-import { SessionIcon } from '../../icon';
-import { SessionInput } from '../../inputs';
-import { SessionProgressBar } from '../../loading';
+import { HE4SIcon } from '../../icon';
+import { HE4SInput } from '../../inputs';
+import { HE4SProgressBar } from '../../loading';
 import { resetRegistration } from '../RegistrationStages';
 import { ContinueButton, OnboardDescription, OnboardHeading } from '../components';
 import { BackButtonWithinContainer } from '../components/BackButton';
@@ -197,8 +197,8 @@ export const RestoreAccount = () => {
       );
       dispatch(setAccountRestorationStep(AccountRestoration.DisplayName));
 
-      // Note: we have to assume here that libsession threw an error because the name was too long.
-      // The error reported by libsession is not localized
+      // Note: we have to assume here that libhe4s threw an error because the name was too long.
+      // The error reported by libhe4s is not localized
       dispatch(setDisplayNameError(window.i18n('displayNameErrorDescriptionShorter')));
     }
   };
@@ -248,8 +248,8 @@ export const RestoreAccount = () => {
         {step === AccountRestoration.RecoveryPassword ? (
           <>
             <Flex container={true} width={'100%'} alignItems="center">
-              <OnboardHeading>{window.i18n('sessionRecoveryPassword')}</OnboardHeading>
-              <SessionIcon
+              <OnboardHeading>{window.i18n('he4sRecoveryPassword')}</OnboardHeading>
+              <HE4SIcon
                 iconType="recoveryPasswordOutline"
                 iconSize="huge"
                 iconColor="var(--text-primary-color)"
@@ -261,7 +261,7 @@ export const RestoreAccount = () => {
               {window.i18n('recoveryPasswordRestoreDescription')}
             </OnboardDescription>
             <SpacerLG />
-            <SessionInput
+            <HE4SInput
               ariaLabel="Recovery password input"
               autoFocus={true}
               disableOnBlurEvent={true}
@@ -299,7 +299,7 @@ export const RestoreAccount = () => {
             <SpacerSM />
             <OnboardDescription>{window.i18n('displayNameErrorNew')}</OnboardDescription>
             <SpacerLG />
-            <SessionInput
+            <HE4SInput
               ariaLabel={window.i18n('displayNameEnter')}
               autoFocus={true}
               disableOnBlurEvent={true}
@@ -330,7 +330,7 @@ export const RestoreAccount = () => {
             />
           </Flex>
         ) : (
-          <SessionProgressBar
+          <HE4SProgressBar
             initialValue={
               step !== AccountRestoration.Finished && step !== AccountRestoration.Complete
                 ? progress

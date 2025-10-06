@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { PropsForExpirationTimer } from '../../state/ducks/conversations';
 
-import { isLegacyDisappearingModeEnabled } from '../../session/disappearing_messages/legacy';
-import { UserUtils } from '../../session/utils';
+import { isLegacyDisappearingModeEnabled } from '../../he4s/disappearing_messages/legacy';
+import { UserUtils } from '../../he4s/utils';
 import {
   useSelectedConversationDisappearingMode,
   useSelectedConversationKey,
@@ -20,12 +20,12 @@ import { SpacerMD, TextWithChildren } from '../basic/Text';
 import { ExpirableReadableMessage } from './message/message-item/ExpirableReadableMessage';
 // eslint-disable-next-line import/order
 import { ConversationInteraction } from '../../interactions';
-import { getConversationController } from '../../session/conversations';
+import { getConversationController } from '../../he4s/conversations';
 import { updateConfirmModal } from '../../state/ducks/modalDialog';
 import type { LocalizerComponentProps, LocalizerToken } from '../../types/localizer';
 import { Localizer } from '../basic/Localizer';
-import { SessionButtonColor } from '../basic/SessionButton';
-import { SessionIcon } from '../icon';
+import { HE4SButtonColor } from '../basic/HE4SButton';
+import { HE4SIcon } from '../icon';
 
 const FollowSettingButton = styled.button`
   color: var(--primary-color);
@@ -66,7 +66,7 @@ function useFollowSettingsButtonClick(
         title: window.i18n('disappearingMessagesFollowSetting'),
         i18nMessage,
         okText,
-        okTheme: SessionButtonColor.Danger,
+        okTheme: HE4SButtonColor.Danger,
         onClickOk: async () => {
           if (!selectedConvoKey) {
             throw new Error('no selected convokey');
@@ -249,7 +249,7 @@ export const TimerNotification = (props: PropsForExpirationTimer) => {
       >
         {renderOffIcon && (
           <>
-            <SessionIcon
+            <HE4SIcon
               iconType="timerFixed"
               iconSize={'tiny'}
               iconColor="var(--text-secondary-color)"

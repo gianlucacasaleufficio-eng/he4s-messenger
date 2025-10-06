@@ -6,12 +6,12 @@ import styled, { CSSProperties } from 'styled-components';
 import { THEME_GLOBALS } from '../../themes/globals';
 import { AnimatedFlex, Flex } from '../basic/Flex';
 import { SpacerMD } from '../basic/Text';
-import { SessionIconButton } from '../icon';
+import { HE4SIconButton } from '../icon';
 import { useHTMLDirection } from '../../util/i18n/rtlSupport';
 
 type TextSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-const StyledSessionInput = styled(Flex)<{
+const StyledHE4SInput = styled(Flex)<{
   error: boolean;
   textSize: TextSizes;
 }>`
@@ -178,7 +178,7 @@ const ErrorItem = (props: { id: string; error: string }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: THEME_GLOBALS['--default-duration-seconds'] }}
-      data-testid="session-error-message"
+      data-testid="he4s-error-message"
     >
       {props.error}
     </motion.label>
@@ -214,7 +214,7 @@ const ShowHideButton = (props: ShowHideButtonProps) => {
 
   if (forceShow) {
     return (
-      <SessionIconButton
+      <HE4SIconButton
         ariaLabel={ariaLabels.hide}
         iconType={'eyeDisabled'}
         iconColor={error ? 'var(--danger-color)' : 'var(--text-primary-color)'}
@@ -227,7 +227,7 @@ const ShowHideButton = (props: ShowHideButtonProps) => {
   }
 
   return (
-    <SessionIconButton
+    <HE4SIconButton
       ariaLabel={ariaLabels.show}
       iconType={'eye'}
       iconColor={props.error ? 'var(--danger-color)' : 'var(--text-primary-color)'}
@@ -271,7 +271,7 @@ type Props = {
   className?: string;
 };
 
-export const SessionInput = (props: Props) => {
+export const HE4SInput = (props: Props) => {
   const {
     placeholder,
     type = 'text',
@@ -285,7 +285,7 @@ export const SessionInput = (props: Props) => {
     disableOnBlurEvent,
     inputRef,
     inputDataTestId,
-    id = 'session-input-floating-label',
+    id = 'he4s-input-floating-label',
     enableShowHideButton,
     showHideButtonAriaLabels,
     showHideButtonDataTestIds,
@@ -394,7 +394,7 @@ export const SessionInput = (props: Props) => {
   }, [editable, isFocused, isTextArea]);
 
   return (
-    <StyledSessionInput
+    <StyledHE4SInput
       className={className}
       container={true}
       flexDirection="column"
@@ -422,7 +422,7 @@ export const SessionInput = (props: Props) => {
                 {...inputProps}
                 placeholder={!autoFocus ? '' : editable ? placeholder : value}
                 ref={inputRef || textAreaRef}
-                aria-label={ariaLabel || 'session input text area'}
+                aria-label={ariaLabel || 'he4s input text area'}
               />
             ) : (
               <StyledPlaceholder
@@ -447,7 +447,7 @@ export const SessionInput = (props: Props) => {
             {...inputProps}
             {...containerProps}
             ref={inputRef}
-            aria-label={ariaLabel || 'session input'}
+            aria-label={ariaLabel || 'he4s input'}
           />
         )}
         {editable && enableShowHideButton && (
@@ -472,6 +472,6 @@ export const SessionInput = (props: Props) => {
       >
         {ctaButton}
       </StyledCtaContainer>
-    </StyledSessionInput>
+    </StyledHE4SInput>
   );
 };

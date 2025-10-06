@@ -1,7 +1,7 @@
 import useInterval from 'react-use/lib/useInterval';
 import useUpdate from 'react-use/lib/useUpdate';
 import styled from 'styled-components';
-import { CONVERSATION } from '../../session/constants';
+import { CONVERSATION } from '../../he4s/constants';
 import { getConversationItemString } from '../../util/i18n/formatting/conversationItemTimestamp';
 import { formatFullDate } from '../../util/i18n/formatting/generics';
 

@@ -10,7 +10,7 @@ It's a good idea to gauge interest in your intended work by finding the current 
 for it or creating a new one yourself. Use Github issues as a place to signal
 your intentions and get feedback from the users most likely to appreciate your changes.
 
-You're most likely to have your pull request accepted if it addresses an existing Github issue marked with the [good-first-issue](https://github.com/oxen-io/session-desktop/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) tag, these issues are specifically tagged, because they are generally features/bug fixes which can be cleanly merged on a single platform without requiring cross platform work, are generally of lower complexity than larger features and are non contentious, meaning that the core team doesn't need to try and assess the community desire for such a feature before merging.
+You're most likely to have your pull request accepted if it addresses an existing Github issue marked with the [good-first-issue](https://github.com/oxen-io/he4s-desktop/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) tag, these issues are specifically tagged, because they are generally features/bug fixes which can be cleanly merged on a single platform without requiring cross platform work, are generally of lower complexity than larger features and are non contentious, meaning that the core team doesn't need to try and assess the community desire for such a feature before merging.
 
 Of course we encourage community developers to work on ANY issue filed on our Github regardless of how it’s tagged, however if you pick up or create an issue without the “Good first issue” tag it would be best if you leave a comment on the issue so that the core team can give you any guidance required, especially around UI heavy features or issues which require cross platform integration.
 
@@ -18,7 +18,7 @@ Of course we encourage community developers to work on ANY issue filed on our Gi
 
 ## Node.js
 
-You'll need a [Node.js](https://nodejs.org/) version which matches our current version. You can check [`.nvmrc` in the `unstable` branch](https://github.com/oxen-io/session-desktop/blob/unstable/.nvmrc) to see what the current version is.
+You'll need a [Node.js](https://nodejs.org/) version which matches our current version. You can check [`.nvmrc` in the `unstable` branch](https://github.com/oxen-io/he4s-desktop/blob/unstable/.nvmrc) to see what the current version is.
 
 If you use other node versions you might have or need a node version manager.
 
@@ -139,13 +139,13 @@ sudo dnf install make automake gcc gcc-c++ kernel-devel
 Now, run these commands in your preferred terminal in a good directory for development:
 
 ```
-git clone https://github.com/oxen-io/session-desktop.git
-cd session-desktop
+git clone https://github.com/oxen-io/he4s-desktop.git
+cd he4s-desktop
 npm install --global yarn      # (only if you don’t already have `yarn`)
 yarn install --frozen-lockfile # Install and build dependencies (this will take a while)
 yarn build-everything
 yarn test                      # A good idea to make sure tests run first
-yarn start-prod                # Start Session!
+yarn start-prod                # Start HE4S!
 ```
 
 You'll need to restart the application regularly to see your changes, as there
@@ -156,17 +156,17 @@ is no automatic restart mechanism. Alternatively, keep the developer tools open
 
 ```
 yarn build-everything:watch # runs until you stop it, re-generating built assets on file changes
-# Once this command is waiting for changes, you will need to run in another terminal `yarn worker:utils && yarn worker:libsession` to fix the "exports undefined" error on start.
+# Once this command is waiting for changes, you will need to run in another terminal `yarn worker:utils && yarn worker:libhe4s` to fix the "exports undefined" error on start.
 # If you do change the sass while this command is running, it won't pick it up. You need to either run `yarn sass` or have `yarn sass:watch` running in a separate terminal.
 ```
 
 ## Multiple instances
 
-Since there is no registration for Session, you can create as many accounts as you
+Since there is no registration for HE4S, you can create as many accounts as you
 can public keys. Each client however has a dedicated storage profile which is determined by the environment and instance variables.
 
 This profile will change [userData](https://electron.atom.io/docs/all/#appgetpathname)
-directory from `%appData%/Session` to `%appData%/Session-{environment}-{instance}`.
+directory from `%appData%/HE4S` to `%appData%/HE4S-{environment}-{instance}`.
 
 There are a few scripts which you can use:
 
@@ -197,7 +197,7 @@ For example, to create an 'alice' profile locally, put a file called `local-alic
 }
 ```
 
-This will then set the `userData` directory to `%appData%/Session-alice-profile` when running the `alice` instance.
+This will then set the `userData` directory to `%appData%/HE4S-alice-profile` when running the `alice` instance.
 
 # Making changes
 
@@ -237,7 +237,7 @@ So you wanna make a pull request? Please observe the following guidelines.
   this script generates updated TypeScript type definitions to ensure you aren't
   using a localisation key which doesn't exist.
 - Please do not submit pull requests for pure translation fixes. Anyone can update
-  the translations at [Crowdin](https://getsession.org/translate).
+  the translations at [Crowdin](https://gethe4s.org/translate).
 - [Rebase](https://nathanleclaire.com/blog/2014/09/14/dont-be-scared-of-git-rebase/) your
   changes on the latest `clearnet` branch, resolving any conflicts.
   This ensures that your changes will merge cleanly when you open your PR.

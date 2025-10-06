@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useTimerOptionsByMode } from '../../../../../hooks/useParamSelector';
 import { setDisappearingMessagesByConvoId } from '../../../../../interactions/conversationInteractions';
-import { TimerOptions } from '../../../../../session/disappearing_messages/timerOptions';
-import { DisappearingMessageConversationModeType } from '../../../../../session/disappearing_messages/types';
+import { TimerOptions } from '../../../../../he4s/disappearing_messages/timerOptions';
+import { DisappearingMessageConversationModeType } from '../../../../../he4s/disappearing_messages/types';
 import { closeRightPanel } from '../../../../../state/ducks/conversations';
 import { resetRightOverlayMode } from '../../../../../state/ducks/section';
 import {
@@ -16,7 +16,7 @@ import {
 } from '../../../../../state/selectors/selectedConversation';
 import { ReleasedFeatures } from '../../../../../util/releaseFeature';
 import { Flex } from '../../../../basic/Flex';
-import { SessionButton } from '../../../../basic/SessionButton';
+import { HE4SButton } from '../../../../basic/HE4SButton';
 import { SpacerLG } from '../../../../basic/Text';
 import { Header, HeaderSubtitle, HeaderTitle, StyledScrollContainer } from '../components';
 import { DisappearingModes } from './DisappearingModes';
@@ -32,7 +32,7 @@ const StyledButtonContainer = styled.div`
   width: 100%;
   bottom: 0px;
 
-  .session-button {
+  .he4s-button {
     font-weight: 500;
     min-width: 90px;
     width: fit-content;
@@ -217,7 +217,7 @@ export const OverlayDisappearingMessages = () => {
         <ButtonSpacer />
 
         <StyledButtonContainer>
-          <SessionButton
+          <HE4SButton
             onClick={handleSetMode}
             disabled={
               singleMode
@@ -229,7 +229,7 @@ export const OverlayDisappearingMessages = () => {
             dataTestId={'disappear-set-button'}
           >
             {window.i18n('set')}
-          </SessionButton>
+          </HE4SButton>
         </StyledButtonContainer>
       </Flex>
     </StyledScrollContainer>

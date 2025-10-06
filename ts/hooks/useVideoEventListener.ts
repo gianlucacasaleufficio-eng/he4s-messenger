@@ -8,7 +8,7 @@ import {
   DEVICE_DISABLED_DEVICE_ID,
   InputItem,
   removeVideoEventsListener,
-} from '../session/utils/calling/CallManager';
+} from '../he4s/utils/calling/CallManager';
 import { getCallIsInFullScreen, getHasOngoingCallWithPubkey } from '../state/selectors/call';
 import { useSelectedConversationKey } from '../state/selectors/selectedConversation';
 

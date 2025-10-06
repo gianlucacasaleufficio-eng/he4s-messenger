@@ -1,6 +1,6 @@
 # Releasing
 
-Creating a new Session Desktop release is very simple.
+Creating a new HE4S Desktop release is very simple.
 
 1.  Bump up the version in `package.json`.
 2.  Merge all changes required into the `master` branch.
@@ -27,10 +27,10 @@ Once this bug is fixed we can go back to using the `zip` format by itself.
 
 Flatpak generation is different from the normal build process and thus must be done once we have the final build binaries.
 
-1. Clone https://github.com/flathub/network.loki.Session
-2. Update `network.loki.Session.metainfo.xml` with the release information
+1. Clone https://github.com/flathub/network.loki.HE4S
+2. Update `network.loki.HE4S.metainfo.xml` with the release information
     - `<release version="[version]" date="[date]"/>`
-3. Update `network.loki.Session.json`
+3. Update `network.loki.HE4S.json`
     - Under `sources`, change the `url` so it points to the latest `deb` and update the `sha256` signature.
 4. Create a pull request with the changes
 

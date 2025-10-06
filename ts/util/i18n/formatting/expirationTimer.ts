@@ -1,5 +1,5 @@
 import { Duration, formatDuration, intervalToDuration } from 'date-fns';
-import { DURATION_SECONDS } from '../../../session/constants';
+import { DURATION_SECONDS } from '../../../he4s/constants';
 import { getForcedEnglishTimeLocale } from '../timeLocaleMap';
 import { getTimeLocaleDictionary } from '../shared';
 

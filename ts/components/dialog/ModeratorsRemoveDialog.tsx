@@ -2,18 +2,18 @@ import { compact } from 'lodash';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getConversationController } from '../../session/conversations';
-import { PubKey } from '../../session/types';
-import { ToastUtils } from '../../session/utils';
+import { getConversationController } from '../../he4s/conversations';
+import { PubKey } from '../../he4s/types';
+import { ToastUtils } from '../../he4s/utils';
 import { Flex } from '../basic/Flex';
 
 import { useConversationPropsById } from '../../hooks/useParamSelector';
-import { sogsV3RemoveAdmins } from '../../session/apis/open_group_api/sogsv3/sogsV3AddRemoveMods';
+import { sogsV3RemoveAdmins } from '../../he4s/apis/open_group_api/sogsv3/sogsV3AddRemoveMods';
 import { updateRemoveModeratorsModal } from '../../state/ducks/modalDialog';
 import { MemberListItem } from '../MemberListItem';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
-import { SessionSpinner } from '../loading';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
+import { HE4SSpinner } from '../loading';
 import { Localizer } from '../basic/Localizer';
 
 type Props = {
@@ -84,7 +84,7 @@ export const RemoveModeratorsDialog = (props: Props) => {
   const hasMods = existingMods.length !== 0;
 
   return (
-    <SessionWrapperModal title={i18n('adminRemove')} onClose={closeDialog}>
+    <HE4SWrapperModal title={i18n('adminRemove')} onClose={closeDialog}>
       <Flex container={true} flexDirection="column" alignItems="center">
         {hasMods ? (
           <div className="contact-selection-list">
@@ -111,24 +111,24 @@ export const RemoveModeratorsDialog = (props: Props) => {
           </p>
         )}
 
-        <div className="session-modal__button-group">
-          <SessionButton
-            buttonType={SessionButtonType.Simple}
+        <div className="he4s-modal__button-group">
+          <HE4SButton
+            buttonType={HE4SButtonType.Simple}
             onClick={removeModsCall}
             disabled={removingInProgress}
             text={i18n('okay')}
           />
-          <SessionButton
-            buttonType={SessionButtonType.Simple}
-            buttonColor={SessionButtonColor.Danger}
+          <HE4SButton
+            buttonType={HE4SButtonType.Simple}
+            buttonColor={HE4SButtonColor.Danger}
             onClick={closeDialog}
             disabled={removingInProgress}
             text={i18n('cancel')}
           />
         </div>
 
-        <SessionSpinner loading={removingInProgress} />
+        <HE4SSpinner loading={removingInProgress} />
       </Flex>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

@@ -53,7 +53,7 @@ const setupTheme = async () => {
   }
 };
 
-export const SessionTheme = ({
+export const HE4STheme = ({
   children,
   runSetup = true,
 }: {

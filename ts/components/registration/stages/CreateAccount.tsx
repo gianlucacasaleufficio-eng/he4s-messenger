@@ -2,10 +2,10 @@ import { isEmpty } from 'lodash';
 import { useDispatch } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
 import { SettingsKey } from '../../../data/settings-key';
-import { mnDecode } from '../../../session/crypto/mnemonic';
-import { ProfileManager } from '../../../session/profile_manager/ProfileManager';
-import { StringUtils } from '../../../session/utils';
-import { fromHex } from '../../../session/utils/String';
+import { mnDecode } from '../../../he4s/crypto/mnemonic';
+import { ProfileManager } from '../../../he4s/profile_manager/ProfileManager';
+import { StringUtils } from '../../../he4s/utils';
+import { fromHex } from '../../../he4s/utils/String';
 import { trigger } from '../../../shims/events';
 import {
   AccountCreation,
@@ -23,12 +23,12 @@ import {
 import {
   generateMnemonic,
   registerSingleDevice,
-  sessionGenerateKeyPair,
+  he4sGenerateKeyPair,
 } from '../../../util/accountManager';
 import { Storage, setSignWithRecoveryPhrase } from '../../../util/storage';
 import { Flex } from '../../basic/Flex';
 import { SpacerLG, SpacerSM } from '../../basic/Text';
-import { SessionInput } from '../../inputs';
+import { HE4SInput } from '../../inputs';
 import { resetRegistration } from '../RegistrationStages';
 import { ContinueButton, OnboardDescription, OnboardHeading } from '../components';
 import { BackButtonWithinContainer } from '../components/BackButton';
@@ -74,7 +74,7 @@ export const CreateAccount = () => {
         seedHex = seedHex.substring(0, privKeyHexLength);
       }
       const seed = fromHex(seedHex);
-      const keyPair = await sessionGenerateKeyPair(seed);
+      const keyPair = await he4sGenerateKeyPair(seed);
       const newHexPubKey = StringUtils.decode(keyPair.pubKey, 'hex');
 
       dispatch(setRecoveryPassword(mnemonic));
@@ -106,8 +106,8 @@ export const CreateAccount = () => {
         `[onboarding] create account: signUpWithDetails failed! Error: ${err.message || String(err)}`
       );
       dispatch(setAccountCreationStep(AccountCreation.DisplayName));
-      // Note: we have to assume here that libsession threw an error because the name was too long.
-      // The error reported by libsession is not localized
+      // Note: we have to assume here that libhe4s threw an error because the name was too long.
+      // The error reported by libhe4s is not localized
       dispatch(setDisplayNameError(window.i18n('displayNameErrorDescriptionShorter')));
     }
   };
@@ -134,7 +134,7 @@ export const CreateAccount = () => {
         <SpacerSM />
         <OnboardDescription>{window.i18n('displayNameDescription')}</OnboardDescription>
         <SpacerLG />
-        <SessionInput
+        <HE4SInput
           ariaLabel={window.i18n('displayNameEnter')}
           autoFocus={true}
           disableOnBlurEvent={true}

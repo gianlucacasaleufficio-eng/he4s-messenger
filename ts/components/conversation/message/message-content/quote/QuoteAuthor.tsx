@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useQuoteAuthorName } from '../../../../../hooks/useParamSelector';
-import { PubKey } from '../../../../../session/types';
+import { PubKey } from '../../../../../he4s/types';
 import { useSelectedIsPublic } from '../../../../../state/selectors/selectedConversation';
 import { ContactName } from '../../../ContactName';
 import { QuoteProps } from './Quote';

@@ -6,7 +6,7 @@ import type {
   LocalizerDictionary,
   LocalizerToken,
 } from '../../types/localizer';
-import { SessionHtmlRenderer } from './SessionHTMLRenderer';
+import { HE4SHtmlRenderer } from './HE4SHTMLRenderer';
 
 /** An array of supported html tags to render if found in a string */
 export const supportedFormattingTags = ['b', 'i', 'u', 's', 'br', 'span'];
@@ -112,7 +112,7 @@ export const Localizer = <T extends LocalizerToken>(props: LocalizerComponentPro
   return containsFormattingTags ? (
     /** If the string contains a relevant formatting tag, render it as HTML */
     <StyledHtmlRenderer>
-      <SessionHtmlRenderer tag={props.asTag} html={i18nString} className={props.className} />
+      <HE4SHtmlRenderer tag={props.asTag} html={i18nString} className={props.className} />
     </StyledHtmlRenderer>
   ) : (
     i18nString

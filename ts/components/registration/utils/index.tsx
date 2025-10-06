@@ -1,5 +1,5 @@
 import { Dispatch } from '@reduxjs/toolkit';
-import { sanitizeSessionUsername } from '../../../session/utils/String';
+import { sanitizeHE4SUsername } from '../../../he4s/utils/String';
 
 export function sanitizeDisplayNameOrToast(
   displayName: string,
@@ -7,7 +7,7 @@ export function sanitizeDisplayNameOrToast(
   onDisplayNameError: (error: string | undefined) => any,
   dispatch?: Dispatch
 ) {
-  const sanitizedName = sanitizeSessionUsername(displayName);
+  const sanitizedName = sanitizeHE4SUsername(displayName);
   const errorString = !sanitizedName ? window.i18n('displayNameErrorDescription') : undefined;
   if (dispatch) {
     dispatch(onDisplayNameError(errorString));

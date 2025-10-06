@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { useIconToImageURL } from '../../../hooks/useIconToImageURL';
 import { updateLightBoxOptions } from '../../../state/ducks/modalDialog';
 import { prepareQRCodeForLightBox } from '../../../util/qrCodes';
-import { QRCodeLogoProps, SessionQRCode } from '../../SessionQRCode';
+import { QRCodeLogoProps, HE4SQRCode } from '../../HE4SQRCode';
 import { Avatar, AvatarSize } from '../../avatar/Avatar';
 import { Flex } from '../../basic/Flex';
 import { SpacerSM } from '../../basic/Text';
-import { SessionIconButton } from '../../icon';
+import { HE4SIconButton } from '../../icon';
 import { ProfileDialogModes } from './EditProfileDialog';
 
 const qrLogoProps: QRCodeLogoProps = {
@@ -15,18 +15,18 @@ const qrLogoProps: QRCodeLogoProps = {
 };
 
 export const QRView = ({
-  sessionID,
+  he4sID,
   setMode,
 }: {
-  sessionID: string;
+  he4sID: string;
   setMode: (mode: ProfileDialogModes) => void;
 }) => {
   const { dataURL, iconSize, iconColor, backgroundColor, loading } = useIconToImageURL(qrLogoProps);
 
   return (
-    <SessionQRCode
-      id={'session-account-id'}
-      value={sessionID}
+    <HE4SQRCode
+      id={'he4s-account-id'}
+      value={he4sID}
       size={190}
       backgroundColor={backgroundColor}
       foregroundColor={iconColor}
@@ -86,7 +86,7 @@ export const ProfileHeader = (props: ProfileHeaderProps) => {
           data-testid="image-upload-section"
         />
         <div className="qr-view-button" onClick={onQRClick} role="button">
-          <SessionIconButton iconType="qr" iconSize={26} iconColor="var(--black-color)" />
+          <HE4SIconButton iconType="qr" iconSize={26} iconColor="var(--black-color)" />
         </div>
       </div>
     </div>
@@ -94,13 +94,13 @@ export const ProfileHeader = (props: ProfileHeaderProps) => {
 };
 
 // We center the name in the modal by offsetting the pencil icon
-// we have a transparent border to match the dimensions of the SessionInput
+// we have a transparent border to match the dimensions of the HE4SInput
 const StyledProfileName = styled(Flex)`
   margin-inline-start: calc((25px + var(--margins-sm)) * -1);
   padding: 8px;
   border: 1px solid var(--transparent-color);
 
-  .session-icon-button {
+  .he4s-icon-button {
     padding: 0px;
   }
 `;
@@ -117,7 +117,7 @@ export const ProfileName = (props: { profileName: string; onClick: () => void })
 
   return (
     <StyledProfileName container={true} justifyContent="center" alignItems="center">
-      <SessionIconButton
+      <HE4SIconButton
         iconType="pencil"
         iconSize="large"
         onClick={onClick}

@@ -4,7 +4,7 @@ import styled, { CSSProperties } from 'styled-components';
 import { THEME_GLOBALS } from '../themes/globals';
 import { renderQRCode } from '../util/qrCodes';
 import { AnimatedFlex } from './basic/Flex';
-import { SessionIconType } from './icon';
+import { HE4SIconType } from './icon';
 
 // AnimatedFlex because we fade in the QR code a flicker on first render
 const StyledQRView = styled(AnimatedFlex)<{
@@ -16,9 +16,9 @@ const StyledQRView = styled(AnimatedFlex)<{
   ${props => props.size && `width: ${props.size}px; height: ${props.size}px;`}
 `;
 
-export type QRCodeLogoProps = { iconType: SessionIconType; iconSize: number };
+export type QRCodeLogoProps = { iconType: HE4SIconType; iconSize: number };
 
-export type SessionQRCodeProps = {
+export type HE4SQRCodeProps = {
   id: string;
   value: string;
   size: number;
@@ -34,7 +34,7 @@ export type SessionQRCodeProps = {
   style?: CSSProperties;
 };
 
-export function SessionQRCode(props: SessionQRCodeProps) {
+export function HE4SQRCode(props: HE4SQRCodeProps) {
   const {
     id,
     value,
@@ -119,7 +119,7 @@ export function SessionQRCode(props: SessionQRCodeProps) {
         event.preventDefault();
         void handleOnClick();
       }}
-      data-testId={dataTestId || 'session-qr-code'}
+      data-testId={dataTestId || 'he4s-qr-code'}
       initial={{ opacity: 0 }}
       animate={{ opacity: loading ? 0 : 1 }}
       transition={{ duration: THEME_GLOBALS['--default-duration-seconds'] }}

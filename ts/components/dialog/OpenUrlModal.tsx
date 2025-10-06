@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { MessageInteraction } from '../../interactions';
 import { OpenUrlModalState, updateOpenUrlModal } from '../../state/ducks/modalDialog';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerMD } from '../basic/Text';
 import { StyledI18nSubText } from '../basic/StyledI18nSubText';
 import { StyledModalDescriptionContainer } from './shared/ModalDescriptionContainer';
@@ -39,34 +39,34 @@ export function OpenUrlModal(props: OpenUrlModalState) {
   }
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={window.i18n('urlOpen')}
       onClose={onClose}
       showExitIcon={true}
       showHeader={true}
     >
-      <div className="session-modal__centered">
+      <div className="he4s-modal__centered">
         <StyledScrollDescriptionContainer>
           <StyledI18nSubText token="urlOpenDescription" asTag="span" args={{ url }} />
         </StyledScrollDescriptionContainer>
       </div>
       <SpacerMD />
-      <div className="session-modal__button-group">
-        <SessionButton
+      <div className="he4s-modal__button-group">
+        <HE4SButton
           text={window.i18n('open')}
-          buttonColor={SessionButtonColor.Danger}
-          buttonType={SessionButtonType.Simple}
+          buttonColor={HE4SButtonColor.Danger}
+          buttonType={HE4SButtonType.Simple}
           onClick={onClickOpen}
-          dataTestId="session-confirm-ok-button"
+          dataTestId="he4s-confirm-ok-button"
         />
-        <SessionButton
+        <HE4SButton
           text={window.i18n('urlCopy')}
-          buttonType={SessionButtonType.Simple}
+          buttonType={HE4SButtonType.Simple}
           onClick={onClickCopy}
-          dataTestId="session-confirm-cancel-button"
+          dataTestId="he4s-confirm-cancel-button"
         />
       </div>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 }
 

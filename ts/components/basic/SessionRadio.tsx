@@ -51,7 +51,7 @@ const StyledLabel = styled.label<{
   }
 `;
 
-type SessionRadioProps = {
+type HE4SRadioProps = {
   label: string;
   value: string;
   active: boolean;
@@ -63,7 +63,7 @@ type SessionRadioProps = {
   style?: CSSProperties;
 };
 
-export const SessionRadio = (props: SessionRadioProps) => {
+export const HE4SRadio = (props: HE4SRadioProps) => {
   const {
     label,
     inputName,
@@ -160,7 +160,7 @@ const StyledLabelOutlineSelected = styled(StyledLabel)<{ selectedColor: string }
 /**
  * Keeping this component here so we can reuse the `StyledInput` and `StyledLabel` defined locally rather than exporting them
  */
-export const SessionRadioPrimaryColors = (props: {
+export const HE4SRadioPrimaryColors = (props: {
   value: string;
   active: boolean;
   inputName?: string;

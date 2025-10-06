@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-multi-str */
-export type SessionIconType =
+export type HE4SIconType =
   | 'addUser'
   | 'addModerator'
   | 'arrow'
@@ -76,7 +76,7 @@ export type SessionIconType =
   | 'sending'
   | 'doubleCheckCircle'
   | 'gallery'
-  | 'session'
+  | 'he4s'
   | 'recoveryPasswordFill'
   | 'recoveryPasswordOutline'
   | 'speaker'
@@ -98,7 +98,7 @@ export type SessionIconType =
   | 'timer60'
   | 'videoCamera';
 
-export type SessionIconSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'huge2' | 'max';
+export type HE4SIconSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'huge2' | 'max';
 
 export type ClipRule = 'nonzero' | 'evenodd' | 'inherit';
 export type FillRule = 'nonzero' | 'evenodd';
@@ -112,7 +112,7 @@ type IconProps = {
   fillRule?: FillRule;
 };
 
-export const icons: Record<SessionIconType, IconProps> = {
+export const icons: Record<HE4SIconType, IconProps> = {
   addUser: {
     path: 'M21.403 26.276c6.38 0 11.578-5.105 11.578-11.388C32.98 8.605 27.783 3.5 21.403 3.5c-6.38 0-11.578 5.105-11.578 11.388 0 6.283 5.19 11.388 11.578 11.388Zm0-19.755c4.691 0 8.507 3.753 8.507 8.367 0 4.614-3.816 8.368-8.507 8.368-4.69 0-8.507-3.754-8.507-8.368 0-4.614 3.816-8.367 8.507-8.367ZM45.564 35.467h-6.932v-6.82c0-.777-.638-1.404-1.428-1.404-.791 0-1.429.627-1.429 1.404v6.82h-6.932c-.791 0-1.428.626-1.428 1.404 0 .778.637 1.405 1.428 1.405h6.932v6.82c0 .777.638 1.404 1.428 1.404.791 0 1.428-.627 1.428-1.405v-6.82h6.933c.791 0 1.428-.626 1.428-1.404 0-.778-.637-1.404-1.428-1.404Z M29.956 32.446h2.756v-2.213a11.843 11.843 0 0 0-4.99-1.102h-12.93C8.275 29.13 3 34.327 3 40.73v3.05c0 .461.376.831.845.831h1.374c.468 0 .844-.37.844-.83V40.73c0-4.742 3.908-8.578 8.722-8.578h12.921c.776 0 1.52.105 2.242.294h.008Z',
     viewBox: '0 0 50 50',
@@ -442,7 +442,7 @@ export const icons: Record<SessionIconType, IconProps> = {
     viewBox: '-1 -2 15 15',
     ratio: 1,
   },
-  session: {
+  he4s: {
     path: 'M0 68h26c-1 7 8 13 28 14 19 0 33-3 33-11 0-19-85 3-85-39C2 12 23 0 54 0c32 0 54 13 54 34H82c0-7-7-14-26-14-17 0-30 3-30 11 0 18 85-2 85 39 0 20-22 32-55 32-34 0-56-13-56-34M126 2h95v21h-71v18h70v19h-70v20h71v20h-95V2zm108 66h26c0 7 8 13 28 14 19 0 33-3 33-11 0-19-84 3-84-39 0-20 20-32 51-32 32 0 54 13 54 34h-25c0-7-7-14-27-14-17 0-29 3-29 11 0 18 84-2 84 39 0 20-22 32-55 32-34 0-56-13-56-34m120 0h26c0 7 8 13 28 14 19 0 33-3 33-11 0-19-85 3-85-39 0-20 21-32 52-32 32 0 54 13 54 34h-26c1-7-7-14-26-14-17 0-29 3-29 11 0 18 84-2 84 39 0 20-22 32-55 32-34 0-56-13-56-34M480 2h24v98h-24V2zm136 49c0-20-14-31-37-31-24 0-38 11-38 31s14 31 38 31c23 0 37-11 37-31m-99 0c0-31 24-51 62-51s61 20 61 51-23 51-61 51-62-20-62-51M654 2h20l68 62V2h24v98h-20l-69-62v62h-24V2z',
     viewBox: '0 0 766.2 102.3',
     ratio: 1,

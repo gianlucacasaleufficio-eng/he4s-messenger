@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 
 import { useIsClosedGroup, useSortedGroupMembers } from '../../../hooks/useParamSelector';
-import { UserUtils } from '../../../session/utils';
+import { UserUtils } from '../../../he4s/utils';
 import { assertUnreachable } from '../../../types/sqlSharedTypes';
 import { Avatar, AvatarSize } from '../Avatar';
 

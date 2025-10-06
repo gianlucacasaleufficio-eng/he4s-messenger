@@ -321,7 +321,7 @@ export const getSuggestedFilename = ({
   if (attachment.fileName?.length > 3) {
     return attachment.fileName;
   }
-  const prefix = 'session-attachment';
+  const prefix = 'he4s-attachment';
   const suffix = timestamp ? format(new Date(timestamp), '-yyyy-MM-dd-HHmmss') : '';
   const fileType = getFileExtension(attachment);
   const extension = fileType ? `.${fileType}` : '';

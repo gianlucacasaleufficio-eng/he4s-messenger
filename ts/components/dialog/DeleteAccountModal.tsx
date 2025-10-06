@@ -2,16 +2,16 @@ import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { updateDeleteAccountModal } from '../../state/ducks/modalDialog';
-import { SessionWrapperModal } from '../SessionWrapperModal';
-import { SessionButton, SessionButtonColor, SessionButtonType } from '../basic/SessionButton';
+import { HE4SWrapperModal } from '../HE4SWrapperModal';
+import { HE4SButton, HE4SButtonColor, HE4SButtonType } from '../basic/HE4SButton';
 import { SpacerLG } from '../basic/Text';
-import { SessionSpinner } from '../loading';
+import { HE4SSpinner } from '../loading';
 
 import {
   deleteEverythingAndNetworkData,
   sendConfigMessageAndDeleteEverything,
 } from '../../util/accountManager';
-import { SessionRadioGroup } from '../basic/SessionRadioGroup';
+import { HE4SRadioGroup } from '../basic/HE4SRadioGroup';
 import { Localizer } from '../basic/Localizer';
 
 const DEVICE_ONLY = 'device_only';
@@ -25,12 +25,12 @@ const DescriptionBeforeAskingConfirmation = (props: {
   const { deleteMode, setDeleteMode } = props;
   return (
     <>
-      <span className="session-confirm-main-message">
+      <span className="he4s-confirm-main-message">
         <Localizer token="clearDataAllDescription" />
       </span>
 
       <SpacerLG />
-      <SessionRadioGroup
+      <HE4SRadioGroup
         group="delete_account"
         initialItem={deleteMode}
         onClick={value => {
@@ -49,7 +49,7 @@ const DescriptionBeforeAskingConfirmation = (props: {
 
 const DescriptionWhenAskingConfirmation = (props: { deleteMode: DeleteModes }) => {
   return (
-    <span className="session-confirm-main-message">
+    <span className="he4s-confirm-main-message">
       {props.deleteMode === 'device_and_network'
         ? window.i18n('clearDeviceAndNetworkConfirm')
         : window.i18n('clearDeviceDescription')}
@@ -101,7 +101,7 @@ export const DeleteAccountModal = () => {
   }, [dispatch]);
 
   return (
-    <SessionWrapperModal
+    <HE4SWrapperModal
       title={window.i18n('clearDataAll')}
       onClose={onClickCancelHandler}
       showExitIcon={true}
@@ -114,12 +114,12 @@ export const DeleteAccountModal = () => {
           setDeleteMode={setDeleteMode}
         />
       )}
-      <div className="session-modal__centered">
-        <div className="session-modal__button-group">
-          <SessionButton
+      <div className="he4s-modal__centered">
+        <div className="he4s-modal__button-group">
+          <HE4SButton
             text={window.i18n('clear')}
-            buttonColor={SessionButtonColor.Danger}
-            buttonType={SessionButtonType.Simple}
+            buttonColor={HE4SButtonColor.Danger}
+            buttonType={HE4SButtonType.Simple}
             onClick={() => {
               if (!askingConfirmation) {
                 setAskingConfirmation(true);
@@ -134,9 +134,9 @@ export const DeleteAccountModal = () => {
             disabled={isLoading}
           />
 
-          <SessionButton
+          <HE4SButton
             text={window.i18n('cancel')}
-            buttonType={SessionButtonType.Simple}
+            buttonType={HE4SButtonType.Simple}
             onClick={() => {
               dispatch(updateDeleteAccountModal(null));
             }}
@@ -144,8 +144,8 @@ export const DeleteAccountModal = () => {
           />
         </div>
         <SpacerLG />
-        <SessionSpinner loading={isLoading} />
+        <HE4SSpinner loading={isLoading} />
       </div>
-    </SessionWrapperModal>
+    </HE4SWrapperModal>
   );
 };

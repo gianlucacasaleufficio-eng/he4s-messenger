@@ -5,14 +5,14 @@ import useKey from 'react-use/lib/useKey';
 import styled from 'styled-components';
 
 import { isEmpty } from 'lodash';
-import { SessionButton } from '../../basic/SessionButton';
-import { SessionSpinner } from '../../loading';
+import { HE4SButton } from '../../basic/HE4SButton';
+import { HE4SSpinner } from '../../loading';
 
 import { useSet } from '../../../hooks/useSet';
-import { VALIDATION } from '../../../session/constants';
-import { createClosedGroup } from '../../../session/conversations/createClosedGroup';
-import { ToastUtils } from '../../../session/utils';
-import LIBSESSION_CONSTANTS from '../../../session/utils/libsession/libsession_constants';
+import { VALIDATION } from '../../../he4s/constants';
+import { createClosedGroup } from '../../../he4s/conversations/createClosedGroup';
+import { ToastUtils } from '../../../he4s/utils';
+import LIBSESSION_CONSTANTS from '../../../he4s/utils/libhe4s/libhe4s_constants';
 import { clearSearch } from '../../../state/ducks/search';
 import { resetLeftOverlayMode } from '../../../state/ducks/section';
 import { getPrivateContactsPubkeys } from '../../../state/selectors/conversations';
@@ -22,10 +22,10 @@ import {
   useIsSearching,
 } from '../../../state/selectors/search';
 import { MemberListItem } from '../../MemberListItem';
-import { SessionSearchInput } from '../../SessionSearchInput';
+import { HE4SSearchInput } from '../../HE4SSearchInput';
 import { Flex } from '../../basic/Flex';
 import { SpacerLG, SpacerMD } from '../../basic/Text';
-import { SessionInput } from '../../inputs';
+import { HE4SInput } from '../../inputs';
 import { StyledLeftPaneOverlay } from './OverlayMessage';
 import { Localizer } from '../../basic/Localizer';
 
@@ -95,7 +95,7 @@ async function createClosedGroupWithErrorHandling(
     return false;
   }
 
-  await createClosedGroup(groupName, groupMemberIds, window.sessionFeatureFlags.useClosedGroupV3);
+  await createClosedGroup(groupName, groupMemberIds, window.he4sFeatureFlags.useClosedGroupV3);
 
   return true;
 }
@@ -162,7 +162,7 @@ export const OverlayClosedGroup = () => {
         alignItems="center"
         padding={'var(--margins-md)'}
       >
-        <SessionInput
+        <HE4SInput
           autoFocus={true}
           type="text"
           placeholder={window.i18n('groupNameEnter')}
@@ -179,11 +179,11 @@ export const OverlayClosedGroup = () => {
           editable={!loading}
         />
         <SpacerMD />
-        <SessionSpinner loading={loading} />
+        <HE4SSpinner loading={loading} />
         <SpacerLG />
       </Flex>
 
-      <SessionSearchInput />
+      <HE4SSearchInput />
       <StyledGroupMemberListContainer>
         {noContactsForClosedGroup ? (
           <NoContacts />
@@ -208,7 +208,7 @@ export const OverlayClosedGroup = () => {
 
       <SpacerLG style={{ flexShrink: 0 }} />
       <Flex container={true} width={'100%'} flexDirection="column" padding={'var(--margins-md)'}>
-        <SessionButton
+        <HE4SButton
           text={window.i18n('create')}
           disabled={disableCreateButton}
           onClick={onEnterPressed}

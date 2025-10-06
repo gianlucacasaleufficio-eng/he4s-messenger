@@ -25,7 +25,7 @@ If you import anything in global.d.ts, the type system won't work correctly.
 declare global {
   interface Window {
     Events: any;
-    Session: any;
+    HE4S: any;
     Whisper: any;
     clearLocalData: () => Promise<void>;
     clipboard: any;
@@ -138,14 +138,14 @@ declare global {
       inEnglish: I18nMethods['inEnglish'];
     };
     log: any;
-    sessionFeatureFlags: {
+    he4sFeatureFlags: {
       useOnionRequests: boolean;
       useTestNet: boolean;
       useClosedGroupV3: boolean;
       replaceLocalizedStringsWithKeys: boolean;
       debug: {
         debugLogging: boolean;
-        debugLibsessionDumps: boolean;
+        debugLibhe4sDumps: boolean;
         debugFileServerRequests: boolean;
         debugNonSnodeRequests: boolean;
         debugOnionRequests: boolean;

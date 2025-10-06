@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { OpenGroupData } from '../../../../data/opengroups';
 import { MessageRenderingProps } from '../../../../models/messageType';
-import { findCachedBlindedMatchOrLookItUp } from '../../../../session/apis/open_group_api/sogsv3/knownBlindedkeys';
-import { getConversationController } from '../../../../session/conversations';
-import { getSodiumRenderer } from '../../../../session/crypto';
-import { KeyPrefixType, PubKey } from '../../../../session/types';
+import { findCachedBlindedMatchOrLookItUp } from '../../../../he4s/apis/open_group_api/sogsv3/knownBlindedkeys';
+import { getConversationController } from '../../../../he4s/conversations';
+import { getSodiumRenderer } from '../../../../he4s/crypto';
+import { KeyPrefixType, PubKey } from '../../../../he4s/types';
 import { openConversationWithMessages } from '../../../../state/ducks/conversations';
 import { updateUserDetailsModal } from '../../../../state/ducks/modalDialog';
 import {
@@ -93,13 +93,13 @@ export const MessageAvatar = (props: Props) => {
       const room = OpenGroupData.getV2OpenGroupRoom(convoOpen.id);
       let privateConvoToOpen = sender;
       if (room?.serverPublicKey) {
-        const foundRealSessionId = await findCachedBlindedMatchOrLookItUp(
+        const foundRealHE4SId = await findCachedBlindedMatchOrLookItUp(
           sender,
           room.serverPublicKey,
           await getSodiumRenderer()
         );
 
-        privateConvoToOpen = foundRealSessionId || privateConvoToOpen;
+        privateConvoToOpen = foundRealHE4SId || privateConvoToOpen;
       }
 
       await getConversationController()

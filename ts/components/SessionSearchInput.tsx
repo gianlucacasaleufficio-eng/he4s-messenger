@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { clearSearch, search, updateSearchTerm } from '../state/ducks/search';
 import { getConversationsCount } from '../state/selectors/conversations';
 import { getLeftOverlayMode } from '../state/selectors/section';
-import { SessionIconButton } from './icon';
+import { HE4SIconButton } from './icon';
 import { useHotkey } from '../hooks/useHotkey';
 
 const StyledSearchInput = styled.div`
@@ -17,7 +17,7 @@ const StyledSearchInput = styled.div`
   display: inline-flex;
   flex-shrink: 0;
 
-  .session-icon-button {
+  .he4s-icon-button {
     margin: auto 10px;
     &:hover svg path {
       fill: var(--search-bar-icon-hover-color);
@@ -65,7 +65,7 @@ function updateSearch(dispatch: Dispatch<any>, searchTerm: string) {
 
   debouncedSearch(dispatch, searchTerm);
 }
-export const SessionSearchInput = () => {
+export const HE4SSearchInput = () => {
   const [currentSearchTerm, setCurrentSearchTerm] = useState('');
   const dispatch = useDispatch();
   const isGroupCreationSearch = useSelector(getLeftOverlayMode) === 'closed-group';
@@ -89,7 +89,7 @@ export const SessionSearchInput = () => {
 
   return (
     <StyledSearchInput>
-      <SessionIconButton
+      <HE4SIconButton
         iconColor="var(--search-bar-icon-color)"
         iconSize="medium"
         iconType="search"
@@ -105,7 +105,7 @@ export const SessionSearchInput = () => {
         placeholder={placeholder}
       />
       {Boolean(currentSearchTerm.length) && (
-        <SessionIconButton
+        <HE4SIconButton
           iconColor="var(--search-bar-icon-color)"
           iconSize="tiny"
           iconType="exit"

@@ -12,17 +12,17 @@ import {
   StagedAttachmentType,
 } from './composition/CompositionBox';
 
-import { perfEnd, perfStart } from '../../session/utils/Performance';
+import { perfEnd, perfStart } from '../../he4s/utils/Performance';
 
-import { SessionMessagesListContainer } from './SessionMessagesListContainer';
+import { HE4SMessagesListContainer } from './HE4SMessagesListContainer';
 
-import { SessionFileDropzone } from './SessionFileDropzone';
+import { HE4SFileDropzone } from './HE4SFileDropzone';
 
 import { Data } from '../../data/data';
 import { markAllReadByConvoId } from '../../interactions/conversationInteractions';
-import { MAX_ATTACHMENT_FILESIZE_BYTES } from '../../session/constants';
-import { getConversationController } from '../../session/conversations';
-import { ToastUtils } from '../../session/utils';
+import { MAX_ATTACHMENT_FILESIZE_BYTES } from '../../he4s/constants';
+import { getConversationController } from '../../he4s/conversations';
+import { ToastUtils } from '../../he4s/utils';
 import {
   ReduxConversationType,
   SortedMessageModelProps,
@@ -45,14 +45,14 @@ import { AttachmentUtil, GoogleChrome, arrayBufferToObjectURL } from '../../util
 import { getCurrentRecoveryPhrase } from '../../util/storage';
 import { EmptyMessageView } from '../EmptyMessageView';
 import { SplitViewContainer } from '../SplitViewContainer';
-import { SessionButtonColor } from '../basic/SessionButton';
+import { HE4SButtonColor } from '../basic/HE4SButton';
 import { InConversationCallContainer } from '../calling/InConversationCallContainer';
 import { NoMessageInConversation } from './SubtleNotification';
 import { ConversationHeaderWithDetails } from './header/ConversationHeader';
 
 import { isAudio } from '../../types/MIME';
 import { NoticeBanner } from '../NoticeBanner';
-import { SessionSpinner } from '../loading';
+import { HE4SSpinner } from '../loading';
 import { RightPanel, StyledRightPanelContainer } from './right-panel/RightPanel';
 import { HTMLDirection } from '../../util/i18n/rtlSupport';
 
@@ -88,12 +88,12 @@ const StyledSpinnerContainer = styled.div`
 const ConvoLoadingSpinner = () => {
   return (
     <StyledSpinnerContainer>
-      <SessionSpinner loading={true} />
+      <HE4SSpinner loading={true} />
     </StyledSpinnerContainer>
   );
 };
 
-export class SessionConversation extends Component<Props, State> {
+export class HE4SConversation extends Component<Props, State> {
   private readonly messageContainerRef: RefObject<HTMLDivElement>;
   private dragCounter: number;
   private publicMembersRefreshTimeout?: NodeJS.Timeout;
@@ -201,7 +201,7 @@ export class SessionConversation extends Component<Props, State> {
         updateConfirmModal({
           title: window.i18n('warning'),
           i18nMessage: { token: 'recoveryPasswordWarningSendDescription' },
-          okTheme: SessionButtonColor.Danger,
+          okTheme: HE4SButtonColor.Danger,
           onClickOk: () => {
             void sendAndScroll();
           },
@@ -278,14 +278,14 @@ export class SessionConversation extends Component<Props, State> {
                 <SplitViewContainer
                   top={<InConversationCallContainer />}
                   bottom={
-                    <SessionMessagesListContainer
+                    <HE4SMessagesListContainer
                       messageContainerRef={this.messageContainerRef}
                       scrollToNow={this.scrollToNow}
                     />
                   }
                   disableTop={!this.props.hasOngoingCallWithFocusedConvo}
                 />
-                {isDraggingFile && <SessionFileDropzone />}
+                {isDraggingFile && <HE4SFileDropzone />}
               </div>
 
               <CompositionBox

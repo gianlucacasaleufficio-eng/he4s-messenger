@@ -17,7 +17,7 @@ import {
   removeSenderFromModerator,
 } from '../../../../interactions/messageInteractions';
 import { MessageRenderingProps } from '../../../../models/messageType';
-import { pushUnblockToSend } from '../../../../session/utils/Toast';
+import { pushUnblockToSend } from '../../../../he4s/utils/Toast';
 import {
   openRightPanel,
   showMessageInfoView,
@@ -45,8 +45,8 @@ import {
 } from '../../../../state/selectors/selectedConversation';
 import { saveAttachmentToDisk } from '../../../../util/attachmentsUtil';
 import { Reactions } from '../../../../util/reactions';
-import { SessionContextMenuContainer } from '../../../SessionContextMenuContainer';
-import { SessionEmojiPanel, StyledEmojiPanel } from '../../SessionEmojiPanel';
+import { HE4SContextMenuContainer } from '../../../HE4SContextMenuContainer';
+import { HE4SEmojiPanel, StyledEmojiPanel } from '../../HE4SEmojiPanel';
 import { MessageReactBar } from './MessageReactBar';
 import { showCopyAccountIdAction } from '../../../menu/items/CopyAccountId';
 import { CopyAccountIdMenuItem } from '../../../menu/items/CopyAccountId/CopyAccountIdMenuItem';
@@ -359,7 +359,7 @@ export const MessageContextMenu = (props: Props) => {
     <StyledMessageContextMenu ref={contextMenuRef}>
       {enableReactions && showEmojiPanel && (
         <StyledEmojiPanelContainer role="button" x={mouseX} y={mouseY}>
-          <SessionEmojiPanel
+          <HE4SEmojiPanel
             ref={emojiPanelRef}
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onEmojiClicked={onEmojiClick}
@@ -369,7 +369,7 @@ export const MessageContextMenu = (props: Props) => {
           />
         </StyledEmojiPanelContainer>
       )}
-      <SessionContextMenuContainer>
+      <HE4SContextMenuContainer>
         <Menu
           id={contextMenuId}
           onVisibilityChange={onVisibilityChange}
@@ -410,7 +410,7 @@ export const MessageContextMenu = (props: Props) => {
           <DeleteItem messageId={messageId} />
           <AdminActionItems messageId={messageId} />
         </Menu>
-      </SessionContextMenuContainer>
+      </HE4SContextMenuContainer>
     </StyledMessageContextMenu>
   );
 };

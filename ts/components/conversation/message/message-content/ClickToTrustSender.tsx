@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { Data } from '../../../../data/data';
-import { getConversationController } from '../../../../session/conversations';
-import { AttachmentDownloads } from '../../../../session/utils';
+import { getConversationController } from '../../../../he4s/conversations';
+import { AttachmentDownloads } from '../../../../he4s/utils';
 import { updateConfirmModal } from '../../../../state/ducks/modalDialog';
 import { useMessageAttachments } from '../../../../state/selectors';
 import { isAudio } from '../../../../types/MIME';
 import { isImageTypeSupported, isVideoTypeSupported } from '../../../../util/GoogleChrome';
-import { SessionButtonColor } from '../../../basic/SessionButton';
-import { SessionIcon } from '../../../icon';
+import { HE4SButtonColor } from '../../../basic/HE4SButton';
+import { HE4SIcon } from '../../../icon';
 import { Localizer } from '../../../basic/Localizer';
 
 const StyledTrustSenderUI = styled.div`
@@ -49,7 +49,7 @@ export const ClickToTrustSender = (props: { messageId: string }) => {
             conversation_name: convo.getContactProfileNameOrShortenedPubKey(),
           },
         },
-        closeTheme: SessionButtonColor.Danger,
+        closeTheme: HE4SButtonColor.Danger,
         onClickOk: async () => {
           convo.set({ isTrustedForAttachmentDownload: true });
           await convo.commit();
@@ -130,7 +130,7 @@ export const ClickToTrustSender = (props: { messageId: string }) => {
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <StyledTrustSenderUI onClick={openConfirmationModal}>
-      <SessionIcon iconSize="small" iconType="gallery" />
+      <HE4SIcon iconSize="small" iconType="gallery" />
       <ClickToDownload>
         <Localizer
           token="attachmentsClickToDownload"

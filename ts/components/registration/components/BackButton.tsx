@@ -15,8 +15,8 @@ import {
 } from '../../../state/onboarding/selectors/registration';
 import { deleteDbLocally } from '../../../util/accountManager';
 import { Flex } from '../../basic/Flex';
-import { SessionButtonColor } from '../../basic/SessionButton';
-import { SessionIconButton } from '../../icon';
+import { HE4SButtonColor } from '../../basic/HE4SButton';
+import { HE4SIconButton } from '../../icon';
 import type { LocalizerComponentProps, LocalizerToken } from '../../../types/localizer';
 
 /** Min height should match the onboarding step with the largest height this prevents the loading spinner from jumping around while still keeping things centered  */
@@ -78,7 +78,7 @@ export const BackButton = ({
   const dispatch = useDispatch();
 
   return (
-    <SessionIconButton
+    <HE4SIconButton
       ariaLabel="Back button"
       iconSize="huge"
       iconType="chevron"
@@ -95,7 +95,7 @@ export const BackButton = ({
             updateQuitModal({
               title: window.i18n('warning'),
               i18nMessage: quitI18nMessageArgs,
-              okTheme: SessionButtonColor.Danger,
+              okTheme: HE4SButtonColor.Danger,
               okText: window.i18n('quitButton'),
               onClickOk: async () => {
                 try {

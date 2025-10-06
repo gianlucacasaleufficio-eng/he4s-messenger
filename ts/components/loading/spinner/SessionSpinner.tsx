@@ -6,7 +6,7 @@ type Props = {
   width?: string;
 };
 
-const StyledSessionSpinner = styled.div<Props>`
+const StyledHE4SSpinner = styled.div<Props>`
   display: inline-block;
   position: relative;
   min-width: 13px;
@@ -26,21 +26,21 @@ const StyledSessionSpinner = styled.div<Props>`
   }
   div:nth-child(1) {
     left: 8px;
-    animation: session-loader1 var(--duration-session-spinner) infinite;
+    animation: he4s-loader1 var(--duration-he4s-spinner) infinite;
   }
   div:nth-child(2) {
     left: 8px;
-    animation: session-loader2 var(--duration-session-spinner) infinite;
+    animation: he4s-loader2 var(--duration-he4s-spinner) infinite;
   }
   div:nth-child(3) {
     left: 32px;
-    animation: session-loader2 var(--duration-session-spinner) infinite;
+    animation: he4s-loader2 var(--duration-he4s-spinner) infinite;
   }
   div:nth-child(4) {
     left: 56px;
-    animation: session-loader3 var(--duration-session-spinner) infinite;
+    animation: he4s-loader3 var(--duration-he4s-spinner) infinite;
   }
-  @keyframes session-loader1 {
+  @keyframes he4s-loader1 {
     0% {
       transform: scale(0);
     }
@@ -48,7 +48,7 @@ const StyledSessionSpinner = styled.div<Props>`
       transform: scale(1);
     }
   }
-  @keyframes session-loader3 {
+  @keyframes he4s-loader3 {
     0% {
       transform: scale(1);
     }
@@ -56,7 +56,7 @@ const StyledSessionSpinner = styled.div<Props>`
       transform: scale(0);
     }
   }
-  @keyframes session-loader2 {
+  @keyframes he4s-loader2 {
     0% {
       transform: translate(0, 0);
     }
@@ -66,11 +66,11 @@ const StyledSessionSpinner = styled.div<Props>`
   }
 `;
 
-export const SessionSpinner = (props: Props) => {
+export const HE4SSpinner = (props: Props) => {
   const { loading, height, width } = props;
 
   return loading ? (
-    <StyledSessionSpinner
+    <StyledHE4SSpinner
       loading={loading}
       height={height}
       width={width}
@@ -80,6 +80,6 @@ export const SessionSpinner = (props: Props) => {
       <div />
       <div />
       <div />
-    </StyledSessionSpinner>
+    </StyledHE4SSpinner>
   ) : null;
 };

@@ -11,9 +11,9 @@ import { handleSwarmContentMessage, innerHandleSwarmContentMessage } from './con
 
 import { Data } from '../data/data';
 import { SignalService } from '../protobuf';
-import { StringUtils, UserUtils } from '../session/utils';
-import { perfEnd, perfStart } from '../session/utils/Performance';
-import { createTaskWithTimeout } from '../session/utils/TaskWithTimeout';
+import { StringUtils, UserUtils } from '../he4s/utils';
+import { perfEnd, perfStart } from '../he4s/utils/Performance';
+import { createTaskWithTimeout } from '../he4s/utils/TaskWithTimeout';
 import { UnprocessedParameter } from '../types/sqlSharedTypes';
 import { getEnvelopeId } from './common';
 

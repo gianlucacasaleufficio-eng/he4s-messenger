@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { useNicknameOrProfileNameOrShortenedPubkey } from '../hooks/useParamSelector';
 import { Avatar, AvatarSize, CrownIcon } from './avatar/Avatar';
-import { SessionRadio } from './basic/SessionRadio';
+import { HE4SRadio } from './basic/HE4SRadio';
 
 const AvatarContainer = styled.div`
   position: relative;
@@ -18,7 +18,7 @@ const AvatarItem = (props: { memberPubkey: string; isAdmin: boolean }) => {
   );
 };
 
-const StyledSessionMemberItem = styled.button<{
+const StyledHE4SMemberItem = styled.button<{
   inMentions?: boolean;
   zombie?: boolean;
   selected?: boolean;
@@ -107,7 +107,7 @@ export const MemberListItem = (props: {
   const memberName = useNicknameOrProfileNameOrShortenedPubkey(pubkey);
 
   return (
-    <StyledSessionMemberItem
+    <StyledHE4SMemberItem
       onClick={() => {
         // eslint-disable-next-line no-unused-expressions
         isSelected ? onUnselect?.(pubkey) : onSelect?.(pubkey);
@@ -127,9 +127,9 @@ export const MemberListItem = (props: {
 
       {!inMentions && (
         <StyledCheckContainer>
-          <SessionRadio active={isSelected} value={pubkey} inputName={pubkey} label="" />
+          <HE4SRadio active={isSelected} value={pubkey} inputName={pubkey} label="" />
         </StyledCheckContainer>
       )}
-    </StyledSessionMemberItem>
+    </StyledHE4SMemberItem>
   );
 };

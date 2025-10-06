@@ -1,9 +1,9 @@
 import { toNumber } from 'lodash';
 import { SignalService } from '../protobuf';
-import { GetNetworkTime } from '../session/apis/snode_api/getNetworkTime';
-import { TTL_DEFAULT } from '../session/constants';
-import { CallManager, UserUtils } from '../session/utils';
-import { WithMessageHash, WithOptExpireUpdate } from '../session/utils/calling/CallManager';
+import { GetNetworkTime } from '../he4s/apis/snode_api/getNetworkTime';
+import { TTL_DEFAULT } from '../he4s/constants';
+import { CallManager, UserUtils } from '../he4s/utils';
+import { WithMessageHash, WithOptExpireUpdate } from '../he4s/utils/calling/CallManager';
 import { removeFromCache } from './cache';
 import { EnvelopePlus } from './types';
 

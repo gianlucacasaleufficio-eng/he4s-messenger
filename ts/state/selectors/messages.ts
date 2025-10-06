@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { MessageModelType } from '../../models/messageType';
-import { UserUtils } from '../../session/utils';
+import { UserUtils } from '../../he4s/utils';
 import {
   MessageModelPropsWithConvoProps,
   PropsForAttachment,

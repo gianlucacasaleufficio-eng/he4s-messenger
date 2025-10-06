@@ -7,11 +7,11 @@ import {
   LegacyGroupInfo,
   LegacyGroupMemberInfo,
   UserGroupsWrapperNode,
-} from 'libsession_util_nodejs';
+} from 'libhe4s_util_nodejs';
 import { from_hex } from 'libsodium-wrappers-sumo';
 import { isEmpty, isEqual } from 'lodash';
 import { HexKeyPair } from '../../../receiver/keypairs';
-import { fromHexToArray } from '../../../session/utils/String';
+import { fromHexToArray } from '../../../he4s/utils/String';
 import {
   CONFIG_DUMP_TABLE,
   ConfigDumpRow,

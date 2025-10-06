@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { getPrimaryColor } from '../../state/selectors/primaryColor';
 import { useTheme } from '../../state/selectors/theme';
 import {
-  StyleSessionSwitcher,
+  StyleHE4SSwitcher,
   getPrimaryColors,
   getThemeColors,
 } from '../../themes/constants/colors';
 import { switchPrimaryColorTo } from '../../themes/switchPrimaryColor';
 import { switchThemeTo } from '../../themes/switchTheme';
-import { SessionRadio, SessionRadioPrimaryColors } from '../basic/SessionRadio';
+import { HE4SRadio, HE4SRadioPrimaryColors } from '../basic/HE4SRadio';
 import { SpacerLG, SpacerMD } from '../basic/Text';
-import { StyledDescriptionSettingsItem, StyledTitleSettingsItem } from './SessionSettingListItem';
+import { StyledDescriptionSettingsItem, StyledTitleSettingsItem } from './HE4SSettingListItem';
 import { Localizer } from '../basic/Localizer';
 
 const StyledSwitcherContainer = styled.div`
@@ -53,7 +53,7 @@ const StyledPreview = styled.svg`
   max-height: 100%;
 `;
 
-const ThemePreview = (props: { style: StyleSessionSwitcher }) => {
+const ThemePreview = (props: { style: StyleHE4SSwitcher }) => {
   return (
     <StyledPreview xmlSpace="preserve" viewBox="0 0 80 72" fill={props.style.background}>
       <path
@@ -94,7 +94,7 @@ const Themes = () => {
           <SpacerLG />
 
           <StyledTitleSettingsItem>{theme.title}</StyledTitleSettingsItem>
-          <SessionRadio
+          <HE4SRadio
             active={selectedTheme === theme.id}
             label={''}
             value={theme.id}
@@ -127,7 +127,7 @@ export const SettingsThemeSwitcher = () => {
       <ThemesContainer style={{ marginInlineStart: 'var(--margins-xs)' }}>
         {getPrimaryColors().map(item => {
           return (
-            <SessionRadioPrimaryColors
+            <HE4SRadioPrimaryColors
               key={item.id}
               active={item.id === selectedPrimaryColor}
               value={item.id}

@@ -4,7 +4,7 @@ import styled, { CSSProperties } from 'styled-components';
 import { PropsForAttachment } from '../../../../../../state/ducks/conversations';
 import { getAlt, getThumbnailUrl, isVideoAttachment } from '../../../../../../types/Attachment';
 import { Flex } from '../../../../../basic/Flex';
-import { SessionIconButton } from '../../../../../icon';
+import { HE4SIconButton } from '../../../../../icon';
 import { Image } from '../../../../Image';
 import {
   StyledSubtitleDotMenu,
@@ -14,7 +14,7 @@ import { showLightboxFromAttachmentProps } from '../../../../message/message-con
 
 const CarouselButton = (props: { visible: boolean; rotation: number; onClick: () => void }) => {
   return (
-    <SessionIconButton
+    <HE4SIconButton
       iconSize={'huge'}
       iconType={'chevron'}
       iconRotation={props.rotation}
@@ -32,7 +32,7 @@ const StyledFullscreenButton = styled.div``;
 const FullscreenButton = (props: { onClick: () => void; style?: CSSProperties }) => {
   return (
     <StyledFullscreenButton style={props.style}>
-      <SessionIconButton
+      <HE4SIconButton
         iconSize={'large'}
         iconColor={'var(--button-icon-stroke-hover-color)'}
         iconType={'fullscreen'}

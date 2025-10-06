@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Constants } from '../../session';
+import { Constants } from '../../he4s';
 
 type Props = {
   overflowingAt: number;
@@ -65,7 +65,7 @@ const NotificationOrUnreadCount = ({ centeredOnTop, overflowingAt, count }: Prop
   );
 };
 
-export const SessionNotificationCount = (props: Pick<Props, 'count'>) => {
+export const HE4SNotificationCount = (props: Pick<Props, 'count'>) => {
   return (
     <NotificationOrUnreadCount
       centeredOnTop={false}
@@ -75,7 +75,7 @@ export const SessionNotificationCount = (props: Pick<Props, 'count'>) => {
   );
 };
 
-export const SessionUnreadCount = (props: Pick<Props, 'count'>) => {
+export const HE4SUnreadCount = (props: Pick<Props, 'count'>) => {
   return (
     <NotificationOrUnreadCount
       centeredOnTop={true}
